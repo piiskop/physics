@@ -1,0 +1,167 @@
+---
+title: "Füüsika"
+---
+
+## Mehaanika
+
+### Reeglid
+
+$$g = G * \frac{M}{R ^ 2}$$
+$G = 6.67 * 10 ^ {-11} \frac{N * m ^ 2}{kg ^ 2}$ Maa mass olevat 6 * 10^24^ kg. Maa raadius olevat 6.4 * 10^6^ m.
+
+```{r}
+g <- 6.67 * 10 ^ (-11) * (6 * 10 ^ 24) / (6.4 * 10 ^ 6) ^ 2
+
+```
+
+g = `r g` $* \frac{m}{s ^ 2}$
+
+### Ülesanded
+
+#### Autobuss
+
+##### Ülesande püstitus
+
+Peatuskohast väljuva autobussi liikumist kirjeldab esimese 10 s jooksul võrrand *s* = 0,38*t^2^*, kus *s* on teepikkus meetrites ja *t* aeg sekundites.
+
+a) Kui suur on bussi kiirendus?
+
+b) Kui pika tee läbib buss esimese 10 sekundiga?
+
+c) Kui suure kiiruse saavutab buss selle aja jooksul?
+
+##### Lahendus
+
+a) $,76 * \frac{m}{s^2}$.
+
+b) 38 * m.
+
+c) $7,6 * \frac{m}{s}$.
+
+#### Lennukikandja
+
+##### Ülesande püstitus
+
+Lennukikandja püüde- ja pidurdustrossidel kulub 25 tonnise hävitaja peatamiseks 2 sekundit. Pidurdamine algab, kui hävitaja kiirus on 240 km/h^[Imeline teadus, 2013, nr 9]
+
+a) Kui suur kiirendus mõjub piloodile pidurdamise ajal?
+
+b) Mitmekordne raskuskiirendus see on?
+
+c) Kui pikk on hävitaja pidurdusteekond?
+
+d) Kui suur on pidurdav jõud?
+
+##### Lahendus
+
+$240 * \frac{km}{h} === \frac{240 * (1000 * m)}{3600 * s} === \frac{200*m}{3*s}$
+
+a) Mõjuv kiirendus on $-\frac{100 * m}{3 * s ^ 2}$.
+
+b) Raskuskiirenduse suhte arvutan selliselt:
+
+```{r}
+accelerationOfPlaneToG = 100 / 3 / g
+```
+
+See on `r accelerationOfPlaneToG`-kordne raskuskiirendus.
+
+c) $\frac{200 * m}{3 * s} * 2 * s + \frac{-\frac{100 * m}{3 * s ^ 2} * (2 * s) ^ 2}{2} === \frac{400}{3} * m - \frac{200}{3} * m === \frac{200}{3} * m$
+
+d) $\frac{2500000}{3} * N$ See on ligikaudu:
+
+```{r}
+breakingForce = 25 * 1000 * (-100 / 3)
+```
+
+`r breakingForce` N.
+
+#### Autod
+
+##### Ülesande püstitus
+
+Maanteel sõidab veoauto, mille pikkus on 16 meetrit ja kiirus 72 km/h. Veoauto taha jõuab sõiduauto, mille kiirus on 90 km/h ja pikkus 4 m. Sõiduauto juht soovib sooritada möödasõitu. Nii möödasõidu alustamisel kui ka lõpetamisel peab autode vaheline pikivahe olema 75 m.
+
+a) Kui kaua kulub möödasõiduks aega?
+
+b) Kui pikk on möödasõidumaa?
+
+c) Kui vastu tuleb auto, mille kiirus on 90 km/h, siis kui kaugel peaks see möödasõidu alguses olema, et mööda sõitev sõiduauto oleks sellega kohakuti parajasti möödasõidu lõppedes?
+
+##### Lahendus
+
+Jätan arvestamata, et möödasõiduks on vaja ümberreastuda ja lihtsuse mõttes kujutan ette, et lühem auto justkui läbiks pikema auto. Tähistan möödasõidu vahemaa lühema auto jaoks meetrites *x*'ga. Sel juhul on pikema auto jaoks möödasõidu vahemaa *x - 79* m, kui võrdlen autode esiotsi, sest pikivahe peab olema 75 m ja lühema auto pikkus on neli meetrit. Möödasõidu lõppedes on mõlemal kulunud võrdne ajavahemik. Teisendan lühema auto kiiruse rahvusvahelistesse ühikutesse:
+
+```{r}
+speedOfShorterVehicle = 90 * 1000 / 3600
+```
+
+$$90 * \frac{km}{h} === 90 * \frac{1000 * m}{3600 * s} === 25 * \frac{m}{s}$$
+
+Teen sama pikema auto kiirusega:
+
+```{r}
+speedOfLongerVehicle = 72 * 1000 / 3600
+```
+
+$$72 * \frac{km}{h} === 72 * \frac{1000 * m}{3600 * s} === 20 * \frac{m}{s}$$
+
+Lühema auto möödasõidu ajavahemik on $\frac{x * m}{`r speedOfShorterVehicle`` 90 * \frac{1000 * m}{3600 s}`} === \frac{x}{25} * s$. Pikema auto möödasõidu ajavahemik on:
+
+```{r}
+lengthOfShorterVehicle = 4
+distanceBetweenVehicles = 75
+lengthOfLongerVehicle = 16
+subtractablesForLongerVehicle = 2 * distanceBetweenVehicles + lengthOfShorterVehicle + lengthOfLongerVehicle
+subtractablesForLongerVehicle
+```
+
+$\frac{(x - `r subtractablesForLongerVehicle`) * m}{`r speedOfLongerVehicle` * \frac{m}{s}} === \frac{(x - `r subtractablesForLongerVehicle`)}{`r speedOfLongerVehicle`} * s$. Et need ajavahemikud on võrdsed, koostan võrrandi:
+
+$$\frac{x}{`r speedOfShorterVehicle`} * s === \frac{x - `r subtractablesForLongerVehicle`}{`r speedOfLongerVehicle`} * s$$
+
+Lahendan selle võrrandi:
+
+$$`r speedOfLongerVehicle` * x === `r speedOfShorterVehicle` * x - `r subtractablesForLongerVehicle` * `r speedOfShorterVehicle`$$
+
+$$5 * x === 4250$$
+
+$$x = 850$$
+
+Sain just teada, et möödasõidu vahemaa lühema auto jaoks on 850 m. Selle vahemaa läbiks lühem auto:
+
+```{r}
+distanceOfShorterVehicle = 850
+timeOfShorterVehicle = distanceOfShorterVehicle / speedOfShorterVehicle
+```
+
+`r timeOfShorterVehicle` sekundiga. Pikema auto jaoks on möödasõidu vahemaa:
+
+```{r}
+distanceOfLongerVehicle = (distanceOfShorterVehicle - subtractablesForLongerVehicle)
+```
+
+`r distanceOfLongerVehicle` meetrit, mille pikem auto läbib:
+
+```{r}
+timeOfLongerVehicle = distanceOfLongerVehicle / speedOfLongerVehicle
+```
+
+`r timeOfLongerVehicle` sekundiga. Et need ajavahemikud on võrdsed, on võrrand õigesti lahendatud.
+
+*c*-osa jaoks eeldan, et *kohakuti* tähendab, et autode esiotsad on kohakuti, sest vastutuleva auto pikkus pole teada. Nii möödasõitev kui vastutulev auto peavad esiotste kohakuti jõudmiseks läbima võrdse vahemaa, sest kummagi auto kiirus on sama. Seetõttu peab vastutulev auto olema möödasõitva auto möödasõidu alguses möödasõitva auto esiotsast
+
+```{r}
+distanceOfIncomingVehicle = 2 * distanceOfShorterVehicle
+```
+
+`r distanceOfIncomingVehicle` meetri kaugusel.
+
+##### Lahendid
+
+a) `r timeOfLongerVehicle` sekundit
+
+b) `r distanceOfShorterVehicle` meetrit
+
+c) `r distanceOfIncomingVehicle` meetrit
+

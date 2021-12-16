@@ -1,0 +1,8 @@
+name: "füüsika"
+navbar:
+  title: "Füüsika"
+  left:
+    - text: "Füüsika"
+      href: index.html
+    - text: "About"
+      href: about.html
