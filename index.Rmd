@@ -6,9 +6,25 @@ title: "Füüsika"
 
 ### Reeglid
 
-#### Kiirendus
+#### Ühtlaselt muutuv liikumine
 
-$$kiirendus = \frac{lõppkiirus - algkiirus}{aeg}$$
+##### Vahemaa
+
+$$vahemaaLõpp = vahemaaAlgus + algKiirus * aeg + \frac{kiirendus * aeg ^ 2}{2}$$
+
+$$vahemaaLõpp = vahemaaAlgus + algKiirus * \frac{lõppKiirus - algKiirus}{kiirendus} + \frac{kiirendus * (\frac{lõppKiirus - algKiirus}{kiirendus}) ^ 2}{2}$$
+
+$$vahemaa = \frac{algKiirus * lõppKiirus - algKiirus ^ 2}{kiirendus} + \frac{\frac{lõppKiirus ^ 2 - 2 * lõppKiirus * algKiirus + algKiirus ^ 2}{kiirendus}}{2}$$
+
+$$vahemaa = \frac{algKiirus * lõppKiirus - algKiirus ^ 2}{kiirendus} + \frac{lõppKiirus ^ 2 - 2 * lõppKiirus * algKiirus + algKiirus ^ 2}{2 * kiirendus}$$
+
+$$vahemaa = \frac{2 * algKiirus * lõppKiirus - 2 * algKiirus ^ 2 + lõppKiirus ^ 2 - 2 * lõppKiirus * algKiirus + algKiirus ^ 2}{2 * kiirendus}$$
+
+$$vahemaa = \frac{lõppKiirus ^ 2 - algKiirus ^ 2}{2 * kiirendus}$$
+
+##### Kiirendus
+
+$$kiirendus = \frac{lõppkiirus - algkiirus}{aeg} === \frac{lõppkiirus ^ 2 - algkiirus ^ 2}{2 * vahemaa}$$
 
 #### Raskuskiirendus
 
@@ -21,6 +37,14 @@ g <- 6.67 * 10 ^ (-11) * (6 * 10 ^ 24) / (6.4 * 10 ^ 6) ^ 2
 ```
 
 g = `r g` $* \frac{m}{s ^ 2}$
+
+#### Rõhk
+
+rõhk = mass * *g*
+
+#### Hõõrdejõud
+
+hõõrdeJõud = hõõrdeTegur * rõhk
 
 ### Ülesanded
 
@@ -225,3 +249,83 @@ force = -(acceleration * 75)
 ```
 
 Turvavöö peab vastu pidama jõule `r force` N.
+
+### Äkkpidurdus
+
+#### Ülesande püstitus
+
+Auto sõidab kiirusega 50 km/h. Peale äkkpidurdust rattad blokeeruvad ja auto libiseb 15 m, kuni jääb seisma. Kui kaugele libiseb sama auto blokeerunud ratastega juhul, kui auto kiirus enne pidurdamist on 150 km/h?
+
+#### Lahendus
+
+Teisendan auto kiiruse 50 km/h rahvusvahelisse mõõtühikute süsteemi:
+
+```{r}
+speed50 = 50 * 1000 / 3600
+```
+
+Auto kiirus 50 km/h on teisendatuna $`r speed50` \frac{m}{s}$.
+
+Kui miski libiseb, on tegemist hõõrdumisega. Hõõrdumise arvestamiseks on vaja teada hõõrdetegurit. Selle saab arvutada kiirenduse kaudu. Nii et järgmisena arvutan auto kiirenduse pidurdamise ajal algkiiruse 50 km/h puhul nullkiiruseni:
+
+```{r}
+acceleration50 = (0 - speed50 ^ 2) / 2 / 15
+```
+
+Selle auto kiirendus kiiruselt 50 km/h nullkiiruseni on $`r acceleration50` * \frac{m}{s ^ 2}$.
+
+Autole mõjub horisontaalsihis pidurdusjõud ja seda tasakaalustab hõõrdejõud. Selle võrduse alusel arvutan hõõrdeteguri, mis on sama objekti ja sama pinna puhul alati sama:
+
+```{r}
+frictionFactor = acceleration50 / g
+```
+
+Selle auto ja selle pinna omavaheline hõõrdetegur on `r frictionFactor`.
+
+Auto kiirus 150 km/h on teisendatuna rahvusvaheliste mõõtühikute süsteemi
+
+```{r}
+speed150 = 150 * 1000 / 3600
+```
+
+Nüüd, kui hõõrdetegur on teada, arvutan auto pidurduskiirenduse nullkiiruseni algkiiruse 150 km/h puhul:
+
+```{r}
+acceleration150 = frictionFactor * g
+```
+
+Auto pidurduskiirendus kiiruselt 150 km/h nullkiiruseni on $`r acceleration150` \frac{m}{s ^ 2}$.
+
+Nüüd on kõik vajalikud andmed olemas, et arvutada auto libisemise vahemaa kiiruselt 150 km/h:
+
+```{r}
+distance150 = (0 - speed150 ^ 2) / 2 / acceleration150
+```
+
+Auto libiseb blokeerunud ratastega `r distance150` m juhul, kui auto kiirus enne pidurdamist on 150 km/h.
+
+### Koormaga veoauto
+
+#### Ülesande püstitus
+
+Mööda teed sõidab 2 tonnise koormaga veoauto. Takistust nähes juht pidurdab äkitselt, rattad blokeeruvad ja auto libiseb peatumiseni 42 m. Kui kaugele oleks veoauto libisenud ilma koormata, kui tühja veoauto mass on 5 t? Eeldada, et rehvide ja teepinna vaheline hõõrdejõud jääb samaks.
+
+#### Lahendus
+
+Meile pole teada algkiirus, kuid võime eeldada, et algkiirus on mõlema massi puhul sama. Kasutan valemit:
+
+$$-algKiirus ^ 2 === vahemaa * 2 * kiirendus$$
+
+Kiirenduse saan avaldada jõu kaudu ja sellesse valemisse asendada:
+
+$$-algKiirus ^ 2 === vahemaa * 2 * \frac{pidurdusjõud}{mass}$$
+
+Kuna vahemaa ja mass on esialgse juhu kohta teada, siis teen vastavad asendused:
+
+$$-algKiirus ^ 2 === (42 * m) * 2 * \frac{pidurdusjõud}{7000 * kg}$$
+
+Teise juhu puhul on teada üksnes mass ja vaja on arvutada vahemaa:
+
+$$vahemaa2 = \frac{(42 * m) * 2 * \frac{pidurdusjõud}{7000 * kg}}{2 * \frac{pidurdusjõud}{5000 * kg}} === 30 * m$$
+
+Veoauto oleks libisenud ilma koormata 30 m kaugusele, kui tühja veoauto mass on viis tonni.
