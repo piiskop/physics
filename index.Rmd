@@ -193,3 +193,35 @@ Ligikaudse väärtuse arvutamiseks topin sellesse valemisse teadaolevad väärtu
 maxHeightOfBall = g / 2
 maxHeightOfBall
 ```
+
+### Turvavöö
+
+#### Ülesande püstitus
+
+Turvavööde katsetamisel sõidab auto vastu seina kiirusega 90 km/h ja peatub 0,1 s jooksul. Juhi kohal istub nukk massiga 75 kg. Kui suurele jõule peab turvavöö vastu pidama?
+
+#### Lahendus
+
+Esmalt on vaja teisendada auto algkiirus 90 km/h rahvusvahelisse mõõtühikute süsteemi:
+
+```{r}
+speed = 90 * 1000 / 3600
+```
+
+Auto algkiirus on $`r speed` \frac{m}{s}$.
+
+Arvutan auto kiirenduse:
+
+```{r}
+acceleration = (0 - speed) / .1
+```
+
+Auto kiirendus on $`r acceleration` \frac{m}{s^2}$.
+
+Viimaks arvutan jõu:
+
+```{r}
+force = -(acceleration * 75)
+```
+
+Turvavöö peab vastu pidama jõule `r force` N.
