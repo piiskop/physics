@@ -1,5 +1,10 @@
 ---
 title: "Füüsika"
+output:
+  bookdown::html_document2:
+    toc: yes
+    toc_float: yes
+    toc_depth: 5
 ---
 
 ## Mehaanika
@@ -218,13 +223,13 @@ maxHeightOfBall = g / 2
 maxHeightOfBall
 ```
 
-### Turvavöö
+#### Turvavöö
 
-#### Ülesande püstitus
+##### Ülesande püstitus
 
 Turvavööde katsetamisel sõidab auto vastu seina kiirusega 90 km/h ja peatub 0,1 s jooksul. Juhi kohal istub nukk massiga 75 kg. Kui suurele jõule peab turvavöö vastu pidama?
 
-#### Lahendus
+##### Lahendus
 
 Esmalt on vaja teisendada auto algkiirus 90 km/h rahvusvahelisse mõõtühikute süsteemi:
 
@@ -250,13 +255,13 @@ force = -(acceleration * 75)
 
 Turvavöö peab vastu pidama jõule `r force` N.
 
-### Äkkpidurdus
+#### Äkkpidurdus
 
-#### Ülesande püstitus
+##### Ülesande püstitus
 
 Auto sõidab kiirusega 50 km/h. Peale äkkpidurdust rattad blokeeruvad ja auto libiseb 15 m, kuni jääb seisma. Kui kaugele libiseb sama auto blokeerunud ratastega juhul, kui auto kiirus enne pidurdamist on 150 km/h?
 
-#### Lahendus
+##### Lahendus
 
 Teisendan auto kiiruse 50 km/h rahvusvahelisse mõõtühikute süsteemi:
 
@@ -304,13 +309,13 @@ distance150 = (0 - speed150 ^ 2) / 2 / acceleration150
 
 Auto libiseb blokeerunud ratastega `r distance150` m juhul, kui auto kiirus enne pidurdamist on 150 km/h.
 
-### Koormaga veoauto
+#### Koormaga veoauto
 
-#### Ülesande püstitus
+##### Ülesande püstitus
 
 Mööda teed sõidab 2 tonnise koormaga veoauto. Takistust nähes juht pidurdab äkitselt, rattad blokeeruvad ja auto libiseb peatumiseni 42 m. Kui kaugele oleks veoauto libisenud ilma koormata, kui tühja veoauto mass on 5 t? Eeldada, et rehvide ja teepinna vaheline hõõrdejõud jääb samaks.
 
-#### Lahendus
+##### Lahendus
 
 Meile pole teada algkiirus, kuid võime eeldada, et algkiirus on mõlema massi puhul sama. Kasutan valemit:
 
@@ -329,3 +334,51 @@ Teise juhu puhul on teada üksnes mass ja vaja on arvutada vahemaa:
 $$vahemaa2 = \frac{(42 * m) * 2 * \frac{pidurdusjõud}{7000 * kg}}{2 * \frac{pidurdusjõud}{5000 * kg}} === 30 * m$$
 
 Veoauto oleks libisenud ilma koormata 30 m kaugusele, kui tühja veoauto mass on viis tonni.
+
+#### Raskus trossi otsas
+
+##### Ülesande püstitus
+
+Raskus massiga 5 kg ripub kahe trossi otsas (vt joonist \@ref(fig:hanging-weight)). Kui suur on kummagi trossi pinge, kui
+
+a) α = 25°;
+
+b) α = 50°.
+
+![(#fig:hanging-weight)Trosside otsas ripub raskus.](hanging-weight.svg)
+
+##### Lahendus
+
+###### Üldine lahendus
+
+![(#fig:hanging-weight-complemented)Täiendatud joonis.](hanging-weight-complemented.svg)
+
+Kuna algandmeid napib ja ainult ühe nurga suurus on teada, siis eeldan, et trossid on ühepikkused. Kõik kolm jõudu peavad üksteist tasakaalustama. Igal jõul on nii rõhtne kui püstine komponent. Näeme jooniselt \@ref(fig:hanging-weight-complemented), et rõhtne komponent puudub raskusjõul ning ülejäänud rõhtsad komponendid on absoluutväärtuselt ühesugused, mistõttu koostan võrrandi üksnes püstiste komponentidega:
+
+$$(5 * kg) * g === 2 * tross * sin(\alpha)$$
+
+Avaldan sellest võrrandist trossi pikkuse:
+
+$$tross = \frac{5 * kg * g}{2 * sin(\alpha)}$$
+
+```{r}
+calculateForce <- function(alpha) {
+  5 * g / 2 / sin(alpha)
+}
+```
+
+###### a-osa
+
+```{r}
+forceA = calculateForce(25 * pi / 180)
+```
+
+Kummagi trossi pinge on `r forceA` * N, kui α = 25 °.
+
+###### b-osa
+
+```{r}
+forceB = calculateForce(50 * pi / 180)
+```
+
+Kummagi trossi pinge on `r forceB` * N, kui α = 50 °.
