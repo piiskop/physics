@@ -6,6 +6,12 @@ title: "Füüsika"
 
 ### Reeglid
 
+#### Kiirendus
+
+$$kiirendus = \frac{lõppkiirus - algkiirus}{aeg}$$
+
+#### Raskuskiirendus
+
 $$g = G * \frac{M}{R ^ 2}$$
 $G = 6.67 * 10 ^ {-11} \frac{N * m ^ 2}{kg ^ 2}$ Maa mass olevat 6 * 10^24^ kg. Maa raadius olevat 6.4 * 10^6^ m.
 
@@ -165,3 +171,25 @@ b) `r distanceOfShorterVehicle` meetrit
 
 c) `r distanceOfIncomingVehicle` meetrit
 
+#### Pall
+
+##### Ülesande püstitus
+
+Poiss viskas palli vertikaalselt üles ja püüdis selle samas kohas 2s pärast kinni. Kui kõrgele lendas pall?
+
+##### Lahendus
+
+Palli lennu kestus oli kaks sekundit. Eeldan, et poiss viskas selle palli üles Maal ja seetõttu mõjub pallile gravitatsioonijõud. Palli lähtekoha loen nulliks sõltumata sellest, kui kõrgel asub palli ja käe irdumiskoht. Sellise lennu trajektoori kirjeldab funktsioon, mille graafik on parabool. Kuna parabooli haarad on üksteise suhtes peegelpildis, siis võime järeldada nii palli tõusmine kui laskumine kumbki kestsid eraldi ühe sekundi. Vaja on arvutada selle parabooli haripunkti ordinaadi väärtus. Kiiruse komponendi arvutamiseks tõusva palli jaoks kasutan valemit $-g === \frac{v - v_{0}}{t}$, kus  *g* on Maa raskuskiirendust, *v* palli lõppkiirus, $v_{0}$ palli algkiirus ja *t* aeg. Palli lõppkiirus on null. Seega on palli algkiiruse komponent avaldatav valemiga $v_{0} = g * t$. Palli maksimaalne kõrgus on seega arvutatav valemiga:
+
+$$maxHeightOfBall = g * t * t - \frac{g * t ^ {2}}{2}$$
+
+Kuna aeg on üks sekund, siis on palli maksimaalne kõrgus meetrites:
+
+$$maxheightOfBall = g - \frac{g}{2} === \frac{g}{2}$$
+
+Ligikaudse väärtuse arvutamiseks topin sellesse valemisse teadaolevad väärtused:
+
+```{r}
+maxHeightOfBall = g / 2
+maxHeightOfBall
+```
