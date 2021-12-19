@@ -30,15 +30,20 @@ $$vahemaa = \frac{lõppKiirus ^ 2 - algKiirus ^ 2}{2 * kiirendus}$$
 ##### Kiirendus
 
 $$kiirendus = \frac{lõppkiirus - algkiirus}{aeg} === \frac{lõppkiirus ^ 2 - algkiirus ^ 2}{2 * vahemaa}$$
+#### Gravitatsioonijõud
 
-#### Raskuskiirendus
-
-$$g = G * \frac{M}{R ^ 2}$$
 $G = 6.67 * 10 ^ {-11} \frac{N * m ^ 2}{kg ^ 2}$ Maa mass olevat 6 * 10^24^ kg. Maa raadius olevat 6.4 * 10^6^ m.
 
 ```{r}
-g <- 6.67 * 10 ^ (-11) * (6 * 10 ^ 24) / (6.4 * 10 ^ 6) ^ 2
+gravitationalConstant = 6.67E-11
+```
 
+$$gravitatsiooniJõud = gravitatsiooniKonstant * \frac{mass1 * mass2}{punktmassidevahelinekaugus^2}$$
+
+$$g = G * \frac{M}{R ^ 2}$$
+
+```{r}
+g <- gravitationalConstant * (6 * 10 ^ 24) / (6.4 * 10 ^ 6) ^ 2
 ```
 
 g = `r g` $* \frac{m}{s ^ 2}$
@@ -382,3 +387,55 @@ forceB = calculateForce(50 * pi / 180)
 ```
 
 Kummagi trossi pinge on `r forceB` * N, kui α = 50 °.
+
+#### Läänemeri
+
+##### Ülesande püstitus
+
+Läänemere maht on umbes 20000 km^3^. Kuu mass on 7,3 * 10^22^ kg ja keskmine kaugus Maast 384000 km. Kui suur gravitatsioonijõud on Kuu ja Läänemere vahel?
+
+##### Lahendus
+
+![Maa ja Kuu](baltic-sea-moon.svg)
+
+Selles ülesandes on vaja teha palju konverteerimisi. Et arvutada Kuu ja Läänemere vaheline jõud, on vaja lisaks gravitatsioonikonstandile kasutada Läänemere ja Kuu massi ning nendevahelist kaugust.
+
+Läänemere massist pole teavitatud. Siiski on teavitatud Läänemere ruumalast. Selle konverteerin esmalt kuupmeetritesse:
+
+```{r}
+volumeOfSea = 20000 * (1000) ^ 3
+```
+
+Läänemere maht kuupmeetrites on `r volumeOfSea`.
+
+On kindlaks tehtud, et üks kilogramm vett tasakaalustab üht liitrit vett. Kui mitu kilogrammi vett tasakaalustab üht kuupmeetrit vett?
+
+```{r}
+weightToVolume = 1 / (1 * .1 ^ 3)
+```
+
+Üht kuupmeetrit vett tasakaalustab `r weightToVolume` kg vett.
+
+Nüüd on võimalik välja arvutada Läänemere mass:
+
+```{r}
+weightOfSea = volumeOfSea * weightToVolume
+```
+
+Läänemere mass on `r weightOfSea` kg.
+
+Kuu keskmine kaugus maast on
+
+```{r}
+distanceBetweenCelestialbodies = 384000 * 1000
+```
+
+`r distanceBetweenCelestialbodies` m.
+
+Nüüd on kõik vajalikud sisendid sobival kujul ja saan arvutada gravitatsioonijõu Kuu ja Läänemere vahel:
+
+```{r}
+gravitationalForce = gravitationalConstant * weightOfSea * 7.3e22 / distanceBetweenCelestialbodies ^ 2
+```
+
+Kuu ja Läänemere vahel on gravitatsioonijõud suurusega `r gravitationalForce` N.
