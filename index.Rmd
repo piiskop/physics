@@ -11,6 +11,12 @@ output:
 
 ### Reeglid
 
+#### Ühikud
+
+1. (UnitConverters.net)[https://www.unitconverters.net/volume/cubic-kilometer-to-cubic-meter.htm]
+
+2. (Calculate weight of compounds and materials per volume)[https://www.aqua-calc.com/calculate/volume-to-weight]
+
 #### Ühtlaselt muutuv liikumine
 
 ##### Vahemaa
@@ -38,7 +44,7 @@ $G = 6.67 * 10 ^ {-11} \frac{N * m ^ 2}{kg ^ 2}$ Maa mass olevat 6 * 10^24^ kg. 
 gravitationalConstant = 6.67E-11
 ```
 
-$$gravitatsiooniJõud = gravitatsiooniKonstant * \frac{mass1 * mass2}{punktmassidevahelinekaugus^2}$$
+$$gravitatsiooniJõud = GRAVITATSIOONI\_KONSTANT * \frac{mass1 * mass2}{punktmassidevahelinekaugus^2}$$
 
 $$g = G * \frac{M}{R ^ 2}$$
 
@@ -47,6 +53,10 @@ g <- gravitationalConstant * (6 * 10 ^ 24) / (6.4 * 10 ^ 6) ^ 2
 ```
 
 g = `r g` $* \frac{m}{s ^ 2}$
+
+Selline valem kehtib objekti kohta, mis on täpselt Maa pinnal. Kui see asub pinna sees või selle kohal, siis tuleb kasutada sellist valemit:
+
+$$gravitatsiooniKiirendus = GRAVITATSIOONI\_KONSTANT * \frac{maaMass}{(maaRaadius + kõrgusMaaPinnast) ^ 2}$$
 
 #### Rõhk
 
@@ -439,3 +449,17 @@ gravitationalForce = gravitationalConstant * weightOfSea * 7.3e22 / distanceBetw
 ```
 
 Kuu ja Läänemere vahel on gravitatsioonijõud suurusega `r gravitationalForce` N.
+
+#### Orbitaaljaam
+
+##### Ülesande püstitus
+
+Kui suurt raskuskiirendust tunnevad orbitaaljaamas asuvad astronaudid, kui orbitaaljaam on 200 km kõrgusel Maa pinnast? Maa mass on $6 \cdot 10^{24} kg$ ja raadius $6,4 \cdot 10^6 m$.
+
+##### Lahendus
+
+```{r}
+gravitationalAccelerationOfAstronauts = gravitationalConstant * 6e24 / (6.4e6 + 200 * 1000) ^ 2
+```
+
+Astronaudid tunnevad orbitaaljaamas raskuskiirendust $`r gravitationalAccelerationOfAstronauts` * \frac{m}{s^2}$.
