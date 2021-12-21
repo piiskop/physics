@@ -2,7 +2,9 @@ name: "füüsika"
 navbar:
   title: "Füüsika"
   left:
-    - text: "Füüsika"
-      href: index.html
-    - text: "About"
+    - text: "mehaanika"
+      href: mechanics.html
+    - text: "aine ja selle olekud"
+      href: substance.html
+    - text: "autor"
       href: about.html
