@@ -6,5 +6,7 @@ navbar:
       href: mechanics.html
     - text: "aine ja selle olekud"
       href: substance.html
+    - text: "soojus"
+      href: warmth.html
     - text: "autor"
       href: about.html
