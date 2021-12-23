@@ -32,12 +32,15 @@ $$periood = 2 * \pi * \sqrt{\frac{pikkus}{{kiirendus}_{gravitatsioon}}} === 2 * 
 VELOCITY_SOUND_AIR = 340
 ```
 
-Heliallika lähenemisel:
+Doppleri efekt, kui nii jälgija kui heliallikas üksteise suhtes liiguvad:
 
-$${sagedus}_{vastuvõetavHeli} = {sagedus}_{heliallikast} * (1 + \frac{{kiirus}_{heliallikas}}{{kiirus}_{heliÕhus}})$$
-Heliallika kaugenemisel:
+$${sagedus}_{vastuvõetavHeli} = {sagedus}_{heliallikast} * (\frac{{kiirus}_{heliÕhus} + {kiirus}_{jälgija}}{{kiirus}_{heliÕhus} + {kiirus}_{heliallikas}})$$
 
-$${sagedus}_{vastuvõetavHeli} = {sagedus}_{heliallikast} * (1 - \frac{{kiirus}_{heliallikas}}{{kiirus}_{heliÕhus}})$$
+Oluline on arvestada kiiruse märki. Kui jälgija ja allikas mõlemad liiguvad üksteise suunas, on jälgija märk pluss ja heliallika märk miinus. Üksteisest eemaldudes on heliallika märk pluss ja jälgija märk miinus.
+
+Kui heliallikas läheneb ja jälgija on paigal, siis jälgija kiirus on null. Heliallika lähenemiskiirus on miinusmärgiga, kaugenemiskiirus plussmärgiga.
+
+Kui heliallikas on paigal ja jälgija läheneb, siis heliallika kiirus on null. Heliallika suunas on jälgija kiirus pluss-, eemaldudes miinusmärgiga.
 
 Kui heliallikatest lähtuva heli lained on samas faasis, siis need võimendavad üksteist, kui faasinihkega, siis nõrgendavad üksteist.
 
@@ -239,7 +242,7 @@ wavelength = 1500 / 256
 wavelength
 ```
 
-## Helilaine pikkus õhus
+## Helilaine pikkus
 
 ### Ülesande püstitus
 
