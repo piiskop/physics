@@ -8,5 +8,7 @@ navbar:
       href: substance.html
     - text: "soojus"
       href: warmth.html
+    - text: "võnkumised, lained, heli"
+      href: sound.html
     - text: "autor"
       href: about.html
