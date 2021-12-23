@@ -28,6 +28,10 @@ $${temperature}_{c} = \frac{{temperature}_{f} - 32}{1.8}$$
 
 ```{r}
 ZERO_DEGREES_C_IN_K = 273.15
+
+convertFromDegreesFToK <- function(temperatureF) {
+  (temperatureF - 32) / 1.8 + ZERO_DEGREES_C_IN_K
+}
 ```
 
 $${erisoojus}_{1} * {mass}_{1} * \Delta({temperatuur}_1) + {erisoojus}_2 * {mass}_2 * \Delta({temperatuur}_2) === 0$$
@@ -35,6 +39,7 @@ $${erisoojus}_{1} * {mass}_{1} * \Delta({temperatuur}_1) + {erisoojus}_2 * {mass
 ```{r}
 SPECIAL_HEAT_WATER = 4190
 SPECIAL_HEAT_FE = .44 / (.1 ^ 3)
+SPECIAL_HEAT_STEEL = 502
 ```
 
 $${soojus}_{sulamiseks} = sulamissoojus * mass$$
@@ -48,6 +53,24 @@ $${soojus}_{soojendamiseks} = erisoojus * mass * \Delta(temperatuur)$$
 ```{r}
 HEAT_VAPORIZATION_WATER = 40.65 * 10 ^ 3 / ((1.008 * 2 + 15.999) * .1 ^ 3)
 ```
+
+$${koefitsient}_{tõhusus} = \frac{{kasulikSoojus}_{lisatudVõiEemaldatud}}{töö} === \frac{{võimsus}_{kasulik}}{{võimsus}_{kogu}}$$
+
+$${koefitsient}_{tõhusus} = \frac{{absoluutneTemperatuur}_{kuumutamine} - {absoluutneTemperatuur}_{jahutamine}}{{absoluutneTemperatuur}_{kuumutamine}}$$
+
+$${koefitsient}_{soojendus} = \frac{|{soojus}_{kuuma}|}{töö} === \frac{|{soojus}_{külmast}| + töö}{töö} === \frac{{soojus}_{kuuma}}{{soojus}_{kuuma} - {soojus}_{külmast}}$$
+
+$${koefitsient}_{soojendus} = \frac{{absoluutneTemperatuur}_{kuumas}}{{absoluutneTemperatuur}_{kuumas} - {absoluutneTemperatuur}_{külmas}}$$
+
+$${koefitsient}_{külmutus} = \frac{{absoluutneTemperatuur}_{külmas}}{{absoluutneTemperatuur}_{kuumas} - {absoluutneTemperatuur}_{külmas}}$$
+
+$${koefitsient}_{külmutus} = \frac{{soojus}_{külmast}}{{soojus}_{kuuma} - {soojus}_{külmast}} === \frac{|{soojus}_{külmast}|}{töö}$$
+
+Termodünaamika esimene seadus:
+
+$$töö = {soojus}_{kuuma} - {soojus}_{külmast}$$
+
+$$\frac{{soojus}_{kuuma}}{{absoluutneTemperatuur}_{kuumas}} === \frac{{soojus}_{külmast}}{{absoluutneTemperatuur}_{külmas}}$$
 
 ## Energia
 
@@ -63,6 +86,18 @@ $$pikenemine = {algpikkus} * joonpaisumistegur * \Delta({temperatuur})$$
 COEFFICIENT_LINEAR_EXPANSION_FE = .000011
 COEFFICIENT_LINEAR_EXPANSION_STEEL = 1.2E-5
 ```
+
+## Soojuskiirgus
+
+```{r}
+WIEN = 2.9E-3
+
+calculateWavelengthForMaxRadiationEnergy <- function(absoluteTemperatureOfBody) {
+  WIEN / absoluteTemperatureOfBody
+}
+```
+
+$${lainepikkus}_{kiirgusenergiaMaksimum} = \frac{WIEN}{{temperatuur}_{absoluutne}}$$
 
 # Ülesanded
 
@@ -326,3 +361,191 @@ b) 419000 * J
 c) `r HEAT_VAPORIZATION_WATER` * J
 
 d) `r MELTING_HEAT_ICE + 419000 + HEAT_VAPORIZATION_WATER` * J
+
+## Graniit
+
+### Ülesande püstitus
+
+Graniidi ja teise kivimite radioaktiivsel lagunemisel tekkiv soojus on piisav, et hoida Maa tuuma kõrgel temperatuuril. Keskmiselt eraldub radioaktiivsel lagunemisel soojushulk 0,03 J ühe kilogrammi kohta aastas. Kui mitu aastat kulub termiliselt isoleeritud graniidi soojendamiseks 500 °C võrra, kui graniidi erisoojus on $800 J/kg \cdot K$?
+
+### Lahendus
+
+$\frac{40000000}{3} * a$ kulub termiliselt isoleeritud graniidi soojendamiseks 500 * °C võrra, kui graniidi erisoojus on $800 J/kg \cdot K$.
+
+## Terasnael
+
+### Ülesande püstitus
+
+Lüües terasnaela puusse, muutub nael selle tagajärjel soojemaks. Oletame, et vasar mõjutab naela keskmise jõuga 500 N ning et nael on 12 cm pikk ja mass on 10 g. Leida naela temperatuuri muutus.
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+differenceOfTemperature = 500 * 12 * .1 ^ 2 / (10 * .1 ^ 3) / SPECIAL_HEAT_STEEL
+```
+
+`r differenceOfTemperature` * K on naela temperatuuri muutus.
+
+## Rauast kuul
+
+### Ülesande püstitus
+
+Rauast kuul massiga 10 kg langeb 100 m kõrguselt maapinnale. Milline on kuuli temperatuuri muutus, kui pool kuuli mehaanilisest energiast muutub kuuli soojendamiseks?
+
+### Lahendus
+
+$\frac{5}{44} * g * K$ on kuuli temperatuuri muutus, kui pool kuuli mehaanilisest energiast muutub kuuli soojendamiseks.
+
+## Lainepikkus
+
+### Ülesande püstitus
+
+Millise lainepikkuse juures on järgmiste kehade soojuskiirguse maksimumid
+
+a) Päike pinnatemperatuuriga 5800 K;
+
+b) hõõglamp, temperatuur 1500 K;
+
+c) inimkeha.
+
+### Lahendus
+
+a) `r calculateWavelengthForMaxRadiationEnergy(5800)` * m
+
+b) `r format(calculateWavelengthForMaxRadiationEnergy(1500), digits = 2)` * m
+
+c) `r format(calculateWavelengthForMaxRadiationEnergy(convertFromDegreesFToK(96)), digits = 2)` * m, kui inimese keha temperatuur on 96 * °F
+
+## Automootori kasutegur
+
+### Ülesande püstitus
+
+Kui suur on automootori maksimaalne kasutegur, kui kütus põleb temperatuuril 760 °C ja jahutusvedeliku temperatuur on 90 °C?
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+temperatureOfHeating = 760 + ZERO_DEGREES_C_IN_K
+efficiency = (temperatureOfHeating - (90 + ZERO_DEGREES_C_IN_K)) / (temperatureOfHeating)
+```
+$`r format(efficiency, digits = 2)`$ on automootori maksimaalne kasutegur, kui kütus põleb temperatuuril 760 * °C ja jahutusvedeliku temperatuur on 90 * °C.
+
+## Elektrijaam
+
+### Ülesande püstitus
+
+Elektrijaam, mille kasutegur on 40% ja elektriline võimsus 10^8^ W, eraldab jahutusvette soojusenergiat $1,5 \cdot 10 ^ 8 W$. Leida, kui palju jahutusvett kasutab elektrijaam igas sekundis, kui vesi soojeneb 3 kraadi võrra.
+
+### Lahendus
+
+Elektrijaama võimsus tähendab seda kogust energiat, mis väljub elektrijaamast tarbijatele. Kasutegur näitab, kui suure osa see moodustab sisendist, mida on vaja selleks, et sellist võimsust väljastada. Sisendvõimsuse arvutan seega jagades väljundvõimsuse kasuteguriga ja saan selleks 2.5 * 10 ^ 8 * W. Võin seda võimsust nimetada ka soojuseks, sest küsitakse ühe sekundi kohta ja võimsus ongi soojushulk sekundi kohta. Nii et sisendvõimsus on kaks ja pool korda suurem kui väljundvõimsus. See sisendsoojus tuleb nt söe põletamisest.
+
+Söe põletamisest eraldunud soojushulka kasutatakse nt turbiini liigutamiseks. Ühtlasi on vaja süsteemi jahutada ja selleks kasutatakse jahutusvedelikku. Kirjas on, et kui jahutusvesi peale lastakse, eraldub sellesse 1.5 * 10 ^ 8 * W ehk J soojust. Nii et sisse pandi 2.5 * 10 ^ 8 * J ja jahutamiseks kasutati 1.5 * 10 ^ 8 * J ning üle jäi nende jääk ehk just see väljundsoojushulk, mis võimsusena kirjas ehk 10 ^ 8 * J.
+
+Küsitakse jahutusvedeliku koguse kohta. Juba ülesande püstituse oli kirjas, kui palju soojust jahutusvette eraldus. See kogus tuleb jagada vee erisoojuse ja temperatuurierinevusega, mille põhjustas sellise soojushulgaga kokkupuutumine, et arvutada välja vajalik veemass:
+
+```{r}
+weightOfWater = 1.5e8 / SPECIAL_HEAT_WATER / 3
+```
+
+`r format(weightOfWater, digits = 2)` * kg jahutusvett kasutab elektrijaam igas sekundis, kui vesi soojeneb 3 kraadi võrra. Kui tahta seda väärtust avaldada kuupmeetrites, tuleb see lihtsalt tuhandega läbi jagada. Nägime, et kasutegurit ja väljundvõimsust polnudki vaja kasutada veekoguse arvutamiseks ja need olid lihtsalt näitlikustavad või siis kontrollandmed.
+
+## Külmik
+
+### Ülesande püstitus
+
+Külmikus on temperatuur 4 °C ja toatemperatuur on 20 °C.
+
+a) Kui suur on külmiku maksimaalne külmutustegur (ideaalsel juhul)?
+
+b) Kui suur on maksimaalne soojushulk, mis võetakse ööpäevas jahutatavast kambrist ära, kui elektrienergia kulu ööpäevas on 0,55 kWh? 1 kWh=3,6 MJ.
+
+c) Külmikusse pannakse toatemperatuuril olev veepudel, milles on 1,5 liitrit vett. Milline on minimaalne elektrienergia hulk, mis kulub selle jahutamiseks temperatuurini 4 °C?
+
+### Lahendus
+
+a) Arvutuskäik:
+
+```{r}
+temperatureOutside = 20 + ZERO_DEGREES_C_IN_K
+temperatureInside = (4 + ZERO_DEGREES_C_IN_K)
+efficiencyOfFridge = temperatureInside / (temperatureOutside - temperatureInside)
+```
+
+`r format(efficiencyOfFridge, digits = 1)` on külmiku maksimaalne külmutustegur.
+
+b) Arvutuskäik:
+
+```{r}
+workOfFridge = 3.6 * 10 ^ 6 * .55
+library(Ryacas)
+equation = paste(efficiencyOfFridge, "== (heatIn) /", workOfFridge, sep = " ")
+equation
+heatIn = eval(parse(text = yac_str(y_rmvars(paste("Solve(", equation, ", heatIn)", sep = "")))))
+```
+
+`r format(heatIn, digits = 2)` * J on maksimaalne soojushulk, mis võetakse ööpäevas jahutatavast kambrist ära, kui elektrienergia kulu ööpäevas on .55 * kWh.
+
+c) Sedapuhku on vaja arvutada väljas olev soojus, milleks on pudelivee soojus. Arvutuskäik:
+
+```{r}
+energyInJ = SPECIAL_HEAT_WATER * 1.5 * (20 - 4) / efficiencyOfFridge
+```
+
+`r format(energyInJ, digits = 2)` * J on minimaalne elektrienergia hulk, mis kulub selle veepudeli jahutamiseks temperatuurini 4 °C.
+
+```{r}
+energyInKwh = energyInJ * .1 ^ 3 / 3600
+```
+
+`r format(energyInKwh, digits = 2)` * kWh on seesama elektrienergia hulk teistes ühikutes.
+
+## Soojuspump
+
+### Ülesande püstitus
+
+Õhk-õhk soojuspump võtab soojust välisõhust ja annab selle edasi toaõhule.
+
+a) Kui suur on soojuspumba maksimaalne võimalik soojendustegur, kui välisõhu temperatuur on -5 °C ja toatemperatuur 20 °C?
+
+b) Olgu elektriradiaatori kasutegur 100%, st kogu radiaatori poolt tarbitud elektrienergia muudetakse soojuseks. Mitu korda vähem elektrienergiat kulutab soojuspump sama soojushulga ülekandmiseks?
+
+### Lahendus
+
+a) Arvutuskäik:
+
+```{r}
+temperatureInside = 20 + ZERO_DEGREES_C_IN_K
+cop = temperatureInside / (temperatureInside - (-5 + ZERO_DEGREES_C_IN_K))
+```
+
+`r format(cop, digits = 1)` on soojuspumba maksimaalne võimalik soojendustegur, kui välisõhu temperatuur on -5 °C ja toatemperatuur 20 °C.
+
+b) 100 * % kasuteguriga elektriradikas tarbib iga ühe väljundi kohta ühe sisendi. See on konverteerimine. Soojendustegur on minimaalselt 1. See näitab, mitu ühikut sisendit on vajalik ühe ühiku väljundsoojuse jaoks. Erinevus on märgatav. Kui radika puhul nii palju kui sisse tuleb, läheb välja, siis pumba puhul tuleb palju vähem sisse kui läheb välja. Arvutan, mitu korda vähem tarbib pump elektrit võrreldes radikaga:
+
+```{r}
+difference = 1 - (1 / cop)
+```
+
+`r format(difference, digits = 1)` korda vähem elektrienergiat kulutab soojuspump sama soojushulga ülekandmiseks.
+
+## Heat Pump – Heating and Air Conditioning
+
+### Task
+
+![Reversible heat pump schemata](Reversible-heat-pump-schematic-min.png)
+
+A reversible heat pump has a coefficient of performance COP = 3.0 when operated in the heating mode. Its compressor consumes 1500 W of electric energy.
+
+Calculate the amount of heat (Qhot) the heat pump can add to a room?
+If the heat pump were turned to the cooling mode (i.e., to act as an air conditioner in the summer), what would you expect its coefficient of performance to be? Assume all else stays the same and neglect all other losses.
+
+### Solution
+
+$4500 * \frac{J}{s}$ is the amount of heat the heat pump can add to a room.
+
+If the heat pump were turned to the cooling mode, I would expect its coefficient of performance to be 2.
