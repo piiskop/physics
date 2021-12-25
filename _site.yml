@@ -10,5 +10,7 @@ navbar:
       href: warmth.html
     - text: "võnkumised, lained, heli"
       href: sound.html
+    - text: "elekter"
+      href: electricity.html
     - text: "autor"
       href: about.html

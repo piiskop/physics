@@ -1,0 +1,203 @@
+---
+title: "Elekter"
+author: 'peacecop kalmer:'
+date: "12/25/2021"
+output:
+  bookdown::html_document2:
+    toc: yes
+    toc_float: yes
+    toc_depth: 5
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Reeglid
+
+$$pinge = \frac{töö}{laeng}$$
+
+$$voolutugevus = \frac{laeng}{aeg} === \frac{võimsus}{pinge}$$
+
+```{r}
+ELEMENTARYCHARGE = 1.6E-19
+```
+
+# Ülesanded
+
+## Ekvipotentsiaaljooned
+
+### Ülesande püstitus
+
+![Ekvipotentsiaaljooned](equipotential-lines.png)
+
+Millises sihis liikudes 
+muutub potentsiaal 
+kiiremini?
+
+• sihis A
+
+• sihis B
+
+### Lahendus
+
+*A*
+
+## Laengukandjad
+
+### Ülesande püstitus
+
+Kui suur võiks ligikaudu olla laengukandjate suunatud 
+liikumise kiirus 230 V pingega ahelas, kus on 20 W 
+pirn?
+
+Laengukandjate kontsentratsioon vases on $8.5E28 * \frac{1}{m^3}$.
+
+Juhi ristlõikepindala on 13 * mm^2^. 
+
+A.
+1 mm/h
+
+B.
+1 mm/s
+
+C.
+1 m/s
+
+D.
+1 km/s
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+options(scipen = 999)
+velocity = 20 / 230 / ELEMENTARYCHARGE / 8.5E28 / (13 * 1E-3)
+velocity
+aInSi = 1 * 1e-3 / 3600
+aInSi
+bInSi = 1 * 1e-3
+bInSi
+cInSi = 1
+cInSi
+dInSi = 1 * 1e3
+dInSi
+differenceFromA = deparse(abs(aInSi - velocity))
+differenceFromA
+differenceFromB = deparse(abs(bInSi - velocity))
+differenceFromB
+differenceFromC = deparse(abs(cInSi - velocity))
+differenceFromC
+differenceFromD = deparse(abs(dInSi - velocity))
+differenceFromD
+minimum = min(c(differenceFromA, differenceFromB, differenceFromC, differenceFromD))
+minimum
+library(switchcase)
+choice <- switchCase(
+  minimum,
+  alt(
+    ..expr == differenceFromA,
+    {NULL},
+    "A"
+  ),
+  alt(
+    ..expr == differenceFromB,
+    {NULL},
+    "B"
+  ),
+  alt(
+    ..expr == differenceFromC,
+    {NULL},
+    "C"
+  ),
+  alt(
+    ..expr == differenceFromD,
+    {NULL},
+    "D"
+  ),
+  alt(
+    NULL,
+    {NULL},
+    "E"
+  )
+)
+choice
+options(scipen = 0)
+```
+*`r choice`*.
+
+## Ohmi seadus
+
+### Ülesande püstitus
+
+Ohmi seadus:
+
+$$voolutugevus = \frac{pinge}{takistus}$$
+Ohmi
+seadusest võime avaldada takistuse:
+
+$$takistus = \frac{pinge}{voolutugevus}$$
+
+See on 
+Ohmi
+seadusest 
+avaldatud. 
+Võimaldab arvutada 
+takistust, kui pinge ja 
+voolutugevus on mõõdetud.
+
+Kas see tähendab, et kui me pinget 
+2 korda suurendame, siis takistus 
+suureneb 2 korda?
+
+### Lahendus
+
+Ei.
+
+## Alalisvool ja vahelduvvool
+
+### Ülesande püstitus
+
+Elektrilöögi korral on inimesele ohtlikum
+
+A.
+alalisvool
+
+B.
+vahelduvvool
+
+### Lahendus
+
+*A*.
+
+## Jõulukuuse küünlad
+
+### Ülesande püstitus
+
+![Jõulukuuse küünlad](christmas-tree-candles.png)
+
+Jõulukuuse tuled on
+
+A.
+jadaühenduses
+
+B.
+rööpühenduses
+
+### Lahendus
+
+*A*.
+
+## Punktlaengud
+
+### Ülesande püstitus
+
+Kaks punktlaengut asetsevad üksteisest 6 cm kaugusel ning mõjutavad üksteist jõuga 20 N. Leia:
+
+a) jõud nende kahe punktlaengu vahel, kui laengute vaheline kaugus on 12 cm;
+
+b) laengute suurused, kui nende absoluutväärtused on võrdsed.
+
+### Lahendus
+
