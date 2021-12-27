@@ -85,6 +85,61 @@ kiiremini?
 
 *A*
 
+## Magnitude of the electrical force
+
+### Task
+
+Two balloons are charged with an identical 
+quantity and type of charge: -6.25 µC. They are held apart at 
+a separation distance of 61.7 cm. Determine the magnitude 
+of the electrical force of repulsion between them.
+
+### Solution
+
+The calculation process:
+
+```{r}
+electricalForce = FORCE_CHARGES * (-6.25e-6) ^ 2 / 61.7e-2 ^ 2
+```
+
+`r electricalForce` * N is the magnitude of the electrical force of repulsion between them.
+
+## Charge
+
+### Task
+
+Two balloons with the same amount of charge repel with 0.0648 N of force 
+when held at a separation distance of 28.2 cm. Determine the quantity of charge on the 
+balloons.
+
+### Solution
+
+The calculation process:
+
+```{r}
+charge = sqrt(.0648 * 28.2e-2 ^ 2 / FORCE_CHARGES)
+```
+
+`r charge` * C is the quantity of charge on the balloons.
+
+## Distance
+
+### Task
+
+Two different objects are given charges of +3.27 μC and -4.91 μC. What 
+separation distance will cause the force of attraction between the two objects to be 0.358 
+N?
+
+### Solution
+
+The calculation process:
+
+```{r}
+distanceBetweenObjects = sqrt(FORCE_CHARGES * abs(3.27e-6) * abs(-4.91e-6) / .358)
+```
+
+`r format(distanceBetweenObjects, digits = 3)` * m is the separation distance that will cause the force of attraction between the two objects to be .358 * N.
+
 ## Laengukandjad
 
 ### Ülesande püstitus
