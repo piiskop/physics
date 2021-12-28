@@ -12,7 +12,9 @@ navbar:
       href: sound.html
     - text: "elekter"
       href: electricity.html
-    - text: "magnetism ja induktsioon"
+    - text: "magnetism, induktsioon"
       href: magnetism.html
+    - text: "elektromagnetkiirgus, valgus, värvus"
+      href: electromagnetic-waves-light-colors.html
     - text: "autor"
       href: about.html

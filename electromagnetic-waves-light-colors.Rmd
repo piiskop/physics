@@ -1,0 +1,183 @@
+---
+title: "Elektromagnetkiirgus, valgus ja värvus"
+author: 'peacecop kalmer:'
+date: "12/28/2021"
+output:
+  bookdown::html_document2:
+    toc: yes
+    toc_float: yes
+    toc_depth: 5
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Reeglid
+
+$${valguskiirus}_{vaakumis} = \frac{lainepikkus}{periood} === lainepikkus \cdot sagedus$$
+
+```{r}
+SPEED_LIGHT <- 299792458
+```
+
+# Ülesanded
+
+## Valge värvus
+
+### Ülesande püstitus
+
+Kas valge värvus on olemas?
+
+Jah
+
+Ei
+
+### Lahendus
+
+*Ei*.
+
+## Must värvus
+
+### Ülesande püstitus
+
+Kas must värvus on olemas?
+
+Jah
+
+Ei
+
+### Lahendus
+
+*Ei*.
+
+## Roos
+
+### Ülesande püstitus
+
+![Roos valges valguses](rose-without-filter.png)
+
+Valges valguses on punase 
+roosi kroonlehed 
+punased, 
+vars ja lehed 
+rohelised.
+
+Punases 
+valguses
+
+Mis värvi on kroonlehed?
+
+Mis värvi on vars ja lehed?
+
+### Lahendus
+
+![Roos punase filtri läbi](rose-with-filter.png)
+
+Kroonlehed punased, vars 
+ja lehed mustad.
+
+## Värvid mustris
+
+### Ülesande püstitus
+
+![Muster kaugelt](pattern-from-far.png)
+
+Mitut värvi on kasutatud 
+valgele põhjale mustri 
+tegemiseks?
+
+### Lahendus
+
+![Muster lähedalt](pattern-from-close.png)
+
+Kaht.
+
+## Raadio *Kuku*
+
+### Ülesande püstitus
+
+Kui suur on raadio Kuku raadiosaatjast kiirguva raadiolaine pikkus, kui raadiojaama sagedus on 100,7 MHz?
+
+### Lahendus
+
+100.7 * MHz on 1.007e2 * MHz ehk 1.007e8 * Hz. Väljendan lainepikkuse:
+
+$$\frac{c}{1.007e8} \cdot m === \frac{c}{1007e5} \cdot m$$
+
+$\frac{c}{1007e5} \cdot m$ on raadio *Kuku* raadiosaatjast kiirguva raadionaline pikkus, kui raadiojaama sagedus on 100.7 * MHz.
+
+Lasen selle väärtuse arvutada ka ebatäpseks:
+
+```{r}
+SPEED_LIGHT / 100.7E6
+```
+
+## Mikrolaineahi
+
+### Ülesande püstitus
+
+Mikrolaineahi töötab elektromagnetkiirgusega, mille sagedus on 2,5 GHz. Kui suur on vastavate mikrolainete lainepikkus?
+
+### Lahendus
+
+$\frac{c}{25e8} \cdot m$ on vastavate mikrolainete lainepikkus.
+
+Lasen selle väärtuse ka ebatäpseks arvutada:
+
+```{r}
+SPEED_LIGHT / 2.5e9
+```
+
+## Päikeselt Maale
+
+### Ülesande püstitus
+
+Kui kaua aega kulub valgusel Päikeselt Maale jõudmiseks? Maa keskmine kaugus Päikesest on 150 mln km.
+
+### Lahendus
+
+Tuleb arvestada, et 150000000 * km on 150000000000 * m.
+
+$\frac{15e10}{c} \cdot s$ kulub valgusel Päikeselt Maale jõudmiseks.
+
+Lasen selle ajaväärtuse ka ebatäpseks arvutada:
+
+```{r}
+timeFromSunToEarth = 150e9 / SPEED_LIGHT
+timeFromSunToEarth
+timeFromSunToEarthInMinutes = timeFromSunToEarth / 60
+timeFromSunToEarthInMinutes
+timeFromSunToEarthInHours = timeFromSunToEarthInMinutes / 60
+timeFromSunToEarthInHours
+```
+
+## Arecibo
+
+### Ülesande püstitus
+
+16. novembril 1974 saadeti Arecibo observatooriumist (Puerto Rico) kosmosesse kodeeritud raadiosõnum, mis sisaldas numbreid ühest kümneni, DNA-s esinevate keemiliste elementide aatomnumbreid, inimese graafilist kujutist ja muud olulist informatsiooni. Sõnum suunati galaktikale M13 ning sõnum peaks sinna jõudma 25 tuh aasta pärast. Kui kaugel asub galaktika M13?
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+distance = SPEED_LIGHT * 25e3 * 365.25 * 24 * 60 * 60
+```
+
+`r distance` * m kaugusel asub galaktika M13.
+
+## Kollane valgus
+
+### Ülesande püstitus
+
+Kollase valguse lainepikkus õhus on 589 nm. Milline on selle valguse sagedus?
+
+$\frac{c}{589e-9} \cdot Hz$ on selle valguse sagedus.
+
+Lasen selle väärtuse arvutada ka ebatäpseks:
+
+```{r}
+SPEED_LIGHT / 589e-9
+```
