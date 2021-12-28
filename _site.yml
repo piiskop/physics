@@ -12,5 +12,7 @@ navbar:
       href: sound.html
     - text: "elekter"
       href: electricity.html
+    - text: "magnetism ja induktsioon"
+      href: magnetism.html
     - text: "autor"
       href: about.html
