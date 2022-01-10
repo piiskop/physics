@@ -759,22 +759,3 @@ Jõuluküünalde "CRYSTAL" ahelas on 100 LED lampi. Jõuluküünalde tööpinge 
 ### Lahendus
 
 52.9 * Ω on ühe LED-lambi takistus.
-
-## Hõõglamp
-
-### Ülesande püstitus
-
-230 voldise pingega hõõglamp tarbib voolu 0,27A. Hõõglambist kiirguva valguse keskmine lainepikkus on 1200 nm. Leida, mitu footonit kiirgab lamp 1 min jooksul, kui kogu tarbitud elektrienergia muundatakse valgusenergiaks.
-
-Märkus: 10 astmete eraldajaks kasuta tähte E. Näiteks 7,1·10^5^ kirjutatakse 7,1E+5
-
-### Lahendus
-
-Võimsus on 62.1 * W. Tundub, et seda pole vaja kasutada. Kasutan hoopis lainepikkuse ja sageduse valemit:
-
-```{r}
-numberOfPhotons <- SPEED_LIGHT / 1200e-9 * 60
-```
-
-`r format(numberOfPhotons, digits = 2)` footonit kiirgab lamp 1 * min kestel, kui kogu tarbitud elektrienergia muundatakse valgusenergiaks.
-

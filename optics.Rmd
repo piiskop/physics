@@ -108,10 +108,7 @@ Millise nurga all peab kiir langema klaasile, et murdunud kiir ja peegeldunud ki
 Risti olevate kiirte vaheline nurk on suurusega $\frac{\pi}{2}$. Tähistan peegeldumisnurga *x*'ga. Ses juhus on murdumisnurga suurus $\pi - \frac{\pi}{2} - x === \frac{\pi}{2} - x$. Eeldan, et valguskiir langeb klaasile vaakumis. Kasutan kiire murdumise võrrandit, et arvutada välja langemisnurga suurus:
 
 ```{r}
-library(Ryacas)
-equality = paste("sin(angleFalling) / sin(pi / 2 - angleFalling) == ", BREAKING_GLASS, sep = " ")
-y_rmvars(paste("Solve(", equality, ", angleFalling)", sep =""))
-angleFalling = eval(parse(text = yac_str(y_rmvars(paste("Solve(", equality, ", angleFalling)", sep ="")))))
+angleFalling <- atan(3/2)
 angleFalling
 ```
 

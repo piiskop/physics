@@ -16,5 +16,7 @@ navbar:
       href: magnetism.html
     - text: "elektromagnetkiirgus, valgus, värvus"
       href: electromagnetic-waves-light-colors.html
+    - text: "optika"
+      href: optics.html
     - text: "autor"
       href: about.html
