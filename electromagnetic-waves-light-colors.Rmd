@@ -21,6 +21,14 @@ $${valguskiirus}_{vaakumis} = \frac{lainepikkus}{periood} === lainepikkus \cdot 
 SPEED_LIGHT <- 299792458
 ```
 
+Footoni energia:
+
+$${energia}_{footon} = {PLANCK} \cdot {sagedus}_{valgus}$$
+
+```{r}
+PLANCK <- 6.63E-34
+```
+
 # Ülesanded
 
 ## Valge värvus
@@ -181,3 +189,34 @@ Lasen selle väärtuse arvutada ka ebatäpseks:
 ```{r}
 SPEED_LIGHT / 589e-9
 ```
+
+## Hõõglamp
+
+### Ülesande püstitus
+
+230 voldise pingega hõõglamp tarbib voolu 0,27A. Hõõglambist kiirguva valguse keskmine lainepikkus on 1200 nm. Leida, mitu footonit kiirgab lamp 1 min jooksul, kui kogu tarbitud elektrienergia muundatakse valgusenergiaks.
+
+Märkus: 10 astmete eraldajaks kasuta tähte E. Näiteks 7,1·10^5^ kirjutatakse 7,1E+5
+
+### Lahendus
+
+Võimsus on 62.1 * W. Lasen arvutada ühe footoni energia:
+
+```{r}
+energyOfPhoton <- PLANCK * SPEED_LIGHT / 1200e-9
+```
+
+`r format(energyOfPhoton, digits = 3)` * J on ühe footoni energia. Sekundis selle pirni poolt kiirgatavate footonite arvu saan, kui lasen pirni võimsuse jagada ühe footoni energiaga, mis on ühtlasi selle pirni footonite kiirgamise sagedus sekundi kohta:
+
+```{r}
+numberOfPhotonsPerSecond <- 230 * .27 / energyOfPhoton
+```
+
+`r format(numberOfPhotonsPerSecond, digits <- 3)` on footonite arv, mida see lamp kiirgab sekundis. Vaja veel arvutada, kui palju see hõõglamp neid footoneid minutis pihustab:
+
+```{r}
+numberOfPhotonsPerMinute <- numberOfPhotonsPerSecond * 60
+```
+
+`r format(numberOfPhotonsPerMinute, digits = 2)` footonit kiirgab lamp 1 * min kestel, kui kogu tarbitud elektrienergia muundatakse valgusenergiaks.
+

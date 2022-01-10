@@ -1,0 +1,119 @@
+---
+title: "Optika"
+author: 'peacecop kalmer:'
+date: "1/7/2022"
+output:
+  bookdown::html_document2:
+    toc: yes
+    toc_float: yes
+    toc_depth: 5
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Reeglid
+
+$$\frac{sin({nurk}_{langemine})}{sin({nurk}_{murdumine})} === \frac{{murdumisnäitaja}_{murdumiskeskkond}}{{murdumisnäitaja}_{langemiskeskkond}}$$
+
+```{r}
+SPEED_LIGHT <- 299792458
+SPEED_LIGHT_GLASS <- SPEED_LIGHT / 1.5
+SPEED_LIGHT_DIAMANT <- 124E6
+SPEED_LIGHT_WATER <- 2.25E8
+BREAKING_GLASS <- SPEED_LIGHT / SPEED_LIGHT_GLASS
+BREAKING_GLASS
+BREAKING_DIAMOND <- SPEED_LIGHT / SPEED_LIGHT_DIAMANT
+BREAKING_DIAMOND
+REFRACTION_WATER <- SPEED_LIGHT / SPEED_LIGHT_WATER
+```
+
+# Ülesanded
+
+## Auto tuuleklaas
+
+### Ülesande püstitus
+
+Maanteel liikuv inimene nägi vastutuleva auto tuuleklaasil Päikest. Millise nurga all horisontaalasendi suhtes on tuuleklaas, kui Päikese kõrgus horisondi suhtes on 18° ja inimese silma sattunud peegeldunud kiir on horisontaalne? Päike paistab inimesele tagant.
+
+### Lahendus
+
+$\frac{9 \cdot \pi}{20} suuruse nurga all horisontaalasendi suhtes on tuuleklaas, kui Päikese kõrgus horisondi suhtes on 18 * ° ja inimese silma sattunud peegeldunud kiir on horisontaalne.
+
+## Kiire kõrvalekaldumine 
+
+### Ülesande püstitus
+
+Millise nurga võrra kaldub kiir esialgsest suunast kõrvale, kui ta langeb 45° nurga all ja murdub
+
+a) klaasis,
+
+b) teemantis?
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+angleOfFallInRadians <- 45 * pi / 180
+angleOfFallInRadians
+sinOfAngleOfFallInRadians = sin(angleOfFallInRadians)
+sinOfAngleOfFallInRadians
+sinOfAngleOfBreakInGlass <- sinOfAngleOfFallInRadians / BREAKING_GLASS
+sinOfAngleOfBreakInGlass
+angleOfBreakInGlass <- asin(sinOfAngleOfBreakInGlass)
+angleOfBreakInGlass
+changeOfAngleInGlass <- angleOfFallInRadians - angleOfBreakInGlass
+changeOfAngleInDiamond <- angleOfFallInRadians - asin(sinOfAngleOfFallInRadians / BREAKING_DIAMOND)
+```
+
+a) Nurga suurusega `r changeOfAngleInGlass` võrra kaldub kiir esialgsest suunast kõrvale klaasis.
+
+b) Nurga suurusega `r changeOfAngleInDiamond` võrra kaldub kiir esialgsest suunast kõrvale teemandis.
+
+Lasen nurgad ka kraadidesse arvutada:
+
+```{r}
+changeOfAngleInGlassInDegrees <- changeOfAngleInGlass * 180 / pi
+changeOfAngleInGlassInDegrees
+changeOfAngleInDiamondInDegrees <- changeOfAngleInDiamond * 180 / pi
+changeOfAngleInDiamondInDegrees
+```
+
+## Vette langev valguskiir 
+
+### Ülesande püstitus
+
+Valguskiir langeb vette 40° nurga all ja murdub. Millise nurga all peaks valguskiir langema klaasile, et murdumisnurk oleks niisama suur kui vees?
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+angleOfGlass <- asin(sin(40 * pi / 180) / REFRACTION_WATER * BREAKING_GLASS)
+```
+
+`r angleOfGlass` suuruse nurga all peaks valguskiir langema klaasile, et murdumisnurk oleks niisama suur kui vees.
+
+## Risti olevad kiired 
+
+### Ülesande püstitus
+
+Millise nurga all peab kiir langema klaasile, et murdunud kiir ja peegeldunud kiir oleksid omavahel risti?
+
+### Lahendus
+
+Risti olevate kiirte vaheline nurk on suurusega $\frac{\pi}{2}$. Tähistan peegeldumisnurga *x*'ga. Ses juhus on murdumisnurga suurus $\pi - \frac{\pi}{2} - x === \frac{\pi}{2} - x$. Eeldan, et valguskiir langeb klaasile vaakumis. Kasutan kiire murdumise võrrandit, et arvutada välja langemisnurga suurus:
+
+```{r}
+library(Ryacas)
+equality = paste("sin(angleFalling) / sin(pi / 2 - angleFalling) == ", BREAKING_GLASS, sep = " ")
+y_rmvars(paste("Solve(", equality, ", angleFalling)", sep =""))
+angleFalling = eval(parse(text = yac_str(y_rmvars(paste("Solve(", equality, ", angleFalling)", sep ="")))))
+angleFalling
+```
+
+`r angleFalling` suurusega nurga all peab kiir langema klaasile, et murdunud kiir ja peegeldunud kiir oleksid omavahel risti.
+

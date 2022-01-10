@@ -286,3 +286,19 @@ Lasen selle arvu ebatäpsena välja arvutada:
 ```{r}
 23 / 1200
 ```
+
+## Tramm
+
+### Ülesande püstitus
+
+Tramm, mille mass on 7 tonni, sõidab kiirusega 10 km/h. Trammi pidurdamiseks kulub 5 sekundit. Leida, kui suur on pidurdav jõud. Vastus esitada kahe tüvenumbri täpsusega. Lisada ühik!
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+forceOfBreaking <- -7e3 * (0 - 10e3 / 3600) / 5
+```
+
+`r signif(forceOfBreaking, digits = 2)` * N on pidurdav jõud.
