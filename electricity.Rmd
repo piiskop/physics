@@ -759,3 +759,20 @@ Jõuluküünalde "CRYSTAL" ahelas on 100 LED lampi. Jõuluküünalde tööpinge 
 ### Lahendus
 
 52.9 * Ω on ühe LED-lambi takistus.
+
+## Vaskjuhtme pikkus
+
+### Ülesande püstitus
+
+Vaskjuhtme ristlõikepindala on 1,5 mm^2^ ja eritakistus 1,7· 10^-8^ Ω·m.  Kui pikk on juhe, kui selle takistus on 0.041 Ω? Vastus esitada meetrites kahe tüvenumbri täpsusega.
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+lengthOfWireOfCu <- .041 * 1.5e-6 / (1.7e-8)
+```
+
+`r signif(lengthOfWireOfCu, digits = 2)` * m pikk on juhe, kui selle takistus on .041 * Ω.
+
