@@ -220,3 +220,46 @@ numberOfPhotonsPerMinute <- numberOfPhotonsPerSecond * 60
 
 `r format(numberOfPhotonsPerMinute, digits = 2)` footonit kiirgab lamp 1 * min kestel, kui kogu tarbitud elektrienergia muundatakse valgusenergiaks.
 
+
+## Eemalduv galaktika
+
+### Ülesande püstitus
+
+Galaktikate eemaldumise tõttu esineb nende spektris punanihe, mis on tingitud Doppleri efektist. Kui galaktika eemaldub meist kiirusega 14 tuh km/s, siis millise lainepikkusega registreerib Maal olev vaatleja vesinikujoont, mille lainepikkus paigalseisva kiirgusallika korral on  λ=486 nm? Galaktika liikumiskiirust lugeda mitterelativistlikuks. Vastus anda nanomeetrites 1 nanomeetri täpsusega.
+
+### Lahendus
+
+Doppleri efekti valem:
+
+$${sagedus}_{vastuvõetavHeli} = {sagedus}_{heliallikast} * (\frac{{kiirus}_{heliÕhus} + {kiirus}_{jälgija}}{{kiirus}_{heliÕhus} + {kiirus}_{heliallikas}})$$
+
+Doppleri efekti valem koos algandmetega:
+
+$${sagedus}_{vastuvõetavHeli} = {sagedus}_{heliallikast} * (\frac{{kiirus}_{valgus} + 0}{{kiirus}_{valgus} + {14e6}})$$
+
+Lainepikkuse valem:
+
+$${valguskiirus}_{vaakumis} = lainepikkus \cdot sagedus$$
+
+Avaldan sageduse:
+
+$$sagedus = \frac{{valguskiirus}_{vaakumis}}{lainepikkus} $$
+
+Asendan sagedused Doppleri efekti valemisse:
+
+$$\frac{{valguskiirus}_{vaakumis}}{{lainepikkus}_{vastuvõetav}} = \frac{{valguskiirus}_{vaakumis}}{{lainepikkus}_{allikast}} * (\frac{{kiirus}_{valgus} + 0}{{kiirus}_{valgus} + {14e6}})$$
+
+Avaldan vastuvõetava lainepikkuse:
+
+$${lainepikkus}_{vastuvõetav} = \frac{{valguskiirus}_{vaakumis}}{\frac{{valguskiirus}_{vaakumis}}{{lainepikkus}_{allikast}} * (\frac{{kiirus}_{valgus} + 0}{{kiirus}_{valgus} + {14e6}})}$$
+
+Arvutuskäik:
+
+```{r}
+wavelengthOnEarth <- SPEED_LIGHT / (SPEED_LIGHT / 486e-9 * (SPEED_LIGHT) / (SPEED_LIGHT + 14e6)) * 1e9
+wavelengthOnEarth
+wavelengthOnEarth <- SPEED_LIGHT /(SPEED_LIGHT / 486e-9 /(SPEED_LIGHT/ (SPEED_LIGHT + 14e6))) * 1e9
+wavelengthOnEarth
+```
+
+`r format(wavelengthOnEarth, digits = 0)` * nm on Maal registreeritava vesinikujoone lainepikkus.

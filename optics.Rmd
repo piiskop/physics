@@ -112,5 +112,6 @@ angleFalling <- atan(3/2)
 angleFalling
 ```
 
-`r angleFalling` suurusega nurga all peab kiir langema klaasile, et murdunud kiir ja peegeldunud kiir oleksid omavahel risti.
+![Skeem nurga arvutamiseks](light-through-glass.svg)
 
+`r angleFalling` suurusega nurga all peab kiir langema klaasile, et murdunud kiir ja peegeldunud kiir oleksid omavahel risti.

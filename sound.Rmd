@@ -362,3 +362,19 @@ velocityOfListener = eval(parse(text = yac_str(y_rmvars(paste("Solve(", equation
 ```
 
 $`r velocityOfListener` * \frac{m}{s}$ peaks kuulaja laulja suhtes liikuma, et ta kuuleks noodi *do* asemel nooti *re*.
+
+## Heli puidus
+
+### Ülesande püstitus
+
+Kui suur on sagedusega 562 Hz heli lainepikkus puidus, kui heli kiirus puidus on 4000 m/s? Vastus esitada kolme tüvenumbriga ja lisada ühik.
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+wavelengthOfSound <- 4000 / 562
+```
+
+`r signif(wavelengthOfSound, digits = 3)` * m on heli lainepikkus puidus, kui heli kiirus puidus on $4000 \cdot \frac{m}{s}$.
