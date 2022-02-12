@@ -549,3 +549,58 @@ If the heat pump were turned to the cooling mode (i.e., to act as an air conditi
 $4500 * \frac{J}{s}$ is the amount of heat the heat pump can add to a room.
 
 If the heat pump were turned to the cooling mode, I would expect its coefficient of performance to be 2.
+
+## Terassild
+
+### Ülesande püstitus
+
+Kui palju tõmbub terassild kokku või paisub temperatuuride vahemikus -30oCkuni   +40o?   Silla   pikkus   0oC   juures   on  200,0   m,   terase   joonpaisumistegur   onα=11⋅10^-6^1/K.
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+length <- 200
+differenceOfLengthIfWarmer <- (1 + 11e-6 * (40 - 0)) * length - length
+differenceOfLengthIfColder <- (1 + 11e-6 * (-30 - 0)) * length - length
+```
+
+Sild pikeneb soojenemisel `r differenceOfLengthIfWarmer` * m ja jahtumisel `r differenceOfLengthIfColder` * m.
+
+## Bensiin
+
+### Ülesande püstitus
+
+80   liitriline   terasest   anum   valati   ääreni   täis   bensiini   temperatuuril   5oC.   Kui
+palju   bensiini   voolas   üle   ääre   kui   temperatuur   tõusis   20oC   võrra?   Terase
+joonpaisumistegur on 11⋅10^-6^1/K, bensiini  ruumpaisumistegur on9,5⋅10^-4^1/K.
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+ 
+```
+
+## Alumiiniumtraat
+
+### Ülesande püstitus
+
+100m pikkune alumiiniumtraat läbimõõduga 3 mm on kinnitatud postide vahelehorisontaalselt ning tõmmatud pingule temperatuuril 0oC. Hinnata, kui palju vajub
+traat   keskkohast   allapoole   kui   temperatuur   tõuseb   40oC-ni.   Alumiiniumi
+soojuspaisumistegur   on  23,2⋅10^-6^1/K.   Kas   traat   hakkab   purunema,   kui
+temperatuur langeb -40oC-ni? Alumiiniumi purunemispinge on 300MPa.
+
+### Lahendus
+
+Arvutuskäik:
+
+```{r}
+ELASTIC_MODULUS_AL <- 69E9
+differenceOfTemperatureAndSpecialHeat <- 40 - 0
+pressure <- (40 - 0) * 23.2e-6 * ELASTIC_MODULUS_AL
+pressure
+#difference <- ()
+```
