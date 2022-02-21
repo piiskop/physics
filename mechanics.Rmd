@@ -11,33 +11,33 @@ output:
 
 ## Ühikud
 
-+------------+-----------------+--------+------------+--------------------+
-| Eesliide   | Kümne astendaja | Lühend | Näide      | Selgitus           |
-+============+=================+========+============+====================+
-| piko-      | -12             | p      | 1 \* pN    | üks pikonjuuton    |
-+------------+-----------------+--------+------------+--------------------+
-| nano-      | -9              | n      | 2 \* nm    | kaks nanomeetrit   |
-+------------+-----------------+--------+------------+--------------------+
-| mikro-     | -6              | μ      | 3 \* μg    | kolm mikrogrammi   |
-+------------+-----------------+--------+------------+--------------------+
-| milli-     | -3              | m      | 4 \* mW    | neli millivatti    |
-+------------+-----------------+--------+------------+--------------------+
-| senti-     | -2              | c      | 5 \* cK    | viis sentikelvinit |
-+------------+-----------------+--------+------------+--------------------+
-| detsi-     | -1              | d      | 6 \* dA    | kuus detsiamprit   |
-+------------+-----------------+--------+------------+--------------------+
-| deka-      | 1               | D      | 7 \* Db    | seitse dekabitti   |
-+------------+-----------------+--------+------------+--------------------+
-| hekto-     | 2               | H      | 8 \* HB    | kaheksa hektobaiti |
-+------------+-----------------+--------+------------+--------------------+
-| kilo-      | 3               | K      | 9 \* Klx   | üheksa kiloluksi   |
-+------------+-----------------+--------+------------+--------------------+
-| mega-      | 6               | M      | 10 \* MJ   | kümme megadžauli   |
-+------------+-----------------+--------+------------+--------------------+
-| giga-      | 9               | G      | 100 \* GPa | sada gigapaskalit  |
-+------------+-----------------+--------+------------+--------------------+
-| tera-      | 12              | T      | .5 \* Tcd  | pool terakandelat  |
-+------------+-----------------+--------+------------+--------------------+
++-----------+-----------------+--------+------------+--------------------+
+| Eesliide  | Kümne astendaja | Lühend | Näide      | Selgitus           |
++===========+=================+========+============+====================+
+| piko-     | -12             | p      | 1 \* pN    | üks pikonjuuton    |
++-----------+-----------------+--------+------------+--------------------+
+| nano-     | -9              | n      | 2 \* nm    | kaks nanomeetrit   |
++-----------+-----------------+--------+------------+--------------------+
+| mikro-    | -6              | μ      | 3 \* μg    | kolm mikrogrammi   |
++-----------+-----------------+--------+------------+--------------------+
+| milli-    | -3              | m      | 4 \* mW    | neli millivatti    |
++-----------+-----------------+--------+------------+--------------------+
+| senti-    | -2              | c      | 5 \* cK    | viis sentikelvinit |
++-----------+-----------------+--------+------------+--------------------+
+| detsi-    | -1              | d      | 6 \* dA    | kuus detsiamprit   |
++-----------+-----------------+--------+------------+--------------------+
+| deka-     | 1               | D      | 7 \* Db    | seitse dekabitti   |
++-----------+-----------------+--------+------------+--------------------+
+| hekto-    | 2               | H      | 8 \* HB    | kaheksa hektobaiti |
++-----------+-----------------+--------+------------+--------------------+
+| kilo-     | 3               | K      | 9 \* Klx   | üheksa kiloluksi   |
++-----------+-----------------+--------+------------+--------------------+
+| mega-     | 6               | M      | 10 \* MJ   | kümme megadžauli   |
++-----------+-----------------+--------+------------+--------------------+
+| giga-     | 9               | G      | 100 \* GPa | sada gigapaskalit  |
++-----------+-----------------+--------+------------+--------------------+
+| tera-     | 12              | T      | .5 \* Tcd  | pool terakandelat  |
++-----------+-----------------+--------+------------+--------------------+
 
 : Ühikute eesliited
 
@@ -55,7 +55,7 @@ convertFromKmPerHToMPerS <- function(velocityInKmPerH) {
 
 ## Sirgjooneline liikumine
 
-![(#fig:integrating-time) Ühesuguste ajavahemike integreerimine](integrating-time.svg)
+![(\#fig:integrating-time) Ühesuguste ajavahemike integreerimine](integrating-time.svg)
 
 Joonisel \@ref(fig:integrating-time) on kujutatud ajatelge, millele on märgitud võrdsed ajavahemikud. Võime neid ajavahemikke kujutada ka lõputult nullilähedasena. Kui need ajavahemikud kokku liita, saame koguaja:
 
@@ -63,116 +63,146 @@ $$\sum_{i = algus}^{\infty}(\Delta(t))_i === \int{dt} === t$$
 
 Tuletan kiirenduse valemi jõnksutamise kaudu:
 
-$$jõnks = \frac{d(kiirendus)}{d({ajavahemik})}$$
+$$jõnks = \frac{d(kiirendus)}{d({t})}$$
 
-$${d({ajavahemik})} = jõnks \cdot d({kiirendus})$$
+$${d({t})} = jõnks \cdot d({kiirendus})$$
 
-$$\int_{algkiirendus}^{kiirendus}d(kiirendus) === \int_{0}^{ajavahemik}jõnks \cdot d(ajavahemik)$$
+$$\int_{algkiirendus}^{kiirendus}d(kiirendus) === \int_{0}^{t}jõnks \cdot d(t)$$
 
-$$kiirendus - algkiirendus === jõnks \cdot ajavahemik$$
+$$kiirendus - algkiirendus === jõnks \cdot t$$
 
+```{=tex}
 \begin{equation}
-kiirendus = algkiirendus + jõnks \cdot ajavahemik
+\color{green}{\bf{kiirendus = algkiirendus + jõnks \cdot t}}
 (\#eq:zeroeth-equation-of-motion-for-constant-jerk)
 \end{equation}
-
+```
 Tuletan kiiruse valemi kiirenduse ja jõnksutamise kaudu:
 
-$$kiirendus = \frac{d(kiirus)}{d(ajavahemik)}$$
+$$kiirendus = \frac{d(kiirus)}{d(t)}$$
 
+```{=tex}
 \begin{equation}
-d(kiirus) === kiirendus \cdot d(ajavahemik)
+d(kiirus) === kiirendus \cdot d(t)
 (\#eq:acceleration)
 \end{equation}
+```
+Asendan valemisse \@ref(eq:acceleration) kiirenduse valemist \@ref(eq:zeroeth-equation-of-motion-for-constant-jerk):
 
-Asendan valemisse \@(eq:acceleration) kiirenduse valemist \@(eq:zeroeth-equation-of-motion-for-constant-jerk):
+$$d(kiirus) === (algkiirendus + jõnks \cdot t) \cdot d(t)$$
 
-$$d(kiirus) === (algkiirendus + jõnks \cdot ajavahemik) \cdot d(ajavahemik)$$
+$$\int_{algkiirus}^{kiirus}d(kiirus) === \int_{0}^{t}(algkiirendus + jõnks \cdot t) \cdot d(t)$$
 
-$$\int_{algkiirus}^{kiirus}d(kiirus) === \int_{0}^{ajavahemik}(algkiirendus + jõnks \cdot ajavahemik) \cdot d(ajavahemik)$$
+$$kiirus - algkiirus === algkiirendus \cdot t + \frac{jõnks \cdot t^2}{2}$$
 
-$$kiirus - algkiirus === algkiirendus \cdot ajavahemik + \frac{jõnks \cdot ajavahemik^2}{2}$$
-
+```{=tex}
 \begin{equation}
-kiirus = algkiirus + algkiirendus \cdot ajavahemik + \frac{jõnks \cdot ajavahemik^2}{2}
+\color{green}{\bf{kiirus = algkiirus + algkiirendus \cdot t + \frac{jõnks \cdot t^2}{2}}}
 (\#eq:first-equation-of-motion-for-constant-jerk)
 \end{equation}
-
+```
 Keskmine kiirus on vahemaa ja selle läbimiseks kulunud ajavahemiku suhe. Milline on hetkekiirus? Selleks tuleb jagada lõputult lühike vahemaa lõputult lühikese selle vahemaa läbimiseks kulunud ajavahemikuga:
 
+```{=tex}
 \begin{equation}
-\overrightarrow{hetkekiirus} = \frac{d(\overrightarrow{vahemaa})}{d(ajavahemik)}
+\overrightarrow{hetkekiirus} = \frac{d(\overrightarrow{vahemaa})}{d(t)}
 (\#eq:momentvelocity)
 \end{equation}
-
+```
 Valemist \@ref(eq:momentvelocity) avaldan vahemaa:
 
+```{=tex}
 \begin{equation}
-d(\overrightarrow{vahemaa}) = \overrightarrow{hetkekiirus} \cdot d(ajavahemik)
+d(\overrightarrow{vahemaa}) = \overrightarrow{hetkekiirus} \cdot d(t)
 (\#eq:smallest-distance)
 \end{equation}
+```
+Asendan valemisse \@ref(eq:smallest-distance) hetkekiiruse valemist \@ref(eq:first-equation-of-motion-for-constant-jerk) ja jätkan tuletamist:
+
+$$d(vahemaa) === (algkiirus + algkiirendus \cdot t + \frac{jõnks \cdot t^2}{2}) \cdot d(t)$$
+
+$$\int_{lähe}^{vahemaa}d(vahemaa) ===\\
+\int_{0}^{t}(algkiirus + algkiirendus \cdot t + \frac{jõnks \cdot t^2}{2}) \cdot d(t)$$
+
+$$vahemaa - lähe === algkiirus \cdot t + \frac{kiirendus \cdot t^2}{2} + \frac{jõnks \cdot t^3}{6}$$
+
+```{=tex}
+\begin{equation}
+\color{green}{\bf{vahemaa === lähe + algkiirus \cdot t + \frac{kiirendus \cdot t^2}{2} + \frac{jõnks \cdot t^3}{6}}}
+(\#eq:second-equation-of-motion-for-constant-jerk)
+\end{equation}
+```
 
 Kogu vahemaa on integreeritud ülilühikestest vahemaa juppidest:
 
+```{=tex}
 \begin{equation}
 \overrightarrow{vahemaa} = \int{d(\overrightarrow{vahemaa})}
 (\#eq:whole-distance)
 \end{equation}
-
+```
 Asendan valemist \@ref(eq:smallest-distance) ülilühikese ajavahemiku valemisse \@ref(eq:whole-distance):
 
+```{=tex}
 \begin{equation}
 \overrightarrow{vahemaa} = \int_{alghetk}^{lõpphetk}{\overrightarrow{hetkekiirus} \cdot d(ajavahemik)}
 (\#eq:whole-distance-integrated)
 \end{equation}
-
+```
 Kui hetkekiirus on $\color{red}{\textbf{konstantne}}$, siis
 
+```{=tex}
 \begin{equation}
 \overrightarrow{vahemaa} = \overrightarrow{hetkekiirus} \cdot \int_{alghetk}^{lõpphetk}{d(ajavahemik)} === \overrightarrow{hetkekiirus} \cdot ajavahemik + \overrightarrow{\underbrace{lähe}_{konstant}}
 (\#eq:whole-distance-with-constant-momentvelocity)
 \end{equation}
-
-![(#fig:aeg-kiirus) Kiiruse muutumine ajas, kui kiirendus on $2 \cdot \frac{m}{s^2}$](aeg-kiirus.svg)
+```
+![(\#fig:aeg-kiirus) Kiiruse muutumine ajas, kui kiirendus on $2 \cdot \frac{m}{s^2}$](aeg-kiirus.svg)
 
 Kui ülilühikese vahemaa ja selle läbimiseks kulunud ülilühikese ajavahemiku suhe on kiirus, mis näitab, kui kiiresti asukoht muutub ajas, siis kiiruse muutumist ajas näitab kiirendus:
 
+```{=tex}
 \begin{equation}
 \overrightarrow{kiirendus} = \lim_{\Delta {ajavahemik} \to 0} \frac{\Delta {\overrightarrow{kiirus}}}{\Delta {ajavahemik}} === \frac{d(\overrightarrow{kiirus})}{d(ajavahemik)}
 (\#eq:acceleration-by-velocity)
 \end{equation}
-
+```
 Asendan valemist \@ref(eq:momentvelocity) valemisse \@ref(eq:acceleration-by-velocity) kiiruse:
 
+```{=tex}
 \begin{equation}
 \overrightarrow{kiirendus} = \frac{d(\frac{d(\overrightarrow{vahemaa})}{d(ajavahemik)})}{d(ajavahemik)}
 (\#eq:acceleration-by-distance-and-time)
 \end{equation}
-
+```
 Avaldan valemist \@ref(eq:acceleration-by-velocity) üliväikese kiiruse:
 
+```{=tex}
 \begin{equation}
 d(\overrightarrow{kiirus}) = \overrightarrow{kiirendus} \cdot {d(ajavahemik)}
 (\#eq:momentvelocity-by-acceleration-and-time)
 \end{equation}
-
+```
 Kui kiirendus on $\color{red}{\textbf{konstantne}}$, siis
 
+```{=tex}
 \begin{equation}
 {kiirus} = \int{\overrightarrow{kiirendus} \cdot {d(ajavahemik)}} === \overrightarrow{kiirendus} \cdot \int{d(ajavahemik)} ===\\
 \overrightarrow{kiirendus} \cdot ajavahemik + \underbrace{lähte\_kiirus}_{konstant}
 (\#eq:velocity-by-integration)
 \end{equation}
-
+```
 Keskmise kiirenduse saame arvutada nii:
 
+```{=tex}
 \begin{equation}
 {keskmine\_kiirendus} = \frac{\overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}}{ajavahemik}
 (\#eq:keskmine-kiirendus)
 \end{equation}
-
+```
 Kui kiirendus on $\color{red}{\textbf{konstantne}}$, siis asendades valemisse \@ref(eq:whole-distance-integrated) kiiruse valemist \@ref(eq:keskmine-kiirendus):
 
+```{=tex}
 \begin{equation}
 \overrightarrow{vahemaa} = \int{\overrightarrow{kiirendus_{keskmine}} \cdot {ajavahemik} + \overrightarrow{alg\_kiirus} \cdot d(ajavahemik)} ===\\
 \int{\overrightarrow{kiirendus_{keskmine}} \cdot {ajavahemik} \cdot d(ajavahemik)} + \int{\overrightarrow{alg\_kiirus} \cdot d(ajavahemik)} ===\\
@@ -180,35 +210,39 @@ Kui kiirendus on $\color{red}{\textbf{konstantne}}$, siis asendades valemisse \@
 \overrightarrow{kiirendus_{keskmine}} \cdot \frac{ajavahemik^2}{2} + \overrightarrow{alg\_kiirus} \cdot ajavahemik + \underbrace{\overrightarrow{lähe}}_{konstant}
 (\#eq:vahemaa-kiirenduse-kaudu)
 \end{equation}
-
+```
 Avaldan valemist \@ref(eq:keskmine-kiirendus) ajavahemiku:
 
+```{=tex}
 \begin{equation}
 {ajavahemik} = \frac{\overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}}{\overrightarrow{{kiirendus}_{keskmine}}}
 (\#eq:ajavahemik)
 \end{equation}
-
+```
 Kui lähe on null, siis lähtuvalt valemist \@ref(eq:vahemaa-kiirenduse-kaudu)
 
+```{=tex}
 \begin{equation}
 \overrightarrow{vahemaa} = \overrightarrow{kiirendus_{keskmine}} \cdot \frac{ajavahemik^2}{2} + \overrightarrow{{kiirus}_{algus}} \cdot ajavahemik + 0 ===\\ \overrightarrow{kiirendus_{keskmine}} \cdot \frac{(\frac{\overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}}{\overrightarrow{{kiirendus}_{keskmine}}})^2}{2} + \overrightarrow{{kiirus}_{algus}} \cdot \frac{\overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}}{\overrightarrow{{kiirendus}_{keskmine}}} ===\\ \frac{\overrightarrow{{kiirus}_{lõpp}}^2 - 2 \cdot \overrightarrow{{kiirus}_{lõpp}} \cdot \overrightarrow{{kiirus}_{algus}} + \overrightarrow{{kiirus}_{algus}}^2}{2 \cdot \overrightarrow{{kiirendus}_{keskmine}}} + \frac{\overrightarrow{{kiirus}_{algus}} \cdot \overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}^2}{\overrightarrow{{kiirendus}_{keskmine}}} ===\\ \frac{\overrightarrow{{kiirus}_{lõpp}}^2 - \overrightarrow{{kiirus}_{algus}}^2}{2 \cdot \overrightarrow{{kiirendus}_{keskmine}}}
 (\#eq:vahemaa-kiiruste-ja-kiirenduse-kaudu)
 \end{equation}
-
+```
 Muutuva kiirenduse valem:
 
+```{=tex}
 \begin{equation}
 \overrightarrow{kiirenduse\_muut} = \frac{d(\overrightarrow{kiirendus_{keskmine}})}{d(ajavahemik)} === \frac{kiirendus_{lõpp} - kiirendus_{algus}}{ajavahemik}
 (\#eq:kiirenduse-muut)
 \end{equation}
-
+```
 Keskmise kiiruse valem:
 
+```{=tex}
 \begin{equation}
 \overline{kiirus} = \frac{\Delta(vahemaa)}{\Delta(ajavahemik)} === \frac{\overrightarrow{kiirus_{algus}} + \overrightarrow{kiirus_{lõpp}}}{2}
 (\#eq:mean-velocity)
 \end{equation}
-
+```
 ## Impulss
 
 $$impulss = mass * kiirus$$
