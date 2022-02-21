@@ -80,7 +80,26 @@ $${temperatuur}_{ideaalneGaas} = \frac{2}{3} * \frac{\overline{{kineetilineEnerg
 
 ## Soojuspaisumine
 
+\begin{equation}
+tihedus = \frac{mass}{ruumala}
+(\#eq:density)
+\end{equation}
+
 $$pikenemine = {algpikkus} * joonpaisumistegur * \Delta({temperatuur})$$
+
+Keha ruumala suhteline suurenemine:
+
+\begin{equation}
+\frac{ruumalade\_erinevus}{algruumala} ===3 \cdot lineaarpaisumistegur \cdot temperatuuride\_vahemik
+(\#eq:relative-enlargement-of-volume)
+\end{equation}
+
+Ruumpaisumistegur lineaarpaisumisteguri kaudu:
+
+\begin{equation}
+ruumpaisumistegur ===3 \cdot lineaarpaisumistegur
+(\#eq:factor-of-enlargement-of-volume)
+\end{equation}
 
 ```{r}
 COEFFICIENT_LINEAR_EXPANSION_FE = .000011
@@ -578,11 +597,115 @@ joonpaisumistegur on 11⋅10^-6^1/K, bensiini  ruumpaisumistegur on9,5⋅10^-4^1
 
 ### Lahendus
 
-Arvutuskäik:
+#### Algandmed
+
+anuma maht $V_0$: 80 * l ehk $(80E-3) \cdot m^3$
+
+algtemperatuur $T_0$: 5°C ehk 278.15 * K
+
+temperatuuride erinevus $\Delta(T)$: 20°C ehk 20 * K
+
+terase joonpaisumistegur $\alpha_{teras}$: $(11E-6) \cdot \frac{1}{K}$
+
+bensiini ruumpaisumistegur $3 \cdot \alpha_{bensiin}$: $(9.5E-4) \cdot \frac{1}{K}$
+
+#### Vaja arvutada
+
+ruumalade erinevus pärast paisumist $\Delta(V)$
+
+#### Arvutused
+
+Kasutan ruumala suhtelise suurenemise valemit \@ref(eq:relative-enlargement-of-volume).
+
+Avaldan sellest valemist ruumalade erinevuse:
+
+\begin{equation}
+\Delta(V) === V_0 \cdot 3 \cdot \alpha \cdot \Delta(T)
+(\#eq:change-of-volume)
+\end{equation}
+
+Kuna vaja on arvutada bensiini ja nõu mahu muutude erinevus, siis selle üldvalem on järgmine:
+
+\begin{equation}
+\Delta(V) === \Delta(V_{bensiin}) - \Delta(V_{nõu})
+(\#eq:change-of-volume-change)
+\end{equation}
+
+Täiendan valemit \@ref(eq:change-of-volume-change) kummagi mahumuudu valemiga valemi \@ref(eq:change-of-volume)  ja valemi \@ref(eq:factor-of-enlargement-of-volume) põhjal:
+
+\begin{equation}
+\Delta(V) === V_0 \cdot \alpha_{bensiin} \cdot \Delta(T) - V_0 \cdot 3 \cdot \alpha_{terasnõu} \cdot \Delta(T) === \Delta(T) \cdot V_0 \cdot (\alpha_{bensiin} - 3 \cdot \alpha_{terasnõu})
+(\#eq:change-of-volume-change)
+\end{equation}
+
+Lasen arvutada terasnõu algruumala:
 
 ```{r}
- 
+ change_volume_change <- 20 * 80e-3 * (9.5e-4 - 3 * 11e-6)
 ```
+
+#### Lahend
+
+`r signif(change_volume_change, digits <- 2)` * m^3 bensiini voolas üle ääre.
+
+## Katseanum
+
+### Ülesande püstitus
+
+Katseanuma täitmisel servani veega temperatuuril 20oC mahtus sinna 65,50 ml vett. Kui anumat javett soojendati temperatuurini 60oC, läks üle serva 0,35g vett. Milline on anuma ruumpaisumistegur?Vee ruumpaisumistegur on 0,21·10^-3^1/K ning tihedus temperatuuril 60oC on 983,24 kg/m^3^.
+
+### Lahendus
+
+#### Algandmed
+
+algtemperatuur *T~0~*: 20°C ehk 293.15 * K
+
+algmaht *V~0~*: 65.50 * ml ehk 65.5e-6 * m^3^
+
+lõpptemperatuur *T*: 60°C ehk 333.15 * K
+
+mahtude muutude erinevus *V~vesi~ - V~anum~*: .35 * g ehk .35e-3 * kg
+
+vee ruumpaisumistegur *3 \* α~vesi~*: $.21 \cdot 10^{-3} \cdot \frac{1}{K}$
+
+vee tihedus lõpptemperatuuril *ρ*: $983.24 \cdot \frac{kg}{m^3}$
+
+#### Vaja arvutada
+
+anuma ruumpaisumistegur *3 \* α~anum~*
+
+#### Arvutuskäik
+
+Esmalt avaldan mahu, milles vett voolas üle serva, kasutades valemit \@ref(eq:relative-enlargement-of-volume):
+
+\begin{equation}
+V_{vesi} - V_{anum} = {3 \cdot \alpha_{vesi} \cdot \Delta(T) \cdot V_0 + V_0} - {3 \cdot \alpha_{anum} \cdot \Delta(T) \cdot V_0 - V_0} ===\\
+{3 \cdot \alpha_{vesi} \cdot \Delta(T) \cdot V_0} - {3 \cdot \alpha_{anum} \cdot \Delta(T) \cdot V_0} === V_0 \cdot ({3 \cdot \alpha_{vesi} \cdot \Delta(T)} - {3 \cdot \alpha_{anum} \cdot \Delta(T)}) ===\\
+V_0 \cdot \Delta(T) \cdot ({3 \cdot \alpha_{vesi}} - {3 \cdot \alpha_{anum}})
+(\#eq:excess-water)
+\end{equation}
+
+Avaldan valemist \@ref(eq:excess-water) anuma ruumpaisumisteguri:
+
+\begin{equation}
+3 \cdot \alpha_{anum} = 3 \cdot \alpha_{vesi} - \frac{V_{vesi} - V_{anum}}{\Delta(T) \cdot V_0}
+(\#eq:factor-of-enlargement-of-beaker)
+\end{equation}
+
+Asendan valemisse \@ref(eq:factor-of-enlargement-of-beaker) ruumala muudus vee ruumala massi ja tiheduse suhtega valemist \@ref(eq:density):
+
+\begin{equation}
+3 \cdot \alpha_{anum} = 3 \cdot \alpha_{vesi} - \frac{\frac{mass_{vesi}}{tihedus_{vesi}}}{\Delta(T) \cdot V_0} === 3 \cdot \alpha_{vesi} - \frac{{mass_{vesi}}}{{tihedus_{vesi}} \cdot \Delta(T) \cdot V_0}
+(\#eq:cte-of-beaker-with-density)
+\end{equation}
+
+```{r}
+cte_volume_beaker <- .21e-3 - (.35e-3) / (983.24 * (60 - 20) * 65.5e-6)
+```
+
+#### Lahend
+
+$`r signif(cte_volume_beaker, digits <- 5)` \cdot \frac{1}{K}$ on anuma ruumpaisumistegur.
 
 ## Alumiiniumtraat
 

@@ -7,11 +7,9 @@ output:
     toc_depth: 5
 ---
 
-# Mehaanika
+# Reeglid
 
-## Reeglid
-
-### Ühikud
+## Ühikud
 
 +------------+-----------------+--------+------------+--------------------+
 | Eesliide   | Kümne astendaja | Lühend | Näide      | Selgitus           |
@@ -55,15 +53,50 @@ convertFromKmPerHToMPerS <- function(velocityInKmPerH) {
 }
 ```
 
-### Sirgjooneline liikumine
-
-#### Vahemaa
+## Sirgjooneline liikumine
 
 ![(#fig:integrating-time) Ühesuguste ajavahemike integreerimine](integrating-time.svg)
 
 Joonisel \@ref(fig:integrating-time) on kujutatud ajatelge, millele on märgitud võrdsed ajavahemikud. Võime neid ajavahemikke kujutada ka lõputult nullilähedasena. Kui need ajavahemikud kokku liita, saame koguaja:
 
 $$\sum_{i = algus}^{\infty}(\Delta(t))_i === \int{dt} === t$$
+
+Tuletan kiirenduse valemi jõnksutamise kaudu:
+
+$$jõnks = \frac{d(kiirendus)}{d({ajavahemik})}$$
+
+$${d({ajavahemik})} = jõnks \cdot d({kiirendus})$$
+
+$$\int_{algkiirendus}^{kiirendus}d(kiirendus) === \int_{0}^{ajavahemik}jõnks \cdot d(ajavahemik)$$
+
+$$kiirendus - algkiirendus === jõnks \cdot ajavahemik$$
+
+\begin{equation}
+kiirendus = algkiirendus + jõnks \cdot ajavahemik
+(\#eq:zeroeth-equation-of-motion-for-constant-jerk)
+\end{equation}
+
+Tuletan kiiruse valemi kiirenduse ja jõnksutamise kaudu:
+
+$$kiirendus = \frac{d(kiirus)}{d(ajavahemik)}$$
+
+\begin{equation}
+d(kiirus) === kiirendus \cdot d(ajavahemik)
+(\#eq:acceleration)
+\end{equation}
+
+Asendan valemisse \@(eq:acceleration) kiirenduse valemist \@(eq:zeroeth-equation-of-motion-for-constant-jerk):
+
+$$d(kiirus) === (algkiirendus + jõnks \cdot ajavahemik) \cdot d(ajavahemik)$$
+
+$$\int_{algkiirus}^{kiirus}d(kiirus) === \int_{0}^{ajavahemik}(algkiirendus + jõnks \cdot ajavahemik) \cdot d(ajavahemik)$$
+
+$$kiirus - algkiirus === algkiirendus \cdot ajavahemik + \frac{jõnks \cdot ajavahemik^2}{2}$$
+
+\begin{equation}
+kiirus = algkiirus + algkiirendus \cdot ajavahemik + \frac{jõnks \cdot ajavahemik^2}{2}
+(\#eq:first-equation-of-motion-for-constant-jerk)
+\end{equation}
 
 Keskmine kiirus on vahemaa ja selle läbimiseks kulunud ajavahemiku suhe. Milline on hetkekiirus? Selleks tuleb jagada lõputult lühike vahemaa lõputult lühikese selle vahemaa läbimiseks kulunud ajavahemikuga:
 
@@ -176,7 +209,7 @@ Keskmise kiiruse valem:
 (\#eq:mean-velocity)
 \end{equation}
 
-### Impulss
+## Impulss
 
 $$impulss = mass * kiirus$$
 
@@ -200,7 +233,7 @@ $$jõuImpulss = impulsiMuut$$
 
 $$jõud * ajavahemik === impulsiMuut$$
 
-### Ringliikumine
+## Ringliikumine
 
 $$\vec{{kiirus}_{joon}} = \frac{{pikkus}_{kaar}}{ajavahemik}$$
 
@@ -220,7 +253,7 @@ $${moment}_{\vec{impulss}} = \vec{{kiirus}_{nurk}} * {moment}_{inerts}$$
 
 Suletud süsteemi koguimpulsimoment on jääv.
 
-### Gravitatsioonijõud
+## Gravitatsioonijõud
 
 $G = 6.67 * 10 ^ {-11} \frac{N * m ^ 2}{kg ^ 2}$ Maa mass olevat 6 \* 10^24^ kg. Maa raadius olevat 6.4 \* 10^6^ m.
 
@@ -242,11 +275,11 @@ Selline valem kehtib objekti kohta, mis on täpselt Maa pinnal. Kui see asub pin
 
 $$gravitatsiooniKiirendus = GRAVITATSIOONI\_KONSTANT * \frac{maaMass}{(maaRaadius + kõrgusMaaPinnast) ^ 2}$$
 
-### Rõhk
+## Rõhk
 
 rõhk = mass \* *g*
 
-### Hõõrdejõud
+## Hõõrdejõud
 
 hõõrdeJõud = hõõrdeTegur \* rõhk
 
@@ -256,7 +289,7 @@ calculateDistanceOfDecceleration <- function(velocity, frictionFactor) {
 }
 ```
 
-### Töö
+## Töö
 
 $$töö = \vec{jõud} * \vec{nihe} * cos(nurk_{\vec{nihe}, \vec{jõud}})$$
 
@@ -278,7 +311,7 @@ $${elastsusJõuEenergia}_{potentsiaalne} = \frac{jäikus * {pikkus}_{surumine} ^
 
 $${tegur}_{kasu} = \frac{töö}{energia}$$
 
-### Jõumoment
+## Jõumoment
 
 $${moment}_{jõud} = jõud * raadius * sin({nurk}_{raadius, {mõjuSirge}_{jõud}})$$
 
@@ -286,11 +319,11 @@ Kangi tasakaal:
 
 $${jõud}_1 * {raadius}_1 === {jõud}_2 * {raadius}_2$$
 
-## Ülesanded
+# Ülesanded
 
-### Autobuss
+## Autobuss
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Peatuskohast väljuva autobussi liikumist kirjeldab esimese 10 s jooksul võrrand *s* = 0,38*t^2^*, kus *s* on teepikkus meetrites ja *t* aeg sekundites.
 
@@ -300,7 +333,7 @@ b)  Kui pika tee läbib buss esimese 10 sekundiga?
 
 c)  Kui suure kiiruse saavutab buss selle aja jooksul?
 
-#### Lahendus
+### Lahendus
 
 a)  $,76 * \frac{m}{s^2}$.
 
@@ -308,9 +341,9 @@ b)  38 \* m.
 
 c)  $7,6 * \frac{m}{s}$.
 
-### Lennukikandja
+## Lennukikandja
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Lennukikandja püüde- ja pidurdustrossidel kulub 25 tonnise hävitaja peatamiseks 2 sekundit. Pidurdamine algab, kui hävitaja kiirus on 240 km/h[^1]
 
@@ -324,7 +357,7 @@ c)  Kui pikk on hävitaja pidurdusteekond?
 
 d)  Kui suur on pidurdav jõud?
 
-#### Lahendus
+### Lahendus
 
 $240 * \frac{km}{h} === \frac{240 * (1000 * m)}{3600 * s} === \frac{200*m}{3*s}$
 
@@ -348,9 +381,9 @@ breakingForce = 25 * 1000 * (-100 / 3)
 
 `r breakingForce` N.
 
-### Autod
+## Autod
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Maanteel sõidab veoauto, mille pikkus on 16 meetrit ja kiirus 72 km/h. Veoauto taha jõuab sõiduauto, mille kiirus on 90 km/h ja pikkus 4 m. Sõiduauto juht soovib sooritada möödasõitu. Nii möödasõidu alustamisel kui ka lõpetamisel peab autode vaheline pikivahe olema 75 m.
 
@@ -360,7 +393,7 @@ b)  Kui pikk on möödasõidumaa?
 
 c)  Kui vastu tuleb auto, mille kiirus on 90 km/h, siis kui kaugel peaks see möödasõidu alguses olema, et mööda sõitev sõiduauto oleks sellega kohakuti parajasti möödasõidu lõppedes?
 
-#### Lahendus
+### Lahendus
 
 Jätan arvestamata, et möödasõiduks on vaja ümberreastuda ja lihtsuse mõttes kujutan ette, et lühem auto justkui läbiks pikema auto. Tähistan möödasõidu vahemaa lühema auto jaoks meetrites *x*'ga. Sel juhul on pikema auto jaoks möödasõidu vahemaa *x - 79* m, kui võrdlen autode esiotsi, sest pikivahe peab olema 75 m ja lühema auto pikkus on neli meetrit. Möödasõidu lõppedes on mõlemal kulunud võrdne ajavahemik. Teisendan lühema auto kiiruse rahvusvahelistesse ühikutesse:
 
@@ -429,7 +462,7 @@ distanceOfIncomingVehicle = 2 * distanceOfShorterVehicle
 
 `r distanceOfIncomingVehicle` meetri kaugusel.
 
-#### Lahendid
+### Lahendid
 
 a)  `r timeOfLongerVehicle` sekundit
 
@@ -437,13 +470,13 @@ b)  `r distanceOfShorterVehicle` meetrit
 
 c)  `r distanceOfIncomingVehicle` meetrit
 
-### Pall
+## Pall
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Poiss viskas palli vertikaalselt üles ja püüdis selle samas kohas 2s pärast kinni. Kui kõrgele lendas pall?
 
-#### Lahendus
+### Lahendus
 
 Palli lennu kestus oli kaks sekundit. Eeldan, et poiss viskas selle palli üles Maal ja seetõttu mõjub pallile gravitatsioonijõud. Palli lähtekoha loen nulliks sõltumata sellest, kui kõrgel asub palli ja käe irdumiskoht. Sellise lennu trajektoori kirjeldab funktsioon, mille graafik on parabool. Kuna parabooli haarad on üksteise suhtes peegelpildis, siis võime järeldada nii palli tõusmine kui laskumine kumbki kestsid eraldi ühe sekundi. Vaja on arvutada selle parabooli haripunkti ordinaadi väärtus. Kiiruse komponendi arvutamiseks tõusva palli jaoks kasutan valemit $-g === \frac{v - v_{0}}{t}$, kus *g* on Maa raskuskiirendust, *v* palli lõppkiirus, $v_{0}$ palli algkiirus ja *t* aeg. Palli lõppkiirus on null. Seega on palli algkiiruse komponent avaldatav valemiga $v_{0} = g * t$. Palli maksimaalne kõrgus on seega arvutatav valemiga:
 
@@ -460,13 +493,13 @@ maxHeightOfBall = g / 2
 maxHeightOfBall
 ```
 
-### Turvavöö
+## Turvavöö
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Turvavööde katsetamisel sõidab auto vastu seina kiirusega 90 km/h ja peatub 0,1 s jooksul. Juhi kohal istub nukk massiga 75 kg. Kui suurele jõule peab turvavöö vastu pidama?
 
-#### Lahendus
+### Lahendus
 
 Esmalt on vaja teisendada auto algkiirus 90 km/h rahvusvahelisse mõõtühikute süsteemi:
 
@@ -492,13 +525,13 @@ force = -(acceleration * 75)
 
 Turvavöö peab vastu pidama jõule `r force` N.
 
-### Äkkpidurdus
+## Äkkpidurdus
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Auto sõidab kiirusega 50 km/h. Peale äkkpidurdust rattad blokeeruvad ja auto libiseb 15 m, kuni jääb seisma. Kui kaugele libiseb sama auto blokeerunud ratastega juhul, kui auto kiirus enne pidurdamist on 150 km/h?
 
-#### Lahendus
+### Lahendus
 
 Teisendan auto kiiruse 50 km/h rahvusvahelisse mõõtühikute süsteemi:
 
@@ -546,13 +579,13 @@ distance150 = (0 - speed150 ^ 2) / 2 / acceleration150
 
 Auto libiseb blokeerunud ratastega `r distance150` m juhul, kui auto kiirus enne pidurdamist on 150 km/h.
 
-### Koormaga veoauto
+## Koormaga veoauto
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Mööda teed sõidab 2 tonnise koormaga veoauto. Takistust nähes juht pidurdab äkitselt, rattad blokeeruvad ja auto libiseb peatumiseni 42 m. Kui kaugele oleks veoauto libisenud ilma koormata, kui tühja veoauto mass on 5 t? Eeldada, et rehvide ja teepinna vaheline hõõrdejõud jääb samaks.
 
-#### Lahendus
+### Lahendus
 
 Meile pole teada algkiirus, kuid võime eeldada, et algkiirus on mõlema massi puhul sama. Kasutan valemit:
 
@@ -572,9 +605,9 @@ $$vahemaa2 = \frac{(42 * m) * 2 * \frac{pidurdusjõud}{7000 * kg}}{2 * \frac{pid
 
 Veoauto oleks libisenud ilma koormata 30 m kaugusele, kui tühja veoauto mass on viis tonni.
 
-### Raskus trossi otsas
+## Raskus trossi otsas
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Raskus massiga 5 kg ripub kahe trossi otsas (vt joonist \@ref(fig:hanging-weight)). Kui suur on kummagi trossi pinge, kui
 
@@ -584,7 +617,7 @@ b)  α = 50°.
 
 ![(\#fig:hanging-weight)Trosside otsas ripub raskus.](hanging-weight.svg)
 
-#### Lahendus
+### Lahendus
 
 #### Üldine lahendus
 
@@ -620,13 +653,13 @@ forceB = calculateForce(50 * pi / 180)
 
 Kummagi trossi pinge on `r forceB` \* N, kui α = 50 °.
 
-### Läänemeri
+## Läänemeri
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Läänemere maht on umbes 20000 km^3^. Kuu mass on 7,3 \* 10^22^ kg ja keskmine kaugus Maast 384000 km. Kui suur gravitatsioonijõud on Kuu ja Läänemere vahel?
 
-#### Lahendus
+### Lahendus
 
 ![Maa ja Kuu](baltic-sea-moon.svg)
 
@@ -672,13 +705,13 @@ gravitationalForce = gravitationalConstant * weightOfSea * 7.3e22 / distanceBetw
 
 Kuu ja Läänemere vahel on gravitatsioonijõud suurusega `r gravitationalForce` N.
 
-### Orbitaaljaam
+## Orbitaaljaam
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Kui suurt raskuskiirendust tunnevad orbitaaljaamas asuvad astronaudid, kui orbitaaljaam on 200 km kõrgusel Maa pinnast? Maa mass on $6 \cdot 10^{24} kg$ ja raadius $6,4 \cdot 10^6 m$.
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 gravitationalAccelerationOfAstronauts = gravitationalConstant * 6e24 / (6.4e6 + 200 * 1000) ^ 2
@@ -686,13 +719,13 @@ gravitationalAccelerationOfAstronauts = gravitationalConstant * 6e24 / (6.4e6 + 
 
 Astronaudid tunnevad orbitaaljaamas raskuskiirendust $`r gravitationalAccelerationOfAstronauts` * \frac{m}{s^2}$.
 
-### Veduri lähenemine ülesõidu kohale
+## Veduri lähenemine ülesõidu kohale
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Raudtee ülesõidule läheneb vedur kiirusega 5 km/h. Tehnilise rikke tõttu on ülesõidule jäänud seisma veoauto, mille mass on neli korda väiksem veduri massist. Peale kokkupõrget lükkab vedur autot enda ees. Millise kiirusega vedur koos autoga liigub?
 
-#### Lahendus
+### Lahendus
 
 Lähtun mitteelastse põrke valemist:
 
@@ -704,19 +737,19 @@ commonVelocity = 4 / 5 * 5 * 1000 / 3600
 
 Vedur liigub koos autoga kiirusega $`r commonVelocity` * \frac{m}{s}$.
 
-### Röövkala
+## Röövkala
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 5 kilogrammine röövkala ujub vees kiirusega 1 m/s. Röövkala avab suu ja neelab alla talle vastu ujunud väiksema kala, mille mass on 1 kg. Peale allaneelamist jääb röövkala seisma. Kui suure kiirusega ujus kala, mis alla neelati?
 
-#### Lahendus
+## Lahendus
 
 Kala, kes alla neelati, ujus kiirusega $5 * \frac{m}{s}$.
 
-### Autode kokkupõrge
+## Autode kokkupõrge
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Kaks autot, mõlemad massiga 1000 kg, põrkavad kokku. Mõlema auto kiirus oli 20 m/s. Kui suure kiirusega ja millises suunas liiguvad kokkupõrkunud autod, kui
 
@@ -724,7 +757,7 @@ a)  üks auto sõitis põhja suunas ja teine lõuna suunas?
 
 b)  üks auto sõitis põhja suunas ja teine ida suunas?
 
-#### Lahendus
+### Lahendus
 
 a)  Autod ei liigu peale kokkupõrget.
 
@@ -743,13 +776,13 @@ commonVelocity = sqrt((weight * velocity) ^ 2 + (weight * velocity) ^ 2) / (weig
 commonVelocity
 ```
 
-### Külmik
+## Külmik
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Külmik, mille mass on 300 kg, tuleb tassida teisele korrusele. Kui palju tööd tuleb seejuures teha, kui teine korrus asub 6 m kõrgusel maapinnast? Mitu minutit saab selle energia arvel põleda elektripirn, mille võimsus on 60 W?
 
-#### Lahendus
+### Lahendus
 
 Külmikul on nullist erinev potentsiaalne energia 6 m kõrgusel ja nulliga võrdne potentsiaalne energia 0 m kõrgusel.
 
@@ -765,13 +798,13 @@ timeOfLighting = work / 60 / 60
 
 `r timeOfLighting` min saab selle energia arvel põleda elektripirn, mille võimsus on 60 W.
 
-### Aeglustusteekond
+## Aeglustusteekond
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Aeglustusteekond on teepikkus, mille auto läbib pidurite töölerakendumisest kuni täieliku peatumiseni. Veoauto massiga 8 t ja sõiduauto massiga 2 t sõidavad mõlemad kiirusega 90 km/h ja pidurdavad. Kui suur on kummagi auto aeglustusteekond? Hõõrdetegur asfaldi ja kummide vahel on 0,6.
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 velocityInMPerS = convertFromKmPerHToMPerS(90)
@@ -782,13 +815,13 @@ distanceOfDecceleration
 
 Kuna aeglustusteekond ei sõltu massist, siis kummagi auto aeglustusteekond on `r distanceOfDecceleration` m.
 
-### Paigalseisust alustamine
+## Paigalseisust alustamine
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Auto mille mass on 1,2 t, alustab paigalseisust liikumist kiirendusega 2 m/s^2^. Kui palju tööd teeb auto veojõud esimese 4 sekundi jooksul? Hõõrdumise võime jätta arvestamata.
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 accelerationFrom0 = 2
@@ -797,13 +830,13 @@ work = 1.2 * 1000 * accelerationFrom0 * ((accelerationFrom0 * 4) ^ 2) / 2 / acce
 
 Auto veojõud teeb esimese 4 sekundi kestel `r work` J tööd.
 
-### Vabalt langev keha
+## Vabalt langev keha
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 2 kilogrammise massiga vabalt langev keha saavutab enne maapinnani jõudmist kiiruse 5 m/s. Kui suur oli raskusjõu töö keha langemisel? Kui kõrgelt langes keha?
 
-#### Lahendus
+### Lahendus
 
 Kui kaua kukkus?
 
@@ -818,9 +851,9 @@ Raskusjõu töö keha langemisel oli `r workOfGravitationalForce` J.
 
 Keha langes `r abs(heightOfFall)` m kõrguselt.
 
-### Avarii
+## Avarii
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Kiirusega 90 km/h sõitev auto sooritab raske avarii, põrkudes vastu puud. Kui kõrgelt kukkudes saaks autos olijad niisama suure vigastuse?
 
@@ -832,13 +865,13 @@ heightOfFallOfObjectsInCar = convertFromKmPerHToMPerS(90) ^ 2 / 2 / g
 
 Niisama suure vigastuse saaksid autos olijad kukkudes `r heightOfFallOfObjectsInCar` m kõrguselt.
 
-### Kuul
+## Kuul
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 10 grammise massiga kuul, mis liikus kiirusega 900 m/s, läbis 4 cm paksuse laua ja väljus sellest kiirusega 600 m/s. Kui suur takistusjõud mõjus kuulile laua läbimisel?
 
-#### Lahendus
+### Lahendus
 
 Kuulile mõjuv takistusjõud mõjub kuuli enda jõule vastupidises suunas:
 
@@ -848,13 +881,13 @@ forceOfResistancy = -(10 * .001 * (600 ^ 2 - 900 ^ 2) / 2 / (4 * .01))
 
 `r forceOfResistancy` N suurusega takistusjõud mõjus kuulile laua läbimisel.
 
-### Kivi
+## Kivi
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Kivi, mille mass on 0,2 kg, lastakse kukkuda 5 m kõrguselt. Kui suur on kivi kineetiline ja potentsiaalne energia 2 m kõrgusel maapinnast?
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 weightOfRock = .2
@@ -867,13 +900,13 @@ Kivi kineetiline energia 2 m kõrgusel maapinnast on `r kineticEnergy` J.
 
 Kivi potentsiaalne energia 2 m kõrgusel maapinnast on `r potentialEnergy` J.
 
-### Bensiini kulutamine
+## Bensiini kulutamine
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Mitu liitrit bensiini kulutab auto 100 km läbimiseks, kui automootori kasutegur on 25% ja veojõud on 500 N? Bensiini kütteväärtus on 40 MJ/l.
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 workOfEngine = 500 * 100 * 1000
@@ -883,13 +916,13 @@ amountOfFuel = energy / (40 * 1000000)
 
 `r amountOfFuel` liitrit bensiini kulutab auto 100 km läbimiseks, kui automootori kasutegur on 25 % ja veojõud on 500 N.
 
-### Päikesekiirgus
+## Päikesekiirgus
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Eestis on summaarne päiksekiirgus pindalaühiku kohta keskmiselt 500 W/m^2^. Eramu võimsustarve on ligikaudu 2 kW. Päikesepaneelidega saab muuta päikesekiirgust elektrienergiaks kasuteguriga 20%. Milline peaks olema päikesepaneelide pindala, kui eramu energiakulu katmiseks soovitakse kasutada vaid päikeseenergiat?
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 area = 2 * 1000 / 500 / (20 / 100)
@@ -897,13 +930,13 @@ area = 2 * 1000 / 500 / (20 / 100)
 
 `r area` \* m \^ 2 peaks olema päikesepaneelide pindala, kui eramu energiakulu katmiseks soovitakse kasutada vaid päikeseenergiat.
 
-### Jalgratta rataste pöörded
+## Jalgratta rataste pöörded
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Jalgrattal on all rattad läbimõõduga 26 tolli (1 toll =2,54 cm). Millise kiirusega sõidab jalgrattur, kui rattad pöörlevad kiirusega 1 pööre sekundis?
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 velocityOfBicycle = pi * 26 * 2.54 * .01
@@ -911,13 +944,13 @@ velocityOfBicycle = pi * 26 * 2.54 * .01
 
 Jalgrattur sõidab kiirusega $`r velocityOfBicycle` * \frac{m}{s}$, kui rattad pöörlevad kiirusega 1 pööre sekundis.
 
-### Jalgratta spidomeeter
+## Jalgratta spidomeeter
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Jalgratta spidomeetril on esiratta kodara küljes andur, mille abil loendatakse esiratt apöördeid. Jalgratta kiiruse näitamiseks peab spidomeetri seadetes olema valitud õige esiratta läbimõõt. Oletame, et jalgrattur pole spidomeetrit õigesti seadistanud: seadetes on kirjas läbimõõt 26 tolli, kuid tegelikult on all rattad läbimõõduga 28 tolli. Sõidu ajal näitab spidomeeter kiirust 18 km/h. Milline on jalgratta õige kiirus?
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 timeOfWheel26 = pi * 26 * 2.54 / convertFromKmPerHToMPerS(18)
@@ -926,13 +959,13 @@ speed28 = pi * 28 * 2.54 / timeOfWheel26
 
 Jalgratta õige kiirus on $`r speed28` * \frac{m}{s}$.
 
-### Kurvi raadius
+## Kurvi raadius
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Kurvi raadius on 30 m. Milline on maksimaalne kiirus (km/h), millega auto võib seda kurvi läbida, et hõõrdejõud rehvide ja asfaldi vahel suudaks autot teel hoida? Hõõrdetegur rehvide ja asfaldi vahel on 0,7.
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 maxVelocity = sqrt(30 * g * .7) * .001 / (1 / 3600)
@@ -940,9 +973,9 @@ maxVelocity = sqrt(30 * g * .7) * .001 / (1 / 3600)
 
 $`r maxVelocity` * \frac{km}{h}$ on maksimaalne kiirus, millega auto võib seda kurvi läbida, et hõõrdejõud rehvide ja asfaldi vahel suudaks autot teel hoida.
 
-### Mutri kinnikeeramine
+## Mutri kinnikeeramine
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Mutri kinnikeeramiseks rakendatakse mutrivõtme otsale jõudu 80 N. Mutrivõtme pikkus on 0,25 m ja jõu suund on mutrivõtmega risti.
 
@@ -952,7 +985,7 @@ b)  Kui võtta mutrivõtmest kinni mutrile lähemalt, kauguselt 0,1 m, kui suurt
 
 c)  Kui suur on jõumoment siis, kui jõud rakendatakse mutrivõtme otsale, kuid jõud ei ole mutrivõtmega risti, vaid nurk jõu mõjusirge ning mutrivõtme vahel on 70°?
 
-#### Lahendus
+### Lahendus
 
 ```{r}
 forceAtEnd = 80
@@ -983,12 +1016,12 @@ momentum70PiOver180 = forceAtEnd * radius * sin(70 * pi / 180)
 
 `r momentum70PiOver180` \* N \* m on jõumoment siis, kui jõud rakendatakse mutrivõtme otsale, kuid jõud ei ole mutrivõtmega risti, vaid nurk jõu mõjusirge ning mutrivõtme vahel on 70°.
 
-### Kiik
+## Kiik
 
-#### Ülesande püstitus
+### Ülesande püstitus
 
 Kiige ühes otsas, kiige teljest kaugusel 1,5 m istub laps massiga 25 kg. Kui kaugele kiige teljest teisele poole peab istuma täiskasvanu massiga 75 kg, et kiik oleks tasakaalus?
 
-#### Lahendus
+### Lahendus
 
 .5 \* m kaugusele kiige teljest teisele poole peab istuma täiskasvanu massiga 75 kg, et kiik oleks tasakaalus.
