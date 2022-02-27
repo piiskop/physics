@@ -243,6 +243,25 @@ Keskmise kiiruse valem:
 (\#eq:mean-velocity)
 \end{equation}
 ```
+
+Pythagorase teoreem:
+
+```{=tex}
+\begin{equation}
+|hüpotenuus| = \sqrt{|kaatet_2|^2 + |kaatet_2|^2}
+(\#eq:pythagorean)
+\end{equation}
+```
+
+Tõusunurk:
+
+```{=tex}
+\begin{equation}
+nurk_{tõus} = atan(\frac{nihe_{vertikaalne}}{nihe_{rõhtne}})
+(\#eq:tangent-angle)
+\end{equation}
+```
+
 ## Impulss
 
 $$impulss = mass * kiirus$$
@@ -1059,3 +1078,62 @@ Kiige ühes otsas, kiige teljest kaugusel 1,5 m istub laps massiga 25 kg. Kui ka
 ### Lahendus
 
 .5 \* m kaugusele kiige teljest teisele poole peab istuma täiskasvanu massiga 75 kg, et kiik oleks tasakaalus.
+
+## Camps
+
+### Task setup
+
+A mountain climbing expedition establishes a base camp and two intermediate camps, A and B. Camp A is 11,200 m east of and 3,200 m above base camp. Camp B is 8400 m east of and 1700 m higher than Camp A. Determine the displacement between base camp and Camp B.
+
+### Base data
+
+lateral distance between the base camp and camp *A* *CA~x~* = 11200 * m
+
+vertical distance between the base camp and camp *A* *CA~y~* = 3200 * m
+
+lateral distance between camp *A* and camp *B* *AB~x~* = 8400 * m
+
+vertical distance between camp *A* and camp *B* *AB~y~* = 1700 * m
+
+### What to calculate?
+
+the displacement between base camp and *Camp B* *cb*
+
+the direction of the displacement *tangentAngle*
+
+### Drawing
+
+![imagination of the distances of camps](expedition.svg)
+
+### The formulas
+
+For reusing later, the lateral displacement can be calculated by summing up lateral distances:
+
+$$lateralDisplacement = CA_x + AB_x$$
+
+The same way for reusing later, the vertical displacement can be calculated:
+
+$$verticalDisplacement = CA_y + AB_y$$
+
+The displacement can be calculated using Pythagorean theorem \@ref(eq:pythagorean):
+
+$$cb = \sqrt{(lateralDisplacement)^2 + (verticalDisplacement)^2}$$
+
+The direction can be expressed using the tangent angle from the formula \@ref(eq:tangent-angle):
+
+$$tangentAngle = atan(\frac{((verticalDisplacement))}{(lateralDisplacement)})$$
+
+### The calculations
+
+```{r}
+lateralDisplacement = 11200 + 8400
+verticalDisplacement = 3200 + 1700
+cb = sqrt((lateralDisplacement)^2 + (verticalDisplacement)^2)
+tangentAngle = atan(verticalDisplacement / lateralDisplacement)
+tangentAngleInDegrees = tangentAngle / pi * 180
+```
+
+### Solution
+
+Approximately `r signif(cb, digits <- 3)` * m in the elevation direction `r signif(tangentAngle, digits <- 3)` (`r signif(tangentAngleInDegrees, digits <- 3)`°) is the displacement between base camp and Camp B.
+

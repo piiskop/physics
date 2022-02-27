@@ -707,6 +707,32 @@ cte_volume_beaker <- .21e-3 - (.35e-3) / (983.24 * (60 - 20) * 65.5e-6)
 
 $`r signif(cte_volume_beaker, digits <- 5)` \cdot \frac{1}{K}$ on anuma ruumpaisumistegur.
 
+## Õhumull
+
+### Ülesande püstitus
+
+Õhumulli ruumala 43,5 m sügavuse järve põhjas on 1,00 cm^3^. Milline on mulli ruumala veepinnale jõudes, kui järve põhjas on temperatuur 5,5oC ning pinnal 20oC?
+
+### Lahendus
+
+#### Algandmed
+
+õhumulli ruumala järve põhjas *V~0~*: 1 * cm^3^ ehk 1e-6 * m^3^
+
+järve sügavus *h*: 43.5 * m
+
+temperatuur järve põhjas *T~0~*: 5.5°C === 278.65 * K
+
+temperatuur järve pinnal *T~1~*: 20°C === 293.15 * K
+
+#### Arvutada
+
+õhumulli ruumala järve pinnal *V~1~*
+
+#### Arvutuskäik
+
+
+
 ## Alumiiniumtraat
 
 ### Ülesande püstitus
