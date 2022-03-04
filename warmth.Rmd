@@ -118,6 +118,125 @@ calculateWavelengthForMaxRadiationEnergy <- function(absoluteTemperatureOfBody) 
 
 $${lainepikkus}_{kiirgusenergiaMaksimum} = \frac{WIEN}{{temperatuur}_{absoluutne}}$$
 
+## Adiabaatiline protsess. Polütroopne protsess
+
+Termodünaamika esimene printsiip:
+
+$$\Delta(Q) = \Delta(U) + A$$
+
+$$\Delta(U) = \frac{i}{2} \cdot z \cdot R \cdot \Delta(T)$$
+
+$$U = \frac{i}{2} \cdot z \cdot R \cdot T$$
+
+$$\Delta(Q) = 0$$
+
+$$\Delta(U) = -A$$
+
+$$A = -\Delta(U)$$
+
+Kui $\Delta(U) >0$ (temperatuur tõuseb), siis A < 0 ehk gaasi surutakse kokku ehk välisjõud teevad tööd ja see läheb ainult U muutmiseks.
+
+$$\Delta(Q) = 0$$
+
+soojusülekanne puudub - adiabaatiline protsess
+
+$$p_1 \cdot V_1^\gamma === p_2 \cdot V_2^\gamma$$
+
+$$\gamma = \frac{i + 2}{i}$$
+
+$$p \cdot V^\gamma = const$$
+
+1-aatomiline:
+
+$$\gamma = \frac{3 + 2}{3} === 1.67$$
+
+2-aatomiline:
+
+$$\gamma = \frac{7}{5} === 1.4$$
+
+3-aatomiline:
+
+$$\gamma = \frac{8}{6} === 1.33$$
+
+õhu puhul:
+
+$$\gamma = 1.39$$
+
+$$p_1 \cdot V_1^n === p_2 \cdot V_2^n$$
+
+$$\frac{p_1 \cdot V_1}{T_1} === \frac{p_2 \cdot V_2}{T_2}$$
+
+Kui n = 0, siis isobaariline protsess, kui n = 1, siis isotermiline protsess. Kui $n = \frac{i + 2}{2} === \gamma$, siis adiabaatiline protsess. Kui $n = \infty$, siis isohooriline protsess.
+
+## Töö erinevates protsessides
+
+$$A = F \cdot s$$
+
+silindri ristlõike pindala *S*
+
+õhusamba pikkus *s~1~*
+
+pikenenud õhusama pikkus *s~2~*
+
+õhusamba pikkuse muutus:
+
+$$\Delta(s) = s_2 - s_1$$
+
+$$p = \frac{F}{S}$$
+
+$$F = p \cdot S$$
+
+$$A = p \cdot S \cdot \Delta(s) === p \cdot \Delta(V)$$
+
+See kehtib, kui *p = const*.
+
+Isobaariline protsess:
+
+$$A = p \cdot \Delta(V) === p \cdot (V_2 - V_1)$$
+
+Kui A < 0, siis gaasi poolt tehtud töö on negatiivne, kuid välisjõudude töö on positiivne.
+
+Kui $\Delta(V)$ on väike ehk $\Delta(V) \rightarrow d(V)$, siis võib lugeda *p = const*.
+
+$$d(A) = p \cdot d(V)$$
+
+*V = const*:
+
+$$d(A) = p \cdot d(V)$$
+
+*A = 0*
+
+$$Q = \Delta(U)$$
+
+*T = const*:
+
+$$d(A) = p \cdot d(V)$$
+
+$$A = \int_{(1)}^{(2)}p \cdot d(V),$$
+
+$$(1) \rightarrow p_1 \cdot V_1 \cdot T_1$$
+
+$$(2) \rightarrow p_2 \cdot V_2 \cdot T_2$$
+
+$$p \cdot V === z \cdot R \cdot T$$
+
+$$p = \frac{z \cdot R \cdot T}{V}$$
+
+$$A = \int_{(1)}^{(2)}\frac{z \cdot R \cdot T}{V} \cdot d(V) === z \cdot R \cdot T \int_{V_1}^{V_2}\frac{d(V)}{V} === z \cdot R \cdot T \cdot ln(V) |_{V_1}^{V_2} === z \cdot R \cdot T \cdot (ln(V_2) - ln(V_1)) === z \cdot R \cdot T \cdot ln(\frac{V_2}{V_1})$$
+
+$$A = z \cdot R \cdot T \cdot ln(\frac{V_2}{V_1})$$
+
+$$A = z \cdot R \cdot T \cdot ln(\frac{p_1}{p_2})$$
+
+$$p_1 \cdot V_1 === p_2 \cdot V_2$$
+
+$$\frac{V_2}{v_1} === \frac{p_1}{p_2}$$
+
+töö adiabaatilises protsessis:
+
+$$A = \frac{p_1 \cdot V_1}{\gamma - 1} \cdot (1 - (\frac{V_1}{V_2})^{\gamma - 1})$$
+
+
 # Ülesanded
 
 ## Vesinik ja hapnik kolvides
@@ -753,3 +872,387 @@ pressure <- (40 - 0) * 23.2e-6 * ELASTIC_MODULUS_AL
 pressure
 #difference <- ()
 ```
+
+## Õhurõhu tasakaaldustumine
+
+### Ülesande püstitus
+
+Hinnata,   kui   kaua   võtab   aega,   et   (õhu)rõhk   50   m   pikkusega   ruumis
+tasakaalustuks, kui ruumi ühes otsas on toimunud rõhu hetkeline suurenemine,
+temperatuuridel
+
+a) -50oC ning
+
+b) +50oC.
+
+### Alusandmed
+
+ruumi pikkus l = 50 * m
+
+esimene temperatuur T~a~ = -50°C === 223.15 * K
+
+teine temperatuur T~b~ = 50°C === 323.15 * K
+
+$$R = 8.314 \cdot \frac{J}{K \cdot mol}$$ 
+
+$$M = .029 \cdot \frac{kg}{mol}$$
+
+
+
+### Arvutada
+
+aeg t
+
+### Valemid
+
+$$v_h = \sqrt{\frac{P}{ρ}}$$
+$$v_h = \frac{s}{t}$$
+
+$$t = \frac{s}{v_h}$$
+
+$$P = \frac{1}{3} \cdot m_0 \cdot n \cdot \bar{v^2} === \frac{1}{3} \cdot ρ  \bar{v^2}$$
+
+$$v_h = \sqrt{\frac{\frac{1}{3} * ρ \bar{v^2}}{ρ}} === \sqrt{\frac{\bar{v^2}}{3}}$$
+
+$$\bar{\epsilon} = \frac{3}{2} \cdot k \cdot T$$
+
+$$\bar\epsilon_õ = \frac{5}{2} \cdot k \cdot T === \frac{m_0 \cdot \bar{v^2}}{2}$$
+
+$$\bar{v^2} = \frac{5 \cdot k \cdot T}{m_0} === 5 \cdot T \cdot \frac{R}{M}$$
+
+$$v_h = \sqrt{\frac{5 \cdot T}{3} \cdot \frac{R}{M}}$$
+
+$$v_{h_1} = \sqrt{\frac{5 \cdot 223 \cdot 8.314}{3 \cdot .029}} === 324 \cdot \frac{m}{s}$$
+
+$$v_{h_2} = 392 \cdot \frac{m}{s}$$
+
+$$t_1 = .15 \cdot s$$
+
+$$t_2 = .12 \cdot s$$
+
+3 ruumi sihti, sellest 3:
+
+$$\bar{\epsilon_k} = \frac{3}{2} \cdot k \cdot T$$
+
+*i* sõltumatut sihti ehk vabadusastet:
+
+$$\bar{\epsilon} = \frac{i}{2} \cdot k \cdot T$$
+
+Kui pind, siis võimalikud liikumissihid *x* ja *y* ehk *i = 2*.
+
+Mitmeaatomiliste gaaside puhul tuleb arvestda ka teisi võimalikke liikumisi.
+
+Ülal 3: need on kulgliikumise vabadusastmed.
+
+Pöördliikumise vabadusastmed sõltuvad telgedest, mille ümber saab pöörelda.
+
+Üheaatomiline gaas - pöördliikumise vabadusastmed puuduvad.
+
+Kaheaatomiline gaas - kaks pöördliikumise vabadusastet, st *i~p~ = 2*.
+
+Kolme ja enama aatomilise gaasi puhul: *i~p~ = 3*.
+
+$$i = i_{kulg} + i_{pöörd}$$
+
+Üheaatomilise gaasi puhul *i = i~kulg~ = 3*.
+
+Kaheaatomilise gaasi puhul $i = 3 + 2 === 5$.
+
+Kolmeaatomiline gaas: $i = 3 + 3 === 6$.
+
+$$\bar{\epsilon}_{kin} = \fra¢{i}{2} \cdot k \cdot T$$
+
+$$\bar{\epsilon}_{kulg} = \frac{3}{2} \cdot k \cdot T$$
+
+$$\bar{\epsilon}_{pöörd} = \frac{i_p}{2} \cdot k \cdot T$$
+
+1-aatomiline:
+
+$$\bar{\epsilon}_{k} = \frac{3}{2} \cdot k \cdot T$$
+
+2-aatomiline:
+
+$$\bar{\epsilon}_{k} = \frac{5}{2} \cdot k \cdot T$$
+
+3-aatomiline:
+
+$$\bar{\epsilon}_{k} = \frac{6}{2} \cdot k \cdot T$$
+
+$$\bar{\epsilon}_{k} = \frac{5}{2} \cdot k \cdot T$$
+
+## Lämmastik
+
+### Ülesande püstitus
+
+Lämmastikku temperatuuriga 300K rõhul 100 kPa on lastud sisse väike kogus
+lämmastikku temperatuuriga 500K. Hinnata, kui kaua läheb aega, et temperatuur
+gaasis tasakaalustuks arvestades, et lämmastiku molekulide efektiivdiameeter d on
+0,36 nm. Vaba tee pikkus gaasis on leitav valemiga 
+λ =
+1
+√
+2
+π
+d
+2
+n
+, kus n on gaasi
+kontsentratsioon
+
+###
+
+## Süsinikdioksiidi ja hapniku molekulide ruutkeskmised kiirused
+
+### Ülesande püstitus
+
+Mitu   korda   erinevad   süsinikdioksiidi   ja   hapniku   molekulide   ruutkeskmised
+kiirused temperatuuril 0
+o
+C?
+
+### Alusandmed
+
+T = 0°C === 237.15 * K
+
+$$R = 8.314 \cdot \frac{J}{K \cdot mol}$$
+
+$$M(O_2) = 32 \cdot \frac{g}{mol} === .032 \cdot \frac{kg}{mol}$$
+
+$$M(CO_2) = .044 \cdot \frac{kg}{mol}$$
+
+$$i_{O_2} = 5$$
+
+$$i_{CO_2} = 6$$
+### Valemid
+
+$$v_{rk} = \sqrt{\frac{i \cdot R \cdot T}{M}}$$
+
+$$\bar{\epsilon}_{k} = \frac{i}{2} \cdot k \cdot T === \frac{m_0 \cdot \bar{v^2}}{2}$$
+
+$$\bar{v^2} = \frac{2 \cdot i \cdot k \cdot T}{2 \cdot m_0} === \frac{i \cdot k \cdot T}{m_0} === \frac{i \cdot R \cdot T}{M}$$
+
+$$\frac{v_{rk_{O_2}}}{v_{rk_{CO_2}}} === \sqrt{\frac{i_{O_2} \cdot R \cdot T}{M_{O_2}} : \frac{i_{CO_2} \cdot R \cdot T}{M_{CO_2}}} === \sqrt{\frac{i_{O_2} \cdot R \cdot T}{M_{O_2}} \cdot \frac{M_{CO_2}}{i_{CO_2} \cdot R \cdot T}} === \sqrt{\frac{i_{O_2} \cdot M_{CO_2}}{i_{CO_2} \cdot M_{O_2}}}$$
+
+$$\frac{v_{O_2}}{v_{CO_2}} = \sqrt{\frac{5 \cdot .0044}{6 \cdot .032}} === 1.07$$
+
+## Gaasi tihedus
+
+### Ülesande püstitus
+
+Gaasi   molekulide   ruutkeskmine   kiirus   on   470   m/s.   Leida   gaasi   tihedus
+normaalrõhul (10^5^Pa). Kui suur on 40 l-sesse ballooni mahtuva gaasi mass antud
+juhul?
+
+### Alusandmed
+
+$$v_{rk} = 470 \cdot \frac{m}{s}$$
+
+$$P = 1 \cdot 10^5 Pa$$
+
+$$V = 40 \cdot l === .04 \cdot m^3$$
+
+### Arvutada
+
+ρ
+
+m
+
+### Valemid
+
+$$ρ = \frac{m}{V}$$
+
+$$p = \frac{1}{3} \cdot ρ \cdot \bar{v_{rk}^2}$$
+
+$$ρ = \frac{3 \cdot p}{\bar{v_{rk}^2}}$$
+
+$$ρ = \frac{3 \cdot 10^5}{470^2} === 1.358 (\frac{kg}{m^3})$$
+
+$$m = ρ \cdot V$$
+
+$$m = 1.358 \cdot .004 === .054 (\cdot kg)$$
+
+## Õhuvahetus
+
+### Ülesande püstitus
+
+Toas, mille ruumala on 90 m^3^, vahetub õhk täielikult 2 tunni jooksul. Kui palju
+on   vaja   soojust,   et   toas   püsiks   ööpäeva   jooksul   temperatuur   18oC,   kusjuures
+välisõhu temperatuur on -5oC? Eeldame, et õhu tihedus on 1,25 g/l.
+
+### Alusandmed
+
+$$V_0 = 90 \cdot m^3$$
+
+$$t_1 = 2 \cdot h$$
+
+$$T_1 = 268 \cdot K$$
+
+$$T_2 = 291 \cdot K$$
+
+$$ρ = 1.25 \cdot \frac{kg}{m^3}$$
+
+$$t_2 = 24 \cdot h$$
+
+$$M = .029 \cdot \frac{kg}{mol}$$
+
+### Arvutada
+
+Q
+
+### Valemid
+
+$$C_{aine} = \frac{i}{2} === R$$
+
+$$C_v = \frac{3}{2} \cdot R$$
+
+$$C_p = \frac{5}{2} \cdot R$$
+
+$$C_v = \frac{i}{2} \cdot R$$
+
+$$C_p = \frac{i + 2}{2} \cdot R$$
+
+$$Q = m \cdot c \cdot \Delta(T)$$
+
+$$Q = z \cdot C \cdot \Delta(T)$$
+
+$$z = \frac{m}{M}$$
+
+$$m = ρ \cdot V === \frac{t_2}{t_1} \cdot ρ \cdot V_0$$
+
+$$C = C_p === \frac{i + 2}{2} \cdot R$$
+
+$$i = 5$$
+
+$$Q = \frac{t_2 \cdot ρ \cdot V_0}{t_1 \cdot M} \cdot \frac{5 + 2}{2} \cdot R \cdot (T_2 - T_1)$$
+
+$$Q = 4.06 \cdot 10^7 \cdot J === 40.6 \cdot MJ$$
+
+Mitu kg puid on vaja põletada selle energia saamiseks?
+
+$$Q = k \cdot m,$$
+
+kus k on kütteväärtus ja m on puidu mass.
+
+$$k = 10 \cdot \frac{MJ}{kg}$$
+
+### Arvutuskäik
+
+```{r}
+Q = (24 * 1.25 * 90) / (2 * .029) * (5 + 2) / 2 * 8 * (291 - 268)
+Q
+```
+
+## Õhu siseenergia
+
+### Ülesande püstitus
+
+Milline on 20 mooli õhu siseenergia, kui gaasi ruumala on 100l ja rõhk 3 MPa?
+
+### Alusandmed
+
+$$p = 3 \cdot MPa === 3 \cdot 10^6 \cdot Pa$$
+
+$$V = 100 \cdot l === .1 \cdot m^3$$
+
+$$z = 20 \cdot mooli$$
+
+$$i = 5$$
+
+### Arvutada
+
+*U*
+
+### Valemid
+
+$$\bar{\epsilon_k} = \frac{i}{2} \cdot k \cdot T$$
+
+$$U = \frac{i}{2} \cdot z \cdot R \cdot T$$
+
+$$p \cdot V === z \cdot R \cdot T$$
+
+$$U = \frac{i}{2} \cdot p \cdot V$$
+
+$$U = \frac{5}{2} \cdot 3 \cdot 10^6 \cdot .1 === 7.5 \cdot 10^5 (\cdot J) === 750 (\cdot kJ)$$
+
+Mehaanikas potentsiaalne energia:
+
+$$E_{pot} = m \cdot g \cdot h$$
+
+Kui *m = 100 \* kg*, millisele kõrgusele peab tõstma selle 100 * kg keha, et see saaks energia 750 * kJ?
+
+$$h = \frac{E_{pot}}{m \cdot g}$$
+
+$$h = \frac{750000}{100 \cdot 10} \approx 750 \cdot m$$
+
+## Lämmastiku soojendamine
+
+### Ülesande püstitus
+
+ Kui palju soojust kulub 1 kg lämmastiku soojendamiseks jääval rõhul -50oC-lt
+kuni 50oC-ni. Kui suur on gaasi siseenergia juurdekasv? Kui palju teeb gaas tööd?
+
+### Alusandmed
+
+lämmastiku mass $m = 1 \cdot kg$
+
+rõhk *p = const*
+
+algtemperatuur $T_1 = -50°C === 223.15 \cdot K$
+
+lõpptemperatuur $T_2 = 50°C === 323.15 \cdot K$
+
+lämmastiku molaarmass $M(N_2) = 28.014 \cdot \frac{g}{mol} === .028014 \frac{kg}{mol}$
+
+$$R = 8.314 \cdot \frac{J}{K \cdot mol}$$
+
+$$i = 5$$
+
+### Arvutada
+
+soojushulk *Q*
+
+gaasi siseenergia juurdekasv $\Delta(U)$
+
+gaasi tehtav töö *A*
+
+### Valemid
+
+$$\Delta(U) = \frac{i}{2} \cdot z \cdot R \cdot \Delta(T)$$
+
+$$z = \frac{m}{M}$$
+
+$$\Delta(U) = \frac{i}{2} \cdot \frac{m}{M} \cdot R \cdot \Delta(T)$$
+
+$$7.42 \cdot 10^4 \cdot J$$
+
+$$Q = z \cdot C_p \cdot \Delta(T)$$
+
+$$C_p = \frac{i + 2}{2} \cdot R$$
+
+$$Q = z \cdot \frac{i + 2}{2} \cdot R \cdot \Delta(T)$$
+
+$$103.9 \cdot kJ$$
+
+$$A = Q - \Delta(U)$$
+
+$$A = p \cdot \Delta(V) === p_2 \cdot V_2 - p_1 \cdot V_1$$
+
+$$p \cdot V === z \cdot R \cdot T$$
+
+$$A = z \cdot R \cdot T_2 - z \cdot R \cdot T_1 === z \cdot R \cdot \Delta(T)$$
+
+### Arvutused
+
+```{r}
+change_u <- 5 / 2 * 1 / .028014 * 8.314 * (323.15 - 223.15)
+q <- 1 / .028014 * (5 + 2) / 2 * 8.314 * (323.15 - 223.15)
+a <- q - change_u
+```
+
+### Lahend
+
+`r signif(change_u, digits <- 5)` * J soojust kulub 1 * kg lämmastiku soojendamiseks jääval rõhul -50°C'lt kuni 50°C'ni. `r signif(q, digits <- 5)` * J on gaasi siseenergia juurdekasv. `r signif(a, digits <- 5)` * J teeb gaas tööd.
+
+## Iseseisvaks lahendamiseks
+
+20, 26, 33, 31, 37

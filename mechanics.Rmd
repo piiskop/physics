@@ -11,33 +11,33 @@ output:
 
 ## Ühikud
 
-+-----------+-----------------+--------+------------+--------------------+
-| Eesliide  | Kümne astendaja | Lühend | Näide      | Selgitus           |
-+===========+=================+========+============+====================+
-| piko-     | -12             | p      | 1 \* pN    | üks pikonjuuton    |
-+-----------+-----------------+--------+------------+--------------------+
-| nano-     | -9              | n      | 2 \* nm    | kaks nanomeetrit   |
-+-----------+-----------------+--------+------------+--------------------+
-| mikro-    | -6              | μ      | 3 \* μg    | kolm mikrogrammi   |
-+-----------+-----------------+--------+------------+--------------------+
-| milli-    | -3              | m      | 4 \* mW    | neli millivatti    |
-+-----------+-----------------+--------+------------+--------------------+
-| senti-    | -2              | c      | 5 \* cK    | viis sentikelvinit |
-+-----------+-----------------+--------+------------+--------------------+
-| detsi-    | -1              | d      | 6 \* dA    | kuus detsiamprit   |
-+-----------+-----------------+--------+------------+--------------------+
-| deka-     | 1               | D      | 7 \* Db    | seitse dekabitti   |
-+-----------+-----------------+--------+------------+--------------------+
-| hekto-    | 2               | H      | 8 \* HB    | kaheksa hektobaiti |
-+-----------+-----------------+--------+------------+--------------------+
-| kilo-     | 3               | K      | 9 \* Klx   | üheksa kiloluksi   |
-+-----------+-----------------+--------+------------+--------------------+
-| mega-     | 6               | M      | 10 \* MJ   | kümme megadžauli   |
-+-----------+-----------------+--------+------------+--------------------+
-| giga-     | 9               | G      | 100 \* GPa | sada gigapaskalit  |
-+-----------+-----------------+--------+------------+--------------------+
-| tera-     | 12              | T      | .5 \* Tcd  | pool terakandelat  |
-+-----------+-----------------+--------+------------+--------------------+
++----------+-----------------+--------+------------+--------------------+
+| Eesliide | Kümne astendaja | Lühend | Näide      | Selgitus           |
++==========+=================+========+============+====================+
+| piko-    | -12             | p      | 1 \* pN    | üks pikonjuuton    |
++----------+-----------------+--------+------------+--------------------+
+| nano-    | -9              | n      | 2 \* nm    | kaks nanomeetrit   |
++----------+-----------------+--------+------------+--------------------+
+| mikro-   | -6              | μ      | 3 \* μg    | kolm mikrogrammi   |
++----------+-----------------+--------+------------+--------------------+
+| milli-   | -3              | m      | 4 \* mW    | neli millivatti    |
++----------+-----------------+--------+------------+--------------------+
+| senti-   | -2              | c      | 5 \* cK    | viis sentikelvinit |
++----------+-----------------+--------+------------+--------------------+
+| detsi-   | -1              | d      | 6 \* dA    | kuus detsiamprit   |
++----------+-----------------+--------+------------+--------------------+
+| deka-    | 1               | D      | 7 \* Db    | seitse dekabitti   |
++----------+-----------------+--------+------------+--------------------+
+| hekto-   | 2               | H      | 8 \* HB    | kaheksa hektobaiti |
++----------+-----------------+--------+------------+--------------------+
+| kilo-    | 3               | K      | 9 \* Klx   | üheksa kiloluksi   |
++----------+-----------------+--------+------------+--------------------+
+| mega-    | 6               | M      | 10 \* MJ   | kümme megadžauli   |
++----------+-----------------+--------+------------+--------------------+
+| giga-    | 9               | G      | 100 \* GPa | sada gigapaskalit  |
++----------+-----------------+--------+------------+--------------------+
+| tera-    | 12              | T      | .5 \* Tcd  | pool terakandelat  |
++----------+-----------------+--------+------------+--------------------+
 
 : Ühikute eesliited
 
@@ -132,7 +132,6 @@ $$vahemaa - lähe === algkiirus \cdot t + \frac{kiirendus \cdot t^2}{2} + \frac{
 (\#eq:second-equation-of-motion-for-constant-jerk)
 \end{equation}
 ```
-
 Kogu vahemaa on integreeritud ülilühikestest vahemaa juppidest:
 
 ```{=tex}
@@ -243,22 +242,38 @@ Keskmise kiiruse valem:
 (\#eq:mean-velocity)
 \end{equation}
 ```
-
 Pythagorase teoreem:
 
 ```{=tex}
 \begin{equation}
-|hüpotenuus| = \sqrt{|kaatet_2|^2 + |kaatet_2|^2}
+|c| = \sqrt{|kaatet_2|^2 + |kaatet_2|^2}
 (\#eq:pythagorean)
 \end{equation}
 ```
-
 Tõusunurk:
 
 ```{=tex}
 \begin{equation}
-nurk_{tõus} = atan(\frac{nihe_{vertikaalne}}{nihe_{rõhtne}})
+\alpha = atan(\frac{nihe_{vertikaalne}}{\Delta(x)})
 (\#eq:tangent-angle)
+\end{equation}
+```
+
+Nurgateisendus:
+
+```{=tex}
+\begin{equation}
+nurk_{rad} = \frac{nurk° \cdot \pi}{180°}
+(\#eq:angle-from-degrees-to-radians)
+\end{equation}
+```
+
+Koosinusteoreem:
+
+```{=tex}
+\begin{equation}
+|a| = \sqrt{|b|^2 + |c|^2 - 2 \cdot |b| \cdot |c| \cdot cos(nurk_{b, c})}
+(\#eq:cosine-theorem)
 \end{equation}
 ```
 
@@ -1087,13 +1102,13 @@ A mountain climbing expedition establishes a base camp and two intermediate camp
 
 ### Base data
 
-lateral distance between the base camp and camp *A* *CA~x~* = 11200 * m
+lateral distance between the base camp and camp *A* *CA~x~* = 11200 \* m
 
-vertical distance between the base camp and camp *A* *CA~y~* = 3200 * m
+vertical distance between the base camp and camp *A* *CA~y~* = 3200 \* m
 
-lateral distance between camp *A* and camp *B* *AB~x~* = 8400 * m
+lateral distance between camp *A* and camp *B* *AB~x~* = 8400 \* m
 
-vertical distance between camp *A* and camp *B* *AB~y~* = 1700 * m
+vertical distance between camp *A* and camp *B* *AB~y~* = 1700 \* m
 
 ### What to calculate?
 
@@ -1135,5 +1150,82 @@ tangentAngleInDegrees = tangentAngle / pi * 180
 
 ### Solution
 
-Approximately `r signif(cb, digits <- 3)` * m in the elevation direction `r signif(tangentAngle, digits <- 3)` (`r signif(tangentAngleInDegrees, digits <- 3)`°) is the displacement between base camp and Camp B.
+Approximately `r signif(cb, digits <- 3)` \* m in the elevation direction `r signif(tangentAngle, digits <- 3)` (`r signif(tangentAngleInDegrees, digits <- 3)`°) is the displacement between base camp and Camp B.
 
+## Round trip
+
+### Setup
+
+Three of the four busiest airports in the US are Hartsfield-Jackson in Atlanta, Georgia (ATL), O'Hare in Chicago, Illinois (ORD), and Dallas/Fort Worth in Texas (DFW). Complete the following table for roundtrip airplane journey from Atlanta to Chicago to Dallas to Atlanta. Note: Bearing are measured clockwise from due north.
+
+| departure | arrival | distance | bearing |
+|-----------|---------|----------|---------|
+| ATL       | ORD     | 975 km   | 342.8°  |
+| ORD       | DFW     | 1291 km  | 221.6°  |
+| DFW       | ATL     |          |         |
+| round     | trip    |          | n/a     |
+
+: A roundtrip airplane journey
+
+### Initial data
+
+the distance between ATL and ORD *|AO|* = 975 * km === 975000 * m
+
+the distance between ORD and DFW *|OD|* = 1291 * km === 1291000 * m
+
+the bearing from ATL to ORD *α* = 342.8°
+
+the bearing from ORD to DFW *β* = 221.6°
+
+### To calculate
+
+the distance between DFW and ATL *distance_da*
+
+the bearing from DFW to ATL *bearing_da*
+
+the round trip distance *distance_all*
+
+### Drawing
+
+I first create a drawing for the task.
+
+![The given lengths are marked as green and the length to be calculated as red.](airports.svg)
+
+### Formulas
+
+If the length of two sides of triangle and the angle between them are known I can solve the whole triangle. The angle from due north anticlockwise from ATL to ORD is 17.2°. There's a smaller right triangle whoses shorter sides are the segment between ORD and x-axis and the segment between ATL and the intersection point *A* for the former segment with the x-axis. As the line (ORD, ATL) cuts two parallel lines - y-axis and the line (ORD, *A*), the angles (N, ATL, ORD) and (ATL, ORD, *A*) have the same size. The angle (*A*, ORD, DFW~2~) is easy to calculate: I just subtract a straight angle from the bearing of (ORD, DFW). So the angle (*A*, ORD, DFW~2~) is 41.6° which makes the angle (ATL, ORD, DFW~2~) as 58.8° in size. Now, I know the length of two adjacent sides and the angle between them and can use the cosine theorem \@ref(eq:cosine-theorem) to calculate the length of the segment (DFW~2~, ATL). I also need to convert angles sizes from degrees to radians using the formula \@ref(eq:angle-from-degrees-to-radians).
+
+For $\angle{ORD, DFW_2, ATL}$, I also use the cosine theorem:
+
+$$\angle{ORD, DFW_2, ATL} = acos(\frac{|(ORD, ATL)|^2 - |(ORD, DFW_2)|^2 - |(DFW_2, ATL)|^2}{2 \cdot |ORD, DFW_2| \cdot |DFW_2, ATL|})$$
+
+For the bearing from DFW to ATl, the bearing from ORD to DFW must be added to $\angle{ORD, DFW_2, ATL}$ less a straight angle:
+
+$$bearing_{da} = acos(\frac{|(ORD, ATL)|^2 - |(ORD, DFW_2)|^2 - |(DFW_2, ATL)|^2}{-2 \cdot |ORD, DFW_2| \cdot |DFW_2, ATL|}) + β - \pi$$
+
+The round trip distance:
+
+$$distance_{all} = |(ORD, ATL)| + |(ORD, DFW_2| + |DFW_2, ATL|$$
+
+### Calculations
+
+```{r}
+distance_ao = 975
+distance_od <- 1291
+distance_da <- sqrt(distance_ao^2 + distance_od^2 - 2 * distance_ao * distance_od * cos((360 - 342.8 + 221.6 - 180) * pi / 180))
+bearing_da <- (acos((distance_ao^2 - distance_od^2 - distance_da^2) / (-2 * distance_od * distance_da)) + 221.6 * pi / 180 - pi) / pi * 180
+angle_oda <- acos((distance_ao^2 - distance_od^2 - distance_da^2) / (-2 * distance_od * distance_da))
+angle_oda
+distance_all <- distance_ao + distance_od + distance_da
+```
+
+### Solution
+
+| departure | arrival | distance | bearing |
+|-----------|---------|----------|---------|
+| ATL       | ORD     | 975 km   | 342.8°  |
+| ORD       | DFW     | 1291 km  | 221.6°  |
+| DFW       | ATL     | `r signif(distance_da, digits <- 5)` km |`r signif(bearing_da, digits <- 4)`°|
+| round     | trip    | `r signif(distance_all, digits <- 4)` km| n/a     |
+
+: A completed roundtrip airplane journey table
