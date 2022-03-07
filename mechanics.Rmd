@@ -51,9 +51,23 @@ Konvertereid:
 convertFromKmPerHToMPerS <- function(velocityInKmPerH) {
   (velocityInKmPerH * 1000 / 3600)
 }
+
+convertFromMiToM <- function(mi) {
+  mi * 1609.344
+}
+
+convertFromFtToM <- function(ft) {
+  convertFromMiToM(ft / 5280)
+}
 ```
 
 ## Sirgjooneline liikumine
+
+Valguse kiirus vaakumis:
+
+```{r}
+SPEED_LIGHT <- 299792458
+```
 
 ![(\#fig:integrating-time) Ühesuguste ajavahemike integreerimine](integrating-time.svg)
 
@@ -121,14 +135,14 @@ Asendan valemisse \@ref(eq:smallest-distance) hetkekiiruse valemist \@ref(eq:fir
 
 $$d(vahemaa) === (algkiirus + algkiirendus \cdot t + \frac{jõnks \cdot t^2}{2}) \cdot d(t)$$
 
-$$\int_{lähe}^{vahemaa}d(vahemaa) ===\\
-\int_{0}^{t}(algkiirus + algkiirendus \cdot t + \frac{jõnks \cdot t^2}{2}) \cdot d(t)$$
+$$\int_{s_0}^{vahemaa}d(vahemaa) ===\\
+\int_{0}^{t}(algkiirus + algkiirendus \cdot t + \frac{j \cdot t^2}{2}) \cdot d(t)$$
 
-$$vahemaa - lähe === algkiirus \cdot t + \frac{kiirendus \cdot t^2}{2} + \frac{jõnks \cdot t^3}{6}$$
+$$vahemaa - s_0 === algkiirus \cdot t + \frac{kiirendus \cdot t^2}{2} + \frac{j \cdot t^3}{6}$$
 
 ```{=tex}
 \begin{equation}
-\color{green}{\bf{vahemaa === lähe + algkiirus \cdot t + \frac{kiirendus \cdot t^2}{2} + \frac{jõnks \cdot t^3}{6}}}
+\color{green}{\bf{vahemaa === s_0 + algkiirus \cdot t + \frac{kiirendus \cdot t^2}{2} + \frac{j \cdot t^3}{6}}}
 (\#eq:second-equation-of-motion-for-constant-jerk)
 \end{equation}
 ```
@@ -303,7 +317,27 @@ $$jõud * ajavahemik === impulsiMuut$$
 
 ## Ringliikumine
 
-$$\vec{{kiirus}_{joon}} = \frac{{pikkus}_{kaar}}{ajavahemik}$$
+Maa keskmine raadius:
+
+```{r}
+RADIUS_EARTH <- 6.371E6
+```
+
+Ringjoone pikkus:
+
+```{=tex}
+\begin{equation}
+pikkus_{ringjoon} = 2 \cdot \pi \cdot raadius
+(\#eq:length-of-circle)
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+\vec{{kiirus}_{joon}} = \frac{{pikkus}_{kaar}}{ajavahemik}
+(\#eq:line-velocity)
+\end{equation}
+```
 
 $$\vec{{kiirus}_{nurk}} = \frac{nurk}{ajavahemik}$$
 
@@ -1229,3 +1263,579 @@ distance_all <- distance_ao + distance_od + distance_da
 | round     | trip    | `r signif(distance_all, digits <- 4)` km| n/a     |
 
 : A completed roundtrip airplane journey table
+
+## Earth's orbit
+
+### Setup
+
+Calculate both the distance and the magnitude of the displacement of the Earth after…
+
+a. one complete orbit around the Sun
+
+b. one-half orbit around the Sun
+
+c. one-fourth orbit around the Sun
+
+d. What relationship between distance and displacement does this illustrate?
+
+### Drawing
+
+![The Earth's orbit around the Sun](earth-s-orbit.svg)
+
+### Formulas
+
+For solving the task, I make use of two formulas: the length of the circle \@ref(eq:length-of-circle) and \@ref(eq:pythagorean).
+
+### Solving
+
+a. One complete orbit around the Sun means one complete trip around the circle which is $2 \cdot \pi \cdot radius$. The displacement of Earth would be nought as Earth would return to the place of origin.
+
+b. One-half orbit around the Sun means a trip across one-half of the circle which is $\pi \cdot radius$. That half-orbit is the blue line CEB in the drawing. The displacement is the diameter of the circle or $2 \cdot radius$. That displacement is the blue segment CAB in the drawing.
+
+c. One-fourth orbit around the Sun means a trip across one-fourth of the circle which is $\frac{\pi \cdot radius}{2}$. That fourth-orbit is the green arc CD in the drawing. The displacement is the hypothenuse of the right-angle triangle CAD in the drawing:
+
+$$displacement = \sqrt{radius^2 + radius^2} === \sqrt{2} \cdot radius$$
+
+d. If the distance is less than a full circle the less it is the less is the displacement.
+
+## Walking
+
+### Setup
+
+I went for a walk one day. I walked north 6.0 km at 6.0 km/h and then west 10 km at 5.0 km/hr. Determine the average…
+
+a. speed
+
+b. velocity
+
+…for the entire journey.
+
+### Basic data
+
+displacement north $\Delta(s_N) = 6.0 \cdot km === 6000 \cdot m$
+
+average velocity north $\overrightarrow{v_N} = 6.0 \cdot \frac{km}{h} === \frac{5}{3} \cdot \frac{m}{s}$
+
+displacement west $\Delta(s_W) = 10 \cdot km === 10000 \cdot m$
+
+average velocity west $\overrightarrow{v_W} = 5.0 \cdot \frac{km}{h} === \frac{10}{9} \cdot \frac{m}{s}$
+
+### To be calculated
+
+average speed *average_speed*
+
+average velocity *average_velocity*
+
+### Formula
+
+For both speed and velocity, I use the formula of the mean velocity \@ref(eq:mean-velocity). So the formula for the average speed is:
+
+$$average\_{speed} = \frac{\Delta(s_N) + \Delta(s_W)}{\frac{\Delta(s_N)}{\overrightarrow{v_N}} + \frac{\Delta(s_W)}{\overrightarrow{v_W}}}$$
+
+For the average velocity, I also use the Pythagorean theorem \@ref(eq:pythagorean):
+
+$$average\_{velocity} = \frac{\sqrt{\Delta(s_N)^2 + \Delta(s_W)^2}}{\frac{\Delta(s_N)}{\overrightarrow{v_N}} + \frac{\Delta(s_W)}{\overrightarrow{v_W}}}$$
+
+As the velocity has a direction, I also use the formula of the tangent \@ref(eq:tangent-angle). So the tangent angle can be calculated using the following formula:
+
+$$tangent\_{angle} = atan(\frac{\Delta(s_W)}{\Delta(s_N)}) + \frac{\pi}{2}$$
+
+### Calculations
+
+```{r}
+average_speed <- (6.0 + 10) / (6.0 / 6.0 + 10 / 5.0) * 1000 / 3600
+average_speed_in_kph <- (6.0 + 10) / (6.0 / 6.0 + 10 / 5.0)
+average_speed_in_kph
+average_velocity <- (sqrt(6.0^2 + 10^2)) / (6.0 / 6.0 + 10 / 5.0) * 1000 / 3600
+average_velocity <- (sqrt(6.0^2 + 10^2)) / (6.0 / 6.0 + 10 / 5.0)
+average_velocity
+tangent_angle <- atan(10 / 6.0) + pi / 2
+```
+
+### Results
+
+The average speed of the whole journey is $`r signif(average_speed, digits <- 2)` \cdot \frac{m}{s}$. The average velocity of the whole journey is $`r signif(average_velocity, digits <- 2)` \cdot \frac{m}{s}$ at the angle `r signif(tangent_angle, digits <- 2)`.
+
+## Point on equator
+
+### Setup
+
+How fast is a point on the equator moving due to the rotation of the Earth?
+
+### Initial data
+
+the radius of the Earth $r = `r RADIUS_EARTH` \cdot m$
+
+the time Earth makes a rotation around its axis $t = 86400 \cdot s$
+
+### To be calculated
+
+the speed *v*
+
+### Formulas
+
+As the point on the equator rotates, I use the formula for the rotational speed \@ref(eq:line-velocity) which assumes the formula of the length of the circle \@ref(eq:length-of-circle). The complete formula looks like this:
+
+$$v = \frac{2 \cdot \pi \cdot RADIUS_{EARTH}}{\Delta(t)}$$
+
+### Calculation
+
+```{r}
+v <- 2 * pi * RADIUS_EARTH / (24 * 60 * 60)
+```
+
+### Result
+
+$`r signif(v, digits <- 4)` \cdot \frac{m}{s}$ is a point on the equator moving due to the rotation of the Earth.
+
+## Light year
+
+### Setup
+
+A common measure of astronomical distances is the light year. This is the distance a beam of light would travel in a vacuum in one year. Determine the size of a light year in meters.
+
+### Initial data
+
+the speed of light $v = `r SPEED_LIGHT` \cdot \frac{m}{s}$
+
+seconds in a year knowing that 241 out of thousand years are longer than usual
+
+### The data to be calculated
+
+the size of a light year in meters *ly*
+
+### Rule
+
+I construct a formula for calculating the size of a light year in meters:
+
+$$ly = v \cdot (\frac{241}{1000} \cdot 366 + \frac{1000 - 241}{1000} \cdot 365) \cdot 24 \cdot 60 \cdot 60$$
+
+### Calculation
+
+```{r}
+ly = SPEED_LIGHT * (241 / 1000 * 366 + (1000 - 241) / 1000 * 365) * 24 * 60 * 60
+```
+
+### Result
+
+`r ly` * m is the size of a light year.
+
+## Conversion from miles to meters
+
+### Setup
+
+A problem for residents of the US only. Convert 60 mph (a common highway speed) to…
+
+a. km/h
+
+b. m/s
+
+### Initial data
+
+the speed in $\frac{miles}{h}$ 60
+
+the number of meters in a mile 1609.344
+
+### To be calculated
+
+the speed in $\frac{km}{h}$ *v_kmph*
+
+the speed in $\frac{m}{s}$ *v_mps*
+
+### Calculations
+
+```{r}
+v_kmph = convertFromMiToM(60) / 1000
+v_mps = convertFromKmPerHToMPerS(v_kmph)
+```
+
+### Results
+
+a. $`r v_kmph` \cdot \frac{km}{h}$
+
+b. $`r signif(v_mps, digits <- 7)` \cdot \frac{m}{s}$
+
+## Accelerating car
+
+### Setup
+
+A problem about a car (US version).
+
+a. A car is said to go "zero to sixty in six point six seconds". What is its acceleration in m/s^2^?
+
+b. The driver can't release his foot from the gas pedal (a.k.a. the accelerator). How many additional seconds would it take for the driver to reach 80 mph assuming the acceleration remains constant?
+
+c. A car moving at 80 mph has a speed of 35.8 m/s. What acceleration would it have if it took 5.0 s to come to a complete stop?
+
+### Initial data
+
+a.  initial speed $v_0 = 0 \cdot \frac{m}{s}$
+
+    final speed $v_1 = 60 \cdot \frac{mi}{h}$
+
+    change of time $\Delta(t) = 6.6 \cdot s$
+
+b.  initial speed $v_0 = 60 \cdot \frac{mi}{h}$ 
+
+    new final speed $v_1 = 80 \cdot \frac{mi}{h}$
+
+    acceleration is constant
+
+c.  initial speed $v_0 = 35.8 \cdot \frac{m}{s}$
+
+    final speed $v_1 = 0 \cdot \frac{m}{s}$
+
+    change of time $\Delta(t) = 5 \cdot s$
+
+### What to calculate?
+
+a. the acceleration *a_a*
+
+b. the change of time $change_{time}$
+
+c. the acceleration *a_c*
+
+### Rules
+
+a. Using the formula for the acceleration \@ref(eq:keskmine-kiirendus).
+
+b.  I use the same formula as for *a* in a modified form:
+
+    $$change_{time} = \frac{v_1 - v_0}{a_a}$$
+
+c. I use the same formula as for *a*.
+
+### Calculations
+
+I first let to convert the speed $60 \cdot \frac{mi}{h}$ into $\frac{m}{s}$:
+
+```{r}
+v_1_a <- convertFromKmPerHToMPerS(convertFromMiToM(60) / 1000)
+v_1_a
+```
+
+a.
+
+```{r}
+a_a <- (v_1_a - 0) / 6.6
+```
+
+b.
+
+```{r}
+change_time = (convertFromKmPerHToMPerS(convertFromMiToM(80) / 1000) - v_1_a) / a_a
+```
+
+c.
+
+```{r}
+a_c <- (0 - 35.8) / 5
+```
+
+### Results
+
+a. $`r a_a` \cdot \frac{m}{s^2} forward$ is the acceleration.
+
+b. `r change_time` additional seconds would it take for the driver to reach 80 mph assuming the acceleration remains constant.
+
+c. The acceleration of $`r a_c` \cdot \frac{m}{s^2} forward$ would it have if it took 5.0 s to come to a complete stop.
+
+## Baseball
+
+### Setup
+
+A baseball is pitched at 40 m/s (90 mph) in a Major League game. The batter hits the ball on a line drive straight toward the pitcher at 50 m/s (112 mph). Determine the the acceleration of the ball if it was in contact with the bat for $\frac{1}{30} \cdot s$.
+
+### Initial data
+
+initial velocity $v_0 = -40 \cdot \frac{m}{s}$
+
+final velocity $v_1 = 50 \cdot \frac{m}{s}$
+
+change of time $\Delta(t) = \frac{1}{30} \cdot s$
+
+### What to calculate?
+
+the acceleration $a$
+
+### Rule
+
+Using the formula for the acceleration \@ref(eq:keskmine-kiirendus).
+
+### Calculation
+
+```{r}
+a = (50 - (-40)) / (1 / 30)
+```
+
+### Result
+
+$`r a` \cdot \frac{m}{s^2}$ towards the pitcher is the acceleration of the ball if it was in contact with the bat for $\frac{1}{30} \cdot s$.
+
+## Exit ramp
+
+### Setup
+
+The speed limit of a particular section of freeway is 25 m/s. The right travel lane is connected to an exit ramp with a short auxiliary lane. Cars would have a comfortable deceleration of $−2.0 m/s^2$ for 3.0 s in the auxiliary lane if they were driving at the speed limit.
+
+a. What speed will cars have when they are done decelerating in this way? (This is also the speed limit of the exit ramp.)
+
+b. What minimum length should the auxiliary lane be to allow for this deceleration?
+
+Drivers don't always drive at the speed limit, and highway engineers take this into consideration.
+
+c. Assume a car could decelerate at four times the "comfortable" rate without losing control. At what maximum speed could a car enter an auxiliary lane with the length you calculated in part *b.* and still exit at the intended speed?
+
+d. Assume a driver was traveling on the freeway at the speed you calculated in part *c.* What distance is needed to decelerate this car to the speed limit of the exit ramp at the "comfortable" rate ?
+
+![Freeway exit](freeway-exit.svg)
+
+### Initial data
+
+a.  initial speed $v_0 = 25 \cdot \frac{m}{s}$
+
+    acceleration $a = -2.0 \cdot \frac{m}{s^2}$
+    
+    change of time $t = 3.0 \cdot s$
+
+b.  initial speed $v_0 = 25 \cdot \frac{m}{s}$
+
+    change of time $t = 3.0 \cdot s$
+    
+    acceleration $a = -2.0 \cdot \frac{m}{s^2}$
+    
+    jerk $j = 0 \cdot \frac{m}{s^3}$
+    
+c.  acceleration $a = -8.0 \cdot \frac{m}{s^2}$
+
+    change of time $t = 3.0 \cdot s$
+
+d.  acceleration $a = -2.0 \cdot \frac{m}{s^2}$
+
+    jerk $j = 0 \cdot \frac{m}{s^3}$
+
+### What to calculate?
+
+a. the final velocity $v$
+
+b. the change in distance *change_distance*
+
+c. the initial speed $v_0$
+
+d. the change in distance *distance_comfortable*
+
+### Rules
+
+a. I use the formula for the velocity by integration \@ref(eq:velocity-by-integration).
+
+b. I use the second formula of motion for constant jerk \@ref(eq:second-equation-of-motion-for-constant-jerk).
+
+c. I use the formula for the distance by speed and acceleration \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu) and rearrange it:
+
+$$v_0 = \sqrt{v^2 - 2 \cdot change\_distance \cdot a}$$
+
+d. I use the formula for the distance by speed and acceleration \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu).
+
+### Calculations
+
+```{r}
+t = 3.0
+a <- -2.0
+v <- a * t + 25
+change_distance <- 25 * 3 + -2 * 3^2 / 2 + 0 * 3^3 / 6
+v_0 <- sqrt(v^2 - 2 * change_distance * 4 * (a))
+distance_comfortable <- (v^2 - v_0^2) / (2 * a)
+```
+
+### Results
+
+a. The speed $`r v` \cdot \frac{m}{s}$ will cars have when they are done decelerating in this way.
+
+b. The auxiliary lane should be the minimum length of `r change_distance` * m to allow for this deceleration.
+
+c. At the maximum speed of $`r signif(v_0, digits <- 2)` \cdot \frac{m}{s}$ could a car enter an auxiliary lane with the length I calculated in part *b.* and still exit at the intended speed.
+
+d. The distance `r distance_comfortable` * m is needed to decelerate this car to the speed limit of the exit ramp at the "comfortable" rate.
+
+## Deceleration
+
+### Setup
+
+A car with an initial velocity of 60 mph needs 144 feet to come to a complete stop. Determine the stopping distance of this same car with an initial velocity of…
+
+a. 30 mph
+
+b. 20 mph
+
+c. 10 mph
+
+Note: The rate of change of velocity is not affected by initial velocity in this problem. Fast cars and slow cars slow down at the same rate.
+
+### Initial data
+
+initial velocity $v_0 = 60 \cdot \frac{mi}{h}$
+    
+distance initial_distance = 144 * ft
+    
+final velocity $0 \cdot \frac{m}{s}$
+    
+a. second initial velocity $v_{0_a} = 30 \cdot \frac{mi}{h}$
+
+b. second initial velocity $v_{0_b} = 20 \cdot \frac{mi}{h}$
+
+c. second initial velocity $v_{0_c} = 10 \cdot \frac{mi}{h}$
+
+### What to calculate?
+
+second distance *second_stopping_distance*
+
+### Rule
+
+I use the formula for the distance by speed and acceleration \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu). I rearrange the formula to suit all three cases:
+
+$$second\_stopping\_distance = \frac{0^2 - v_0^2}{2 \cdot \frac{0^2 - v_{0_0}^2}{2 \cdot initial\_distance}} === \frac{- v_0^2 \cdot initial\_distance}{- v_{0_0}^2} === \frac{v_0^2 \cdot initial\_distance}{v_{0_0}^2}$$
+
+### Calculations
+
+```{r}
+initial_invert_acceleration <- convertFromFtToM(144) / convertFromKmPerHToMPerS(convertFromMiToM(60) / 1000)^2
+second_stopping_distance_a <- convertFromKmPerHToMPerS(convertFromMiToM(30) / 1000) ^ 2 * initial_invert_acceleration
+second_stopping_distance_b <- convertFromKmPerHToMPerS(convertFromMiToM(20) / 1000) ^ 2 * initial_invert_acceleration
+second_stopping_distance_c <- convertFromKmPerHToMPerS(convertFromMiToM(10) / 1000) ^ 2 * initial_invert_acceleration
+```
+
+### Results
+
+The stopping distance of this same car with an initial velocity of…
+
+a. 30 mph is `r signif(second_stopping_distance_a, digits <- 3)` * m. 
+
+b. 20 mph is `r signif(second_stopping_distance_b, digits <- 3)` * m. 
+
+c. 10 mph is `r signif(second_stopping_distance_c, digits <- 3)` * m. 
+
+## A plane
+
+### Setup
+
+A typical commercial jet airliner needs to reach a speed of 180 knots before it can take off. (A knot is a nautical mile per hour and is nearly equal to half a meter per second.) If such a plane spends 30 s on the runway estimate…
+
+a. its acceleration.
+
+b. the minimum runway length.
+
+### Initial data
+
+initial speed $v_0 = 0 \cdot \frac{m}{s}$
+
+final speed $v = 180 \cdot kn === 90 \cdot \frac{m}{s}$
+
+change of time $t = 30 \cdot s$
+
+jerk $j = 0 \cdot \frac{m}{s^3}$
+
+### What to calculate?
+
+a. the acceleration *a*
+
+b. the change of distance *change_distance*
+
+### Rules
+
+a. I use the acceleration equation \@ref(eq:velocity-by-integration) and rearrange it:
+
+$$a = \frac{v - v_0}{\Delta(t)}$$
+
+b. I use the distance equation \@ref(eq:second-equation-of-motion-for-constant-jerk).
+
+### Calculations
+
+```{r}
+t = 30
+a = (180 * .5 - 0) / t
+change_distance <- 0 * t + a * t^2 / 2 + 0 * t^3 / 6
+```
+
+### Results
+
+If such a plane spends 30 s on the runway I estimate…
+
+a. the acceleration to be $`r a` \cdot \frac{m}{s^2}$.
+
+b. the minimum runway length to be `r change_distance` * m.
+
+## Subway
+
+### Setup
+
+A 10 car subway train is sitting in a station. It reaches its cruising speed after accelerating at 0.75 m/s^2^ for distance equivalent to the length of the station (184 m). It then travels at a constant speed towards the next station 18 blocks away (1425 m).
+
+a. Determine the train's cruising speed.
+
+b. Determine the time it took for the train to accelerate from rest to its cruising speed.
+
+c. How long does it take the train to travel the 18 blocks to the next station?
+
+The driver stops the train in the second station in half the distance it took to start it at the first station.
+
+d. What is deceleration of the train in the second station?
+
+### Initial data
+
+the initial speed $v = 0 \cdot \frac{m}{s}$
+
+the acceleration $a = .75 \cdot \frac{m}{s^2}$
+
+the distance for the acceleration $\Delta(s_a) = 184 \cdot m$
+
+the distance after accelerating $\Delta(s_v) = 1425 \cdot m$
+
+the distance for stopping $\Delta(s_d) = 92 \cdot m$
+
+### What to calculate?
+
+a. the cruising speed *v*
+
+b. the acceleration time *t_a*
+
+c. the cruising time *t_v*
+
+d. the deceleration *d*
+
+### Rules
+
+a. I use the distance equation \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu) and rearrange it:
+
+$$v = \sqrt{\Delta(s_a) \cdot 2 \cdot a + v^2}$$
+
+b. I use the time equation \@ref(eq:ajavahemik).
+
+c. I use the equation of the mean speed \@ref(eq:mean-velocity) and rearrange it:
+
+$$t_v = \frac{\Delta(s_v)}{v}$$
+
+d. I use the distance equation \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu) and rearrange it:
+
+$$d = -\frac{(v_0^2 - v^2)}{2 \cdot \Delta(s_d)}$$
+
+### Calculations
+
+```{r}
+v_0 = 0
+a = .75
+s_a = 184
+v = sqrt(s_a * 2 * a + v_0^2)
+t_a = (v - v_0) / a
+t_v = 1425 / v
+d <- -(v_0^2 - v^2) / (2 * s_a / 2)
+```
+
+### Results
+
+a. The train's cruising speed is $`r signif(v, digits <- 4)` \cdot \frac{m}{s}$.
+
+b. The time it took for the train to accelerate from rest to its cruising speed was $`r signif(t_a, digits <- 4)` \cdot s$.
+
+c. It takes `r signif(t_v, digits <- 4)` * s the train to travel the 18 blocks to the next station.
+
+d. The deceleration of the train in the second station is $`r d` \cdot \frac{m}{s^2}$.
