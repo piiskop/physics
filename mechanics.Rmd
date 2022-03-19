@@ -59,6 +59,9 @@ convertFromMiToM <- function(mi) {
 convertFromFtToM <- function(ft) {
   convertFromMiToM(ft / 5280)
 }
+
+SECONDS_IN_YEAR <- (365 * (9 * 76 + 75) + 366 * (9 * 24 + 25)) / 1000 * 24 * 60 * 60
+SECONDS_IN_YEAR
 ```
 
 ## Sirgjooneline liikumine
@@ -1839,3 +1842,72 @@ b. The time it took for the train to accelerate from rest to its cruising speed 
 c. It takes `r signif(t_v, digits <- 4)` * s the train to travel the 18 blocks to the next station.
 
 d. The deceleration of the train in the second station is $`r d` \cdot \frac{m}{s^2}$.
+
+## How much time would it take to fill this "basin" with plastics?
+
+### Setup
+
+![The channel that I'm dealing with](channel-20220317-181534.jpg)
+
+At the address (https://dripfina.com/plastic-in-the-ocean-statistics/): "Every year, 25 million tons of plastic end up in the ocean." There's a channel here and a part of this channel that's shown on the task's picture is important. This part of the channel is restricted by concrete walls and waterfalls. I imagine that this "basin" is different: having also concrete walls instead of waterfalls with the height of the lowest existing concrete wall aside the "basin" which is shown by the red arrow. I also imagin that any water drains connected to the "basin" are closed so that nothing can flow in or out through them. The imaginable upper edge of the "basin" is shown by the blue line. I don't consider the small niches nor prisms inside the "basin". I only consider that the "basin" is surrounded by four walls and it's empty. Suddenly, out of nowhere, this imaginable "basin" is starting to be filled by plastics having the mentioned speed. My task is to calculate the time frame for this "basin" to be filled by plastics.
+
+### Figures
+
+![(\#fig:channel-lower-wall)Measurements of the channel's lower wall](channel-lower-wall.svg)
+
+![(\#fig:channel-width)Measuring the width of the channel](channel-width.svg)
+
+### Description
+
+The "basin" looks like a cuboid. I know how to calculate the volume of the "basin". I just need its measurements which I can take using a measurement stick or band. It's easy to measure the length *AB* of the "basin" (image \@ref(fig:channel-lower-wall)). It's not harder to measure the height of the lower wall *BD*. The height at the level *C* is where the water starts to fall. This is important if I don't want to enter the channel in order to measure its width. As at the time of writing, it's about 273 degrees around in the air, I certainly don't want to enter the water. Instead, I use the rule of similar triangles. For that, I stare at the point *E* (\@ref(fig:channel-width)) where *E* is on the wall at the opposite side of the channel crossing the waterfall line. I walk backwards away from the channel until the point *E* matches the point *D* at the edge of the channel wall at my side. I measure the height of my eyes from the ground *KL*. Then, I measure the distance *DK* which means how far my body from the edge of the channel is. Now, I have two similar triangles: *KLD* and *CDE*. The ratio of the lengths of covers is the same. After I know the width of the channel *CE*, I can calculate the volume of the "basin".
+
+The speed of filling oceans with plastic is given in tons per year. It'd make sense to convert that speed into SI units. I also need the density of plastic in order to convert between its weight and volume. The density of different types of plastic is different: https://plasticranger.com/density-of-plastics/ i just calculate the average of the minimal and maximal value and use it.
+
+### Inputs
+
+the length of the "basin" $l = .973 \cdot m$
+
+the depth of the "basin" up to the waterfall upper edge $h_{lower} = .5 \cdot m$
+
+the depth of the "basin" from the waterfall upper edge $h_{higher} = .65 \cdot m$
+
+the height of eyes from the ground $h_{eyes} = 1.69 \cdot m$
+
+the distance between the channel edge and my body $s = 11.22 \cdot m$
+
+```{r}
+l = .973
+h_lower <- .5
+h_higher <- .65
+h_eyes <- 1.69
+s = 11.22
+v <- 25000000e3 / SECONDS_IN_YEAR
+ρ_min <- 150
+ρ_max <- 2300
+```
+
+the speed of filling oceans with plastic $v = 25000000 \cdot \frac{t}{ys} === `r signif(v, digits <- 5)` \cdot \frac{kg}{s}$
+
+the minimal density of the plastics $\rho_{min} = .15 \frac{g}{cm^3} === 150 \cdot \frac{kg}{m^3}$
+
+the minimal density of the plastics $\rho_{min} = 2.3 \frac{g}{cm^3} === 2300 \cdot \frac{kg}{m^3}$
+
+### What to calculate?
+
+the time the "basin" would be filled by plastic $t = ?$
+
+### Rule
+
+$$t = \frac{l \cdot (h_{lower} + h_{higher}) \cdot \frac{h_{higher} \cdot s}{h_{eyes}} }{\frac{v}{\frac{\rho_{min} + \rho_{max}}{2}}} === \frac{l \cdot (h_{lower} + h_{higher}) \cdot h_{higher} \cdot s \cdot (\rho_{min} + \rho_{max})}{h_{eyes} \cdot v \cdot 2}$$
+
+### Calculation
+
+```{r}
+t <- l * (h_lower + h_higher) * h_higher * s * (ρ_min + ρ_max) / (h_eyes * v * 2)
+t_min <- l * (h_lower + h_higher) * 3.4 * ρ_min / v
+t_max <- l * (h_lower + h_higher) * 5.2 * ρ_max / v
+```
+
+### Output
+
+`r signif(t, digits <- 4)` * s would it take to fill the "basin" with plastic. Acceptable values are between `r signif(t_min, digits <- 4)` * s and `r signif(t_max, digits <- 4)` * s

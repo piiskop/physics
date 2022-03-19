@@ -234,8 +234,42 @@ $$\frac{V_2}{v_1} === \frac{p_1}{p_2}$$
 
 töö adiabaatilises protsessis:
 
+$$A = \int_{V_1}^{V_2}p_1 \cdot V_1^γ \cdot \frac{d(V}{V^γ}$$
+
+Gaas paisub silindris.
+
+$$pV^γ === p_1V_1^γ === p_2V_2^γ === ...$$
+
+$$γ = \frac{i + 2}{i}$$
+
+$$d(A) = p \cdot d(V)$$
+
+$$A = \int_{(1)}^{(2)}p \cdot d(V)$$
+
+$$(1) \rightarrow T_1 \cdot V_1 \cdot p_1$$
+
+$$p = \frac{p_1 \cdot V_1^γ}{V^γ}$$
+
+$$A = \int_{(1}}^{(2)}\frac{p_1 \cdot V_1^γ}{V^γ}d(V) ===\\
+p_1 \cdot V_1^γ \cdot \int_{V_1}^{V_2}V^{-γ} \cdot d(V) === p_1 \cdot V_1^γ \cdot \frac{1}{-γ + 1} \cdot V^{-γ + 1}|_{V_1}^{V_2} === \frac{p_1 \cdot V_1^γ}{1 - γ} \cdot \frac{1}{V^{γ - 1}}|_{V_1}^{V_2} === \frac{p_1 \cdot V_1^γ}{1 - γ} \cdot [\frac{1}{V_2^{γ - 1}} - \frac{1}{V_1^{γ - 1}}] === \frac{p_1 \cdot V_1^γ}{1 - γ} \cdot [\frac{V_1^{γ - 1}}{V_1^{γ - 1} \cdot V_2^{γ - 1}} - \frac{1}{V_1^{γ - 1}}] === \frac{p_1 \cdot V_1^γ}{1 - γ} \cdot \frac{1}{V_1^{γ - 1}} \cdot [\frac{V_1^{γ - 1}}{V_2^{γ - 1]}} - 1] === \frac{p_1}{1 - γ} \cdot V_1^{γ - γ + 1} \cdot []$$
+
+$$A = \frac{p_1 \cdot V_1}{1 - γ} \cdot [(\frac{V_1}{V_2})^{γ - 1} - 1]$$
+
+$$γ = \frac{i + 2}{i}$$
+
+$$A = \frac{p_1 \cdot V_1}{γ - 1} \cdot [1 - (\frac{V_1}{V_2})^{γ - 1}]$$
+
+$$p \cdot V === z \cdot R \cdot T$$
+
+$$A = \frac{z \cdot R \cdot T_1}{γ - 1} \cdot [1 - (\frac{V_1}{V_2})^{γ - 1}]$$
+
 $$A = \frac{p_1 \cdot V_1}{\gamma - 1} \cdot (1 - (\frac{V_1}{V_2})^{\gamma - 1})$$
 
+Boltzmanni jaotus:
+
+$$p = \int_{0}^{h_1}ρ \cdot g \cdot d(h)$$
+
+$$p = p_0 \cdot e^{-\frac{m_0 \cdot g \cdot h}{k \cdot T}} === p_0 \cdot e^{-\frac{M \cdot g \cdot h}{R \cdot T}}$$
 
 # Ülesanded
 
@@ -897,11 +931,9 @@ $$R = 8.314 \cdot \frac{J}{K \cdot mol}$$
 
 $$M = .029 \cdot \frac{kg}{mol}$$
 
-
-
 ### Arvutada
 
-aeg t
+aeg *t*
 
 ### Valemid
 
@@ -987,19 +1019,37 @@ $$\bar{\epsilon}_{k} = \frac{5}{2} \cdot k \cdot T$$
 Lämmastikku temperatuuriga 300K rõhul 100 kPa on lastud sisse väike kogus
 lämmastikku temperatuuriga 500K. Hinnata, kui kaua läheb aega, et temperatuur
 gaasis tasakaalustuks arvestades, et lämmastiku molekulide efektiivdiameeter d on
-0,36 nm. Vaba tee pikkus gaasis on leitav valemiga 
-λ =
-1
-√
-2
-π
-d
-2
-n
-, kus n on gaasi
-kontsentratsioon
+0,36 nm. Vaba tee pikkus gaasis on leitav valemiga $\lambda = \frac{1}{\sqrt{2} \cdot \pi \cdot d^2 \cdot n}$, kus n on gaasi
+kontsentratsioon.
 
-###
+### Algandmed
+
+alglämmastiku temperatuur $T_0 = 300 \cdot K$
+
+### Valemid
+
+$$v = \sqrt{\frac{3 \cdot R \cdot T}{M}}$$
+
+$$p = n \cdot k \cdot T$$
+
+$$n = \frac{p}{k \cdot T}$$
+
+$$t = \frac{\lambda}{v}$$
+
+$$t = \frac{\frac{1}{\sqrt{2} \cdot \pi \cdot d^2 \cdot \frac{p}{k \cdot T}}}{\sqrt{\frac{3 \cdot R \cdot T}{M}}} === \frac{\sqrt{M}}{\sqrt{3 \cdot R \cdot T}} \cdot \frac{k \cdot T}{\sqrt{2} \cdot \pi \cdot d^2 \cdot p}$$
+
+### Arvutamine
+
+```{r}
+t_1 <- sqrt(.028) / (sqrt(3 * 8.31 * 300)) * (1.38e-23 * 300) / (sqrt(2) * pi * (3.6e-10)^2 * 1e6)
+t_1
+t_2 <- sqrt(.028) / sqrt(3 * 8.31 * 500) * (1.38e-23 * 500) / (sqrt(2) * pi * (3.6e-10)^2 * 1e6)
+t_2
+```
+
+### Lahend
+
+
 
 ## Süsinikdioksiidi ja hapniku molekulide ruutkeskmised kiirused
 
@@ -1252,6 +1302,58 @@ a <- q - change_u
 ### Lahend
 
 `r signif(change_u, digits <- 5)` * J soojust kulub 1 * kg lämmastiku soojendamiseks jääval rõhul -50°C'lt kuni 50°C'ni. `r signif(q, digits <- 5)` * J on gaasi siseenergia juurdekasv. `r signif(a, digits <- 5)` * J teeb gaas tööd.
+
+##
+
+### Ülesande püstitus
+
+Neljataktilises   diiselmootoris   surutakse   sisseimetud   õhk   12-kordselt   kokku.
+Oletades,   et   protsess   on   adiabaatiline,   leida   lõpprõhk,   lõpptemperatuur   ja
+kokkusurumisel tehtud töö, kui algrõhk on 0,1MPa, algtemperatuur on 10
+o
+C ja
+algruumala 2l.
+
+### Algandmed
+
+$$p_1 = .1 \cdot MPa === 10^5 \cdot Pa$$
+
+$$T_1 = 10°C === 283 \cdot K$$
+
+$$V_1 = 2 \cdot l === .002 \cdot m^3$$
+
+$$\frac{V_1}{V_2} = 12$$
+
+$$\gamma = 1.39$$
+
+### Arvutada
+
+$$p_2 = ?$$
+
+$$T_2 = ?$$
+
+$$A = ?$$
+
+### Valemid
+
+$$p_1 \cdot V_1^\gamma === p_2 \cdot V_2^\gamma$$
+
+$$p = \frac{i + 2}{i}$$
+
+$$p_2 = p_1 \cdot (\frac{V_1}{V_2})^\gamma$$
+
+$$\frac{p_1 \cdot V_1}{T_1} === \frac{p_2 \cdot V_2}{T_2}$$
+
+$$T_2 = ...$$
+
+$$A = \frac{p_1 \cdot V_1}{\gamma - 1} \cdot [1 - (\frac{V_1}{V_2})^{\gamma - 1}]$$
+
+### Arvutamine
+
+```{r}
+gamma = (5 + 2) / 5
+gamma
+```
 
 ## Iseseisvaks lahendamiseks
 
