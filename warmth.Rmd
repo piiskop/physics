@@ -15,6 +15,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Reeglid
 
+## Molaarmassid
+
+```{r}
+MOLAR_WEIGHT_H <- 1.008E-3
+MOLAR_WEIGHT_C <- 12.011E-3
+MOLAR_WEIGHT_N <- 14.007E-3
+MOLAR_WEIGHT_O <- 15.999E-3
+```
+
 ## Maa
 
 ```{r}
@@ -128,17 +137,23 @@ $$\Delta(U) = \frac{i}{2} \cdot z \cdot R \cdot \Delta(T)$$
 
 $$U = \frac{i}{2} \cdot z \cdot R \cdot T$$
 
-$$\Delta(Q) = 0$$
+Kui
 
-$$\Delta(U) = -A$$
+$$\Delta(Q) = 0,$$
+
+siis
+
+$$\Delta(U) = -A.$$
 
 $$A = -\Delta(U)$$
 
 Kui $\Delta(U) >0$ (temperatuur tõuseb), siis A < 0 ehk gaasi surutakse kokku ehk välisjõud teevad tööd ja see läheb ainult U muutmiseks.
 
-$$\Delta(Q) = 0$$
+Kui
 
-soojusülekanne puudub - adiabaatiline protsess
+$$\Delta(Q) = 0,$$
+
+siis soojusülekanne puudub - adiabaatiline protsess.
 
 $$p_1 \cdot V_1^\gamma === p_2 \cdot V_2^\gamma$$
 
@@ -198,13 +213,11 @@ Kui A < 0, siis gaasi poolt tehtud töö on negatiivne, kuid välisjõudude tö�
 
 Kui $\Delta(V)$ on väike ehk $\Delta(V) \rightarrow d(V)$, siis võib lugeda *p = const*.
 
-$$d(A) = p \cdot d(V)$$
-
 *V = const*:
 
 $$d(A) = p \cdot d(V)$$
 
-*A = 0*
+*A = 0*:
 
 $$Q = \Delta(U)$$
 
@@ -222,7 +235,11 @@ $$p \cdot V === z \cdot R \cdot T$$
 
 $$p = \frac{z \cdot R \cdot T}{V}$$
 
-$$A = \int_{(1)}^{(2)}\frac{z \cdot R \cdot T}{V} \cdot d(V) === z \cdot R \cdot T \int_{V_1}^{V_2}\frac{d(V)}{V} === z \cdot R \cdot T \cdot ln(V) |_{V_1}^{V_2} === z \cdot R \cdot T \cdot (ln(V_2) - ln(V_1)) === z \cdot R \cdot T \cdot ln(\frac{V_2}{V_1})$$
+$$A = \int_{(1)}^{(2)}\frac{z \cdot R \cdot T}{V} \cdot d(V) ===\\
+z \cdot R \cdot T \int_{V_1}^{V_2}\frac{d(V)}{V} ===\\
+z \cdot R \cdot T \cdot ln(V) |_{V_1}^{V_2} ===\\
+z \cdot R \cdot T \cdot (ln(V_2) - ln(V_1)) ===\\
+z \cdot R \cdot T \cdot ln(\frac{V_2}{V_1})$$
 
 $$A = z \cdot R \cdot T \cdot ln(\frac{V_2}{V_1})$$
 
@@ -230,11 +247,11 @@ $$A = z \cdot R \cdot T \cdot ln(\frac{p_1}{p_2})$$
 
 $$p_1 \cdot V_1 === p_2 \cdot V_2$$
 
-$$\frac{V_2}{v_1} === \frac{p_1}{p_2}$$
+$$\frac{V_2}{V_1} === \frac{p_1}{p_2}$$
 
 töö adiabaatilises protsessis:
 
-$$A = \int_{V_1}^{V_2}p_1 \cdot V_1^γ \cdot \frac{d(V}{V^γ}$$
+$$A = \int_{V_1}^{V_2}p_1 \cdot V_1^γ \cdot \frac{d(V)}{V^γ}$$
 
 Gaas paisub silindris.
 
@@ -250,8 +267,14 @@ $$(1) \rightarrow T_1 \cdot V_1 \cdot p_1$$
 
 $$p = \frac{p_1 \cdot V_1^γ}{V^γ}$$
 
-$$A = \int_{(1}}^{(2)}\frac{p_1 \cdot V_1^γ}{V^γ}d(V) ===\\
-p_1 \cdot V_1^γ \cdot \int_{V_1}^{V_2}V^{-γ} \cdot d(V) === p_1 \cdot V_1^γ \cdot \frac{1}{-γ + 1} \cdot V^{-γ + 1}|_{V_1}^{V_2} === \frac{p_1 \cdot V_1^γ}{1 - γ} \cdot \frac{1}{V^{γ - 1}}|_{V_1}^{V_2} === \frac{p_1 \cdot V_1^γ}{1 - γ} \cdot [\frac{1}{V_2^{γ - 1}} - \frac{1}{V_1^{γ - 1}}] === \frac{p_1 \cdot V_1^γ}{1 - γ} \cdot [\frac{V_1^{γ - 1}}{V_1^{γ - 1} \cdot V_2^{γ - 1}} - \frac{1}{V_1^{γ - 1}}] === \frac{p_1 \cdot V_1^γ}{1 - γ} \cdot \frac{1}{V_1^{γ - 1}} \cdot [\frac{V_1^{γ - 1}}{V_2^{γ - 1]}} - 1] === \frac{p_1}{1 - γ} \cdot V_1^{γ - γ + 1} \cdot []$$
+$$A = \int_{(1)}^{(2)}\frac{p_1 \cdot V_1^γ}{V^γ}d(V) ===\\
+p_1 \cdot V_1^γ \cdot \int_{V_1}^{V_2}V^{-γ} \cdot d(V) ===\\
+p_1 \cdot V_1^γ \cdot \frac{1}{-γ + 1} \cdot V^{-γ + 1}|_{V_1}^{V_2} ===\\
+\frac{p_1 \cdot V_1^γ}{1 - γ} \cdot \frac{1}{V^{γ - 1}}|_{V_1}^{V_2} ===\\
+\frac{p_1 \cdot V_1^γ}{1 - γ} \cdot [\frac{1}{V_2^{γ - 1}} - \frac{1}{V_1^{γ - 1}}] ===\\
+\frac{p_1 \cdot V_1^γ}{1 - γ} \cdot [\frac{V_1^{γ - 1}}{V_1^{γ - 1} \cdot V_2^{γ - 1}} - \frac{1}{V_1^{γ - 1}}] ===\\
+\frac{p_1 \cdot V_1^γ}{1 - γ} \cdot \frac{1}{V_1^{γ - 1}} \cdot [\frac{V_1^{γ - 1}}{V_2^{γ - 1}} - 1] ===\\
+\frac{p_1}{1 - γ} \cdot V_1^{γ - γ + 1} \cdot [\frac{V_1^{γ - 1}}{V_2^{γ - 1}} - 1]$$
 
 $$A = \frac{p_1 \cdot V_1}{1 - γ} \cdot [(\frac{V_1}{V_2})^{γ - 1} - 1]$$
 
@@ -262,8 +285,6 @@ $$A = \frac{p_1 \cdot V_1}{γ - 1} \cdot [1 - (\frac{V_1}{V_2})^{γ - 1}]$$
 $$p \cdot V === z \cdot R \cdot T$$
 
 $$A = \frac{z \cdot R \cdot T_1}{γ - 1} \cdot [1 - (\frac{V_1}{V_2})^{γ - 1}]$$
-
-$$A = \frac{p_1 \cdot V_1}{\gamma - 1} \cdot (1 - (\frac{V_1}{V_2})^{\gamma - 1})$$
 
 Boltzmanni jaotus:
 
@@ -1354,6 +1375,616 @@ $$A = \frac{p_1 \cdot V_1}{\gamma - 1} \cdot [1 - (\frac{V_1}{V_2})^{\gamma - 1}
 gamma = (5 + 2) / 5
 gamma
 ```
+
+##
+
+### Ülesande püstitus
+
+Leida gaasisegu erisoojused jääval rõhul ja jääval ruumalal, kui gaas koosneb
+2 g CO2-st ning 3 g N2-st.
+
+### Sisendid
+
+$CO_2$ mass $m\_CO_2 = 2 \cdot g === 2 \cdot 10^{-3} \cdot kg$
+
+$N_2$ mass $m\_N_2 = 3 \cdot g === 3 \cdot 10^{-3} \cdot kg$
+
+$CO_2$ vabadusastmete arv $i\_CO_2 = 6$
+
+$N_2$ vabadusastmete arv $i\_N_2 = 5$
+
+### Mida arvutada
+
+gaasisegu erisoojus jääval rõhul $c_p$
+
+gaasisegu erisoojus jääval ruumalal $c_V$
+
+### Lahendus
+
+```{r}
+M_CO2 <- MOLAR_WEIGHT_C + 2 * MOLAR_WEIGHT_O
+M_CO2
+M_N2 <- MOLAR_WEIGHT_N * 2
+M_N2
+```
+
+
+$c$ näitab, kui palju energiat on vaja anda 1 * kg ainele, et tõsta selle temperatuuri 1 * K võrra.
+
+$$c_V = \frac{i}{2} \cdot R$$
+
+$$c_V = \frac{i}{2 \cdot \mu} \cdot R$$
+
+$$\Delta(Q) = c \cdot m \cdot \Delta(T)$$
+
+$$c = \frac{\Delta(Q)}{m \cdot \Delta(T)}$$
+
+$\lambda \cdot \Delta(Q_1)$ on $CO_2$ jaoks
+
+```{r}
+c_v_1 <- 6 / (2 * .044) * 8.31
+c_v_1
+c_v_2 <- 5 / (2 * .028) * 8.31
+c_v_2
+```
+
+$$\Delta(Q_1) = m_1 \cdot c_1 \cdot \Delta(T)$$
+
+Vastavalt definitsioonile võtame laest, et $\Delta(T) = 1 \cdot K$.
+
+```{r}
+change_q1 <- 2e-3 * c_v_1 * 1
+change_q1
+change_q2 <- 3e-3 * c_v_2 * 1
+change_q2
+```
+
+$$c = \frac{\Delta(Q_1) + \Delta(Q_2)}{(m_1 + m_2) \cdot \Delta(T)}$$
+
+```{r}
+c <- (change_q1 + change_q2) / ((2e-3 + 3e-3) * 1)
+c
+```
+
+See oli siis konstantse ruumala jaoks. Nüüd konstantse rõhu jaoks:
+
+$$c_p = \frac{i + 2}{2 \cdot \mu} \cdot R$$
+
+## Vesi
+
+### Ülesande püstitus
+
+1,00 kg vett on temperatuuril 100oC ning muudetakse veeauruks jääval rõhul
+100 kPa. Vee ruumala kasvab väärtuselt 1,00 l vedelas olekus väärtuseni 1,671 m3
+aurufaasis. Kui palju tehakse selle protsessi käigus tööd? Kui palju kantakse üle
+energiat ning milline on süsteemi siseenergia muutus, kui vee aurustumissoojus
+on 2,256 MJ/kg?
+
+### Lahendus
+
+#### Sisendid
+
+vee mass $m = 1 \cdot kg$
+
+vee temperatuur $T = 100°C === 373.15 \cdot K$
+
+rõhk $p = 1 \cdot 10^5 \cdot Pa$
+
+vee algruumala $V_0 = 1 \cdot l === 1 \cdot 10^{-3} \cdot m^3$
+
+vee lõppruumala $V_1 = 1.671 \cdot m^3$
+
+vee aurustumissoojus $\lambda = 2.256 \cdot \frac{MJ}{kg} === 2.256 \cdot 10^6 \cdot \frac{J}{kg}$
+
+#### Mida arvutada?
+
+töö $A = ?$
+
+ülekantav energiakogus $\Delta(Q) = ?$, sest üle kantakse energiat soojusena
+
+siseenergia muutus $\Delta(U) = ?$
+
+#### Lahendus
+
+$$\Delta(Q) = \Delta(U) + A$$
+
+1.  Aurustumine:
+    
+    $$\Delta(Q_1) = \lambda \cdot m$$
+    
+    Kui vedelik ei paisu, siis:
+    
+    $$\Delta(Q_1) = \Delta(U_1)$$
+
+2.  Gaasi paisumine:
+    
+    $$\Delta(Q_2) = c \cdot m \cdot \Delta(T)$$
+
+    $$\Delta(Q_2) + A$$
+    
+    $$\Delta(U_2) = 0$$
+    
+    Gaasi korral, kuna siseenergia muutub faasi (pole olek, sest olek on nt siis muu, kui muutub temperatuur vms) ehk oleku ülemineku korral, või ka ainult tahkise korral või ainult vedeliku korral:
+    
+    $$\Delta(U) ~ \Delta(T)$$
+    
+    Gaasides pole vaja potentsiaalset energiat arvestada, küll aga voolistes, sest tõmbejõud.
+    
+$$\Delta(Q) = \Delta(U_1) + A_2$$
+
+$$A_2 = p \cdot \Delta(V)$$
+
+$$\Delta(U) = \Delta(Q_1)$$
+
+$$\Delta(U) = \lambda \cdot m$$
+
+$$\Delta(U) = 2.256 \cdot 10^6 \cdot J$$
+
+```{r}
+A_2 <- 1e5 * 1.67
+A_2
+change_u <- 1.67e3 + 2.256e6
+change_u
+```
+
+Aurustumistemperatuuril aur kõrvetab rohkem kui vesi, sest auru siseenergia on suurem.
+
+## Gaasi paisumine graafikute järgi
+
+### Ülesande püstitus
+
+Gaas paisub, minnes olekust A olekusse B nii nagu näidatud joonisel 1. Kui
+suur on gaasi paisumise töö? Kui suur on gaasi paisumise töö joonise 2 järgi?
+
+### Lahendus
+
+$$V_1 = .2 \cdot l = 2 \cdot 10^{-4} \cdot m^3$$
+
+$$V_2 = .65 = 6.5 \cdot 10^{-4} \cdot m^3$$
+
+$$p_1 = p_2 = 120 \cdot 10^3 \cdot Pa$$
+
+$$A_1 = ?$$
+
+$$A = \Delta(V) \cdot p$$
+
+$$A = (6.5 - 2) \cdot 10^{-4} \cdot 120 \cdot 10^3 === 54 \cdot J$$
+
+Graafiku järgi pindala:
+
+$$120 \cdot 6.5^{-4}$$
+Teise graafiku järgi tuleb arvutada ühe ruudu pindala ja siis korrutada ruutude arvuga.
+
+$$A_{elementaarne} = S_{elementaarne} = 5 \cdot 10^{-5} \cdot m^3 \cdot 5 \cdot 10^3 \cdot Pa === .25 \cdot J$$
+
+$$A = A_1 + A_2$$
+
+$$A_1 = 1.15 \cdot 10^5 \cdot Pa \cdot (.7 - .25) \cdot 10^{-3} \cdot m^3$$
+
+```{r}
+a_1 <- 1.15e5 * (.7 - .25) * 10^{-3}
+a_1
+```
+
+```{r}
+a_2 <- 17 * .25
+a_2
+a <- a_1 + a_2
+a
+```
+
+## Kalorimeeter
+
+### Ülesande püstitus
+
+ Kalorimeetrisse   soojusmahtuvusega   63   J/K   valati   250   g   õli   temperatuuril
+12oC.   Kui   õlisse   lasti   vasksilinder   massiga   500g   temperatuuril   100oC,   kujunes
+lõpptemperatuuriks 33oC. Kui suur on õli erisoojus antud andmete põhjal?  Vase
+erisoojus on 390 J/(kg·K) ) (V: 2240 J/(kg·K) ).
+
+### Lahendus
+
+#### Sisendid
+
+kalorimeetri soojusmahtuvus $C = 63 \cdot \frac{J}{K}$
+
+õli mass $m_{oil} = 250 \cdot g === 2.5 \cdot 10^{-1} \cdot kg$
+
+õli temperatuur $T_{oil} = 12°C === 285.15 \cdot K$
+
+vasksilindri mass $m_{CU} = 500 \cdot g === 5 \cdot 10^{-1} \cdot kg$
+
+vasksilindri temperatuur $T_{CU} = 100°C === 373.15 \cdot K$
+
+segu temperatuur $T = 33°C === 306.15 \cdot K$
+
+vase erisoojus $c_{CU} = 390 \cdot \frac{J}{kg \cdot K}$
+
+```{r}
+C <- 63
+m_oil <- 2.5e-1
+T_oil <- 285.15
+m_CU <- 5e-1
+T_CU <- 373.15
+T <- 306.15
+c_CU <- 390
+```
+
+
+#### Mida arvutada
+
+õli erisoojus $c_{oil} = ?$
+
+#### Reeglid
+
+$$\Delta(Q_1) + \Delta(Q_2) + ... + \Delta(Q_n) === 0$$
+
+Annab:
+
+$$\Delta(Q_3) = m_{CU} \cdot c_{CU} \cdot \Delta(T)$$
+
+$$\Delta(T) = T_{CU} - T_{oil}$$
+
+Võtab:
+
+$$|\Delta(Q_3)| = \Delta(Q_1) + \Delta(Q_2)$$
+
+kalorimeetris:
+
+$$\Delta(Q_1) = C \cdot (T - T_{oil})$$
+
+õli:
+
+$$\Delta(Q_2) = m_{oil} \cdot c_{oil} \cdot (T - T_{oil})$$
+
+$$\Delta(Q_3) = m_{CU} \cdot c_{CU} \cdot (T - T_{oil})$$
+
+$$C \cdot (T - T_{oil}) + m_{oil} \cdot c_{oil} \cdot (T - T_{oil}) + m_{CU} \cdot c_{CU} \cdot (T - T_{CU}) === 0$$
+
+$$m_{oil} \cdot c_{oil} \cdot (T - T_{oil}) === -m_{CU} \cdot c_{CU} \¢dot (T - T_{CU}) - C \cdot (T - T_{oil})$$
+
+$$c_{oil} = \frac{-m_{CU} \cdot c_{CU} \cdot (T - T_{CU}) - C \cdot (T - T_{oil})}{m_{oil} \cdot (T - T_{oil})}$$
+
+### Lahendus
+
+```{r}
+c_oil <- (-m_CU * c_CU * (T - T_CU) - C * (T - T_oil)) / (m_oil * (T - T_oil))
+```
+
+### Lahend
+
+$`r c_oil` \cdot \frac{J}{kg \cdot K}$ on õli erisoojus antud andmete põhjal.
+
+## Anumasse juhitav veeaur
+
+### Ülesande püstitus
+
+Anumasse, milles on 1,5 kg vett temperatuuril 15oC, juhitakse 200g veeauru
+temperatuuril 100oC. Kui suur on segu lõpptemperatuur?
+
+### Sisendid
+
+vee mass $m_{vesi} = 1.5 \cdot kg$
+
+vee temperatuur $T_{vesi} = 15°C === 288.15 \cdot K$
+
+auru mass $m_{aur} = 200 \cdot g === 2 \cdot 10^{-1} \cdot kg$
+
+veeauru temperatuur $T_{aur} = 100°C === 373.15 \cdot K$
+
+vee aurustumissoojus $\lambda = 2.26 \cdot 10^6 \cdot \frac{J}{kg}$
+
+```{r}
+m_vesi <- 1.5
+T_vesi <- 288.15
+m_aur <- 2e-1
+T_aur <- 373.15
+lambda <- 2.26
+```
+
+### Arvutada mida?
+
+segu lõpptemperatuur $T = ?$
+
+### Reeglid
+
+$$\Delta(Q_1) + \Delta(Q_2) + \Delta(Q_3) === 0$$
+
+$$\Delta(Q_1) = -\lambda \cdot m_{aur}$$
+
+$$\Delta(Q_2) = m_{aur} \cdot c \cdot (T - T_{aur})$$
+
+$$\Delta(Q_3) = m_{vesi} \cdot c \cdot (T - T_{vesi})$$
+
+$$m_{aur} \cdot c \cdot T - m_{aur} \cdot c \cdot T_{aur} + m_{vesi} \cdot c \cdot T - m_{vesi} \cdot c \cdot T_{vesi} - \lambda \cdot m_{aur} === 0$$
+
+$$T \cdot (m_{aur} \cdot c + m_{vesi} \cdot c) === \lambda \cdot m_{aur} + m_{aur} \cdot c \cdot T_{aur} + m_{vesi} \cdot c \cdot T_{vesi}$$
+
+$$$$
+
+### Lahendus
+
+1) Veeaur kondenseerub veeks.
+
+2) Vesi jahtub lõpptemperatuurini.
+
+3) Algne vesi soojeneb.
+
+Eeldan, et on normaalrõhk, muidu on mingi -baariline protsess.
+
+```{r}
+T <- (lambda * m_aur + m_aur * c * T_aur + m_vesi * c * T_vesi) / (m_aur * c + m_vesi * c)
+```
+
+### Lahend
+
+`r T` * K on segu lõpptemperatuur.88.5C
+
+##
+
+### Ülesande püstitus
+
+Mitu   protsenti   vesiniku   molekulidest   omab   temperatuuril   300K   kiirust
+vahemikus   200-205   m/s?   Mitu   protsenti   hapniku   molekulidest   on   samal
+temperatuuril samas kiirustevahemikus? (V: umbes 0,011% vesiniku ning 0,57%
+hapniku korral). 
+
+### Sisendid
+
+temperatuur $T = 300 \cdot K$
+
+algkiirus $v_0 = 200 \frac{m}{s}$
+
+lõppkiirus $v = 205 \frac{m}{s}$
+
+```{r}
+T = 300
+v_0 <- 200
+v = 205
+```
+
+
+### Mida arvutada?
+
+vesiniku molekulide osa protsentides $\frac{\Delta(N_v)}{N} = ?$
+
+hapniku molekulide osa protsentides $r_{O_2} = ?$
+
+### Reeglid
+
+$$f(v) = \frac{1}{N} \cdot \rho(v) === \frac{1}{N} \cdot \frac{\Delta(N_v)}{\Delta(v)}$$
+
+$$f(v) = 4 \cdot \pi \cdot \sqrt{(\frac{M}{2 \cdot \pi \cdot R \cdot T})^3} \cdot e^{\frac{-M \cdot v^2}{2 \cdot R \cdot T}} \cdot v^2$$
+
+$$\frac{\Delta(N_v)}{N} === f(v) \cdot \Delta(v)$$
+
+$$v_{probable} = \sqrt{\frac{2 \cdot R \cdot T}{M}}$$
+
+### Lahendus
+
+```{r}
+ratio_hydrogen <- 4 * pi * sqrt((MOLAR_WEIGHT_H * 2 / (2 * pi * 8.314 * T))^3) * exp(1)^{-MOLAR_WEIGHT_H * 2 * ((v + v_0) / 2) ^2 / (2 * 8.314 * 300)} * ((v + v_0) / 2) ^2
+ratio_hydrogen
+v_probable = sqrt(2 * 8.314 * 300 / (MOLAR_WEIGHT_H * 2))
+v_probable
+```
+
+
+### Lahend
+
+1.16*10^-4
+
+##
+
+### Ülesande püstitus
+
+Oletame, et maapinnal on õhus 78% lämmastikku N2
+ ning umbes 20% hapnikkuO2
+ – kas ja kuidas muutub lämmastiku ja hapniku protsentuaalne sisaldus õhus
+1000 m kõrgusel, kui eeldada, et õhu temperatuur on kõikjal
+
+a) 0oC?
+
+b) 20°C?
+
+Kuidas muutub õhu rõhk, kui maapinnal on see 101.3 * kPa?
+
+### Sisend
+
+kõrgus $h = 1000 \cdot m$
+
+lämmastiku sisaldus $\eta_{O_2} = 78%$
+
+hapniku sisaldus $\eta_{N_2} = 20%$
+
+a) temperatuur $T = 0°C === 237.15 \cdot K$
+
+b) temperatuur $T = 20°C === 293.15 \cdot K$
+
+õhu rõhk $p = 101.3 \cdot kPa === 1.013 \cdot 10^5 \cdot Pa$
+
+### Mida arvutada?
+
+lämmastiku sisaldus kõrgemal $\eta_{N_2}^{'}$
+
+hapniku sisaldus kõrgemal $\eta_{O_2}^{'}$
+
+õhu rõhk kõrgemal $p^{'}$
+
+### Reeglid
+
+$$p = p_0 \cdot e^{-\frac{M \cdot g \cdot h}{R \cdot T}}$$
+
+$$n = n_0 \cdot e^{-\frac{M \cdot g \cdot h}{R \cdot T}}$$
+
+$$p_0 = p_{0_1} + p_{0_2} + p_{0_h}$$
+
+$$p = n \cdot k \cdot T$$
+
+lämmastiku osarõhk (7.5*10^4Pa):
+
+$$p_{1_0} = .78 \cdot p_0$$
+
+hapniku osarõhk maapinnal (2*10^4Pa):
+
+$$p_{2_0} = .2 \cdot p_0$$
+
+lämmastiku osarõhk kõrgemal (6.9*10^4Pa):
+
+$$p_{1_1} = p_{1_0} \cdot e^{-\frac{.028 \cdot 9.8 \cdot 1000}{8.31 \cdot 273}}$$
+
+hapniku osarõhk kõrgema (1.7*10^4Pa)l:
+
+$$p_{2_1}$$
+
+$$\frac{n_{1_0}}{n_{2_0}} === \frac{7.9}{2}$$
+
+$$\frac{n_{1_1}}{n_{2_1}} === \frac{p_{1_1}}{n_{2_1}} \frac{69}{17}$$
+
+### Lahendus
+
+Eeldame, et õhu protsentuaalne koostis väga ei muutu:
+
+$$M_{air} = .029 \cdot \frac{kg}{mol}$$
+
+```{r}
+p = 101.3 * 10^3 * exp(1)^(-.029 * 9.81 * 1000 / (8.31 * 273))
+```
+
+
+### Lahend
+
+p = 8.9*10^4 Pa
+
+## Puidu põletamine
+
+### Ülesande püstitus
+
+Kui palju puid peab põletama ahjus, mille kasutegur on 40%, et saada 200g
+lumest   temperatuuril   -10oC  vesi   temperatuuril   20oC.   Puidu   kütteväärtus   on   10MJ/kg,   jää   erisoojus   on   2100   J/(kg*K),   vee   erisoojus   on   4190   J/(kg*K),   jääsulamissoojus on 330 kJ/kg.
+
+### Sisendid
+
+ahju kasutegur $\eta = 40%$
+
+lume mass $m_{lumi} = 200 \cdot g === 2 \cdot 10^{-1} \cdot kg$
+
+lume temperatuur $-10°C === 263.15 \cdot K$
+
+vee temperatuur $T = 20°C === 293.15 \cdot K$
+
+puidu kütteväärtus $k = 10 \cdot \frac{MJ}{kg} === 1 \cdot 10^7 \cdot \frac{J}{kg}$
+
+jää erisoojus $c_{ice} = 2100 \frac{J}{kg \cdot K}$
+
+vee erisoojus $c_{vesi} = 4190 \cdot \frac{J}{kg \cdot K}$
+
+jää sulamissoojus $L = 330 \cdot \frac{kJ}{kg} === 3.3 \cdot 10^5 \cdot \frac{J}{kg}$
+
+jää sulamistemperatuur $T_{sulamine} = 273.15 \cdot K$
+
+### Mida arvutada?
+
+puude mass $m_{puit} = ?$
+
+### Reeglid
+
+1) $\Delta(Q_1) = -k \cdot m_2 \cdot \eta$
+
+2) $\Delta(Q_2) = c_{ice} \cdot m_{ice} \cdot (T_{sulamine} - T_{ice})$
+
+3) $\Delta(Q_3) = m_{lumi} \cdot L$
+
+4) $\Delta(Q_4) = m_{lumi} \cdot c_{ice} \cdot (T_{vesi} - T_{sulamine})$
+
+$$\Delta(Q_1) + \Delta(Q_2) + \Delta(Q_3) + \Delta(Q_4) === 0$$
+
+$$m_{puit} = \frac{m_{lumi} \cdot L + m_{lumi} \cdot c_{vesi} \cdot (T_{vesi} -)}{}$$
+
+### Lahendus
+
+1) Puidu põlemine.
+
+2) Jää soojenemine.
+
+3) Jää sulamine.
+
+4) Vee soojenemine.
+
+### Lahend
+
+
+## Jää sulatamine
+
+### Ülesande püstitus
+
+Kui palju 80oC-lise temperatuuriga vett on vaja, et sulatada 0,5 kg jääd, mille
+temperatuur on -10oC kalorimeetris, mille soojusmahtuvus on 90 J/K ning mille
+algtemperatuur on samuti -10oC? Vee erisoojus on 4190 J/(kg*K), jää erisoojus on
+2100 J/(kg*K), jää sulamissoojus on 330 kJ/kg.
+
+### Sisendid
+
+vee temperatuur $T_{vesi} = 80°C === 353.15 \cdot K$
+
+jää mass $m_{jää} = .5 \cdot kg$
+
+jää temperatuur $-10°C === 263.15 \cdot K$
+
+kalorimeetri soojusmahtuvus $c_{calorimeter} = 4190 \cdot \frac{J}{kg \cdot K}$
+
+jää erisoojus $c_{ice} = 2100 \cdot \frac{J}{kg \cdot K}$
+
+jää sulamissoojus $L = 330 \cdot \frac{kJ}{kg} === 3.3 \cdot 10^5 \frac{J}{kg}$
+
+### Mida arvutada?
+
+vee mass $m_{vesi} = ?$
+
+### Reeglid
+
+1) $\Delta(Q_1) = m_1 \cdot c_1 \cdot (T - T_1)$
+
+2) $\Delta(Q_2) = m_2 \cdot c_2 \cdot (T - T_2)$
+
+3) $\Delta(Q_3) = L \cdot m_2$
+
+4) $\Delta(Q_4) = C \cdot (T - T_2)$
+
+$$\Delta(Q_1) + \Delta(Q_2) + \Delta(Q_3) + \Delta(Q_4) === 0$$
+
+$$m_1 \cdot c_1 \cdot (T - T_1) === -m_2 \cdot c_2 \cdot (T - T_2) - L \cdot m_2 - C \cdot (T - T_2)$$
+
+### Lahendus
+
+1) Kuum vesi jahtub.
+
+2) Jää soojeneb.
+
+3) Jää sulab.
+
+4) Kalorimeeter soojeneb.
+
+### Lahend
+
+.52
+
+## Märgamine
+
+### Ülesande püstitus
+
+Kui   kõrgele   tõuseb   vesi   kahe   vertikaalselt   asetatud   paralleelse   klaasplaadi
+vahel, kui nendevaheline kaugus on 0,5 mm. Eeldada, et märgamine on täielik. Vee
+pindpinevustegur   on   0,072   N/m.   Vee   tihedus   on   1000   kg/m3.   Vaba   langemise
+kiirendus g=9,81 m/s2.
+
+### Sisendid
+
+kaugus $s = .5 \cdot mm === 5 \cdot 10^{-4} \cdot m$
+
+vee pindpinevustegur $.072 \cdot \frac{}{}$
+
+### Lahendus
 
 ## Iseseisvaks lahendamiseks
 

@@ -5,6 +5,7 @@ output:
     toc: yes
     toc_float: yes
     toc_depth: 5
+bibliography: references.bib
 ---
 
 # Reeglid
@@ -59,7 +60,11 @@ convertFromMiToM <- function(mi) {
 convertFromFtToM <- function(ft) {
   convertFromMiToM(ft / 5280)
 }
+```
 
+$$SECONDS\_IN\_YEAR = (\frac{241}{1000} \cdot 366 + \frac{1000 - 241}{1000} \cdot 365) \cdot 24 \cdot 60 \cdot 60$$
+
+```{r}
 SECONDS_IN_YEAR <- (365 * (9 * 76 + 75) + 366 * (9 * 24 + 25)) / 1000 * 24 * 60 * 60
 SECONDS_IN_YEAR
 ```
@@ -90,10 +95,13 @@ $$kiirendus - algkiirendus === jõnks \cdot t$$
 
 ```{=tex}
 \begin{equation}
-\color{green}{\bf{kiirendus = algkiirendus + jõnks \cdot t}}
+\color{green}{\bf{a = a_0 + j \cdot t}},
 (\#eq:zeroeth-equation-of-motion-for-constant-jerk)
 \end{equation}
 ```
+
+kus *a* on kiirendus, *a_0_* on algkiirendus, *j* on jõnks, *t* on lõpphetk.
+
 Tuletan kiiruse valemi kiirenduse ja jõnksutamise kaudu:
 
 $$kiirendus = \frac{d(kiirus)}{d(t)}$$
@@ -108,16 +116,23 @@ Asendan valemisse \@ref(eq:acceleration) kiirenduse valemist \@ref(eq:zeroeth-eq
 
 $$d(kiirus) === (algkiirendus + jõnks \cdot t) \cdot d(t)$$
 
-$$\int_{algkiirus}^{kiirus}d(kiirus) === \int_{0}^{t}(algkiirendus + jõnks \cdot t) \cdot d(t)$$
+$$\int_{v_0}^{v}d(v) === \int_{0}^{t}(a_0 + j \cdot t) \cdot d(t),$$
 
-$$kiirus - algkiirus === algkiirendus \cdot t + \frac{jõnks \cdot t^2}{2}$$
+kus *v_0_* on algkiirus, *v* on lõppkiirus, *a_0_* on algkiirendus, *j* on jõnks, *t* on lõpphetk.
+
+$$v - v_0 === a_0 \cdot t + \frac{j \cdot t^2}{2},$$
+
+kus *v* on kiirus, *v_0_* on algkiirus, *t* on lõpphetk, *j* on jõnks.
 
 ```{=tex}
 \begin{equation}
-\color{green}{\bf{kiirus = algkiirus + algkiirendus \cdot t + \frac{jõnks \cdot t^2}{2}}}
+\color{green}{\bf{v = v_0 + a_0 \cdot t + \frac{j \cdot t^2}{2}}},
 (\#eq:first-equation-of-motion-for-constant-jerk)
 \end{equation}
 ```
+
+kus *v* on lõppkiirus, *v_0_* on algkiirus, *a_0_* on algkiirendus, *t* on lõpphetk, *j* on jõnks.
+
 Keskmine kiirus on vahemaa ja selle läbimiseks kulunud ajavahemiku suhe. Milline on hetkekiirus? Selleks tuleb jagada lõputult lühike vahemaa lõputult lühikese selle vahemaa läbimiseks kulunud ajavahemikuga:
 
 ```{=tex}
@@ -130,25 +145,35 @@ Valemist \@ref(eq:momentvelocity) avaldan vahemaa:
 
 ```{=tex}
 \begin{equation}
-d(\overrightarrow{vahemaa}) = \overrightarrow{hetkekiirus} \cdot d(t)
+d(\overrightarrow{s}) = \overrightarrow{v} \cdot d(t),
 (\#eq:smallest-distance)
 \end{equation}
 ```
+
+kus *s* on vahemaa, *v* on kiirus, *t* on lõpphetk.
+
 Asendan valemisse \@ref(eq:smallest-distance) hetkekiiruse valemist \@ref(eq:first-equation-of-motion-for-constant-jerk) ja jätkan tuletamist:
 
-$$d(vahemaa) === (algkiirus + algkiirendus \cdot t + \frac{jõnks \cdot t^2}{2}) \cdot d(t)$$
+$$d(s) === (v_0 + a_0 \cdot t + \frac{j \cdot t^2}{2}) \cdot d(t),$$
+
+kus *s* on vahemaa, *v_0_* on algkiirus, *t* on lõpphetk, *j* on jõnks, *a_0_* on algkiirendus.
 
 $$\int_{s_0}^{vahemaa}d(vahemaa) ===\\
 \int_{0}^{t}(algkiirus + algkiirendus \cdot t + \frac{j \cdot t^2}{2}) \cdot d(t)$$
 
-$$vahemaa - s_0 === algkiirus \cdot t + \frac{kiirendus \cdot t^2}{2} + \frac{j \cdot t^3}{6}$$
+$$s - s_0 === v_0 \cdot t + \frac{a \cdot t^2}{2} + \frac{j \cdot t^3}{6},$$
+
+kus *s* on vahemaa, *s_0_* on lähe, *v_0_* on algkiirus, *t* on lõpphetk, *a* on kiirendus, *j* on jõnks.
 
 ```{=tex}
 \begin{equation}
-\color{green}{\bf{vahemaa === s_0 + algkiirus \cdot t + \frac{kiirendus \cdot t^2}{2} + \frac{j \cdot t^3}{6}}}
+\color{green}{\bf{s === s_0 + v_0 \cdot t + \frac{a \cdot t^2}{2} + \frac{j \cdot t^3}{6}}},
 (\#eq:second-equation-of-motion-for-constant-jerk)
 \end{equation}
 ```
+
+kus *s* on vahemaa, *s_0_* on lähe, *v_0_* on algkiirus, *a* on kiirendus, *t* on lõpphetk.
+
 Kogu vahemaa on integreeritud ülilühikestest vahemaa juppidest:
 
 ```{=tex}
@@ -161,104 +186,141 @@ Asendan valemist \@ref(eq:smallest-distance) ülilühikese ajavahemiku valemisse
 
 ```{=tex}
 \begin{equation}
-\overrightarrow{vahemaa} = \int_{alghetk}^{lõpphetk}{\overrightarrow{hetkekiirus} \cdot d(ajavahemik)}
+\overrightarrow{s} = \int_{t_0}^{t}{\overrightarrow{v} \cdot d(t)},
 (\#eq:whole-distance-integrated)
 \end{equation}
 ```
+
+kus *s* on vahemaa, *t_0_* on alghetk, *t* on lõpphetk, *v* on hetkekiirus.
+
 Kui hetkekiirus on $\color{red}{\textbf{konstantne}}$, siis
 
 ```{=tex}
 \begin{equation}
-\overrightarrow{vahemaa} = \overrightarrow{hetkekiirus} \cdot \int_{alghetk}^{lõpphetk}{d(ajavahemik)} === \overrightarrow{hetkekiirus} \cdot ajavahemik + \overrightarrow{\underbrace{lähe}_{konstant}}
+\overrightarrow{s} = \overrightarrow{v} \cdot \int_{t_0}^{t}{d(t)} === \overrightarrow{v} \cdot t + \overrightarrow{\underbrace{s_0}_{konstant}},
 (\#eq:whole-distance-with-constant-momentvelocity)
 \end{equation}
 ```
+
+kus *s* on vahemaa, *v* on hetkekiirus, *t_0_* on alghetk, *t* on lõpphetk, *s_0_* on lähe.
+
 ![(\#fig:aeg-kiirus) Kiiruse muutumine ajas, kui kiirendus on $2 \cdot \frac{m}{s^2}$](aeg-kiirus.svg)
 
 Kui ülilühikese vahemaa ja selle läbimiseks kulunud ülilühikese ajavahemiku suhe on kiirus, mis näitab, kui kiiresti asukoht muutub ajas, siis kiiruse muutumist ajas näitab kiirendus:
 
 ```{=tex}
 \begin{equation}
-\overrightarrow{kiirendus} = \lim_{\Delta {ajavahemik} \to 0} \frac{\Delta {\overrightarrow{kiirus}}}{\Delta {ajavahemik}} === \frac{d(\overrightarrow{kiirus})}{d(ajavahemik)}
+\overrightarrow{a} = \lim_{\Delta {t} \to 0} \frac{\Delta {\overrightarrow{v}}}{\Delta {t}} === \frac{d(\overrightarrow{v})}{d(t)},
 (\#eq:acceleration-by-velocity)
 \end{equation}
 ```
+
+kus *a* on kiirendus, *t* on ajavahemik, *v* on kiirus.
+
 Asendan valemist \@ref(eq:momentvelocity) valemisse \@ref(eq:acceleration-by-velocity) kiiruse:
 
 ```{=tex}
 \begin{equation}
-\overrightarrow{kiirendus} = \frac{d(\frac{d(\overrightarrow{vahemaa})}{d(ajavahemik)})}{d(ajavahemik)}
+\overrightarrow{a} = \frac{d(\frac{d(\overrightarrow{s})}{d(t)})}{d(t)},
 (\#eq:acceleration-by-distance-and-time)
 \end{equation}
 ```
+
+kus *s* on vahemaa, *a* on kiirendus ja *t* on ajavahemik.
+
 Avaldan valemist \@ref(eq:acceleration-by-velocity) üliväikese kiiruse:
 
 ```{=tex}
 \begin{equation}
-d(\overrightarrow{kiirus}) = \overrightarrow{kiirendus} \cdot {d(ajavahemik)}
+d(\overrightarrow{v}) = \overrightarrow{a} \cdot {d(t)},
 (\#eq:momentvelocity-by-acceleration-and-time)
 \end{equation}
 ```
+
+kus *v* on kiirus, *a* on kiirendus ja *t* on ajavahemik.
+
 Kui kiirendus on $\color{red}{\textbf{konstantne}}$, siis
 
 ```{=tex}
 \begin{equation}
-{kiirus} = \int{\overrightarrow{kiirendus} \cdot {d(ajavahemik)}} === \overrightarrow{kiirendus} \cdot \int{d(ajavahemik)} ===\\
-\overrightarrow{kiirendus} \cdot ajavahemik + \underbrace{lähte\_kiirus}_{konstant}
+{v} = \int{\overrightarrow{a} \cdot {d(t)}} === \overrightarrow{a} \cdot \int{d(t)} ===\\
+\overrightarrow{a} \cdot t + \underbrace{v_0}_{konstant},
 (\#eq:velocity-by-integration)
 \end{equation}
 ```
+
+kus *v* on lõppkiirus, *a* on kiirendus, *t* on ajavahemik, *v_0_* on algkiirus.
+
 Keskmise kiirenduse saame arvutada nii:
 
 ```{=tex}
 \begin{equation}
-{keskmine\_kiirendus} = \frac{\overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}}{ajavahemik}
+{\overline{a}} = \frac{\overrightarrow{v} - \overrightarrow{{v}_{0}}}{t},
 (\#eq:keskmine-kiirendus)
 \end{equation}
 ```
+
+kus *a* on kiirendus, *v* on lõppkiirus, *v_0_* on algkiirus ja *t* on ajavahemik.
+
 Kui kiirendus on $\color{red}{\textbf{konstantne}}$, siis asendades valemisse \@ref(eq:whole-distance-integrated) kiiruse valemist \@ref(eq:keskmine-kiirendus):
 
 ```{=tex}
 \begin{equation}
-\overrightarrow{vahemaa} = \int{\overrightarrow{kiirendus_{keskmine}} \cdot {ajavahemik} + \overrightarrow{alg\_kiirus} \cdot d(ajavahemik)} ===\\
-\int{\overrightarrow{kiirendus_{keskmine}} \cdot {ajavahemik} \cdot d(ajavahemik)} + \int{\overrightarrow{alg\_kiirus} \cdot d(ajavahemik)} ===\\
-\overrightarrow{kiirendus_{keskmine}} \cdot \int{{ajavahemik} \cdot d(ajavahemik)} + \overrightarrow{alg\_kiirus} \cdot \int{d(ajavahemik)} === \\
-\overrightarrow{kiirendus_{keskmine}} \cdot \frac{ajavahemik^2}{2} + \overrightarrow{alg\_kiirus} \cdot ajavahemik + \underbrace{\overrightarrow{lähe}}_{konstant}
+\overrightarrow{s} = \int{\overrightarrow{\overline{a}} \cdot {t} + \overrightarrow{v_0} \cdot d(t)} ===\\
+\int{\overrightarrow{\overline{a}} \cdot {t} \cdot d(t)} + \int{\overrightarrow{v_0} \cdot d(t)} ===\\
+\overrightarrow{\overline{a}} \cdot \int{{t} \cdot d(t)} + \overrightarrow{v_0} \cdot \int{d(t)} === \\
+\overrightarrow{\overline{a}} \cdot \frac{t^2}{2} + \overrightarrow{v_0} \cdot t + \underbrace{\overrightarrow{s_0}}_{konstant},
 (\#eq:vahemaa-kiirenduse-kaudu)
 \end{equation}
 ```
+
+kus *s* on vahemaa, *a* on kiirendus, *v_0_* on algkiirus, *t* on ajavahemik.
+
 Avaldan valemist \@ref(eq:keskmine-kiirendus) ajavahemiku:
 
 ```{=tex}
 \begin{equation}
-{ajavahemik} = \frac{\overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}}{\overrightarrow{{kiirendus}_{keskmine}}}
+{t} = \frac{\overrightarrow{v} - \overrightarrow{{v}_{0}}}{\overrightarrow{\overline{a}}},
 (\#eq:ajavahemik)
 \end{equation}
 ```
+
+kus *t* on ajavahemik, *v* on lõppkiirus, *v_0_* on algkiirus ja *a* on kiirendus.
+
 Kui lähe on null, siis lähtuvalt valemist \@ref(eq:vahemaa-kiirenduse-kaudu)
 
 ```{=tex}
 \begin{equation}
-\overrightarrow{vahemaa} = \overrightarrow{kiirendus_{keskmine}} \cdot \frac{ajavahemik^2}{2} + \overrightarrow{{kiirus}_{algus}} \cdot ajavahemik + 0 ===\\ \overrightarrow{kiirendus_{keskmine}} \cdot \frac{(\frac{\overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}}{\overrightarrow{{kiirendus}_{keskmine}}})^2}{2} + \overrightarrow{{kiirus}_{algus}} \cdot \frac{\overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}}{\overrightarrow{{kiirendus}_{keskmine}}} ===\\ \frac{\overrightarrow{{kiirus}_{lõpp}}^2 - 2 \cdot \overrightarrow{{kiirus}_{lõpp}} \cdot \overrightarrow{{kiirus}_{algus}} + \overrightarrow{{kiirus}_{algus}}^2}{2 \cdot \overrightarrow{{kiirendus}_{keskmine}}} + \frac{\overrightarrow{{kiirus}_{algus}} \cdot \overrightarrow{{kiirus}_{lõpp}} - \overrightarrow{{kiirus}_{algus}}^2}{\overrightarrow{{kiirendus}_{keskmine}}} ===\\ \frac{\overrightarrow{{kiirus}_{lõpp}}^2 - \overrightarrow{{kiirus}_{algus}}^2}{2 \cdot \overrightarrow{{kiirendus}_{keskmine}}}
+\overrightarrow{s} = \overrightarrow{\overline{a}} \cdot \frac{t^2}{2} + \overrightarrow{{v}_{0}} \cdot t + 0 ===\\
+\overrightarrow{overline{a}} \cdot \frac{(\frac{\overrightarrow{{v}} - \overrightarrow{{v}_{0}}}{\overrightarrow{\overline{a}}})^2}{2} + \overrightarrow{{v}_{0}} \cdot \frac{\overrightarrow{{v}} - \overrightarrow{{v}_{0}}}{\overrightarrow{\overline{a}}} ===\\ \frac{\overrightarrow{{v}}^2 - 2 \cdot \overrightarrow{v} \cdot \overrightarrow{{v}_{0}} + \overrightarrow{{v}_{0}}^2}{2 \cdot \overrightarrow{\overline{a}}} + \frac{\overrightarrow{{v}_{0}} \cdot \overrightarrow{v} - \overrightarrow{{v}_{0}}^2}{\overrightarrow{\overline{a}}} ===\\ \frac{\overrightarrow{{v}}^2 - \overrightarrow{{v}_{0}}^2}{2 \cdot \overrightarrow{\overline{a}}},
 (\#eq:vahemaa-kiiruste-ja-kiirenduse-kaudu)
 \end{equation}
 ```
+
+kus *s* on vahemaa, *a* on kiirendus, *t* on ajavahemik, *v* on lõppkiirus, *v_0_* on algkiirus.
+
 Muutuva kiirenduse valem:
 
 ```{=tex}
 \begin{equation}
-\overrightarrow{kiirenduse\_muut} = \frac{d(\overrightarrow{kiirendus_{keskmine}})}{d(ajavahemik)} === \frac{kiirendus_{lõpp} - kiirendus_{algus}}{ajavahemik}
+\overrightarrow{\Delta(a)} = \frac{d(\overrightarrow{\overline{a}})}{d(t)} === \frac{a - a_{0}}{t},
 (\#eq:kiirenduse-muut)
 \end{equation}
 ```
+
+kus *a* on kiirendus, *a~0~* on algkiirendus, *t* on ajavahemik.
+
 Keskmise kiiruse valem:
 
 ```{=tex}
 \begin{equation}
-\overline{kiirus} = \frac{\Delta(vahemaa)}{\Delta(ajavahemik)} === \frac{\overrightarrow{kiirus_{algus}} + \overrightarrow{kiirus_{lõpp}}}{2}
+\overline{v} = \frac{\Delta(s)}{\Delta(t)} === \frac{\overrightarrow{v_0} + \overrightarrow{v}}{2},
 (\#eq:mean-velocity)
 \end{equation}
 ```
+
+kus *v* on kiirus, *v~0~* on algkiirus, *s* on vahemaa, *t* on ajavahemik.
+
 Pythagorase teoreem:
 
 ```{=tex}
@@ -289,7 +351,8 @@ Koosinusteoreem:
 
 ```{=tex}
 \begin{equation}
-|a| = \sqrt{|b|^2 + |c|^2 - 2 \cdot |b| \cdot |c| \cdot cos(nurk_{b, c})}
+|a| =\\
+\sqrt{|b|^2 + |c|^2 - 2 \cdot |b| \cdot |c| \cdot cos(nurk_{b, c})}
 (\#eq:cosine-theorem)
 \end{equation}
 ```
@@ -298,21 +361,28 @@ Koosinusteoreem:
 
 $$impulss = mass * kiirus$$
 
-$$kehadeSüsteemiKoguImpulss = \sum{süsteemiKehaImpulss}$$
+$$kehadeSüsteemiKoguImpulss =\\
+\sum{süsteemiKehaImpulss}$$
 
 See on alati jääv.
 
 Elastne põrge:
 
-$$mass_1 * \vec{kiirus_1} + mass_2 * \vec{kiirus_2} === mass_1 * \vec{kiirus_1 ^ \prime} + mass_2 + \vec{kiirus_2 ^ \prime}$$
+$$m_1 * \vec{v_1} + m_2 * \vec{v_2} === m_1 * \vec{v_1 ^ \prime} + m_2 + \vec{v_2 ^ \prime},$$
+
+kus *m* on mass, *v* on kiirus
 
 Energia jäävuse seadus:
 
-$$\frac{mass_1 * \vec{kiirus_1} ^ 2}{2} + \frac{mass_2 * \vec{kiirus_2} ^ 2}{2} === \frac{mass_1 * (\vec{kiirus_1} ^ \prime) ^ 2}{2} + \frac{mass_2 * (\vec{kiirus_2} ^ \prime) ^ 2}{2}$$
+$$\frac{m_1 * \vec{v_1} ^ 2}{2} + \frac{m_2 * \vec{v_2} ^ 2}{2} === \frac{m_1 * (\vec{v_1} ^ \prime) ^ 2}{2} + \frac{m_2 * (\vec{v_2} ^ \prime) ^ 2}{2},$$
+
+kus *m* on mass ja *v* on kiirus.
 
 Mitteelastne põrge:
 
-$$mass_1 * \vec{kiirus_1} + mass_2 * \vec{kiirus_2} === (mass_1 + mass_2) * \vec{kiirus ^ \prime}$$
+$$m_1 * \vec{v_1} + m_2 * \vec{v_2} === (m_1 + m_2) * \vec{v ^ \prime},$$
+
+kus *m* on mass ja *v* on kiirus.
 
 $$jõuImpulss = impulsiMuut$$
 
@@ -352,7 +422,9 @@ $${moment}_{inerts} = mass * raadius ^ 2$$
 
 Suund kruvireegli järgi:
 
-$${moment}_{\vec{impulss}} = \vec{impulss} * raadius === mass * \vec{{kiirus}_{joon}} * raadius === mass * \vec{{kiirus}_{nurk}} * raadius ^ 2$$
+$${moment}_{\vec{impulss}} = \vec{impulss} * r === m * \vec{{v}_{joon}} * r === m * \vec{{v}_{nurk}} * r ^ 2,$$
+
+kus *r* on raadius, *m* on mass, *v* on kiirus.
 
 $${moment}_{\vec{impulss}} = \vec{{kiirus}_{nurk}} * {moment}_{inerts}$$
 
@@ -366,7 +438,9 @@ $G = 6.67 * 10 ^ {-11} \frac{N * m ^ 2}{kg ^ 2}$ Maa mass olevat 6 \* 10^24^ kg.
 gravitationalConstant = 6.67E-11
 ```
 
-$$gravitatsiooniJõud = GRAVITATSIOONI\_KONSTANT * \frac{mass1 * mass2}{punktmassidevahelinekaugus^2}$$
+$$F_g = G * \frac{m_1 * m_2}{s^2},$$
+
+kus $F_g$ on raskusjõud, *G* on gravitatsioonikonstant, *m* on mass, *s* on punktmasside vaheline kaugus.
 
 $$g = G * \frac{M}{R ^ 2}$$
 
@@ -374,15 +448,51 @@ $$g = G * \frac{M}{R ^ 2}$$
 g <- gravitationalConstant * (6 * 10 ^ 24) / (6.4 * 10 ^ 6) ^ 2
 ```
 
-g = `r g` $* \frac{m}{s ^ 2}$
+g = `r signif(g, digits <- 3)` $* \frac{m}{s ^ 2}$
+
+![gravitatsiooni standardkiirendus eri piirkondades Maal](cities.svg)
+
+"The value 9.806 m/s2 is midway between these two extremes, so it's sort of true to say that…
+
+g = 9.806 ± 0.026 m/s2
+
+This is not the same thing as an average, however. For that, use this value that someone else derived…
+
+g = 9.798 m/s2
+
+Here are my suggestions. Use the value of 9.8 m/s2 with two significant digits for calculations on the surface of the Earth unless a value of gravity is otherwise specified. That seems reasonable. Use the value of 9.80665 m/s2 with six significant digits only when you want to convert m/s2 to g. That is the law." [@gravitation]
 
 Selline valem kehtib objekti kohta, mis on täpselt Maa pinnal. Kui see asub pinna sees või selle kohal, siis tuleb kasutada sellist valemit:
 
-$$gravitatsiooniKiirendus = GRAVITATSIOONI\_KONSTANT * \frac{maaMass}{(maaRaadius + kõrgusMaaPinnast) ^ 2}$$
+$$g = G * \frac{m}{(r + h) ^ 2},$$
+
+kus *g* on gravitatsioonikiirendus, *G* on gravitatsioonikonstant, *m* on Maa mass, *r* on Maa raadius, *h* on kõrgus Maa pinnast.
 
 ## Rõhk
 
 rõhk = mass \* *g*
+
+## Elastsusjõud
+
+Hooke'i seadus:
+
+```{=tex}
+\begin{equation}
+F = –k∙Δx,
+(\#eq:elasticity)
+\end{equation}
+```
+
+kus *F* on elastsusjõud, *k* elastsustegur ja $\Delta(x)$ on pikenemisvahemik.
+
+```{=tex}
+\begin{equation}
+F = k∙Δx,
+(\#eq:pulling-force)
+\end{equation}
+```
+
+kus $F$ on tõmbejõud, $k$ on elastsustegru ja $\Delta(x)$ on pikenemisvahemik.
 
 ## Hõõrdejõud
 
@@ -398,27 +508,37 @@ calculateDistanceOfDecceleration <- function(velocity, frictionFactor) {
 
 $$töö = \vec{jõud} * \vec{nihe} * cos(nurk_{\vec{nihe}, \vec{jõud}})$$
 
-$$energia_{potentsiaalne} = mass * \vec{gravitatsiooniKiirendus} * kõrgus$$
+$$E_{pot} = m * g * h,$$
+
+kus $E_{pot}$: potentsiaalne energia, *m*: mass ja *h*: kõrgus.
 
 Välisjõudude töö koorma tõstmisel võrdub koorma potentsiaalse energia muuduga:
 
-$$töö = potentsiaalneEnergia_2 - potentsiaalneEnergia_1$$
+$$töö = E_{pot_2} - E_{pot_1},$$
+
+kus $E_{pot}$ on potentsiaalne energia.
 
 Suletud süsteemi mehaaniline koguenergia on jääv:
 
 $$energia = energia_{potentsiaalne} + energia_{kineetiline}$$
 
-$$energia = mass * \vec{gravitatsiooniKiirendus} * kõrgus + \frac{mass * \vec{kiirus} ^ 2}{2}$$
+$$E = m * g * h + \frac{m * \vec{v} ^ 2}{2},$$
+
+kus *E* on energia, *m* on mass, *h* on kõrgus ja *v* on kiirus.
 
 $$võimsus = \frac{töö}{ajavahemik}$$
 
-$${elastsusJõuEenergia}_{potentsiaalne} = \frac{jäikus * {pikkus}_{surumine} ^ 2}{2}$$
+$${elastsusJõuEenergia}_{pot} = \frac{k * (\Delta(s)) ^ 2}{2},$$
+
+kus *k* on jäikus, $\Delta(s)$ on kokkusurumise vahemaa, *pot* on potentsiaalne.
 
 $${tegur}_{kasu} = \frac{töö}{energia}$$
 
 ## Jõumoment
 
-$${moment}_{jõud} = jõud * raadius * sin({nurk}_{raadius, {mõjuSirge}_{jõud}})$$
+$${moment}_{F} = F * raadius * sin({nurk}_{raadius, {mõjuSirge}_{F}}),$$
+
+kus *F* on jõud.
 
 Kangi tasakaal:
 
@@ -476,7 +596,8 @@ accelerationOfPlaneToG = 100 / 3 / g
 
 See on `r accelerationOfPlaneToG`-kordne raskuskiirendus.
 
-c)  $\frac{200 * m}{3 * s} * 2 * s + \frac{-\frac{100 * m}{3 * s ^ 2} * (2 * s) ^ 2}{2} === \frac{400}{3} * m - \frac{200}{3} * m === \frac{200}{3} * m$
+c)  $\frac{200 * m}{3 * s} * 2 * s + \frac{-\frac{100 * m}{3 * s ^ 2} * (2 * s) ^ 2}{2} ===\\
+\frac{400}{3} * m - \frac{200}{3} * m === \frac{200}{3} * m$
 
 d)  $\frac{2500000}{3} * N$ See on ligikaudu:
 
@@ -706,7 +827,7 @@ $$-algKiirus ^ 2 === (42 * m) * 2 * \frac{pidurdusjõud}{7000 * kg}$$
 
 Teise juhu puhul on teada üksnes mass ja vaja on arvutada vahemaa:
 
-$$vahemaa2 = \frac{(42 * m) * 2 * \frac{pidurdusjõud}{7000 * kg}}{2 * \frac{pidurdusjõud}{5000 * kg}} === 30 * m$$
+$$s_2 = \frac{(42 * m) * 2 * \frac{pidurdusjõud}{7000 * kg}}{2 * \frac{pidurdusjõud}{5000 * kg}} === 30 * m$$
 
 Veoauto oleks libisenud ilma koormata 30 m kaugusele, kui tühja veoauto mass on viis tonni.
 
@@ -868,11 +989,12 @@ a)  Autod ei liigu peale kokkupõrget.
 
 b)  Pärast kokkupõrget liiguvad autod kirdesse. Kiiruse arvutan lähtudes mitteelastse kokkupõrke valemist ja Pythagorase teoreemist:
 
-$$kiirus_{ühine} = \frac{\sqrt{(1000 * kg * 20 * \frac{m}{s}) ^ 2 + (1000 * kg * 20 * \frac{m}{s}) ^ 2}}{1000 * kg + 1000 * kg} === \frac{\sqrt{2 * (1000 * kg * 20 * \frac{m}{s}) ^ 2}}{2000 * kg}$$
+$$v_{ühine} = \frac{\sqrt{(1000 * kg * 20 * \frac{m}{s}) ^ 2 + (1000 * kg * 20 * \frac{m}{s}) ^ 2}}{1000 * kg + 1000 * kg} ===\\
+\frac{\sqrt{2 * (1000 * kg * 20 * \frac{m}{s}) ^ 2}}{2000 * kg}$$
 
-$$kiirus_{ühine} = \frac{\sqrt{2 * 1000000 * 400 * kg ^ 2 * \frac{m ^ 2}{s ^ 2}}}{2000 * kg}$$
+$$v_{ühine} = \frac{\sqrt{2 * 1000000 * 400 * kg ^ 2 * \frac{m ^ 2}{s ^ 2}}}{2000 * kg}$$
 
-$$kiirus_{ühine} = \frac{1000 * 20 * kg * \frac{m}{s} * \sqrt{2}}{2000 * kg} === \frac{20000 * \frac{m}{s} * \sqrt{2}}{2000} === \frac{20 * \sqrt{2} * \frac{m}{s}}{2} === 10 * \sqrt{2} * \frac{m}{s}$$
+$$v_{ühine} = \frac{1000 * 20 * kg * \frac{m}{s} * \sqrt{2}}{2000 * kg} === \frac{20000 * \frac{m}{s} * \sqrt{2}}{2000} === \frac{20 * \sqrt{2} * \frac{m}{s}}{2} === 10 * \sqrt{2} * \frac{m}{s}$$
 
 ```{r}
 weight <- 1000
@@ -1161,19 +1283,19 @@ the direction of the displacement *tangentAngle*
 
 For reusing later, the lateral displacement can be calculated by summing up lateral distances:
 
-$$lateralDisplacement = CA_x + AB_x$$
+$$\overrightarrow{s_x} = \overrightarrow{CA_x} + \overrightarrow{AB_x}$$
 
 The same way for reusing later, the vertical displacement can be calculated:
 
-$$verticalDisplacement = CA_y + AB_y$$
+$$\overrightarrow{s_y} = \overrightarrow{CA_y} + \overrightarrow{AB_y}$$
 
 The displacement can be calculated using Pythagorean theorem \@ref(eq:pythagorean):
 
-$$cb = \sqrt{(lateralDisplacement)^2 + (verticalDisplacement)^2}$$
+$$cb = \sqrt{(\overrightarrow{s_x})^2 + (\overrightarrow{s_y})^2}$$
 
 The direction can be expressed using the tangent angle from the formula \@ref(eq:tangent-angle):
 
-$$tangentAngle = atan(\frac{((verticalDisplacement))}{(lateralDisplacement)})$$
+$$tangentAngle = atan(\frac{((\overrightarrow{s_y}))}{(\overrightarrow{s_x})})$$
 
 ### The calculations
 
@@ -1234,15 +1356,18 @@ If the length of two sides of triangle and the angle between them are known I ca
 
 For $\angle{ORD, DFW_2, ATL}$, I also use the cosine theorem:
 
-$$\angle{ORD, DFW_2, ATL} = acos(\frac{|(ORD, ATL)|^2 - |(ORD, DFW_2)|^2 - |(DFW_2, ATL)|^2}{2 \cdot |ORD, DFW_2| \cdot |DFW_2, ATL|})$$
+$$\angle{ORD, DFW_2, ATL} =\\
+acos(\frac{|(ORD, ATL)|^2 - |(ORD, DFW_2)|^2 - |(DFW_2, ATL)|^2}{2 \cdot |ORD, DFW_2| \cdot |DFW_2, ATL|})$$
 
 For the bearing from DFW to ATl, the bearing from ORD to DFW must be added to $\angle{ORD, DFW_2, ATL}$ less a straight angle:
 
-$$bearing_{da} = acos(\frac{|(ORD, ATL)|^2 - |(ORD, DFW_2)|^2 - |(DFW_2, ATL)|^2}{-2 \cdot |ORD, DFW_2| \cdot |DFW_2, ATL|}) + β - \pi$$
+$$bearing_{da} =\\
+acos(\frac{|(ORD, ATL)|^2 - |(ORD, DFW_2)|^2 - |(DFW_2, ATL)|^2}{-2 \cdot |ORD, DFW_2| \cdot |DFW_2, ATL|}) + β - \pi$$
 
 The round trip distance:
 
-$$distance_{all} = |(ORD, ATL)| + |(ORD, DFW_2| + |DFW_2, ATL|$$
+$$distance_{all} =\\
+|(ORD, ATL)| + |(ORD, DFW_2| + |DFW_2, ATL|$$
 
 ### Calculations
 
@@ -1407,16 +1532,18 @@ seconds in a year knowing that 241 out of thousand years are longer than usual
 
 the size of a light year in meters *ly*
 
+number of seconds per year *SECONDS_IN_YEAR*
+
 ### Rule
 
 I construct a formula for calculating the size of a light year in meters:
 
-$$ly = v \cdot (\frac{241}{1000} \cdot 366 + \frac{1000 - 241}{1000} \cdot 365) \cdot 24 \cdot 60 \cdot 60$$
+$$ly = v \cdot SECONDS\_IN\_YEAR$$
 
 ### Calculation
 
 ```{r}
-ly = SPEED_LIGHT * (241 / 1000 * 366 + (1000 - 241) / 1000 * 365) * 24 * 60 * 60
+ly = SPEED_LIGHT * SECONDS_IN_YEAR
 ```
 
 ### Result
@@ -1690,13 +1817,13 @@ c. second initial velocity $v_{0_c} = 10 \cdot \frac{mi}{h}$
 
 ### What to calculate?
 
-second distance *second_stopping_distance*
+second distance *s*
 
 ### Rule
 
 I use the formula for the distance by speed and acceleration \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu). I rearrange the formula to suit all three cases:
 
-$$second\_stopping\_distance = \frac{0^2 - v_0^2}{2 \cdot \frac{0^2 - v_{0_0}^2}{2 \cdot initial\_distance}} === \frac{- v_0^2 \cdot initial\_distance}{- v_{0_0}^2} === \frac{v_0^2 \cdot initial\_distance}{v_{0_0}^2}$$
+$$s = \frac{0^2 - v_0^2}{2 \cdot \frac{0^2 - v_{0_0}^2}{2 \cdot initial\_distance}} === \frac{- v_0^2 \cdot initial\_distance}{- v_{0_0}^2} === \frac{v_0^2 \cdot initial\_distance}{v_{0_0}^2}$$
 
 ### Calculations
 
@@ -1843,6 +1970,135 @@ c. It takes `r signif(t_v, digits <- 4)` * s the train to travel the 18 blocks t
 
 d. The deceleration of the train in the second station is $`r d` \cdot \frac{m}{s^2}$.
 
+## Laskevõistlus
+
+### Ülesande püstitus
+
+Laskevõistlustel laseb laskur temast tabamise hetkel 30 m kaugusel olevat sihtmärki, mille kiirus on
+72 km/h. Sihtmärgi liikumistee on sihtimisjoonega risti. Kui kaugel peab olema sihtmärk tabamiskohast
+laskmise hetkel, kui kuuli kiirus on 375 m/s. Eesmärkon ikkagi, et kuul tabaks sihtmärki.
+
+### Sisendid
+
+sihtimisjoon $FB$
+
+vahemaa laskuri ja sihtmärgi vahel tabamise hetkes $|FB| = 30 * m$
+
+sihtmärgi liikumiskiirus $v_{target} = 72 \cdot \frac{km}{h} === 20 \cdot \frac{m}{s}$
+
+sihtmärgi liikumistee $AB$
+
+sihtmärgi liikumistee ja sihtimisjoon on omavahel risti: $AB \perp FB$
+
+kuuli kiirus $v_{kuul} = 375 \cdot \frac{m}{s}$
+
+```{r}
+FB <- 30
+v_target = 20
+v_kuul <- 375
+```
+
+
+### Mida arvutada?
+
+sihtmärgi kaugus tabamiskohast laskmise hetkes $|AB| = ?$
+
+### Reeglistik
+
+Vastavalt valemile \@ref(eq:mean-velocity) on vahemaa ja kiirus võrdelised. Tabamiseks peavad nii kuul kui sihtmärk kasutama liikumiseks sama ajavahemiku, mis tähendab, et ajavahemiku suurus on muutumatu. Seetõttu saab arvutada sihtmärgi kauguse tabamiskohast laskmishetkes suhete järgi:
+
+$$\frac{|FB|}{|AB|} === \frac{v_{kuul}}{v_{target}},$$
+
+millest
+
+$$|AB| = \frac{|FB| \cdot v_{target}}{v_{kuul}}.$$
+
+### Arvutamine
+
+```{r}
+AB <- FB * v_target / v_kuul
+```
+
+### Lahend
+
+`r AB` * m kaugusel peab sihtmärk olema tabamiskohast laskmishetkes, et toimuks selle sihtmärgi tabamine.
+
+## Auto liikumise kiirus ratta raadiuse järgi
+
+### Ülesande püstitus
+
+Auto ratas raadiusega 40 cm pöörleb 10 
+pööret/sekundis. Leida auto liikumise kiirus.
+
+### Sisendid
+
+ratta raadius $r = 40 * cm === 4 * 10^{-1} * m$
+
+pöörlemiskiirus $v_{ratas} = 10 * \frac{pööret}{s}$
+
+pöörlemisaeg $t = 1 \cdot s$
+
+```{r}
+r = 4e-1
+v_ratas <- 10
+t <- 1
+```
+
+### Mida arvutada?
+
+auto liikumise kiirus $\overline{v_{auto}} = ?$
+
+### Reeglistik
+
+Lähtun keskmise kiiruse valemist \@ref(eq:mean-velocity) ja ringjoone pikkuse valemist \@ref(eq:length-of-circle):
+
+$$\overline{v_{auto}} = \frac{v_{ratas} \cdot 2 \cdot \pi \cdot r}{t}$$
+
+### Arvutamine
+
+```{r}
+v_auto <- v_ratas * 2 * pi * r / t
+```
+
+### Lahend
+
+$`r signif(v_auto, digits <- 1)` \cdot \frac{m}{s}$ on auto liikumise kiirus.
+
+## Traadi venitamine
+
+### Ülesande püstitus
+
+Millise jõuga peab venitama ühest otsast kinnitatud traati, etta pikeneks 2mmvõrra? Traadi jäikus on $2 \cdot 10^5 \cdot \frac{N}{m}$.
+
+### Sisendid
+
+traadi pikenemisvahemik $\Delta(x) = 2 \cdot mm === 2 \cdot 10^{-3} \cdot m$
+
+traadi jäikus $2 \cdot 10^5 \cdot \frac{N}{m}$
+
+```{r}
+change_x <- 2e-3
+k <- 2e5
+```
+
+### Mida arvutada?
+
+jõud $F = ?$
+
+### Reeglistik
+
+Lähtun elastsusjõu valemist \@ref(eq:pulling-force).
+
+### Arvutamine
+
+```{r}
+F <- k * change_x
+```
+
+### Lahend
+
+Jõuga `r F` * N peab venitama ühest otsast kinnitatud traati, et see pikeneks 2 * mm võrra.
+
 ## How much time would it take to fill this "basin" with plastics?
 
 ### Setup
@@ -1898,7 +2154,8 @@ the time the "basin" would be filled by plastic $t = ?$
 
 ### Rule
 
-$$t = \frac{l \cdot (h_{lower} + h_{higher}) \cdot \frac{h_{higher} \cdot s}{h_{eyes}} }{\frac{v}{\frac{\rho_{min} + \rho_{max}}{2}}} === \frac{l \cdot (h_{lower} + h_{higher}) \cdot h_{higher} \cdot s \cdot (\rho_{min} + \rho_{max})}{h_{eyes} \cdot v \cdot 2}$$
+$$t = \frac{l \cdot (h_{lower} + h_{higher}) \cdot \frac{h_{higher} \cdot s}{h_{eyes}} }{\frac{v}{\frac{\rho_{min} + \rho_{max}}{2}}} ===\\
+\frac{l \cdot (h_{lower} + h_{higher}) \cdot h_{higher} \cdot s \cdot (\rho_{min} + \rho_{max})}{h_{eyes} \cdot v \cdot 2}$$
 
 ### Calculation
 
