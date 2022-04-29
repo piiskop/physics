@@ -2168,3 +2168,168 @@ t_max <- l * (h_lower + h_higher) * 5.2 * ρ_max / v
 ### Output
 
 `r signif(t, digits <- 4)` * s would it take to fill the "basin" with plastic. Acceptable values are between `r signif(t_min, digits <- 4)` * s and `r signif(t_max, digits <- 4)` * s
+
+## Kraana
+
+### Ülesande püstitus
+
+Kraana tõstab maas lamava rööpa 3s jooksul. Määra kasulik töö, kui rööpa mass on 1t ja rööbas 
+tõuseb kiirusega 30m/min.
+
+#### Sisendid
+
+$$t = 3 \cdot s$$
+
+$$m = 1 \cdot t = 1 \cdot 10^3 \kg$$
+
+$$v = 30 \cdot \frac{m}{min} = \frac{1}{2} \cdot \frac{m}{s}$$
+
+$$\alpha = 0$$
+
+$$g = 9.8 \cdot \frac{m}{s^2}$$
+
+#### Väljund
+
+$$A = ?$$
+
+#### Reeglistik
+
+$$A = F \cdot s \cdot cos(\alpha) = m \cdot g \cdot v \cdot t \cdot cos(\alpha)$$
+
+#### Arvutuskäik
+1.5*10^4
+
+###
+
+#### Ülesande püstitus
+
+Tõstes koorma massiga m=2kg kõrgusele h=1m teeb jõud F
+tõste
+ tööd A=78,5J. Millise 
+kiirendusega tõuseb koorem
+
+#### Sisendid
+
+$$m = 2 \cdot kg$$
+
+$$h = 1 \cdot m$$
+
+$$A = 78.5 \cdot J$$
+
+$$g = 9.8 \cdot \frac{m}{s^2}$$
+
+$$\alpha = 0 \cdot rad$$
+
+```{r}
+m = 2
+h = 1
+A = 78.5
+g = 9.8
+alpha = 0
+```
+
+
+#### Väljund
+
+$$a = ?$$
+
+#### Reeglistik
+
+$$A = F_t \cdot h \cdot cos(\alpha)$$
+
+$$\overrightarrow{F_t} + \overrightarrow{F_r} = \overrightarrow{F_i}$$
+
+$$F_t - F_r = F_i$$
+
+$$F_t = F_i + F_r = m \cdot a + m \cdot g$$
+
+$$A = (m \cdot g + m \cdot a) \cdot h = m \cdot g \cdot h + m \cdot a \cdot h$$
+
+$$m \cdot a \cdot h = A - m \cdot g \cdot h$$
+
+$$a = \frac{A - m \cdot g \cdot h}{m \cdot h}$$
+
+$$A = F \cdot h \cdot cos(\alpha) = m \cdot (a - g) \cdot h \cdot cos(\alpha)$$
+
+$$a = $$
+
+#### Arvutuskäik
+
+```{r}
+a = (A - m * g * h) / (m * h)
+a
+```
+
+###
+
+#### Ülesande püstitus
+
+Lennuk tõuseb ja kõrgusel h=5km saavutab kiiruse v=360km/h. Mitu korda on tõusmiseks tehtav töö A1 suurem kiiruse tõstmiseks tehtavast tööst A2?
+
+#### Sisendid
+
+$$h = 5 \cdot 10^3 \cdot m$$
+
+$$v = 100 \cdot \frac{m}{s}$$
+
+#### Väljund
+
+$$\frac{A_1}{A_2} = ?$$
+
+9.8
+
+###
+
+#### Ülesande püstitus
+
+Millist tööd on vaja sooritada, et keha massiga m=2kg suurendaks kiirust v
+0
+=2m/s kuni v=5m/s
+
+#### kodus, 8.5 ka
+
+###
+
+#### Ülesande püstitus
+
+ Inimene massiga 70,0 kg jookseb mööda treppi üles 4,0s. Trepi vertikaalne kõrgus on 4,5m. Arvuta inimese keskmine võimsus vattides ja hobujõududes.  
+
+#### Tegu
+
+$$1 \cdot hj = 735.5 \cdot W$$
+
+772W
+1.05hj
+
+### kodus ja järgmine 8.7 ka kodus
+
+#### Ülesande püstitus
+
+Arvuta võimsus, mida vajab auto, mille mass on 1,4t, järgmistes olukordades: 
+a)  auto sõidab 10˚ kalde juures mäkke kiirusel 80km/h 
+b)  auto kiirendab 90 kuni 110 km/h 6s jooksul, et teisest autost mööduda. 
+Autole mõjuv hõõrdejõud on 700N. 
+
+#### Tegu
+
+### 
+
+#### Ülesande püstitus
+
+Püssist massiga m1=5kg lendab välja kuul massiga m2=5g kiirusega v2=600m/s. Leida püssi 
+tagasilöögi kiirus v1.  
+
+#### Tegu
+
+### 
+
+#### Ülesande püstitus
+
+ Inimene massiga m1=60kg, kes jookseb kiirusega v1=8m/s, jõuab järele kärule massiga m1=80kg, 
+mis liigub kiirusega v2=2,9km/h ja hüppab sellele.
+
+a) Millise kiirusega hakkab liikuma käru?
+
+b) Millise kiirusega liigub käru, kui inimene jookseb kärule vastu? 
+
+####

@@ -3,65 +3,35 @@ title: "Soojus"
 author: 'peacecop kalmer:'
 date: "12/21/2021"
 output:
-  bookdown::html_document2:
-    toc: yes
-    toc_float: yes
-    toc_depth: 5
+    bookdown::html_document2:
+      toc: yes
+      toc_float: yes
+      toc_depth: 5
+bibliography: references.bib
+biblio-style: "newapa"
+link-citations: true
+citation_package: biblatex
+
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r echo=FALSE}
+source("_common.R")
+```
 
 # Reeglid
-
-## Molaarmassid
-
-```{r}
-MOLAR_WEIGHT_H <- 1.008E-3
-MOLAR_WEIGHT_C <- 12.011E-3
-MOLAR_WEIGHT_N <- 14.007E-3
-MOLAR_WEIGHT_O <- 15.999E-3
-```
-
-## Maa
-
-```{r}
-RADIUS_EARTH = 6.4E6
-LENGTH_EQUATOR_EARTH = RADIUS_EARTH * 2 * pi
-```
 
 ## Temperatuur
 
 $${temperature}_{c} = \frac{{temperature}_{f} - 32}{1.8}$$
 
-```{r}
-ZERO_DEGREES_C_IN_K = 273.15
-
-convertFromDegreesFToK <- function(temperatureF) {
-  (temperatureF - 32) / 1.8 + ZERO_DEGREES_C_IN_K
-}
-```
-
 $${erisoojus}_{1} * {mass}_{1} * \Delta({temperatuur}_1) + {erisoojus}_2 * {mass}_2 * \Delta({temperatuur}_2) === 0$$
-
-```{r}
-SPECIAL_HEAT_WATER = 4190
-SPECIAL_HEAT_FE = .44 / (.1 ^ 3)
-SPECIAL_HEAT_STEEL = 502
-```
 
 $${soojus}_{sulamiseks} = sulamissoojus * mass$$
 
-```{r}
-MELTING_HEAT_ICE = 330000
-```
-
 $${soojus}_{soojendamiseks} = erisoojus * mass * \Delta(temperatuur)$$
-
-```{r}
-HEAT_VAPORIZATION_WATER = 40.65 * 10 ^ 3 / ((1.008 * 2 + 15.999) * .1 ^ 3)
-```
 
 $${koefitsient}_{tõhusus} = \frac{{kasulikSoojus}_{lisatudVõiEemaldatud}}{töö} === \frac{{võimsus}_{kasulik}}{{võimsus}_{kogu}}$$
 
@@ -94,7 +64,12 @@ tihedus = \frac{mass}{ruumala}
 (\#eq:density)
 \end{equation}
 
-$$pikenemine = {algpikkus} * joonpaisumistegur * \Delta({temperatuur})$$
+```{=tex}
+\begin{equation}
+pikenemine = {algpikkus} * joonpaisumistegur * \Delta({temperatuur})
+(\#eq:enlengthening)
+\end{equation}
+```
 
 Keha ruumala suhteline suurenemine:
 
@@ -110,9 +85,13 @@ ruumpaisumistegur ===3 \cdot lineaarpaisumistegur
 (\#eq:factor-of-enlargement-of-volume)
 \end{equation}
 
-```{r}
-COEFFICIENT_LINEAR_EXPANSION_FE = .000011
-COEFFICIENT_LINEAR_EXPANSION_STEEL = 1.2E-5
+Survejõud:
+
+```{=tex}
+\begin{equation}
+F = \frac{E \cdot \Delta(l) \cdot A}{l}
+(\#eq:strain)
+\end{equation}
 ```
 
 ## Soojuskiirgus
@@ -292,13 +271,31 @@ $$p = \int_{0}^{h_1}ρ \cdot g \cdot d(h)$$
 
 $$p = p_0 \cdot e^{-\frac{m_0 \cdot g \cdot h}{k \cdot T}} === p_0 \cdot e^{-\frac{M \cdot g \cdot h}{R \cdot T}}$$
 
+## Van der Waals
+
+$$(p + \frac{z^2 \cdot a}{v^2}) \cdot (V - z \cdot b) = z \cdot\ R \cdot T$$
+
+$$(\frac{p \cdot V^2 + z^2 \cdot a}{V^2}) \cdot (\frac{V - z \cdot b}{1}) = z \cdot R \cdot T$$
+
+$$\frac{(V^2 \cdot p + z^2 \cdot a) \cdot (V - z \cdot b)}{V^2} = z \cdot R \cdot T | \cdot V^2$$
+
+$$(V^2 \cdot p + z^2 \cdot a) \cdot (V - z \cdot b) = V^2 \cdot z \cdot R \cdot T$$
+
+$$V^3 \cdot p - V^2 \cdot p \cdot z \cdot b + V \cdot z^2 \cdot a - a \cdot b \cdot z^3 = V^2 \cdot z \cdot R \cdot T$$
+
+$$p \cdot V^3 - V^2 \cdot (b \cdot p \cdot z + z \cdot R \cdot T) + a \cdot z^2 \cdot V - a \cdot b \cdot z^3 = 0$$
+
+## Märgamine
+
+Sõltub tihedusest. Nt elavhõbeda tihedus on palju suurem kui klaasi oma, st selle osakesed on üksteisele lähemal kui klaasile. See pole alati nii.
+
 # Ülesanded
 
 ## Vesinik ja hapnik kolvides
 
 ### Ülesande püstitus
 
-![Kaks kolvi, millest ühes on vesinik, teises hapnik](gases.png)
+![Kaks kolvi, millest ühes on vesinik, teises hapnik](heat/gases.png)
 
 Ühes kolvis on vesinik, teises hapnik. Mõlema 
 gaasikoguse temperatuur on ühesugune. Kumma gaasi 
@@ -362,7 +359,7 @@ informatsiooni
 
 Olgu meil 2 samast materjalist ja sama läbimõõduga varrast.
 
-![Kaks varrast](sticks.png)
+![Kaks varrast](heat/sticks.png)
 
 A
 pikkus 10 cm
@@ -524,7 +521,7 @@ Vaatasin just järele ja minu toas on õhutemperatuur põrandal 16.9 * °C:
 
 ```{R}
 library(Ryacas)
-equation = paste(SPECIAL_HEAT_WATER, "* (temperatureEnd - (16.9 +", ZERO_DEGREES_C_IN_K, ")) +", SPECIAL_HEAT_FE, "* (temperatureEnd - (40 +", ZERO_DEGREES_C_IN_K, ")) == 0", sep = " ")
+equation = paste(SPECIFIC_HEAT_CAPACITY_OF_WATER, "* (temperatureEnd - (16.9 +", ZERO_DEGREES_C_IN_K, ")) +", SPECIAL_HEAT_FE, "* (temperatureEnd - (40 +", ZERO_DEGREES_C_IN_K, ")) == 0", sep = " ")
 equation
 temperatureEnd = yac_str(y_rmvars(paste("Solve(", equation, ", temperatureEnd)", sep = "")))
 ```
@@ -553,7 +550,7 @@ b) 419000 * J
 
 c) `r HEAT_VAPORIZATION_WATER` * J
 
-d) `r MELTING_HEAT_ICE + 419000 + HEAT_VAPORIZATION_WATER` * J
+d) `r HEAT_OF_FUSION_OF_ICE + 419000 + HEAT_VAPORIZATION_WATER` * J
 
 ## Graniit
 
@@ -642,7 +639,7 @@ Söe põletamisest eraldunud soojushulka kasutatakse nt turbiini liigutamiseks. 
 Küsitakse jahutusvedeliku koguse kohta. Juba ülesande püstituse oli kirjas, kui palju soojust jahutusvette eraldus. See kogus tuleb jagada vee erisoojuse ja temperatuurierinevusega, mille põhjustas sellise soojushulgaga kokkupuutumine, et arvutada välja vajalik veemass:
 
 ```{r}
-weightOfWater = 1.5e8 / SPECIAL_HEAT_WATER / 3
+weightOfWater = 1.5e8 / SPECIFIC_HEAT_CAPACITY_OF_WATER / 3
 ```
 
 `r format(weightOfWater, digits = 2)` * kg jahutusvett kasutab elektrijaam igas sekundis, kui vesi soojeneb 3 kraadi võrra. Kui tahta seda väärtust avaldada kuupmeetrites, tuleb see lihtsalt tuhandega läbi jagada. Nägime, et kasutegurit ja väljundvõimsust polnudki vaja kasutada veekoguse arvutamiseks ja need olid lihtsalt näitlikustavad või siis kontrollandmed.
@@ -686,7 +683,7 @@ heatIn = eval(parse(text = yac_str(y_rmvars(paste("Solve(", equation, ", heatIn)
 c) Sedapuhku on vaja arvutada väljas olev soojus, milleks on pudelivee soojus. Arvutuskäik:
 
 ```{r}
-energyInJ = SPECIAL_HEAT_WATER * 1.5 * (20 - 4) / efficiencyOfFridge
+energyInJ = SPECIFIC_HEAT_CAPACITY_OF_WATER * 1.5 * (20 - 4) / efficiencyOfFridge
 ```
 
 `r format(energyInJ, digits = 2)` * J on minimaalne elektrienergia hulk, mis kulub selle veepudeli jahutamiseks temperatuurini 4 °C.
@@ -730,7 +727,7 @@ difference = 1 - (1 / cop)
 
 ### Task
 
-![Reversible heat pump schemata](Reversible-heat-pump-schematic-min.png)
+![Reversible heat pump schemata](heat/Reversible-heat-pump-schematic-min.png)
 
 A reversible heat pump has a coefficient of performance COP = 3.0 when operated in the heating mode. Its compressor consumes 1500 W of electric energy.
 
@@ -880,6 +877,101 @@ cte_volume_beaker <- .21e-3 - (.35e-3) / (983.24 * (60 - 20) * 65.5e-6)
 #### Lahend
 
 $`r signif(cte_volume_beaker, digits <- 5)` \cdot \frac{1}{K}$ on anuma ruumpaisumistegur.
+
+## Betoonplokkidest tee
+
+### Ülesande püstitus
+
+Tee on valatud $20 \cdot m$ pikkustest ning $.2 \cdot m^2$ ristlõikepindalaga betoonplokkidest, mille vahele on jäetud $1 \cdot mm$ suurune vahe (temperatuuril $0°C$). Kas betoonplokid paisuvad temperatuuri tõusul $50 \cdot kraadi$ võrra nii palju, et otsad ulatuvad kokku? Kui jah, siis kui suur jõud mõjub plokkide vahel? Betooni soojuspaisumistegur on $\frac{12 \cdot 10^{-6}}{K}$, Youngi moodul on $30 \cdot 10^9 \cdot \frac{N}{m^2}$. (8p).
+
+### Sisendid
+
+$$l = 20 \cdot m = 2 \cdot 10 \cdot m$$
+
+```{r l}
+l = 2e1
+```
+
+
+$$A = .2 \cdot m^2 = 2 \cdot 10^{-1} \cdot m^2$$
+
+```{r A}
+A = 2e-1
+```
+
+$$d = 1 \cdot mm = 1 \cdot 10^{-3} \cdot m$$
+
+```{r d}
+d = 1e-3
+```
+
+```{r T}
+#T = celsius_to_kelvin(0)
+```
+
+
+$$T = 0°C = `r T` \cdot K$$
+
+$$\Delta(T) = 50°C = 50 \cdot K$$
+
+```{r change-of-temperature}
+change_of_temperature <- 50
+```
+
+$$\alpha_l = \frac{12 \cdot 10^{-6}}{K}$$ [@erichardcohen_1987_symbols, p. 31]
+
+```{r}
+alpha_l <- 12e-6
+```
+
+$$E = 30 \cdot 10^9 \cdot \frac{N}{m^2} = 3 \cdot 10^{10} \cdot \frac{N}{m^2}$$
+
+```{r}
+E <- 3e10
+```
+
+### Mida arvutada?
+
+$$\Delta(l) - d \ge 0 = ?$$
+
+$$\Delta(l) - d \ge 0 = TRUE \rightarrow F = ?$$
+
+### Kuidas arvutada?
+
+Et teada saada, kas plokid paisudes üksteist puudutavad, on vaja arvutada, kui palju iga plokk pikeneb. Selleks kasutan valemit \@ref(eq:enlengthening):
+
+```{=tex}
+\begin{equation}
+\Delta(l) - d = {l} * \alpha_l * \Delta({T}) - d
+(\#eq:difference-between-enlengthening-and-distance)
+\end{equation}
+```
+
+Jõu arvutamiseks saab kasutada valemit \@ref(eq:strain):
+
+```{=tex}
+\begin{equation}
+F = \frac{E \cdot (\Delta(l) - d) \cdot A}{(l + d)}
+(\#eq:strain)
+\end{equation}
+```
+
+### Arvutuskäik
+
+```{r}
+difference_between_enlengthening_and_distance <- l * alpha_l * change_of_temperature - d
+
+if(difference_between_enlengthening_and_distance >= 0) {
+  F <- E * difference_between_enlengthening_and_distance * A / ((l + d))
+  solution <- paste("Betoonplokid paisuvad temperatuuri tõusul 50 kraadi võrra nii palju, et otsad ulatuvad kokku. Nende plokkide vahel mõjub jõud suurusega ", changeSciNot(signif(F, digits = 2)), " $\\times N$.")
+} else {
+  solution <- "Betoonplokid ei paisu temperatuuri tõusul 50 kraadi võrra nii palju, et otsad ulatuksid kokku."
+}
+```
+
+### Lahend
+
+`r solution`
 
 ## Õhumull
 
@@ -1989,3 +2081,124 @@ vee pindpinevustegur $.072 \cdot \frac{}{}$
 ## Iseseisvaks lahendamiseks
 
 20, 26, 33, 31, 37
+
+## 
+
+### Ülesande püstitus
+
+Missugusel temperatuuril on hapniku rõhk 7 MPa, kui hapniku tihedus on
+$100 \cdot \frac{kg}{m^3}$. Lahendada ülesanne reaalse ja ideaalse gaasi võrrandi abil.
+(V: 296K, 289K. Reaalse gaasi puhul on mõistlik fikseerida ruumala, näiteks võtta
+ruumalaks   $1 \cdot m^3$,   seejärel   leida   moolide   arv   ning   siis   arvutada   temperatuur.   Või
+fikseerida moolide arv, siis tiheduse kaudu saab kätte ruumala jne)
+
+### Tegu
+
+$$p \cdot V = z \cdot R \cdot T$$
+
+$$(p + \frac{z^2 \cdot a}{V^2}) \cdot (V - z \cdot b) = z \cdot R \cdot T$$
+
+Kui $V = 1 \cdot m^3$, siis $m = 100 \cdot kg$.
+
+```{r}
+T = 7e6 / (100 / 3.2e-2 * 8.314)
+T
+# See on õige, ülesannete kogus on viga.
+T_waals <- (7e6 + (100 / 3.2e-2)^2 * 1.36e-1) * (1 - 100 / 3.2e-2 * 3.16e-5) / (100 / 3.2e-2 * 8.314)
+T_waals
+z = 100 / 3.2e-2
+z
+z_b = z * 3.16e-5
+z_b
+z2_a_over_v = z^2 * 1.36e-1
+z2_a_over_v
+```
+
+## 
+
+### Ülesande püstitus
+
+Õhk on küllastunud temperatuuril 15oC. Kui suur on õhu suhteline niiskus, kui temperatuur tõuseb 25oC-ni?
+
+### Tegu
+
+$$R = \frac{a}{A} \cdot 100\%$$
+
+15 kraadi juures on küllastunud, st $12.8 \cdot \frac{g}{m^3}$, mis on 100%.
+
+$$A = 23.5 \cdot \frac{g}{m^3}$$
+
+$$R = 53\%$$
+
+##
+
+### Ülesande püstitus
+
+80m3-lise ruumalaga toas on suhteline õhuniiskus temperatuuril 18oC 75%.
+Toas on avatud veeanum, milles on 3 l vett. Kas vesi sellest anumast saab tuppa
+täielikult auruda?
+(Vihje: Leida, milline on antud temperatuuril küllastava veeauru tihedus. Siis leida,
+milline oleks veeauru tihedus, kui kõik auruks, kasutades Mendelejev-Clapeyroni
+võrrandit).
+
+### Tegu
+
+Tegelik õhuniiskus on 75% $15.4 \cdot \frac{g}{m^3}$.
+
+$$V = 80 \cdot m^3$$
+
+$$t = 18°C$$
+
+$$R = 75\%$$
+
+$$V_1 = 3 \cdot l = 3 \cdot 10^{-3} \cdot \frac{g}{m^3}$$
+
+$$m = ?$$
+
+$$a = 15.4 \cdot .75 = 11.55 \cdot \frac{g}{m^3}$$
+
+$$A = 15.4 \cdot \frac{g}{m^3}$$
+
+$$15.4 - 11.55 = 3.85 \cdot \frac{g}{m^3}$$
+
+$$m_{võimalik} = 3.85 \cdot 80 = 308 \cdot g$$
+
+$1 \cdot m^3$ saab lisada 3.85 * g veeauru.
+
+$$m_{vesi} = 3 \cdot kg$$
+
+
+$$m = \rho \cdot V$$
+
+##
+
+### Ülesande püstitus
+
+Kui kõrgele tõuseb vesi kahe vertikaalselt asetatud paralleelse klaasplaadi
+vahel, kui nendevaheline kaugus on 0,5 mm. Eeldada, et märgamine on täielik. Vee
+pindpinevustegur on 0,072 N/m. Vee tihedus on 1000 kg/m3. Vaba langemise
+kiirendus g=9,81 m/s2. (V: 29 mm)
+
+### Tegu
+
+$$s = 5 * 10^-4 \cdot m$$
+
+$$h = ?$$
+
+$$F_pind = m * g$$
+
+$$\sigma * L = m * g$$
+
+$$m = \rho \cdot V$$
+
+$$V = h \cdot \l \cdot s$$
+
+$$L = 2 * l$$
+
+$$2 \cdot \sigma \cdot l = h \cdot l \cdot s \cdot g \cdot \rho$$
+
+$$2 \cdot \sigma = h \cdot s \cdot g \cdot \rho$$
+
+$$\frac{2 \cdot \sigma}{s \cdot g \cdot \rho}$$
+
+57, 58 kodus
