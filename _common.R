@@ -20,6 +20,7 @@ include_svg = function(path) {
   }
   knitr::include_graphics(output)
 }
+
 ZERO_DEGREES_C_IN_K = 273.15
 
 convertFromDegreesFToK <- function(temperatureF) {
@@ -56,3 +57,7 @@ changeSciNot <- function(n) {
   output <- sub("-0?", "-", output) #Leaves - symbol but removes leading zeros on expoent, if < 1
   output <- sub("(.*)", "\\$\\1\\$", output)
 }
+
+R <- 8.314472
+
+p <- 1e5

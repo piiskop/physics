@@ -27,11 +27,13 @@ source("_common.R")
 
 $${temperature}_{c} = \frac{{temperature}_{f} - 32}{1.8}$$
 
+## Soojusülekanne
+
+$${soojus}_{soojendamiseks} = erisoojus * mass * \Delta(temperatuur)$$
+
 $${erisoojus}_{1} * {mass}_{1} * \Delta({temperatuur}_1) + {erisoojus}_2 * {mass}_2 * \Delta({temperatuur}_2) === 0$$
 
 $${soojus}_{sulamiseks} = sulamissoojus * mass$$
-
-$${soojus}_{soojendamiseks} = erisoojus * mass * \Delta(temperatuur)$$
 
 $${koefitsient}_{tõhusus} = \frac{{kasulikSoojus}_{lisatudVõiEemaldatud}}{töö} === \frac{{võimsus}_{kasulik}}{{võimsus}_{kogu}}$$
 
@@ -50,6 +52,236 @@ Termodünaamika esimene seadus:
 $$töö = {soojus}_{kuuma} - {soojus}_{külmast}$$
 
 $$\frac{{soojus}_{kuuma}}{{absoluutneTemperatuur}_{kuumas}} === \frac{{soojus}_{külmast}}{{absoluutneTemperatuur}_{külmas}}$$
+
+Termodünaamika esimese seaduse veel üks teisend:
+
+```{=tex}
+\begin{align}
+Q := \Delta(U) + W
+(\#eq:thermodynamics-1)
+\end{align}
+```
+
+![(\#fig:iso-processes) Isoprocesses](iso-processes.svg)
+
+Gaasi molaarruumala:
+
+```{=tex}
+\begin{align}
+V_m :&= \frac{V}{n} \\
+&= \frac{`r R` \times J \times T}{K \times mol \times 1 \times 10^5 \times Pa} &
+(\#eq:molar-volume-of-gas)
+\end{align}
+```
+
+[@haynes_2014_crc, p. 1-7], [@mills_1993_quantities, p. 54]
+Isobaarilise protsessi töö üks valem on jooniselt \@ref(fig:iso-processes):
+
+```{=tex}
+\begin{equation}
+W = n \times `r R` \times \frac{J}{K \times mol} \times \Delta(T) 
+(\#eq:isobaric-work-by-amount)
+\end{equation}
+```
+
+[@haynes_2014_crc, p. 7-22]
+
+Asendan molaarruumala valemist \@ref(eq:molar-volume-of-gas) isobaarilise protsessi töö valemisse \@ref(eq:isobaric-work-by-amount) ainehulga:
+
+```{=tex}
+\begin{equation}
+W = \frac{V_0 \times `r R` \times J \times \Delta(T)}{V_m \times K \times mol} 
+(\#eq:isobaric-work-by-molar-volume)
+\end{equation}
+```
+
+Joonisel \@ref(fig:iso-processes) on esitatud ka isobaarilise protsessi ruumalade ja temperatuuride seose valem, millest avaldan lõpptemperatuuri:
+
+```{=tex}
+\begin{equation}
+T = \frac{T_0 \times V}{V_0} 
+(\#eq:final-temperature)
+\end{equation}
+```
+
+Valemiga \@ref(eq:final-temperature) täiendan valemit \@ref(eq:isobaric-work-by-molar-volume):
+
+```{=tex}
+\begin{align}
+W :&= \frac{V_0 \times `r R` \times J \times (\frac{T_0 \times V}{V_0} - T_0)}{V_m \times K \times mol} \\
+&= \frac{V_0 \times `r R` \times J \times T_0 \times (\frac{V}{V_0} - 1)}{V_m \times K \times mol} \\
+&= \frac{V_0 \times `r R` \times J \times T_0 \times (\frac{V - V_0}{V_0})}{V_m \times K \times mol} \\
+&= \frac{`r R` \times J \times T_0 \times (V - V_0)}{V_m \times K \times mol} \\
+&= \frac{`r R` \times J \times T_0 \times (V - V_0)}{\frac{`r R` \times J \times T_0}{K \times mol \times 1 \times 10^5 \times Pa} \times K \times mol} \\
+&= \frac{(V - V_0) \times K \times mol \times 1 \times 10^5 \times Pa}{K \times mol} \\
+&= (V - V_0) \times 1 \times 10^5 \times Pa \\
+(\#eq:isobaric-work-by-change-of-volume)
+\end{align}
+```
+
+Adiabaatilise protsessi töö valemi leian samuti jooniselt \@ref(fig:iso-processes). Asendan sellesse valemisse ainehulga valemist \@ref(eq:molar-volume-of-gas):
+
+```{=tex}
+\begin{align}
+W :&= \frac{V_0 \times C_V \times (T_0 - T)}{V_m} \\
+&= \frac{V_0 \times C_V \times (T_0 - T)}{\frac{`r R` \times J \times T_0}{K \times mol \times p}} \\
+&= \frac{V_0 \times C_V \times (T_0 - T) \times K \times mol \times p}{`r R` \times J \times T_0} \\
+(\#eq:adiabatic-work-by-temperature)
+\end{align}
+```
+
+Ideaalse gaasi soojusmahtuvus adiabaatilises protsessis:
+
+```{=tex}
+\begin{align}
+C_V = \frac{3 \times `r R` \times J}{2 \times K \times mol}
+(\#eq:adiabatic-heat-capacity)
+\end{align}
+```
+
+Asendan adiabaatilise protsessi soojusmahtuvuse valemist \@ref(eq:adiabatic-heat-capacity) adiabaatilise protsessi töö valemisse \@ref(eq:adiabatic-work):
+
+```{=tex}
+\begin{align}
+W :&= \frac{V_0 \times \frac{3 \times `r R` \times J}{2 \times K \times mol} \times (T_0 - T) \times K \times mol \times p}{`r R` \times J \times T_0} \\
+&= \frac{V_0 \times \frac{3}{2} \times (T_0 - T) \times p}{T_0} \\
+&= \frac{V_0 \times 3 \times (T_0 - T) \times p}{2 \times T_0} \\
+(\#eq:adiabatic-work-of-ideal-gas)
+\end{align}
+```
+
+Kui tegemist pole ideaalse gaasiga, siis on $C_V$ muutuja, millele väärtuse võime leida vastavast tabelist või umbkaudselt arvutada vastavalt vabadusastmetele.
+
+Adiabaatilises protsessis muutuvad nii rõhk, ruumala kui temperatuur. Kui on teada, mismoodi muutub ruumala, saab arvutada gaasi poolt või gaasi suhtes tehtava töö. Kui ruumala suureneb, rõhk väheneb ja temperatuur väheneb ka. Ning vastupidi. Temperatuuri graafik on rõhu ja ruumala korrutise funktsioon, kuid mitte ainult. Selles funktsioonis on ruumala astendatud koefitsiendiga, mille väärtus sõltub gaasist. Selle funktsiooni väärtus on igasuguse ruumala korral ühesugune. Töö on jõu ja nihke korrutis:
+
+```{=tex}
+\begin{align}
+W := \Delta(x) \times F
+(\#eq:work)
+\end{align}
+```
+
+Jõud on rõhu ja pindala korrutis:
+
+```{=tex}
+\begin{align}
+F := \overrightarrow{p} \times A
+(\#eq:force)
+\end{align}
+```
+
+Asendan valemist \@ref(eq:force) jõu valemisse \@ref(eq:work):
+
+```{=tex}
+\begin{align}
+W := \Delta(x) \times \overrightarrow{p} \times A
+(\#eq:work-by-change-of-spatium-pressure-and-area)
+\end{align}
+```
+
+Kui korrutada nihe ja pindala, saame ruumala:
+
+```{=tex}
+\begin{align}
+W := \Delta(V) \times \overrightarrow{p}
+(\#eq:work-by-change-of-volume-and-pressure)
+\end{align}
+```
+
+Rõhu all mõeldakse siin välisrõhku. Seega, kui gaasi ruumala suureneb, siis see rõhk on negatiivne.
+
+Sõltuvalt gaasist astendatakse ruumala koefitsiendiga. Rõhu ja ruumala astme korrutis on mis tahes sisendite väärtuste korral adiabaatilises protsessis jääv suurus:
+
+```{=tex}
+\begin{align}
+\overrightarrow{p_0} \times V_0^\gamma = \overrightarrow{p} \times V^\gamma = CONSTANT
+(\#eq:constant-partial-work)
+\end{align}
+```
+
+Seega kui elementaarrõhkusid liita järjest alates algruumalast kuni lõppruumalani, saame kokku töö:
+
+```{=tex}
+\begin{align}
+W :&= \int_{V_0}^{V}{\overrightarrow{p} \times d(V)} \\
+&= \int_{V_0}^{V}{\frac{CONSTANT}{V^\gamma} \times d(V)} \\
+&= CONSTANT \times \int_{V_0}^{V}{V^{-\gamma} \times d(V)} \\
+&= CONSTANT \times (\frac{V^{-\gamma + 1}}{-\gamma + 1}) |_{V_0}^{V} \\
+&= CONSTANT \times (\frac{V^{1 -\gamma}}{1 -\gamma}) |_{V_0}^{V} \\
+&= CONSTANT \times (\frac{V^{1 -\gamma}}{1 -\gamma} - \frac{V_0^{1 -\gamma}}{1 -\gamma}) \\
+&= CONSTANT \times (\frac{V^{1 -\gamma} - V_0^{1 -\gamma}}{1 -\gamma}) \\
+&= \frac{p \times V^\gamma \times V^{1 -\gamma} - p_0 \times V_0^\gamma \times V_0^{1 -\gamma}}{1 -\gamma} \\
+&= \frac{p \times V - p_0 \times V_0}{1 -\gamma} \\
+(\#eq:adiabatic-work)
+\end{align}
+```
+
+[@elucyda]
+
+Milline on lõpptemperatuur adiabaatilises protsessis? Selle arvutamiseks tuleb omavahel kõrvutada töö valemid jooniselt \@ref(fig:iso-processes) ja \@ref(eq:work-by-change-of-volume-and-pressure):
+
+```{=tex}
+\begin{align}
+-n \times C_V \times (T_0 - T) &= \Delta(V) \times \overrightarrow{p}\\
+-n \times C_V \times d(T) &= \overrightarrow{p} \times d(V)
+(\#eq:comparing-adiabatic-work-equations)
+\end{align}
+```
+
+Ideaalse gaasi olekuvõrrand:
+
+```{=tex}
+\begin{align}
+\overrightarrow{p} \times V = \frac{n \times `r R` \times J \times T}{K \times mol} 
+(\#eq:ideal-gas)
+\end{align}
+```
+
+Asendan ideaalse gaasi olekuvõrrandist \@ref(eq:ideal-gas) adiabaatilise töö võrdlusvõrrandisse rõhu:
+
+```{=tex}
+\begin{align}
+-n \times C_V \times d(T) &=  \frac{n \times `r R` \times J \times T}{K \times mol \times V}\times d(V)\\
+-\frac{K \times mol \times n \times C_V \times d(T)}{n \times `r R` \times J \times T} &=  \frac{d(V)}{V}\\
+-\frac{K \times mol \times C_V \times d(T)}{`r R` \times J \times T} &=  \frac{d(V)}{V}\\
+\int_{T_0}^T{-\frac{K \times mol \times C_V \times d(T)}{`r R` \times J \times T}} &= \int_{V_0}^V{ \frac{d(V)}{V}}\\
+-\frac{K \times mol \times C_V}{`r R` \times J } \times \int_{T_0}^T{\frac{d(T)}{T}} &= \int_{V_0}^V{ \frac{d(V)}{V}}\\
+-\frac{K \times mol \times C_V}{`r R` \times J } \times (ln(T) - ln(T_0)) &= ln(V) - ln(V_0)\\
+\frac{K \times mol \times C_V}{`r R` \times J } \times (ln(T_0) - ln(T)) &= ln(V) - ln(V_0)\\
+\frac{K \times mol \times C_V}{`r R` \times J } \times ln(\frac{T_0}{T}) &= ln(\frac{V}{V_0})\\
+(\#eq:preparing-for-temperature-or-volume)
+\end{align}
+```
+
+Võrrandist \@ref(eq:preparing-for-temperature-or-volume) saab avaldada nt ruumala:
+
+```{=tex}
+\begin{align}
+(\frac{T_0}{T})^\frac{K \times mol \times C_V}{`r R` \times J } &= \frac{V}{V_0}\\
+(\#eq:volume-from-work-comparison)
+\end{align}
+```
+
+Võrrandist \@ref(eq:preparing-for-temperature-or-volume) saab avaldada nt temperatuuri:
+
+```{=tex}
+\begin{align}
+ln(\frac{T_0}{T}) &= \frac{ln(\frac{V}{V_0})}{\frac{K \times mol \times C_V}{`r R` \times J }}\\
+\frac{T_0}{T} &= (\frac{V}{V_0})^\frac{`r R` \times J}{K \times mol \times C_V}
+(\#eq:temperature-from-work-comparison)
+\end{align}
+```
+
+Adiabaatilise töö valem võib olla ka selline, milles pole lõpptemperatuuri. Sellise valemi saamiseks asendan lõpptemperatuuri valemist \@ref(eq:temperature-from-work-comparison) adiabaatilise tööprotsessi valemisse \@ref(eq:adiabatic-work-by-temperature):
+
+```{=tex}
+\begin{align}
+W :&= \frac{V_0 \times C_V \times (T_0 - \frac{T_0}{(\frac{V}{V_0})^\frac{`r R` \times J}{K \times mol \times C_V}}) \times K \times mol \times p}{`r R` \times J \times T_0} \\
+&= \frac{V_0 \times C_V \times (1 - \frac{1}{(\frac{V}{V_0})^\frac{`r R` \times J}{K \times mol \times C_V}}) \times K \times mol \times p}{`r R` \times J} \\
+&= \frac{V_0 \times C_V \times (1 - (\frac{V_0}{V})^\frac{`r R` \times J}{K \times mol \times C_V}) \times K \times mol \times p}{`r R` \times J} \\
+(\#eq:adiabatic-work-by-volumes-molar-heat-capacity-pressure)
+\end{align}
+```
 
 ## Energia
 
@@ -972,6 +1204,67 @@ if(difference_between_enlengthening_and_distance >= 0) {
 ### Lahend
 
 `r solution`
+
+## Gaas teeb tööd.
+
+### Ülesande püstitus
+
+Milline on gaasi poolt tehtud töö, kui 150l süsihapegaasi, mille algtemperatuur on 30°C paisub isobaariliselt 300l-ni? Milline on gaasi töö juhul, kui süsihappegaas paisuks adiabaatiliselt? (8p.)
+
+### Sisendid
+
+$$V_0 := 150 \times l = 1.5 \times 10^{-1} \times m^3$$
+
+```{r}
+V_0 <- 150e-3
+T_0 <- celsius_to_kelvin(30)
+```
+
+
+$$t := 30°C \leadsto T_0 := `r T` \times K$$
+
+$$V := 300 \times l = 3 \times 10^{-1} \times m^3$$
+
+```{r co2-expanding-isobaric-adiabatic-work-v}
+V <- 300e-3
+```
+
+$$C_V := 0.6593 \times \frac{kJ}{kg \times K} = 6.593 \times 10^{2} \times \frac{J}{kg \times K}$$ [@haynes_2014_crc, p. 6-36]
+
+```{r co2-expanding-isobaric-adiabatic-work-cv}
+C_V <- .6593e3
+```
+
+### Väljundid
+
+$$W_p := \ldots$$
+
+$$W_a := \ldots$$
+
+### Kuidas lahendada?
+
+Isobaarilise töö arvutamiseks kasutan valemit \@ref(eq:isobaric-work-by-change-of-volume).
+
+Adiabaatilise töö arvutamiseks kasutan valemit \@ref(eq:adiabatic-work-by-volumes-molar-heat-capacity-pressure).
+
+### Arvutuskäik
+
+```{r co2-expanding-isobaric-adiabatic-work}
+W_p <- (V - V_0) * -p
+W_a <- (V_0 * C_V * (1 - (V_0 / V)^(R / C_V)) * -p) / R
+```
+
+### Lahend
+
+$`r W_p` \times J$ on gaasi poolt tehtud töö, kui $`r V_0` \times m^3$ süsihappegaasi, mille algtemperatuur on $`r T_0` \times K$, paisub isobaariliselt $`r V` \times m^3$-ni.
+
+$`r signif(W_a, digits = 7)` \times J$ oleks gaasi töö juhul, kui süsihappegaas paisuks adiabaatiliselt.
+
+
+
+
+
+
 
 ## Õhumull
 
@@ -2202,3 +2495,164 @@ $$2 \cdot \sigma = h \cdot s \cdot g \cdot \rho$$
 $$\frac{2 \cdot \sigma}{s \cdot g \cdot \rho}$$
 
 57, 58 kodus
+
+## 
+
+### Ülesande püstitus
+
+Veetorust tilgub külma vett 10 tilka minutis. Mitu korda on suurenenud või
+vähenenud vee pindpinevustegur, kui samast torust tilgub seda 12 tilka minutis?
+(V: Pindpinevustegur on vähenenud 6/5 korda).
+
+### Tegu
+
+$$t = 60 \times s$$
+
+$$N_1 = 10$$
+
+$$N_2 = 12$$
+
+$$\frac{\sigma_1}{\sigma_2} = ?$$
+
+Pindpinevusjõud mõjub üles, raskusjõud alla:
+
+$$F_{pind} = m \times g$$
+
+$$\sigma \times l = m \times g$$
+
+Ühe minuti kestel läbi toru tuleb vesi massiga $M$.
+
+Tilga mass $m_1 = \frac{M}{N_1}$ ja $m_2 = \frac{M}{N_2}$.
+
+$$\sigma \times l = \frac{M}{N} \times g$$
+
+$$\sigma = \frac{M \times g}{N \times l}$$
+
+$$\frac{sigma_1}{sigma_2} = \frac{\frac{M \times g}{N_1 \times l}}{\frac{M \times g}{N_2 \times l}} = \frac{g \times N_2}{N_1}$$
+
+$$\frac{sigma_1}{sigma_2} = \frac{N_2}{N_1}$$
+
+##
+
+### Ülesande püstitus
+
+ 37   cm   paksuse   telliskiviseina   välispinna   temperatuur   on   -15oC,   sisepinnal
++20oC.   Leida   ööpäeva   jooksul   läbi   25m2
+  pinna   mineva   soojuse   hulk.   Telliskivi
+soojusjuhtivustegur   on   0,7   W/(m*K).   Kui   palju   puid   peaks   ahjus   põletama,   et
+sellist soojusenergiat saada? Puidu kütteväärtus on 19,4 MJ/kg.(V: 7,37 kg)
+
+
+### Tegu
+
+$$T_1 = -15°C = 258 K$$
+
+$$T_2 = 20°C = 293 K$$
+
+$$l = 37 cm = .37 m$$
+
+$$t = 86400 s$$
+
+$$\kappa = .7 \times \frac{W}{m \times K}$$
+
+$$k_v = 19.4 \times 10^6 \times \frac{J}{kg}$$
+
+$$m = ?$$
+
+$$\Delta(Q) = ?$$
+
+$$q = \frac{\Delta(Q)}{\Delta(t)} = \frac{S \times \Delta(T) \times k_v}{l}$$
+
+```{r}
+q <- 25 * (293 - 258) * .7 / .37
+q
+```
+
+$$\Delta(Q) = q \times \Delta(t)$$
+
+```{r}
+delta_q <- q * 86400
+delta_q
+```
+
+$$Q = k_v \times m$$
+
+$$m = \frac{Q}{k_v}$$
+
+```{r}
+m <- delta_q / (19.4e6)
+m
+```
+
+Samad küsimused, kui seinale lisada viis sentimeetrit klaasvilla, mille $\kappa_2 = .037 \times \frac{W}{m \times K}$.
+
+$$q = \frac{S \times \Delta(T)}{\frac{l_1}{\kappa_1} + \frac{l_2}{\kappa_2}}$$
+
+```{r}
+q = 25 * (293 - 258) / (.37 / .7 + .05 / .037)
+q
+Q <- q * 86400
+Q
+m <- Q / 19.4e6
+m
+```
+
+##
+
+### Ülesande püstitus
+
+Maja   seina   soojuspidavuse   2,5-kordseks   suurendamiseks   temperatuuride
+vahel   20oC   (st,   et   seest   välja   läheks   2,5   korda   vähem   soojust),   otsustati   20cm
+paksusele tellisest seinale lisada klaasvilla ning sellele 2 cm paksune voodrilaud.
+Kui   paks   peab   olema   klaasvilla   kiht?   Klaasvilla   soojusjuhtivustegur   on   0,037 W/(m*K), puidul 0,16 W/(m*K). (V: 1,1 cm.)
+
+### Tegu
+
+$$Delta(T) = 20°C$$
+
+$$l_1 = 20 cm = 0.2 m$$
+
+$$l_3 = 2 cm = 0.02 m$$
+
+$$\kappa_1 = 0.7 \frac{W}{m \times K}$$
+
+$$\kappa_2 = 0.037 \frac{W}{m \times K}$$
+
+$$\kappa_3 = 0.16 \frac{W}{m \times K}$$
+
+$$\frac{q_1}{q_2} = 2.5$$
+
+$$l_2$$
+
+$$q_1 = \kappa_1 \times \frac{Delta(T) \times S}{l_1}$$
+
+$$q_2 = \frac{\Delta(T) \times S}{\frac{l_1}{\kappa_1} + \frac{l_2}{\kappa_2} + \frac{l_3}{\kappa_3}}$$
+
+$$q_1 = 2.5 \times q_2$$
+
+$$\frac{\Delta(T) \times S}{\frac{l_1}{\kappa_1}} = \frac{2.5 \Delta(T) \times S}{\frac{l_1}{\kappa_1} + \frac{l_2}{\kappa_2} + \frac{l_3}{\kappa_3}}$$
+
+$$\frac{1}{\frac{l_1}{\kappa_1}} = \frac{2.5}{\frac{l_1}{\kappa_1} + \frac{l_2}{\kappa_2} + \frac{l_3}{\kappa_3}}$$
+
+$$\frac{l_1}{\kappa_1} + \frac{l_2}{\kappa_2} + \frac{l_3}{\kappa_3} = 2.5 \times \frac{l_1}{\kappa_1}$$
+
+$$\frac{l_2}{\kappa_2} = 2.5 \times \frac{l_1}{\kappa_1} - \frac{l_1}{\kappa_1} - \frac{l_3}{\kappa_3}$$
+
+$$\frac{l_2}{\kappa_2} = 1.5 \times \frac{l_1}{\kappa_1} - \frac{l_3}{\kappa_3}$$
+
+$$l_2 = \kappa_2 \times (1.5 \times \frac{l_1}{\kappa_1} - \frac{l_3}{\kappa_3})$$
+
+```{r}
+l_2 <- .037 * (1.5 * .2 / .7 - .02 / .16)
+l_2
+```
+
+tellis: $\frac{0.2}{0.7} \approx 0.29$
+
+puit: $0.29 \times 0.16 = 0.045$
+
+Seega 4.5 cm puitu on sama mis 29 cm tellisseina.
+
+vill: $0.29 \times 0.037 = 0.01 (m)$
+
+63 ise!
