@@ -77,7 +77,7 @@ Valguse kiirus vaakumis:
 SPEED_LIGHT <- 299792458
 ```
 
-![(\#fig:integrating-time) Ühesuguste ajavahemike integreerimine](integrating-time.svg)
+![(\#fig:integrating-time) Ühesuguste ajavahemike integreerimine](mechanics/integrating-time.svg)
 
 Joonisel \@ref(fig:integrating-time) on kujutatud ajatelge, millele on märgitud võrdsed ajavahemikud. Võime neid ajavahemikke kujutada ka lõputult nullilähedasena. Kui need ajavahemikud kokku liita, saame koguaja:
 
@@ -204,7 +204,7 @@ Kui hetkekiirus on $\color{red}{\textbf{konstantne}}$, siis
 
 kus *s* on vahemaa, *v* on hetkekiirus, *t_0_* on alghetk, *t* on lõpphetk, *s_0_* on lähe.
 
-![(\#fig:aeg-kiirus) Kiiruse muutumine ajas, kui kiirendus on $2 \cdot \frac{m}{s^2}$](aeg-kiirus.svg)
+![(\#fig:aeg-kiirus) Kiiruse muutumine ajas, kui kiirendus on $2 \cdot \frac{m}{s^2}$](mechanics/aeg-kiirus.svg)
 
 Kui ülilühikese vahemaa ja selle läbimiseks kulunud ülilühikese ajavahemiku suhe on kiirus, mis näitab, kui kiiresti asukoht muutub ajas, siis kiiruse muutumist ajas näitab kiirendus:
 
@@ -450,7 +450,7 @@ g <- gravitationalConstant * (6 * 10 ^ 24) / (6.4 * 10 ^ 6) ^ 2
 
 g = `r signif(g, digits <- 3)` $* \frac{m}{s ^ 2}$
 
-![gravitatsiooni standardkiirendus eri piirkondades Maal](cities.svg)
+![gravitatsiooni standardkiirendus eri piirkondades Maal](mechanics/cities.svg)
 
 "The value 9.806 m/s2 is midway between these two extremes, so it's sort of true to say that…
 
@@ -841,13 +841,13 @@ a)  α = 25°;
 
 b)  α = 50°.
 
-![(\#fig:hanging-weight)Trosside otsas ripub raskus.](hanging-weight.svg)
+![(\#fig:hanging-weight)Trosside otsas ripub raskus.](mechanics/hanging-weight.svg)
 
 ### Lahendus
 
 #### Üldine lahendus
 
-![(\#fig:hanging-weight-complemented)Täiendatud joonis.](hanging-weight-complemented.svg)
+![(\#fig:hanging-weight-complemented)Täiendatud joonis.](mechanics/hanging-weight-complemented.svg)
 
 Kuna algandmeid napib ja ainult ühe nurga suurus on teada, siis eeldan, et trossid on ühepikkused. Kõik kolm jõudu peavad üksteist tasakaalustama. Igal jõul on nii rõhtne kui püstine komponent. Näeme jooniselt \@ref(fig:hanging-weight-complemented), et rõhtne komponent puudub raskusjõul ning ülejäänud rõhtsad komponendid on absoluutväärtuselt ühesugused, mistõttu koostan võrrandi üksnes püstiste komponentidega:
 
@@ -887,7 +887,7 @@ Läänemere maht on umbes 20000 km^3^. Kuu mass on 7,3 \* 10^22^ kg ja keskmine 
 
 ### Lahendus
 
-![Maa ja Kuu](baltic-sea-moon.svg)
+![Maa ja Kuu](mechanics/baltic-sea-moon.svg)
 
 Selles ülesandes on vaja teha palju konverteerimisi. Et arvutada Kuu ja Läänemere vaheline jõud, on vaja lisaks gravitatsioonikonstandile kasutada Läänemere ja Kuu massi ning nendevahelist kaugust.
 
@@ -1277,7 +1277,7 @@ the direction of the displacement *tangentAngle*
 
 ### Drawing
 
-![imagination of the distances of camps](expedition.svg)
+![imagination of the distances of camps](mechanics/expedition.svg)
 
 ### The formulas
 
@@ -1348,7 +1348,7 @@ the round trip distance *distance_all*
 
 I first create a drawing for the task.
 
-![The given lengths are marked as green and the length to be calculated as red.](airports.svg)
+![The given lengths are marked as green and the length to be calculated as red.](mechanics/airports.svg)
 
 ### Formulas
 
@@ -1408,7 +1408,7 @@ d. What relationship between distance and displacement does this illustrate?
 
 ### Drawing
 
-![The Earth's orbit around the Sun](earth-s-orbit.svg)
+![The Earth's orbit around the Sun](mechanics/earth-s-orbit.svg)
 
 ### Formulas
 
@@ -1718,7 +1718,7 @@ c. Assume a car could decelerate at four times the "comfortable" rate without lo
 
 d. Assume a driver was traveling on the freeway at the speed you calculated in part *c.* What distance is needed to decelerate this car to the speed limit of the exit ramp at the "comfortable" rate ?
 
-![Freeway exit](freeway-exit.svg)
+![Freeway exit](mechanics/freeway-exit.svg)
 
 ### Initial data
 
@@ -2103,15 +2103,15 @@ Jõuga `r F` * N peab venitama ühest otsast kinnitatud traati, et see pikeneks 
 
 ### Setup
 
-![The channel that I'm dealing with](channel-20220317-181534.jpg)
+![The channel that I'm dealing with](mechanics/channel-20220317-181534.jpg)
 
 At the address (https://dripfina.com/plastic-in-the-ocean-statistics/): "Every year, 25 million tons of plastic end up in the ocean." There's a channel here and a part of this channel that's shown on the task's picture is important. This part of the channel is restricted by concrete walls and waterfalls. I imagine that this "basin" is different: having also concrete walls instead of waterfalls with the height of the lowest existing concrete wall aside the "basin" which is shown by the red arrow. I also imagin that any water drains connected to the "basin" are closed so that nothing can flow in or out through them. The imaginable upper edge of the "basin" is shown by the blue line. I don't consider the small niches nor prisms inside the "basin". I only consider that the "basin" is surrounded by four walls and it's empty. Suddenly, out of nowhere, this imaginable "basin" is starting to be filled by plastics having the mentioned speed. My task is to calculate the time frame for this "basin" to be filled by plastics.
 
 ### Figures
 
-![(\#fig:channel-lower-wall)Measurements of the channel's lower wall](channel-lower-wall.svg)
+![(\#fig:channel-lower-wall)Measurements of the channel's lower wall](mechanics/channel-lower-wall.svg)
 
-![(\#fig:channel-width)Measuring the width of the channel](channel-width.svg)
+![(\#fig:channel-width)Measuring the width of the channel](mechanics/channel-width.svg)
 
 ### Description
 

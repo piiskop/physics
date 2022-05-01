@@ -26,7 +26,7 @@ gravitationalAcceleration <- GRAVITATION * (WEIGHT_EARTH) / (RADIUS_EARTH) ^ 2
 
 $$periood = 2 * \pi * \sqrt{\frac{pikkus}{{kiirendus}_{gravitatsioon}}} === 2 * \pi * \sqrt{\frac{mass}{{jäikus}_{vedru}}}$$
 
-![Pillikeel ja lainepikkus](vibstr1.gif)
+![Pillikeel ja lainepikkus](sound/vibstr1.gif)
 
 ```{r}
 VELOCITY_SOUND_AIR = 340
@@ -52,7 +52,7 @@ $$KUULDELÄVI = 10^{-12} * \frac{J}{m^2 * s}$$
 
 $${valjus} * dB = 10 * \log \frac{intensiivsus * \frac{W}{m^2}}{kuuldelävi * \frac{W}{m^2}}$$
 
-![Põhi- ja ülemtoonid](tones.png)
+![Põhi- ja ülemtoonid](sound/tones.png)
 
 # Ülesanded
 

@@ -63,7 +63,7 @@ Ei
 
 ### Ülesande püstitus
 
-![Roos valges valguses](rose-without-filter.png)
+![Roos valges valguses](electromagnetic-waves-light-colors/rose-without-filter.png)
 
 Valges valguses on punase 
 roosi kroonlehed 
@@ -80,7 +80,7 @@ Mis värvi on vars ja lehed?
 
 ### Lahendus
 
-![Roos punase filtri läbi](rose-with-filter.png)
+![Roos punase filtri läbi](electromagnetic-waves-light-colors/rose-with-filter.png)
 
 Kroonlehed punased, vars 
 ja lehed mustad.
@@ -89,7 +89,7 @@ ja lehed mustad.
 
 ### Ülesande püstitus
 
-![Muster kaugelt](pattern-from-far.png)
+![Muster kaugelt](electromagnetic-waves-light-colors/pattern-from-far.png)
 
 Mitut värvi on kasutatud 
 valgele põhjale mustri 
@@ -97,7 +97,7 @@ tegemiseks?
 
 ### Lahendus
 
-![Muster lähedalt](pattern-from-close.png)
+![Muster lähedalt](electromagnetic-waves-light-colors/pattern-from-close.png)
 
 Kaht.
 

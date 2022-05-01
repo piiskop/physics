@@ -77,7 +77,7 @@ SPEED_LIGHT <- 299792458
 
 ### Ülesande püstitus
 
-![Ekvipotentsiaaljooned](equipotential-lines.png)
+![Ekvipotentsiaaljooned](electricity/equipotential-lines.png)
 
 Millises sihis liikudes 
 muutub potentsiaal 
@@ -278,7 +278,7 @@ vahelduvvool
 
 ### Ülesande püstitus
 
-![Jõulukuuse küünlad](christmas-tree-candles.png)
+![Jõulukuuse küünlad](electricity/christmas-tree-candles.png)
 
 Jõulukuuse tuled on
 

@@ -2,25 +2,166 @@
 title: "Füüsika"
 author: 'peacecop kalmer:'
 date: "12/21/2021"
-output: html_document
+output:
+    bookdown::html_document2:
+      toc: yes
+      toc_float: yes
+      toc_depth: 5
+bibliography: references.bib
+biblio-style: "newapa"
+link-citations: true
+citation_package: biblatex
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+options(width = 60)
+options(bookdown.render.file_scope = FALSE)
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  echo = TRUE
+  )
+knitr::opts_chunk$set(out.height = "\\textheight",  out.width = "\\textwidth",
+                      out.extra = "keepaspectratio=true")
+knitr::opts_chunk$set(fig.margin = TRUE)
 ```
 
-fakultatiivsed
+# Funktsioonid
 
-ülesanded
+```{r functions}
+include_svg = function(path) {
+  if (knitr::is_latex_output()) {
+    output = xfun::with_ext(path, 'pdf')
+    # you can compare the timestamp of pdf against svg to avoid conversion if necessary
+    system2('rsvg-convert', c('-f', 'pdf', '-a', '-o', shQuote(c(output, path))))
+  } else {
+    output = path
+  }
+  knitr::include_graphics(output)
+}
 
-ühiseks
+celsius_to_kelvin = function(celsius) {
+  celsius + 2.7315e2
+}
 
-sirvimiseks
+convertFromDegreesFToK <- function(temperatureF) {
+  (temperatureF - 32) / 1.8 + ZERO_DEGREES_C_IN_K
+}
 
-ilma
+changeSciNot <- function(n) {
+  output <- format(n, scientific = TRUE) #Transforms the number into scientific notation even if small
+  output <- sub("e", "\\\\times 10^", output) #Replace e with 10^
+  output <- sub("\\+0?", "", output) #Remove + symbol and leading zeros on expoent, if > 1
+  output <- sub("-0?", "-", output) #Leaves - symbol but removes leading zeros on expoent, if < 1
+  output <- sub("(.*)", "\\$\\1\\$", output)
+}
+```
 
-kaaslase
+# Temperatuurid
 
-abita
+Standardtemperatuur: [@Calvert, p. 2216]
 
+$$t_\mathrm{m} := 0\mathrm{°C} \leadsto T_\mathrm{m} := `r celsius_to_kelvin(0)` \times \mathrm{K}$$
 
+```{r T_m}
+TEMPERATURE_OF_FUSION_OF_ICE <- ZERO_DEGREES_C_IN_K <- celsius_to_kelvin(0)
+```
+
+# Molaarmassid
+
+$$M(\mathrm{H}) := 1.008 \times \frac{\mathrm{g}}{\mathrm{mol}} = 1.008 \times 10^{-3} \frac{kg}{mol}$$
+
+```{r M_H}
+MOLAR_WEIGHT_H <- 1.008E-3
+```
+
+$$M(\mathrm{C}) := 12.011 \times \frac{\mathrm{g}}{\mathrm{mol}} = 1.2011 \times 10^{-3} \frac{kg}{mol}$$
+
+```{r M_C}
+MOLAR_WEIGHT_C <- 12.011E-3
+```
+
+$$M(\mathrm{N}) := 14.007 \times \frac{\mathrm{g}}{\mathrm{mol}} = 1.4007 \times 10^{-3} \frac{kg}{mol}$$
+
+```{r M_N}
+MOLAR_WEIGHT_N <- 14.007E-3
+```
+
+$$M(\mathrm{O}) := 15.999 \times \frac{\mathrm{g}}{\mathrm{mol}} = 1.5999 \times 10^{-3} \frac{\mathrm{kg}}{\mathrm{mol}}$$
+
+```{r M_O}
+MOLAR_WEIGHT_O <- 15.999E-3
+```
+
+# Erisoojused
+
+$$c_p(\mathrm{Cu, `r celsius_to_kelvin(25)` \times \mathrm(K)}) := 0.385 \times \frac{\mathrm{J}}{\mathrm{g} \times \mathrm{K}} = 3.85 \times 10^{2} \frac{\mathrm{J}}{\mathrm{kg} \times \mathrm{K}}$$ [@haynes_2014_crc, p. 4-124]
+
+```{r cp_Cu}
+cp_Cu = .385e3
+```
+
+$$c_p(\mathrm{Fe, `r celsius_to_kelvin(25)` \times \mathrm(K)}) := 0.449 \times \frac{\mathrm{J}}{\mathrm{g} \times \mathrm{K}} = 4.49 \times 10^{2} \frac{\mathrm{J}}{\mathrm{kg} \times \mathrm{K}}$$ [@haynes_2014_crc, p. 4-124]
+
+```{r cp_Fe}
+SPECIAL_HEAT_FE = .44 / (.1 ^ 3)
+```
+
+$$c_p(\mathrm{H_2O}) := 4.2194 \times \frac{\mathrm{kJ}}{\mathrm{kg} \times \mathrm{K}} = 4.2194 \times 10^{3} \frac{\mathrm{J}}{\mathrm{kg} \times \mathrm{K}}$$ [@haynes_2014_crc, p. 6-1]
+
+```{r cp_H2O}
+SPECIFIC_HEAT_CAPACITY_OF_WATER <- 4.18e3
+```
+
+$$c_p(teras) := 500 \times \frac{\mathrm{J}}{\mathrm{kg} \times \mathrm{K}} = 5 \times 10^2 \times \frac{\mathrm{J}}{\mathrm{kg} \times \mathrm{K}}$$ [@haynes_2014_crc, p. 12-211]
+
+```{r cp_steel}
+SPECIAL_HEAT_STEEL = 5e2
+```
+
+# Paisumiskordajad
+
+$$\alpha(\mathrm{Fe, `r celsius_to_kelvin(25)` \times \mathrm{K}}) := \frac{11.8}{10^6} \times \frac{1}{\mathrm{K}} = 1.18 \times 10^{-5} \times \frac{1}{K}$$ [@haynes_2014_crc, p. 12-217]
+
+```{r alpha_fe}
+COEFFICIENT_LINEAR_EXPANSION_FE = 1.18e-5
+```
+
+$$\alpha(\mathrm{steel}) := -19.87 \times10^{-5} = -1.987 \times 10^{-4}$$ [@haynes_2014_crc, p. 12-213]
+
+```{r alpha_steel}
+COEFFICIENT_LINEAR_EXPANSION_STEEL = -1.9872E-4
+```
+
+# Muu
+
+$$R = 8.314472 \times \frac{\mathrm{Pa} \times \mathrm{m^3}}{\mathrm{K} \times \mathrm{mol}}$$ [@haynes_2014_crc, p. 1-46]
+
+```{r R}
+R <- 8.314472
+```
+
+$$p := 10^5 \times \mathrm{Pa}$$
+
+```{r p}
+p <- 1e5
+```
+
+$$∆_{fus}(H)(\mathrm{jää}) := 333.4 \times \frac{\mathrm{J}}{\mathrm{g}} = 3.334 \times 10^5 \frac{\mathrm{J}}{\mathrm{kg}}$$ [@haynes_2014_crc, p. 6-12]
+
+```{r heat-of-fusion-of-ice}
+HEAT_OF_FUSION_OF_ICE <- 3.334E5
+```
+
+$$\Delta_{vap}(H)(\mathrm{H_2O}) := 2500.9 \times \frac{\mathrm{kJ}}{\mathrm{kg}} = 2.5009 \times 10^6 \times \frac{\mathrm{J}}{\mathrm{kg}}$$ [@haynes_2014_crc, p. 6-5]
+
+```{r heat-of-vaporization-of-h2o}
+HEAT_VAPORIZATION_WATER = 2500.9e3
+```
+
+$$a_\mathrm{e} := 6378136 \times \mathrm{m} = 6.378136 \times 10^6 \times \mathrm{m}$$ [@haynes_2014_crc, p. 14-1]
+
+```{r earth}
+RADIUS_EARTH = 6.378136E6
+LENGTH_EQUATOR_EARTH = RADIUS_EARTH * 2 * pi
+```

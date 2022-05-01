@@ -29,7 +29,7 @@ RADIUS_EARTH = 6.4E6
 GRAVITATIONAL_ACCELERATION_EARTH = GRAVITATION_EARTH * MASS_EARTH / RADIUS_EARTH ^ 2
 ```
 
-![Vastassuunalised voolud tõukuvad](power-lines.png)
+![Vastassuunalised voolud tõukuvad](magnetism/power-lines.png)
 
 $$magnetvoog = magnetinduktsioon \cdot T \cdot pindala \cdot m^2 \cdot cos({nurk}_{{normaal}_{pind}, magnetväljaJõujoon})$$
 
@@ -49,7 +49,7 @@ $${ülekanne}_{trafo} = \frac{{pinge}_{primaarmähis}}{{pinge}_{sekundaarmähis}
 
 ### Ülesande püstitus
 
-![Poolused](poles.png)
+![Poolused](magnetism/poles.png)
 
 Kus asub Maa magnetiline 
 põhjapoolus?
@@ -70,7 +70,7 @@ lõunapoolusel
 
 ### Ülesande püstitus
 
-![Troll](trolleybus.png)
+![Troll](magnetism/trolleybus.png)
 
 Kas trollibussi kontaktliinid
 

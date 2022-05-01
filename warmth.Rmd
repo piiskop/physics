@@ -11,14 +11,10 @@ bibliography: references.bib
 biblio-style: "newapa"
 link-citations: true
 citation_package: biblatex
-
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-```
-```{r echo=FALSE}
-source("_common.R")
 ```
 
 # Reeglid
@@ -31,9 +27,16 @@ $${temperature}_{c} = \frac{{temperature}_{f} - 32}{1.8}$$
 
 $${soojus}_{soojendamiseks} = erisoojus * mass * \Delta(temperatuur)$$
 
-$${erisoojus}_{1} * {mass}_{1} * \Delta({temperatuur}_1) + {erisoojus}_2 * {mass}_2 * \Delta({temperatuur}_2) === 0$$
-
 $${soojus}_{sulamiseks} = sulamissoojus * mass$$
+
+Soojuslik tasakaal:
+
+```{=tex}
+\begin{align}
+\sum_{i := 1}^n{Q_i} = 0
+(\#eq:thermal-equilibrium)
+\end{align}
+```
 
 $${koefitsient}_{tõhusus} = \frac{{kasulikSoojus}_{lisatudVõiEemaldatud}}{töö} === \frac{{võimsus}_{kasulik}}{{võimsus}_{kogu}}$$
 
@@ -62,7 +65,7 @@ Q := \Delta(U) + W
 \end{align}
 ```
 
-![(\#fig:iso-processes) Isoprocesses](iso-processes.svg)
+![(\#fig:iso-processes) Isoprocesses](heat/iso-processes.svg)
 
 Gaasi molaarruumala:
 
@@ -650,7 +653,7 @@ kui kuum vesi (100 °C)?
 Temperatuuril 100 °C on auru siseenergia aurustumissoojuse võrra suurem suurem kui vee siseenergia samal 
 temperatuuril.
 
-## Fahrenheiti ja Celsiuse skaala
+## Fahrenheiti-Celsius
 
 ### Ülesande püstitus
 
@@ -955,7 +958,7 @@ difference = 1 - (1 / cop)
 
 `r format(difference, digits = 1)` korda vähem elektrienergiat kulutab soojuspump sama soojushulga ülekandmiseks.
 
-## Heat Pump – Heating and Air Conditioning
+## Heat Pump
 
 ### Task
 
@@ -1221,7 +1224,7 @@ T_0 <- celsius_to_kelvin(30)
 ```
 
 
-$$t := 30°C \leadsto T_0 := `r T` \times K$$
+$$t := 30°C \leadsto T_0 := `r T_0` \times K$$
 
 $$V := 300 \times l = 3 \times 10^{-1} \times m^3$$
 
@@ -1259,6 +1262,124 @@ W_a <- (V_0 * C_V * (1 - (V_0 / V)^(R / C_V)) * -p) / R
 $`r W_p` \times J$ on gaasi poolt tehtud töö, kui $`r V_0` \times m^3$ süsihappegaasi, mille algtemperatuur on $`r T_0` \times K$, paisub isobaariliselt $`r V` \times m^3$-ni.
 
 $`r signif(W_a, digits = 7)` \times J$ oleks gaasi töö juhul, kui süsihappegaas paisuks adiabaatiliselt.
+
+## Alumiiniumist kalorimeeter
+
+### Ülesande püstitus
+
+Alumiiniumist kalorimeetrisse massiga 80 g oli valatud vesi massiga 200 g temperatuuril 15°C. Sellesse kalorimeetrisse lasti sisse vasksilinder massiga 120g ning temperatuuril 80°C. Määrata süsteemi lõpptemperatuur. Vee erisoojus on $4190 \times \frac{J}{kg \cdot K}$, vase erisoojus on $380 \times \frac{J}{kg \times K}$, alumiiniumi erisoojus on $880 \times \frac{J}{kg \times K}$. (6p)
+
+### Sisendid
+
+$$m(\mathrm{Al}) := 80 \times g = 8 \times 10^{-2} \times kg$$
+
+```{r putting-copper-cylinder-into-calorimeter-of-aluminum-m-al}
+m_Al <- 80e-3
+```
+
+
+$$m(\mathrm{H_2O}) := 200 \times g = 2 \times 10^{-1} \times kg$$
+
+```{r putting-copper-cylinder-into-calorimeter-of-aluminum-m-h2o}
+m_H2O <- 200e-3
+```
+
+$$t(\mathrm{Al, H_2O}) := 15°C \leadsto T(\mathrm{Al, H_2O}) := 2.8815 \times 10^2 K$$
+
+```{r putting-copper-cylinder-into-calorimeter-of-aluminum-t-al-and-h2o}
+T_Al_and_H2O <- celsius_to_kelvin(15)
+```
+
+$$m(\mathrm{Cu}) := 120 \times g = 1.2 \times 10^{-1} \times kg$$
+
+```{r putting-copper-cylinder-into-calorimeter-of-aluminum-m-cu}
+m_Cu <- 120e-3
+```
+
+$$t(\mathrm{Cu}) := 80\mathrm{°C} \leadsto T(\mathrm{Cu}) := 3.5315 \times 10^2 \times \mathrm{K}$$
+
+```{r putting-copper-cylinder-into-calorimeter-of-aluminum-t-cu}
+T_Cu <- celsius_to_kelvin(80)
+```
+
+$$c_p(\mathrm{Al}, 300 \times \mathrm{K}) := 0.895 \times \frac{\mathrm{J}}{\mathrm{g} \times \mathrm{K}} = 8.95 \times 10^2 \times \frac{\mathrm{J}}{\mathrm{kg} \times \mathrm{K}}$$ [@haynes_2014_crc, p. 12-217]
+
+```{r putting-copper-cylinder-into-calorimeter-of-aluminum-cp}
+cp_Al <- .895e3
+```
+
+$$c_p(\mathrm{H_2O, `r celsius_to_kelvin(20)` \times \mathrm{K}}) := 4.1841 \times \frac{\mathrm{kJ}}{\mathrm{kg} \times \mathrm{K}} = 4.1841 \times 10^{3} \frac{\mathrm{J}}{\mathrm{kg} \times \mathrm{K}}$$ [@haynes_2014_crc, p. 6-1]
+
+```{r cp_H2O_293k}
+cp_H2O_at_293K <- 4.1841e3
+```
+
+### Väljund
+
+$$T := \ldots$$
+
+### Kuidas arvutada?
+
+Lähtun soojusliku tasakaalu valemist \@ref(eq:thermal-equilibrium):
+
+```{=tex}
+\begin{align}
+Q(\mathrm{Al}) &+ Q(\mathrm{H_2O}) &+ Q(\mathrm{Cu}) &= 0\\
+m(\mathrm{Al}) &\times c_p(\mathrm{Al}, 300 \times K) &\times (T - T(\mathrm{Al, H_2O}))\\
++ m(\mathrm{H_2O}) &\times c_p(\mathrm{H_2O, `r celsius_to_kelvin(20)` \times \mathrm{K}}) &\times (T - T(\mathrm{Al, H_2O}))\\
++ m(\mathrm{Cu}) &\times c_p(\mathrm{Cu}, 300 \times K) &\times (T - T(Cu)) &= 0\\
++m(\mathrm{Al}) &\times c_p(\mathrm{Al}, 300 \times K) &\times T\\
+- m(\mathrm{Al}) &\times c_p(\mathrm{Al}, 300 \times K) &\times T(\mathrm{Al, H_2O})\\
++ m(\mathrm{H_2O}) &\times c_p(\mathrm{H_2O}, `r celsius_to_kelvin(20)` \times \mathrm{K}) &\times T\\
+- m(\mathrm{H_2O}) &\times c_p(\mathrm{H_2O}, `r celsius_to_kelvin(20)` \times \mathrm{K}) &\times T(\mathrm{Al, H_2O})\\
++ m(\mathrm{Cu}) &\times c_p(\mathrm{Cu}, 300 \times \mathrm{K}) &\times T\\
+- m(\mathrm{Cu}) &\times c_p(\mathrm{Cu}, 300 \times \mathrm{K}) &\times T(\mathrm{Cu}) &= 0\\
+(\#eq:balanced-heat-in-al-calorimeter)
+\end{align}
+```
+
+Võrrandis \@ref(eq:balanced-heat-in-al-calorimeter) toon lõpliku temperatuuri *T* sulgude ette:
+
+```{=tex}
+\begin{align}
+&+T \times (\\
+&&+m(\mathrm{Al}) &\times &c_p(\mathrm{Al}, 300 \times \mathrm{K})\\
+&&+ m(\mathrm{H_2O}) &\times &c_p(\mathrm{H_2O, `r celsius_to_kelvin(20)` \times \mathrm{K}})\\
+&&+ m(\mathrm{Cu}) &\times &c_p(\mathrm{Cu}, 300 \times \mathrm{K})\\
+&)\\
+&= T(\mathrm{Al, H_2O}) \times (\\
+&&+m(\mathrm{Al}) &\times &c_p(\mathrm{Al}, 300 \times \mathrm{K})\\
+&& + m(\mathrm{H_2O}) &\times &c_p(\mathrm{H_2O, `r celsius_to_kelvin(20)` \times \mathrm{K}})\\
+&)\\
+&+ T(Cu) &+ m(\mathrm{Cu}) &\times &c_p(\mathrm{Cu}, 300 \times K)\\
+(\#eq:derivation-of-final-temperature-in-al-calorimeter)
+\end{align}
+```
+
+Võrrandi \@ref(eq:derivation-of-final-temperature-in-al-calorimeter) teisendamisest saan nüüd avaldada lõpliku temperatuuri *T*:
+
+```{=tex}
+\begin{align}
+T := (T(\mathrm{Al, H_2O}) \times (m(\mathrm{Al}) \times c_p(\mathrm{Al}, 300 \times K) + m(\mathrm{H_2O}) \times c_p(\mathrm{H_2O, `r celsius_to_kelvin(20)` \times \mathrm{K}}))\\
++ m(\mathrm{Cu}) \times c_p(\mathrm{Cu}, 300 \times K) \times T(Cu))\\
+/ m(\mathrm{Al}) \times c_p(\mathrm{Al}, 300 \times K) + m(\mathrm{H_2O}) \times c_p(\mathrm{H_2O, `r celsius_to_kelvin(20)` \times \mathrm{K}}) + m(\mathrm{Cu}) \times c_p(\mathrm{Cu}, 300 \times K)
+\end{align}
+```
+
+### Arvutuskäik
+
+```{r putting-cu-into-al-calorimeter-calculation}
+T <- (T_Al_and_H2O * (m_Al * cp_Al + m_H2O * cp_H2O_at_293K) + m_Cu * cp_Cu * T_Cu) / (m_Al * cp_Al + m_H2O * cp_H2O_at_293K + m_Cu * cp_Cu)
+```
+
+### Lahend
+
+$`r signif(T, digits = 5)` \times \mathrm{K}$ on süsteemi lõpptemperatuur.
+
+
+
+
+
 
 
 
