@@ -407,16 +407,51 @@ pikkus_{ringjoon} = 2 \cdot \pi \cdot raadius
 
 ```{=tex}
 \begin{equation}
-\vec{{kiirus}_{joon}} = \frac{{pikkus}_{kaar}}{ajavahemik}
+\vec{v} = \frac{s}{t}
 (\#eq:line-velocity)
 \end{equation}
 ```
 
-$$\vec{{kiirus}_{nurk}} = \frac{nurk}{ajavahemik}$$
+[@mills_1993_quantities, p. 13]
 
-$$\vec{{kiirus}_{joon}} = \vec{{kiirus}_{nurk}} * raadius$$
+```{=tex}
+\begin{equation}
+\overline{\vec{\omega}} = \frac{\phi}{t}
+(\#eq:average-angular-velocity)
+\end{equation}
+```
 
-$$\vec{{kiirendus}_{kesktõmme}} = \frac{\vec{{kiirus}_{joon}} ^ 2}{raadius}$$
+```{=tex}
+\begin{equation}
+\omega = \frac{d(\phi)}{d(t)}
+(\#eq:angular-velocity)
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+\alpha = \frac{d(\omega)}{d(t)}
+(\#eq:angular-acceleration)
+\end{equation}
+```
+
+[@erichardcohen_1987_symbols, p. 28]
+
+```{=tex}
+\begin{equation}
+\vec{v} = \omega * r
+(\#eq:tangential-velocity)
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+a_c = \frac{v^2}{r}
+(\#eq:centripetal-acceleration)
+\end{equation}
+```
+
+[@edsarx.1602.0636120160101, p. 2]
 
 $${moment}_{inerts} = mass * raadius ^ 2$$
 
@@ -2168,6 +2203,163 @@ t_max <- l * (h_lower + h_higher) * 5.2 * ρ_max / v
 ### Output
 
 `r signif(t, digits <- 4)` * s would it take to fill the "basin" with plastic. Acceptable values are between `r signif(t_min, digits <- 4)` * s and `r signif(t_max, digits <- 4)` * s
+
+##
+
+### Ülesande püstitus
+
+Ratas pöörleb nii, et raadiuse pöördenurga sõltuvus ajast on kirjeldatav  võrrandiga $\phi := 2 + B \times t + C \times t^2 + D \times t^3$, kus $B := 1 \times \frac{rad}{s}$, $C := 1.0 \frac{rad}{s^2}$ ja $D := 1.0 \times \frac{rad}{s^3}$. Leida, ratta raadius r, kui on teada, 
+et teise sekundi lõpuks on ratta serval oleva punkti kesktõmbekiirendus (normaalkiirendus) $a_k := 3.46 \times 10^3 \times \frac{m}{s}$.
+
+### Sisendid
+
+$$\phi := 2 + B \times t + C \times t^2 + D \times t^3$$
+
+$$B := 1 \times \frac{rad}{s}$$
+
+$$C := 1.0 \frac{rad}{s^2}$$
+
+$$D := 1.0 \times \frac{rad}{s^3}$$
+
+$$a_k := 3.46 \times 10^3 \times \frac{m}{s}$$
+
+$$t := 2 \times s$$
+
+### Mida arvutada?
+
+$$r := \ldots$$
+
+### Kuidas arvutada?
+
+Tahvlile lahendatud, praegu ei tee siia.
+
+## Pöörlev ratas
+
+### Ülesande püstitus
+
+Ratas, mille raadius r=10,0cm, pöörleb nii, et raadiuse pöördenurga sõltuvus ajast on kirjeldatav  
+võrrandiga $\phi := A + B \times t + C \times t^3$, kus $B := 2.0 \times \mathrm{\frac{rad}{s}}$ ja $C := 1.0 \times \mathrm{\frac{rad}{s}}$. Leida, ratta serval oleva punkti nurkkiirus 
+ω, nurkkiirendus β, lineaarne kiirus v, tangentsiaalkiirendus (lineaarne) $a_τ$, kesktõmbe kiirendus $a_k$
+ ja 
+täiskiirendus a ajahetkel t=2,0s.
+
+### Sisendid
+
+$$r := 10.0 \times \mathrm{cm} = 10^{-1} \times \mathrm{m}$$
+
+```{r rotating-wheel-r}
+r <- 10e-1
+```
+
+$$\phi := A + B \times t + C \times t^3$$
+
+```{r rotating-wheel-phi}
+phi <- expression(A + B * t + C * t^3)
+```
+
+$$B := 2.0 \times \mathrm{\frac{rad}{s}}$$
+
+```{r rotating-wheel-b}
+B <- 2
+```
+
+$$C := 1.0 \times \mathrm{\frac{rad}{s}}$$
+
+```{r rotating-wheel-c}
+C <- 1
+```
+
+
+$$t := 2 \times \mathrm{s}$$
+
+```{r rotating-wheel-t}
+t <- 2
+```
+
+
+### Väljundid
+
+$$\omega := \ldots$$
+
+$$\beta := \ldots$$
+
+$$v := \ldots$$
+
+$$a_\tau := \ldots$$
+
+$$a_k := \ldots$$
+
+$$a := \ldots$$
+
+### Kuidas arvutada?
+
+Nurkkiiruse arvutamiseks kasutan vastavat valemit \@ref(eq:angular-velocity).
+
+Nurkkiirenduse arvutamiseks kasutan vastavat valemit \@ref(eq:angular-acceleration).
+
+Joonkiiruse arvutamiseks kasutan vastavat valemit \@ref(eq:tangential-velocity).
+
+Tangentsiaalkiirenduse arvutamiseks saab kokku panna valemid \@ref(eq:keskmine-kiirendus), \@ref(eq:tangential-velocity):
+
+```{=tex}
+\begin{align}
+a_\tau := \frac{v - B \times r}{t}
+\end{align}
+```
+
+Kesktõmbe kiirenduse jaoks kasutan vastavat valemit \@ref(eq:centripetal-acceleration).
+
+Kogukiirenduse jaoks kasutan Pythagorase teoreemi \@ref(eq:pythagorean):
+
+```{=tex}
+\begin{align}
+a = \sqrt{a_\tau^2 + a_k^2}
+\end{align}
+```
+
+### Lahendamine
+
+```{r rotating-wheel-solving}
+function_for_omega = D(phi, "t")
+omega <- eval(function_for_omega)
+function_for_beta <- D(function_for_omega, "t")
+beta <- eval(function_for_beta)
+v <- omega * r
+a_tau <- (v - B * r) / t
+a_k <- v^2 / r
+a <- sqrt(a_tau^2 + a_k^2)
+```
+
+### Lahend
+
+Ratta serval oleva punkti nurkkiirus on $\omega = `r omega` \times \mathrm{\frac{rad}{s}}$, nurkkiirendus $\beta = `r beta` \times \mathrm{\frac{rad}{s^2}}$, lineaarne kiirus $v = `r v` \times \mathrm{\frac{m}{s}}$, tangentsiaalkiirendus $a_\tau = `r a_tau` \times \mathrm{\frac{m}{s^2}}$, kesktõmbe kiirendus $a_k = `r a_k` \times \mathrm{\frac{m}{s^2}}$ ja täiskiirendus $a = `r signif(a, digits = 4)` \times \mathrm{\frac{m}{s^2}}$ ajahetkel $t = 2.0 \times \mathrm{s}$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Kraana
 
