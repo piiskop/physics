@@ -1,0 +1,670 @@
+---
+title: "Untitled"
+author: 'peacecop kalmer:'
+date: '2022-05-14'
+output:
+  bookdown::html_document2:
+    toc: yes
+    toc_float: yes
+    toc_depth: 5
+bibliography: references.bib
+---
+
+# Mehaanika reeglid
+
+## Ühikud
+
++----------+-----------------+--------+------------+--------------------+
+| Eesliide | Kümne astendaja | Lühend | Näide      | Selgitus           |
++==========+=================+========+============+====================+
+| piko-    | -12             | p      | 1 \* pN    | üks pikonjuuton    |
++----------+-----------------+--------+------------+--------------------+
+| nano-    | -9              | n      | 2 \* nm    | kaks nanomeetrit   |
++----------+-----------------+--------+------------+--------------------+
+| mikro-   | -6              | μ      | 3 \* μg    | kolm mikrogrammi   |
++----------+-----------------+--------+------------+--------------------+
+| milli-   | -3              | m      | 4 \* mW    | neli millivatti    |
++----------+-----------------+--------+------------+--------------------+
+| senti-   | -2              | c      | 5 \* cK    | viis sentikelvinit |
++----------+-----------------+--------+------------+--------------------+
+| detsi-   | -1              | d      | 6 \* dA    | kuus detsiamprit   |
++----------+-----------------+--------+------------+--------------------+
+| deka-    | 1               | D      | 7 \* Db    | seitse dekabitti   |
++----------+-----------------+--------+------------+--------------------+
+| hekto-   | 2               | H      | 8 \* HB    | kaheksa hektobaiti |
++----------+-----------------+--------+------------+--------------------+
+| kilo-    | 3               | K      | 9 \* Klx   | üheksa kiloluksi   |
++----------+-----------------+--------+------------+--------------------+
+| mega-    | 6               | M      | 10 \* MJ   | kümme megadžauli   |
++----------+-----------------+--------+------------+--------------------+
+| giga-    | 9               | G      | 100 \* GPa | sada gigapaskalit  |
++----------+-----------------+--------+------------+--------------------+
+| tera-    | 12              | T      | .5 \* Tcd  | pool terakandelat  |
++----------+-----------------+--------+------------+--------------------+
+
+: Ühikute eesliited
+
+Konvertereid:
+
+1.  (UnitConverters.net)[<https://www.unitconverters.net/volume/cubic-kilometer-to-cubic-meter.htm>]
+
+2.  (Calculate weight of compounds and materials per volume)[<https://www.aqua-calc.com/calculate/volume-to-weight>]
+
+```{r}
+convertFromKmPerHToMPerS <- function(velocityInKmPerH) {
+  (velocityInKmPerH * 1000 / 3600)
+}
+
+convertFromMiToM <- function(mi) {
+  mi * 1609.344
+}
+
+convertFromFtToM <- function(ft) {
+  convertFromMiToM(ft / 5280)
+}
+
+convert_degrees_to_radians <- function(degrees) {
+  return(degrees * pi / 180)
+}
+```
+
+$$SECONDS\_IN\_YEAR = (\frac{241}{1000} \cdot 366 + \frac{1000 - 241}{1000} \cdot 365) \cdot 24 \cdot 60 \cdot 60$$
+
+```{r}
+SECONDS_IN_YEAR <- (365 * (9 * 76 + 75) + 366 * (9 * 24 + 25)) / 1000 * 24 * 60 * 60
+SECONDS_IN_YEAR
+```
+
+## Sirgjooneline liikumine
+
+Valguse kiirus vaakumis:
+
+```{r}
+SPEED_LIGHT <- 299792458
+```
+
+![(\#fig:integrating-time) Ühesuguste ajavahemike integreerimine](mechanics/integrating-time.svg)
+
+Joonisel \@ref(fig:integrating-time) on kujutatud ajatelge, millele on märgitud võrdsed ajavahemikud. Võime neid ajavahemikke kujutada ka lõputult nullilähedasena. Kui need ajavahemikud kokku liita, saame koguaja:
+
+$$\sum_{i = algus}^{\infty}(\Delta(t))_i === \int{dt} === t$$
+
+Tuletan kiirenduse valemi jõnksutamise kaudu:
+
+$$jõnks = \frac{d(kiirendus)}{d({t})}$$
+
+$${d({t})} = jõnks \cdot d({kiirendus})$$
+
+$$\int_{algkiirendus}^{kiirendus}d(kiirendus) === \int_{0}^{t}jõnks \cdot d(t)$$
+
+$$kiirendus - algkiirendus === jõnks \cdot t$$
+
+```{=tex}
+\begin{equation}
+\color{green}{\bf{a = a_0 + j \cdot t}},
+(\#eq:zeroeth-equation-of-motion-for-constant-jerk)
+\end{equation}
+```
+
+kus *a* on kiirendus, *a_0_* on algkiirendus, *j* on jõnks, *t* on lõpphetk.
+
+Tuletan kiiruse valemi kiirenduse ja jõnksutamise kaudu:
+
+$$kiirendus = \frac{d(kiirus)}{d(t)}$$
+
+```{=tex}
+\begin{equation}
+d(kiirus) === kiirendus \cdot d(t)
+(\#eq:acceleration)
+\end{equation}
+```
+Asendan valemisse \@ref(eq:acceleration) kiirenduse valemist \@ref(eq:zeroeth-equation-of-motion-for-constant-jerk):
+
+$$d(kiirus) === (algkiirendus + jõnks \cdot t) \cdot d(t)$$
+
+$$\int_{v_0}^{v}d(v) === \int_{0}^{t}(a_0 + j \cdot t) \cdot d(t),$$
+
+kus *v_0_* on algkiirus, *v* on lõppkiirus, *a_0_* on algkiirendus, *j* on jõnks, *t* on lõpphetk.
+
+$$v - v_0 === a_0 \cdot t + \frac{j \cdot t^2}{2},$$
+
+kus *v* on kiirus, *v_0_* on algkiirus, *t* on lõpphetk, *j* on jõnks.
+
+```{=tex}
+\begin{equation}
+\color{green}{\bf{v = v_0 + a_0 \cdot t + \frac{j \cdot t^2}{2}}},
+(\#eq:first-equation-of-motion-for-constant-jerk)
+\end{equation}
+```
+
+kus *v* on lõppkiirus, *v_0_* on algkiirus, *a_0_* on algkiirendus, *t* on lõpphetk, *j* on jõnks.
+
+Keskmine kiirus on vahemaa ja selle läbimiseks kulunud ajavahemiku suhe. Milline on hetkekiirus? Selleks tuleb jagada lõputult lühike vahemaa lõputult lühikese selle vahemaa läbimiseks kulunud ajavahemikuga:
+
+```{=tex}
+\begin{equation}
+\overrightarrow{hetkekiirus} = \frac{d(\overrightarrow{vahemaa})}{d(t)}
+(\#eq:momentvelocity)
+\end{equation}
+```
+Valemist \@ref(eq:momentvelocity) avaldan vahemaa:
+
+```{=tex}
+\begin{equation}
+d(\overrightarrow{s}) = \overrightarrow{v} \cdot d(t),
+(\#eq:smallest-distance)
+\end{equation}
+```
+
+kus *s* on vahemaa, *v* on kiirus, *t* on lõpphetk.
+
+Asendan valemisse \@ref(eq:smallest-distance) hetkekiiruse valemist \@ref(eq:first-equation-of-motion-for-constant-jerk) ja jätkan tuletamist:
+
+$$d(s) === (v_0 + a_0 \cdot t + \frac{j \cdot t^2}{2}) \cdot d(t),$$
+
+kus *s* on vahemaa, *v_0_* on algkiirus, *t* on lõpphetk, *j* on jõnks, *a_0_* on algkiirendus.
+
+$$\int_{s_0}^{vahemaa}d(vahemaa) ===\\
+\int_{0}^{t}(algkiirus + algkiirendus \cdot t + \frac{j \cdot t^2}{2}) \cdot d(t)$$
+
+$$s - s_0 === v_0 \cdot t + \frac{a \cdot t^2}{2} + \frac{j \cdot t^3}{6},$$
+
+kus *s* on vahemaa, *s_0_* on lähe, *v_0_* on algkiirus, *t* on lõpphetk, *a* on kiirendus, *j* on jõnks.
+
+```{=tex}
+\begin{equation}
+\color{green}{\bf{s === s_0 + v_0 \cdot t + \frac{a \cdot t^2}{2} + \frac{j \cdot t^3}{6}}},
+(\#eq:second-equation-of-motion-for-constant-jerk)
+\end{equation}
+```
+
+kus *s* on vahemaa, *s_0_* on lähe, *v_0_* on algkiirus, *a* on kiirendus, *t* on lõpphetk.
+
+Kogu vahemaa on integreeritud ülilühikestest vahemaa juppidest:
+
+```{=tex}
+\begin{equation}
+\overrightarrow{vahemaa} = \int{d(\overrightarrow{vahemaa})}
+(\#eq:whole-distance)
+\end{equation}
+```
+Asendan valemist \@ref(eq:smallest-distance) ülilühikese ajavahemiku valemisse \@ref(eq:whole-distance):
+
+```{=tex}
+\begin{equation}
+\overrightarrow{s} = \int_{t_0}^{t}{\overrightarrow{v} \cdot d(t)},
+(\#eq:whole-distance-integrated)
+\end{equation}
+```
+
+kus *s* on vahemaa, *t_0_* on alghetk, *t* on lõpphetk, *v* on hetkekiirus.
+
+Kui hetkekiirus on $\color{red}{\textbf{konstantne}}$, siis
+
+```{=tex}
+\begin{equation}
+\overrightarrow{s} = \overrightarrow{v} \cdot \int_{t_0}^{t}{d(t)} === \overrightarrow{v} \cdot t + \overrightarrow{\underbrace{s_0}_{konstant}},
+(\#eq:whole-distance-with-constant-momentvelocity)
+\end{equation}
+```
+
+kus *s* on vahemaa, *v* on hetkekiirus, *t_0_* on alghetk, *t* on lõpphetk, *s_0_* on lähe.
+
+![(\#fig:aeg-kiirus) Kiiruse muutumine ajas, kui kiirendus on $2 \cdot \frac{m}{s^2}$](mechanics/aeg-kiirus.svg)
+
+Kui ülilühikese vahemaa ja selle läbimiseks kulunud ülilühikese ajavahemiku suhe on kiirus, mis näitab, kui kiiresti asukoht muutub ajas, siis kiiruse muutumist ajas näitab kiirendus:
+
+```{=tex}
+\begin{equation}
+\overrightarrow{a} = \lim_{\Delta {t} \to 0} \frac{\Delta {\overrightarrow{v}}}{\Delta {t}} === \frac{d(\overrightarrow{v})}{d(t)},
+(\#eq:acceleration-by-velocity)
+\end{equation}
+```
+
+kus *a* on kiirendus, *t* on ajavahemik, *v* on kiirus.
+
+Asendan valemist \@ref(eq:momentvelocity) valemisse \@ref(eq:acceleration-by-velocity) kiiruse:
+
+```{=tex}
+\begin{equation}
+\overrightarrow{a} = \frac{d(\frac{d(\overrightarrow{s})}{d(t)})}{d(t)},
+(\#eq:acceleration-by-distance-and-time)
+\end{equation}
+```
+
+kus *s* on vahemaa, *a* on kiirendus ja *t* on ajavahemik.
+
+Avaldan valemist \@ref(eq:acceleration-by-velocity) üliväikese kiiruse:
+
+```{=tex}
+\begin{equation}
+d(\overrightarrow{v}) = \overrightarrow{a} \cdot {d(t)},
+(\#eq:momentvelocity-by-acceleration-and-time)
+\end{equation}
+```
+
+kus *v* on kiirus, *a* on kiirendus ja *t* on ajavahemik.
+
+Kui kiirendus on $\color{red}{\textbf{konstantne}}$, siis
+
+```{=tex}
+\begin{equation}
+{v} = \int{\overrightarrow{a} \cdot {d(t)}} === \overrightarrow{a} \cdot \int{d(t)} ===\\
+\overrightarrow{a} \cdot t + \underbrace{v_0}_{konstant},
+(\#eq:velocity-by-integration)
+\end{equation}
+```
+
+kus *v* on lõppkiirus, *a* on kiirendus, *t* on ajavahemik, *v_0_* on algkiirus.
+
+Keskmise kiirenduse saame arvutada nii:
+
+```{=tex}
+\begin{equation}
+{\overline{a}} = \frac{\overrightarrow{v} - \overrightarrow{{v}_{0}}}{t},
+(\#eq:keskmine-kiirendus)
+\end{equation}
+```
+
+kus *a* on kiirendus, *v* on lõppkiirus, *v_0_* on algkiirus ja *t* on ajavahemik.
+
+Kui kiirendus on $\color{red}{\textbf{konstantne}}$, siis asendades valemisse \@ref(eq:whole-distance-integrated) kiiruse valemist \@ref(eq:keskmine-kiirendus):
+
+```{=tex}
+\begin{equation}
+\overrightarrow{s} = \int{\overrightarrow{\overline{a}} \cdot {t} + \overrightarrow{v_0} \cdot d(t)} ===\\
+\int{\overrightarrow{\overline{a}} \cdot {t} \cdot d(t)} + \int{\overrightarrow{v_0} \cdot d(t)} ===\\
+\overrightarrow{\overline{a}} \cdot \int{{t} \cdot d(t)} + \overrightarrow{v_0} \cdot \int{d(t)} === \\
+\overrightarrow{\overline{a}} \cdot \frac{t^2}{2} + \overrightarrow{v_0} \cdot t + \underbrace{\overrightarrow{s_0}}_{konstant},
+(\#eq:vahemaa-kiirenduse-kaudu)
+\end{equation}
+```
+
+kus *s* on vahemaa, *a* on kiirendus, *v_0_* on algkiirus, *t* on ajavahemik.
+
+Avaldan valemist \@ref(eq:keskmine-kiirendus) ajavahemiku:
+
+```{=tex}
+\begin{equation}
+{t} = \frac{\overrightarrow{v} - \overrightarrow{{v}_{0}}}{\overrightarrow{\overline{a}}},
+(\#eq:ajavahemik)
+\end{equation}
+```
+
+kus *t* on ajavahemik, *v* on lõppkiirus, *v_0_* on algkiirus ja *a* on kiirendus.
+
+Kui lähe on null, siis lähtuvalt valemist \@ref(eq:vahemaa-kiirenduse-kaudu)
+
+```{=tex}
+\begin{equation}
+\overrightarrow{s} := \overrightarrow{\overline{a}} \cdot \frac{t^2}{2} + \overrightarrow{{v}_{0}} \cdot t + 0 =\\
+\overrightarrow{\overline{a}} \cdot \frac{(\frac{\overrightarrow{{v}} - \overrightarrow{{v}_{0}}}{\overrightarrow{\overline{a}}})^2}{2} + \overrightarrow{{v}_{0}} \cdot \frac{\overrightarrow{{v}} - \overrightarrow{{v}_{0}}}{\overrightarrow{\overline{a}}} ===\\ \frac{\overrightarrow{{v}}^2 - 2 \cdot \overrightarrow{v} \cdot \overrightarrow{{v}_{0}} + \overrightarrow{{v}_{0}}^2}{2 \cdot \overrightarrow{\overline{a}}} + \frac{\overrightarrow{{v}_{0}} \cdot \overrightarrow{v} - \overrightarrow{{v}_{0}}^2}{\overrightarrow{\overline{a}}} ===\\ \frac{\overrightarrow{{v}}^2 - \overrightarrow{{v}_{0}}^2}{2 \cdot \overrightarrow{\overline{a}}},
+(\#eq:vahemaa-kiiruste-ja-kiirenduse-kaudu)
+\end{equation}
+```
+
+kus *s* on vahemaa, *a* on kiirendus, *t* on ajavahemik, *v* on lõppkiirus, *v_0_* on algkiirus.
+
+Muutuva kiirenduse valem:
+
+```{=tex}
+\begin{equation}
+\overrightarrow{\Delta(a)} = \frac{d(\overrightarrow{\overline{a}})}{d(t)} === \frac{a - a_{0}}{t},
+(\#eq:kiirenduse-muut)
+\end{equation}
+```
+
+kus *a* on kiirendus, *a~0~* on algkiirendus, *t* on ajavahemik.
+
+Keskmise kiiruse valem:
+
+```{=tex}
+\begin{equation}
+\overline{v} = \frac{\Delta(s)}{\Delta(t)} === \frac{\overrightarrow{v_0} + \overrightarrow{v}}{2},
+(\#eq:mean-velocity)
+\end{equation}
+```
+
+kus *v* on kiirus, *v~0~* on algkiirus, *s* on vahemaa, *t* on ajavahemik.
+
+Pythagorase teoreem:
+
+```{=tex}
+\begin{equation}
+|c| = \sqrt{|kaatet_2|^2 + |kaatet_2|^2}
+(\#eq:pythagorean)
+\end{equation}
+```
+Tõusunurk:
+
+```{=tex}
+\begin{equation}
+\alpha = atan(\frac{nihe_{vertikaalne}}{\Delta(x)})
+(\#eq:tangent-angle)
+\end{equation}
+```
+
+Nurgateisendus:
+
+```{=tex}
+\begin{equation}
+nurk_{rad} = \frac{nurk° \cdot \pi}{180°}
+(\#eq:angle-from-degrees-to-radians)
+\end{equation}
+```
+
+Koosinusteoreem:
+
+```{=tex}
+\begin{equation}
+|a| =\\
+\sqrt{|b|^2 + |c|^2 - 2 \cdot |b| \cdot |c| \cdot cos(nurk_{b, c})}
+(\#eq:cosine-theorem)
+\end{equation}
+```
+
+## Impulss
+
+$$impulss = mass * kiirus$$
+
+$$kehadeSüsteemiKoguImpulss =\\
+\sum{süsteemiKehaImpulss}$$
+
+See on alati jääv.
+
+Elastne põrge:
+
+$$m_1 * \vec{v_1} + m_2 * \vec{v_2} === m_1 * \vec{v_1 ^ \prime} + m_2 + \vec{v_2 ^ \prime},$$
+
+kus *m* on mass, *v* on kiirus
+
+Energia jäävuse seadus:
+
+$$\frac{m_1 * \vec{v_1} ^ 2}{2} + \frac{m_2 * \vec{v_2} ^ 2}{2} === \frac{m_1 * (\vec{v_1} ^ \prime) ^ 2}{2} + \frac{m_2 * (\vec{v_2} ^ \prime) ^ 2}{2},$$
+
+kus *m* on mass ja *v* on kiirus.
+
+Mitteelastne põrge:
+
+$$m_1 * \vec{v_1} + m_2 * \vec{v_2} === (m_1 + m_2) * \vec{v ^ \prime},$$
+
+kus *m* on mass ja *v* on kiirus.
+
+$$jõuImpulss = impulsiMuut$$
+
+$$jõud * ajavahemik === impulsiMuut$$
+
+## Ringliikumine
+
+Maa keskmine raadius:
+
+```{r}
+RADIUS_EARTH <- 6.371E6
+```
+
+Ringjoone pikkus:
+
+```{=tex}
+\begin{equation}
+pikkus_{ringjoon} = 2 \cdot \pi \cdot raadius
+(\#eq:length-of-circle)
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+\vec{v} = \frac{s}{t}
+(\#eq:line-velocity)
+\end{equation}
+```
+
+[@mills_1993_quantities, p. 13]
+
+```{=tex}
+\begin{equation}
+\overline{\vec{\omega}} = \frac{\phi}{t}
+(\#eq:average-angular-velocity)
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+\omega = \frac{d(\phi)}{d(t)}
+(\#eq:angular-velocity)
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+\alpha = \frac{d(\omega)}{d(t)}
+(\#eq:angular-acceleration)
+\end{equation}
+```
+
+[@erichardcohen_1987_symbols, p. 28]
+
+```{=tex}
+\begin{equation}
+\vec{v} = \omega * r
+(\#eq:tangential-velocity)
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+a_c = \frac{v^2}{r}
+(\#eq:centripetal-acceleration)
+\end{equation}
+```
+
+[@edsarx.1602.0636120160101, p. 2]
+
+$${moment}_{inerts} = mass * raadius ^ 2$$
+
+Suund kruvireegli järgi:
+
+$${moment}_{\vec{impulss}} = \vec{impulss} * r === m * \vec{{v}_{joon}} * r === m * \vec{{v}_{nurk}} * r ^ 2,$$
+
+kus *r* on raadius, *m* on mass, *v* on kiirus.
+
+$${moment}_{\vec{impulss}} = \vec{{kiirus}_{nurk}} * {moment}_{inerts}$$
+
+Suletud süsteemi koguimpulsimoment on jääv.
+
+## Jõud
+
+### Ühik
+
+```{=tex}
+\begin{equation}
+\mathrm{N} = \mathrm{kg} \times \mathrm{m} \times \mathrm{s^{-2}} = \mathrm{M \times L \times T^{-2}}
+(\#eq:force-unit)
+\end{equation}
+```
+
+[@newell_sp, p. 29]
+
+### Inertsiaaljõud
+
+Kõikide jõudude summa on võrdne jõuga, mille mõjul keha liigub ühtlaselt ja sirgjooneliselt:
+
+```{=tex}
+\begin{equation}
+F_{inertial} = \sum_{i = 1}^{n}{F_i}
+(\#eq:inertial-force)
+\end{equation}
+```
+
+### Gravitatsioonijõud
+
+gravitatsioonikonstant:
+
+$$G := 6.67428 \times 10 ^ {-11} \times m^3 \times kg^{-1} \times s^{-2}$$ [@haynes_2014_crc, p. 14-1]
+
+```{r label = "G"}
+G = 6.67428E-11
+```
+
+või Newtoni oma
+
+$$G := 6.67384(80) × 10^{−11} \times m^3 \times kg^{-1} \times s^{-2}$$ [@haynes_2014_crc, p. 1-1, 1-2, 87]
+
+Maa mass:
+
+$$M_e := 5.9736 \times 10^{24} \times kg$$ [@haynes_2014_crc, p. 14-2]
+
+```{r label = "M_e"}
+M_e = 5.9736e24
+```
+
+```{=tex}
+\begin{equation}
+F_g = G \cdot \frac{m_1 \cdot m_2}{r^2},
+(\#eq:gravitational-force)
+\end{equation}
+```
+
+kus $F_g$ on raskusjõud, *G* on gravitatsioonikonstant, *m* on mass, *s* on punktmasside vaheline kaugus  [@haynes_2014_crc, p. 2-2].
+
+Jõud:
+
+```{=tex}
+\begin{equation}
+\vec{F} := \frac{d(\vec{p})}{d(t)} = m \cdot \vec{a}
+(\#eq:force)
+\end{equation}
+```
+
+[@haynes_2014_crc, p. 2-2]
+
+Vaba langemise ehk gravitatsiooni põhjustatud kiirendus  [@haynes_2014_crc, p. 2-12, 2-34, 14-21] valemitest \@ref(eq:force) ja \@ref(eq:gravitational-force):
+
+```{=tex}
+\begin{equation}
+\vec{g} := \frac{G \cdot m_1}{r^2}
+(\#eq:g)
+\end{equation}
+```
+
+![gravitatsiooni standardkiirendus eri piirkondades Maal](mechanics/cities.svg)
+
+"The value 9.806 m/s2 is midway between these two extremes, so it's sort of true to say that…
+
+g = 9.806 ± 0.026 m/s2
+
+This is not the same thing as an average, however. For that, use this value that someone else derived…
+
+g = 9.798 m/s2
+
+Here are my suggestions. Use the value of 9.8 m/s2 with two significant digits for calculations on the surface of the Earth unless a value of gravity is otherwise specified. That seems reasonable. Use the value of 9.80665 m/s2  [@haynes_2014_crc, p. 2-44, 14-11] with six significant digits only when you want to convert m/s2 to g. That is the law." [@gravitation]
+```{r label = "g"}
+g <- 9.8
+```
+
+Selline valem kehtib objekti kohta, mis on täpselt Maa pinnal. Kui see asub pinna sees või selle kohal, siis tuleb kasutada sellist valemit:
+
+$$g = G * \frac{m}{(r + h) ^ 2},$$
+
+kus *g* on gravitatsioonikiirendus, *G* on gravitatsioonikonstant, *m* on Maa mass, *r* on Maa raadius, *h* on kõrgus Maa pinnast.
+
+## Elastsusjõud
+
+Hooke'i seadus:
+
+```{=tex}
+\begin{equation}
+F = –k∙Δx,
+(\#eq:elasticity)
+\end{equation}
+```
+
+kus *F* on elastsusjõud, *k* elastsustegur ja $\Delta(x)$ on pikenemisvahemik.
+
+```{=tex}
+\begin{equation}
+F = k∙Δx,
+(\#eq:pulling-force)
+\end{equation}
+```
+
+kus $F$ on tõmbejõud, $k$ on elastsustegru ja $\Delta(x)$ on pikenemisvahemik.
+
+## Hõõrdejõud
+
+hõõrdeJõud = hõõrdeTegur \* rõhk
+
+```{r}
+calculateDistanceOfDecceleration <- function(velocity, frictionFactor) {
+  ((velocity) ^ 2) / 2 / g / frictionFactor
+}
+```
+
+## Rõhk
+
+rõhk = mass \* *g*
+
+## Töö
+
+```{=tex}
+\begin{equation}
+W = \int{\vec{F}}\cdot cos(\alpha) \cdot d(s) 
+(\#eq:work)
+\end{equation}
+```
+
+[@haynes_2014_crc, p. 2-1 - 2-2]
+
+$$E_{pot} = m * g * h,$$
+
+kus $E_{pot}$: potentsiaalne energia, *m*: mass ja *h*: kõrgus.
+
+Välisjõudude töö koorma tõstmisel võrdub koorma potentsiaalse energia muuduga:
+
+$$töö = E_{pot_2} - E_{pot_1},$$
+
+kus $E_{pot}$ on potentsiaalne energia.
+
+Suletud süsteemi mehaaniline koguenergia on jääv:
+
+$$energia = energia_{potentsiaalne} + energia_{kineetiline}$$
+
+$$E = m * g * h + \frac{m * \vec{v} ^ 2}{2},$$
+
+kus *E* on energia, *m* on mass, *h* on kõrgus ja *v* on kiirus.
+
+```{=tex}
+\begin{equation}
+P := \frac{W}{t} 
+(\#eq:power)
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+P_hp := 746 \times P 
+(\#eq:power-hp)
+\end{equation}
+```
+
+[@haynes_2014_crc, p. 2-55]
+```{r label = "function-for-power-hp"}
+convert_W_to_hp <- function(W) {
+  return(W / 746)
+}
+```
+
+$${elastsusJõuEenergia}_{pot} = \frac{k * (\Delta(s)) ^ 2}{2},$$
+
+kus *k* on jäikus, $\Delta(s)$ on kokkusurumise vahemaa, *pot* on potentsiaalne.
+
+$${tegur}_{kasu} = \frac{töö}{energia}$$
+
+## Jõumoment
+
+$${moment}_{F} = F * raadius * sin({nurk}_{raadius, {mõjuSirge}_{F}}),$$
+
+kus *F* on jõud.
+
+Kangi tasakaal:
+
+$${jõud}_1 * {raadius}_1 === {jõud}_2 * {raadius}_2$$

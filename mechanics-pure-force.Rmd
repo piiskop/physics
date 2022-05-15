@@ -1,0 +1,184 @@
+---
+title: "Untitled"
+author: 'peacecop kalmer:'
+date: '2022-05-15'
+output:
+    bookdown::html_document2:
+      toc: yes
+      toc_float: yes
+      toc_depth: 5
+bibliography: references.bib
+biblio-style: "newapa"
+link-citations: true
+citation_package: biblatex
+---
+
+# Mehaanika ülesanded
+
+## Puhas jõud
+
+### Raskus trossi otsas
+
+#### Ülesande püstitus
+
+Raskus massiga 5 kg ripub kahe trossi otsas (vt joonist \@ref(fig:hanging-weight)). Kui suur on kummagi trossi pinge, kui
+
+a)  α = 25°;
+
+b)  α = 50°.
+
+![(\#fig:hanging-weight)Trosside otsas ripub raskus.](mechanics/hanging-weight.svg)
+
+#### Lahendus
+
+##### Üldine lahendus
+
+![(\#fig:hanging-weight-complemented)Täiendatud joonis.](mechanics/hanging-weight-complemented.svg)
+
+Kuna algandmeid napib ja ainult ühe nurga suurus on teada, siis eeldan, et trossid on ühepikkused. Kõik kolm jõudu peavad üksteist tasakaalustama. Igal jõul on nii rõhtne kui püstine komponent. Näeme jooniselt \@ref(fig:hanging-weight-complemented), et rõhtne komponent puudub raskusjõul ning ülejäänud rõhtsad komponendid on absoluutväärtuselt ühesugused, mistõttu koostan võrrandi üksnes püstiste komponentidega:
+
+$$(5 * kg) * g === 2 * tross * sin(\alpha)$$
+
+Avaldan sellest võrrandist trossi pikkuse:
+
+$$tross = \frac{5 * kg * g}{2 * sin(\alpha)}$$
+
+```{r}
+calculateForce <- function(alpha) {
+  5 * g / 2 / sin(alpha)
+}
+```
+
+##### a-osa
+
+```{r}
+forceA = calculateForce(25 * pi / 180)
+```
+
+Kummagi trossi pinge on `r forceA` \* N, kui α = 25 °.
+
+##### b-osa
+
+```{r}
+forceB = calculateForce(50 * pi / 180)
+```
+
+Kummagi trossi pinge on `r forceB` \* N, kui α = 50 °.
+
+### Läänemeri
+
+#### Ülesande püstitus
+
+Läänemere maht on umbes 20000 km^3^. Kuu mass on 7,3 \* 10^22^ kg ja keskmine kaugus Maast 384000 km. Kui suur gravitatsioonijõud on Kuu ja Läänemere vahel?
+
+#### Lahendus
+
+![Maa ja Kuu](mechanics/baltic-sea-moon.svg)
+
+Selles ülesandes on vaja teha palju konverteerimisi. Et arvutada Kuu ja Läänemere vaheline jõud, on vaja lisaks gravitatsioonikonstandile kasutada Läänemere ja Kuu massi ning nendevahelist kaugust.
+
+Läänemere massist pole teavitatud. Siiski on teavitatud Läänemere ruumalast. Selle konverteerin esmalt kuupmeetritesse:
+
+```{r}
+volumeOfSea = 20000 * (1000) ^ 3
+```
+
+Läänemere maht kuupmeetrites on `r volumeOfSea`.
+
+On kindlaks tehtud, et üks kilogramm vett tasakaalustab üht liitrit vett. Kui mitu kilogrammi vett tasakaalustab üht kuupmeetrit vett?
+
+```{r}
+weightToVolume = 1 / (1 * .1 ^ 3)
+```
+
+Üht kuupmeetrit vett tasakaalustab `r weightToVolume` kg vett.
+
+Nüüd on võimalik välja arvutada Läänemere mass:
+
+```{r}
+weightOfSea = volumeOfSea * weightToVolume
+```
+
+Läänemere mass on `r weightOfSea` kg.
+
+Kuu keskmine kaugus maast on
+
+```{r}
+distanceBetweenCelestialbodies = 384000 * 1000
+```
+
+`r distanceBetweenCelestialbodies` m.
+
+Nüüd on kõik vajalikud sisendid sobival kujul ja saan arvutada gravitatsioonijõu Kuu ja Läänemere vahel:
+
+```{r}
+gravitationalForce = g * weightOfSea * 7.3e22 / distanceBetweenCelestialbodies ^ 2
+```
+
+Kuu ja Läänemere vahel on gravitatsioonijõud suurusega `r gravitationalForce` N.
+
+
+### Bensiini kulutamine
+
+#### Ülesande püstitus
+
+Mitu liitrit bensiini kulutab auto 100 km läbimiseks, kui automootori kasutegur on 25% ja veojõud on 500 N? Bensiini kütteväärtus on 40 MJ/l.
+
+#### Lahendus
+
+```{r}
+workOfEngine = 500 * 100 * 1000
+energy = workOfEngine / (25 / 100)
+amountOfFuel = energy / (40 * 1000000)
+```
+
+`r amountOfFuel` liitrit bensiini kulutab auto 100 km läbimiseks, kui automootori kasutegur on 25 % ja veojõud on 500 N.
+
+### Päikesekiirgus
+
+#### Ülesande püstitus
+
+Eestis on summaarne päiksekiirgus pindalaühiku kohta keskmiselt 500 W/m^2^. Eramu võimsustarve on ligikaudu 2 kW. Päikesepaneelidega saab muuta päikesekiirgust elektrienergiaks kasuteguriga 20%. Milline peaks olema päikesepaneelide pindala, kui eramu energiakulu katmiseks soovitakse kasutada vaid päikeseenergiat?
+
+#### Lahendus
+
+```{r}
+area = 2 * 1000 / 500 / (20 / 100)
+```
+
+`r area` \* m \^ 2 peaks olema päikesepaneelide pindala, kui eramu energiakulu katmiseks soovitakse kasutada vaid päikeseenergiat.
+
+### Traadi venitamine
+
+#### Ülesande püstitus
+
+Millise jõuga peab venitama ühest otsast kinnitatud traati, etta pikeneks 2mmvõrra? Traadi jäikus on $2 \cdot 10^5 \cdot \frac{N}{m}$.
+
+#### Sisendid
+
+traadi pikenemisvahemik $\Delta(x) = 2 \cdot mm === 2 \cdot 10^{-3} \cdot m$
+
+traadi jäikus $2 \cdot 10^5 \cdot \frac{N}{m}$
+
+```{r}
+change_x <- 2e-3
+k <- 2e5
+```
+
+#### Mida arvutada?
+
+jõud $F = ?$
+
+#### Reeglistik
+
+Lähtun elastsusjõu valemist \@ref(eq:pulling-force).
+
+#### Arvutamine
+
+```{r}
+F <- k * change_x
+```
+
+#### Lahend
+
+Jõuga `r F` * N peab venitama ühest otsast kinnitatud traati, et see pikeneks 2 * mm võrra.

@@ -2,8 +2,14 @@ name: "füüsika"
 navbar:
   title: "Füüsika"
   left:
-    - text: "mehaanika"
+    - text: "mehaanika reeglid"
+      href: mechanics-rules.html
+    - text: "mehaanika ülesanded: sirgjooneline liikumine"
       href: mechanics.html
+    - text: "mehaanika ülesanded: pöördliikumine"
+      href: mechanics-rotational-movement.html
+    - text: "mehaanika ülesanded: puhas jõud"
+      href: mechanics-pure-force.html
     - text: "aine ja selle olekud"
       href: substance.html
     - text: "soojus"

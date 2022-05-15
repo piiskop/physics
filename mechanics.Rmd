@@ -1,589 +1,19 @@
 ---
-title: "Mehaanika"
+title: "Mehaanika ülesanded: sirgjooneline liikumine"
 output:
   bookdown::html_document2:
     toc: yes
     toc_float: yes
     toc_depth: 5
 bibliography: references.bib
+biblio-style: "newapa"
+link-citations: true
+citation_package: biblatex
 ---
 
-# Reeglid
+# Autobuss
 
-## Ühikud
-
-+----------+-----------------+--------+------------+--------------------+
-| Eesliide | Kümne astendaja | Lühend | Näide      | Selgitus           |
-+==========+=================+========+============+====================+
-| piko-    | -12             | p      | 1 \* pN    | üks pikonjuuton    |
-+----------+-----------------+--------+------------+--------------------+
-| nano-    | -9              | n      | 2 \* nm    | kaks nanomeetrit   |
-+----------+-----------------+--------+------------+--------------------+
-| mikro-   | -6              | μ      | 3 \* μg    | kolm mikrogrammi   |
-+----------+-----------------+--------+------------+--------------------+
-| milli-   | -3              | m      | 4 \* mW    | neli millivatti    |
-+----------+-----------------+--------+------------+--------------------+
-| senti-   | -2              | c      | 5 \* cK    | viis sentikelvinit |
-+----------+-----------------+--------+------------+--------------------+
-| detsi-   | -1              | d      | 6 \* dA    | kuus detsiamprit   |
-+----------+-----------------+--------+------------+--------------------+
-| deka-    | 1               | D      | 7 \* Db    | seitse dekabitti   |
-+----------+-----------------+--------+------------+--------------------+
-| hekto-   | 2               | H      | 8 \* HB    | kaheksa hektobaiti |
-+----------+-----------------+--------+------------+--------------------+
-| kilo-    | 3               | K      | 9 \* Klx   | üheksa kiloluksi   |
-+----------+-----------------+--------+------------+--------------------+
-| mega-    | 6               | M      | 10 \* MJ   | kümme megadžauli   |
-+----------+-----------------+--------+------------+--------------------+
-| giga-    | 9               | G      | 100 \* GPa | sada gigapaskalit  |
-+----------+-----------------+--------+------------+--------------------+
-| tera-    | 12              | T      | .5 \* Tcd  | pool terakandelat  |
-+----------+-----------------+--------+------------+--------------------+
-
-: Ühikute eesliited
-
-Konvertereid:
-
-1.  (UnitConverters.net)[<https://www.unitconverters.net/volume/cubic-kilometer-to-cubic-meter.htm>]
-
-2.  (Calculate weight of compounds and materials per volume)[<https://www.aqua-calc.com/calculate/volume-to-weight>]
-
-```{r}
-convertFromKmPerHToMPerS <- function(velocityInKmPerH) {
-  (velocityInKmPerH * 1000 / 3600)
-}
-
-convertFromMiToM <- function(mi) {
-  mi * 1609.344
-}
-
-convertFromFtToM <- function(ft) {
-  convertFromMiToM(ft / 5280)
-}
-```
-
-$$SECONDS\_IN\_YEAR = (\frac{241}{1000} \cdot 366 + \frac{1000 - 241}{1000} \cdot 365) \cdot 24 \cdot 60 \cdot 60$$
-
-```{r}
-SECONDS_IN_YEAR <- (365 * (9 * 76 + 75) + 366 * (9 * 24 + 25)) / 1000 * 24 * 60 * 60
-SECONDS_IN_YEAR
-```
-
-## Sirgjooneline liikumine
-
-Valguse kiirus vaakumis:
-
-```{r}
-SPEED_LIGHT <- 299792458
-```
-
-![(\#fig:integrating-time) Ühesuguste ajavahemike integreerimine](mechanics/integrating-time.svg)
-
-Joonisel \@ref(fig:integrating-time) on kujutatud ajatelge, millele on märgitud võrdsed ajavahemikud. Võime neid ajavahemikke kujutada ka lõputult nullilähedasena. Kui need ajavahemikud kokku liita, saame koguaja:
-
-$$\sum_{i = algus}^{\infty}(\Delta(t))_i === \int{dt} === t$$
-
-Tuletan kiirenduse valemi jõnksutamise kaudu:
-
-$$jõnks = \frac{d(kiirendus)}{d({t})}$$
-
-$${d({t})} = jõnks \cdot d({kiirendus})$$
-
-$$\int_{algkiirendus}^{kiirendus}d(kiirendus) === \int_{0}^{t}jõnks \cdot d(t)$$
-
-$$kiirendus - algkiirendus === jõnks \cdot t$$
-
-```{=tex}
-\begin{equation}
-\color{green}{\bf{a = a_0 + j \cdot t}},
-(\#eq:zeroeth-equation-of-motion-for-constant-jerk)
-\end{equation}
-```
-
-kus *a* on kiirendus, *a_0_* on algkiirendus, *j* on jõnks, *t* on lõpphetk.
-
-Tuletan kiiruse valemi kiirenduse ja jõnksutamise kaudu:
-
-$$kiirendus = \frac{d(kiirus)}{d(t)}$$
-
-```{=tex}
-\begin{equation}
-d(kiirus) === kiirendus \cdot d(t)
-(\#eq:acceleration)
-\end{equation}
-```
-Asendan valemisse \@ref(eq:acceleration) kiirenduse valemist \@ref(eq:zeroeth-equation-of-motion-for-constant-jerk):
-
-$$d(kiirus) === (algkiirendus + jõnks \cdot t) \cdot d(t)$$
-
-$$\int_{v_0}^{v}d(v) === \int_{0}^{t}(a_0 + j \cdot t) \cdot d(t),$$
-
-kus *v_0_* on algkiirus, *v* on lõppkiirus, *a_0_* on algkiirendus, *j* on jõnks, *t* on lõpphetk.
-
-$$v - v_0 === a_0 \cdot t + \frac{j \cdot t^2}{2},$$
-
-kus *v* on kiirus, *v_0_* on algkiirus, *t* on lõpphetk, *j* on jõnks.
-
-```{=tex}
-\begin{equation}
-\color{green}{\bf{v = v_0 + a_0 \cdot t + \frac{j \cdot t^2}{2}}},
-(\#eq:first-equation-of-motion-for-constant-jerk)
-\end{equation}
-```
-
-kus *v* on lõppkiirus, *v_0_* on algkiirus, *a_0_* on algkiirendus, *t* on lõpphetk, *j* on jõnks.
-
-Keskmine kiirus on vahemaa ja selle läbimiseks kulunud ajavahemiku suhe. Milline on hetkekiirus? Selleks tuleb jagada lõputult lühike vahemaa lõputult lühikese selle vahemaa läbimiseks kulunud ajavahemikuga:
-
-```{=tex}
-\begin{equation}
-\overrightarrow{hetkekiirus} = \frac{d(\overrightarrow{vahemaa})}{d(t)}
-(\#eq:momentvelocity)
-\end{equation}
-```
-Valemist \@ref(eq:momentvelocity) avaldan vahemaa:
-
-```{=tex}
-\begin{equation}
-d(\overrightarrow{s}) = \overrightarrow{v} \cdot d(t),
-(\#eq:smallest-distance)
-\end{equation}
-```
-
-kus *s* on vahemaa, *v* on kiirus, *t* on lõpphetk.
-
-Asendan valemisse \@ref(eq:smallest-distance) hetkekiiruse valemist \@ref(eq:first-equation-of-motion-for-constant-jerk) ja jätkan tuletamist:
-
-$$d(s) === (v_0 + a_0 \cdot t + \frac{j \cdot t^2}{2}) \cdot d(t),$$
-
-kus *s* on vahemaa, *v_0_* on algkiirus, *t* on lõpphetk, *j* on jõnks, *a_0_* on algkiirendus.
-
-$$\int_{s_0}^{vahemaa}d(vahemaa) ===\\
-\int_{0}^{t}(algkiirus + algkiirendus \cdot t + \frac{j \cdot t^2}{2}) \cdot d(t)$$
-
-$$s - s_0 === v_0 \cdot t + \frac{a \cdot t^2}{2} + \frac{j \cdot t^3}{6},$$
-
-kus *s* on vahemaa, *s_0_* on lähe, *v_0_* on algkiirus, *t* on lõpphetk, *a* on kiirendus, *j* on jõnks.
-
-```{=tex}
-\begin{equation}
-\color{green}{\bf{s === s_0 + v_0 \cdot t + \frac{a \cdot t^2}{2} + \frac{j \cdot t^3}{6}}},
-(\#eq:second-equation-of-motion-for-constant-jerk)
-\end{equation}
-```
-
-kus *s* on vahemaa, *s_0_* on lähe, *v_0_* on algkiirus, *a* on kiirendus, *t* on lõpphetk.
-
-Kogu vahemaa on integreeritud ülilühikestest vahemaa juppidest:
-
-```{=tex}
-\begin{equation}
-\overrightarrow{vahemaa} = \int{d(\overrightarrow{vahemaa})}
-(\#eq:whole-distance)
-\end{equation}
-```
-Asendan valemist \@ref(eq:smallest-distance) ülilühikese ajavahemiku valemisse \@ref(eq:whole-distance):
-
-```{=tex}
-\begin{equation}
-\overrightarrow{s} = \int_{t_0}^{t}{\overrightarrow{v} \cdot d(t)},
-(\#eq:whole-distance-integrated)
-\end{equation}
-```
-
-kus *s* on vahemaa, *t_0_* on alghetk, *t* on lõpphetk, *v* on hetkekiirus.
-
-Kui hetkekiirus on $\color{red}{\textbf{konstantne}}$, siis
-
-```{=tex}
-\begin{equation}
-\overrightarrow{s} = \overrightarrow{v} \cdot \int_{t_0}^{t}{d(t)} === \overrightarrow{v} \cdot t + \overrightarrow{\underbrace{s_0}_{konstant}},
-(\#eq:whole-distance-with-constant-momentvelocity)
-\end{equation}
-```
-
-kus *s* on vahemaa, *v* on hetkekiirus, *t_0_* on alghetk, *t* on lõpphetk, *s_0_* on lähe.
-
-![(\#fig:aeg-kiirus) Kiiruse muutumine ajas, kui kiirendus on $2 \cdot \frac{m}{s^2}$](mechanics/aeg-kiirus.svg)
-
-Kui ülilühikese vahemaa ja selle läbimiseks kulunud ülilühikese ajavahemiku suhe on kiirus, mis näitab, kui kiiresti asukoht muutub ajas, siis kiiruse muutumist ajas näitab kiirendus:
-
-```{=tex}
-\begin{equation}
-\overrightarrow{a} = \lim_{\Delta {t} \to 0} \frac{\Delta {\overrightarrow{v}}}{\Delta {t}} === \frac{d(\overrightarrow{v})}{d(t)},
-(\#eq:acceleration-by-velocity)
-\end{equation}
-```
-
-kus *a* on kiirendus, *t* on ajavahemik, *v* on kiirus.
-
-Asendan valemist \@ref(eq:momentvelocity) valemisse \@ref(eq:acceleration-by-velocity) kiiruse:
-
-```{=tex}
-\begin{equation}
-\overrightarrow{a} = \frac{d(\frac{d(\overrightarrow{s})}{d(t)})}{d(t)},
-(\#eq:acceleration-by-distance-and-time)
-\end{equation}
-```
-
-kus *s* on vahemaa, *a* on kiirendus ja *t* on ajavahemik.
-
-Avaldan valemist \@ref(eq:acceleration-by-velocity) üliväikese kiiruse:
-
-```{=tex}
-\begin{equation}
-d(\overrightarrow{v}) = \overrightarrow{a} \cdot {d(t)},
-(\#eq:momentvelocity-by-acceleration-and-time)
-\end{equation}
-```
-
-kus *v* on kiirus, *a* on kiirendus ja *t* on ajavahemik.
-
-Kui kiirendus on $\color{red}{\textbf{konstantne}}$, siis
-
-```{=tex}
-\begin{equation}
-{v} = \int{\overrightarrow{a} \cdot {d(t)}} === \overrightarrow{a} \cdot \int{d(t)} ===\\
-\overrightarrow{a} \cdot t + \underbrace{v_0}_{konstant},
-(\#eq:velocity-by-integration)
-\end{equation}
-```
-
-kus *v* on lõppkiirus, *a* on kiirendus, *t* on ajavahemik, *v_0_* on algkiirus.
-
-Keskmise kiirenduse saame arvutada nii:
-
-```{=tex}
-\begin{equation}
-{\overline{a}} = \frac{\overrightarrow{v} - \overrightarrow{{v}_{0}}}{t},
-(\#eq:keskmine-kiirendus)
-\end{equation}
-```
-
-kus *a* on kiirendus, *v* on lõppkiirus, *v_0_* on algkiirus ja *t* on ajavahemik.
-
-Kui kiirendus on $\color{red}{\textbf{konstantne}}$, siis asendades valemisse \@ref(eq:whole-distance-integrated) kiiruse valemist \@ref(eq:keskmine-kiirendus):
-
-```{=tex}
-\begin{equation}
-\overrightarrow{s} = \int{\overrightarrow{\overline{a}} \cdot {t} + \overrightarrow{v_0} \cdot d(t)} ===\\
-\int{\overrightarrow{\overline{a}} \cdot {t} \cdot d(t)} + \int{\overrightarrow{v_0} \cdot d(t)} ===\\
-\overrightarrow{\overline{a}} \cdot \int{{t} \cdot d(t)} + \overrightarrow{v_0} \cdot \int{d(t)} === \\
-\overrightarrow{\overline{a}} \cdot \frac{t^2}{2} + \overrightarrow{v_0} \cdot t + \underbrace{\overrightarrow{s_0}}_{konstant},
-(\#eq:vahemaa-kiirenduse-kaudu)
-\end{equation}
-```
-
-kus *s* on vahemaa, *a* on kiirendus, *v_0_* on algkiirus, *t* on ajavahemik.
-
-Avaldan valemist \@ref(eq:keskmine-kiirendus) ajavahemiku:
-
-```{=tex}
-\begin{equation}
-{t} = \frac{\overrightarrow{v} - \overrightarrow{{v}_{0}}}{\overrightarrow{\overline{a}}},
-(\#eq:ajavahemik)
-\end{equation}
-```
-
-kus *t* on ajavahemik, *v* on lõppkiirus, *v_0_* on algkiirus ja *a* on kiirendus.
-
-Kui lähe on null, siis lähtuvalt valemist \@ref(eq:vahemaa-kiirenduse-kaudu)
-
-```{=tex}
-\begin{equation}
-\overrightarrow{s} = \overrightarrow{\overline{a}} \cdot \frac{t^2}{2} + \overrightarrow{{v}_{0}} \cdot t + 0 ===\\
-\overrightarrow{overline{a}} \cdot \frac{(\frac{\overrightarrow{{v}} - \overrightarrow{{v}_{0}}}{\overrightarrow{\overline{a}}})^2}{2} + \overrightarrow{{v}_{0}} \cdot \frac{\overrightarrow{{v}} - \overrightarrow{{v}_{0}}}{\overrightarrow{\overline{a}}} ===\\ \frac{\overrightarrow{{v}}^2 - 2 \cdot \overrightarrow{v} \cdot \overrightarrow{{v}_{0}} + \overrightarrow{{v}_{0}}^2}{2 \cdot \overrightarrow{\overline{a}}} + \frac{\overrightarrow{{v}_{0}} \cdot \overrightarrow{v} - \overrightarrow{{v}_{0}}^2}{\overrightarrow{\overline{a}}} ===\\ \frac{\overrightarrow{{v}}^2 - \overrightarrow{{v}_{0}}^2}{2 \cdot \overrightarrow{\overline{a}}},
-(\#eq:vahemaa-kiiruste-ja-kiirenduse-kaudu)
-\end{equation}
-```
-
-kus *s* on vahemaa, *a* on kiirendus, *t* on ajavahemik, *v* on lõppkiirus, *v_0_* on algkiirus.
-
-Muutuva kiirenduse valem:
-
-```{=tex}
-\begin{equation}
-\overrightarrow{\Delta(a)} = \frac{d(\overrightarrow{\overline{a}})}{d(t)} === \frac{a - a_{0}}{t},
-(\#eq:kiirenduse-muut)
-\end{equation}
-```
-
-kus *a* on kiirendus, *a~0~* on algkiirendus, *t* on ajavahemik.
-
-Keskmise kiiruse valem:
-
-```{=tex}
-\begin{equation}
-\overline{v} = \frac{\Delta(s)}{\Delta(t)} === \frac{\overrightarrow{v_0} + \overrightarrow{v}}{2},
-(\#eq:mean-velocity)
-\end{equation}
-```
-
-kus *v* on kiirus, *v~0~* on algkiirus, *s* on vahemaa, *t* on ajavahemik.
-
-Pythagorase teoreem:
-
-```{=tex}
-\begin{equation}
-|c| = \sqrt{|kaatet_2|^2 + |kaatet_2|^2}
-(\#eq:pythagorean)
-\end{equation}
-```
-Tõusunurk:
-
-```{=tex}
-\begin{equation}
-\alpha = atan(\frac{nihe_{vertikaalne}}{\Delta(x)})
-(\#eq:tangent-angle)
-\end{equation}
-```
-
-Nurgateisendus:
-
-```{=tex}
-\begin{equation}
-nurk_{rad} = \frac{nurk° \cdot \pi}{180°}
-(\#eq:angle-from-degrees-to-radians)
-\end{equation}
-```
-
-Koosinusteoreem:
-
-```{=tex}
-\begin{equation}
-|a| =\\
-\sqrt{|b|^2 + |c|^2 - 2 \cdot |b| \cdot |c| \cdot cos(nurk_{b, c})}
-(\#eq:cosine-theorem)
-\end{equation}
-```
-
-## Impulss
-
-$$impulss = mass * kiirus$$
-
-$$kehadeSüsteemiKoguImpulss =\\
-\sum{süsteemiKehaImpulss}$$
-
-See on alati jääv.
-
-Elastne põrge:
-
-$$m_1 * \vec{v_1} + m_2 * \vec{v_2} === m_1 * \vec{v_1 ^ \prime} + m_2 + \vec{v_2 ^ \prime},$$
-
-kus *m* on mass, *v* on kiirus
-
-Energia jäävuse seadus:
-
-$$\frac{m_1 * \vec{v_1} ^ 2}{2} + \frac{m_2 * \vec{v_2} ^ 2}{2} === \frac{m_1 * (\vec{v_1} ^ \prime) ^ 2}{2} + \frac{m_2 * (\vec{v_2} ^ \prime) ^ 2}{2},$$
-
-kus *m* on mass ja *v* on kiirus.
-
-Mitteelastne põrge:
-
-$$m_1 * \vec{v_1} + m_2 * \vec{v_2} === (m_1 + m_2) * \vec{v ^ \prime},$$
-
-kus *m* on mass ja *v* on kiirus.
-
-$$jõuImpulss = impulsiMuut$$
-
-$$jõud * ajavahemik === impulsiMuut$$
-
-## Ringliikumine
-
-Maa keskmine raadius:
-
-```{r}
-RADIUS_EARTH <- 6.371E6
-```
-
-Ringjoone pikkus:
-
-```{=tex}
-\begin{equation}
-pikkus_{ringjoon} = 2 \cdot \pi \cdot raadius
-(\#eq:length-of-circle)
-\end{equation}
-```
-
-```{=tex}
-\begin{equation}
-\vec{v} = \frac{s}{t}
-(\#eq:line-velocity)
-\end{equation}
-```
-
-[@mills_1993_quantities, p. 13]
-
-```{=tex}
-\begin{equation}
-\overline{\vec{\omega}} = \frac{\phi}{t}
-(\#eq:average-angular-velocity)
-\end{equation}
-```
-
-```{=tex}
-\begin{equation}
-\omega = \frac{d(\phi)}{d(t)}
-(\#eq:angular-velocity)
-\end{equation}
-```
-
-```{=tex}
-\begin{equation}
-\alpha = \frac{d(\omega)}{d(t)}
-(\#eq:angular-acceleration)
-\end{equation}
-```
-
-[@erichardcohen_1987_symbols, p. 28]
-
-```{=tex}
-\begin{equation}
-\vec{v} = \omega * r
-(\#eq:tangential-velocity)
-\end{equation}
-```
-
-```{=tex}
-\begin{equation}
-a_c = \frac{v^2}{r}
-(\#eq:centripetal-acceleration)
-\end{equation}
-```
-
-[@edsarx.1602.0636120160101, p. 2]
-
-$${moment}_{inerts} = mass * raadius ^ 2$$
-
-Suund kruvireegli järgi:
-
-$${moment}_{\vec{impulss}} = \vec{impulss} * r === m * \vec{{v}_{joon}} * r === m * \vec{{v}_{nurk}} * r ^ 2,$$
-
-kus *r* on raadius, *m* on mass, *v* on kiirus.
-
-$${moment}_{\vec{impulss}} = \vec{{kiirus}_{nurk}} * {moment}_{inerts}$$
-
-Suletud süsteemi koguimpulsimoment on jääv.
-
-## Gravitatsioonijõud
-
-$G = 6.67 * 10 ^ {-11} \frac{N * m ^ 2}{kg ^ 2}$ Maa mass olevat 6 \* 10^24^ kg. Maa raadius olevat 6.4 \* 10^6^ m.
-
-```{r}
-gravitationalConstant = 6.67E-11
-```
-
-$$F_g = G * \frac{m_1 * m_2}{s^2},$$
-
-kus $F_g$ on raskusjõud, *G* on gravitatsioonikonstant, *m* on mass, *s* on punktmasside vaheline kaugus.
-
-$$g = G * \frac{M}{R ^ 2}$$
-
-```{r}
-g <- gravitationalConstant * (6 * 10 ^ 24) / (6.4 * 10 ^ 6) ^ 2
-```
-
-g = `r signif(g, digits <- 3)` $* \frac{m}{s ^ 2}$
-
-![gravitatsiooni standardkiirendus eri piirkondades Maal](mechanics/cities.svg)
-
-"The value 9.806 m/s2 is midway between these two extremes, so it's sort of true to say that…
-
-g = 9.806 ± 0.026 m/s2
-
-This is not the same thing as an average, however. For that, use this value that someone else derived…
-
-g = 9.798 m/s2
-
-Here are my suggestions. Use the value of 9.8 m/s2 with two significant digits for calculations on the surface of the Earth unless a value of gravity is otherwise specified. That seems reasonable. Use the value of 9.80665 m/s2 with six significant digits only when you want to convert m/s2 to g. That is the law." [@gravitation]
-
-Selline valem kehtib objekti kohta, mis on täpselt Maa pinnal. Kui see asub pinna sees või selle kohal, siis tuleb kasutada sellist valemit:
-
-$$g = G * \frac{m}{(r + h) ^ 2},$$
-
-kus *g* on gravitatsioonikiirendus, *G* on gravitatsioonikonstant, *m* on Maa mass, *r* on Maa raadius, *h* on kõrgus Maa pinnast.
-
-## Rõhk
-
-rõhk = mass \* *g*
-
-## Elastsusjõud
-
-Hooke'i seadus:
-
-```{=tex}
-\begin{equation}
-F = –k∙Δx,
-(\#eq:elasticity)
-\end{equation}
-```
-
-kus *F* on elastsusjõud, *k* elastsustegur ja $\Delta(x)$ on pikenemisvahemik.
-
-```{=tex}
-\begin{equation}
-F = k∙Δx,
-(\#eq:pulling-force)
-\end{equation}
-```
-
-kus $F$ on tõmbejõud, $k$ on elastsustegru ja $\Delta(x)$ on pikenemisvahemik.
-
-## Hõõrdejõud
-
-hõõrdeJõud = hõõrdeTegur \* rõhk
-
-```{r}
-calculateDistanceOfDecceleration <- function(velocity, frictionFactor) {
-  ((velocity) ^ 2) / 2 / g / frictionFactor
-}
-```
-
-## Töö
-
-$$töö = \vec{jõud} * \vec{nihe} * cos(nurk_{\vec{nihe}, \vec{jõud}})$$
-
-$$E_{pot} = m * g * h,$$
-
-kus $E_{pot}$: potentsiaalne energia, *m*: mass ja *h*: kõrgus.
-
-Välisjõudude töö koorma tõstmisel võrdub koorma potentsiaalse energia muuduga:
-
-$$töö = E_{pot_2} - E_{pot_1},$$
-
-kus $E_{pot}$ on potentsiaalne energia.
-
-Suletud süsteemi mehaaniline koguenergia on jääv:
-
-$$energia = energia_{potentsiaalne} + energia_{kineetiline}$$
-
-$$E = m * g * h + \frac{m * \vec{v} ^ 2}{2},$$
-
-kus *E* on energia, *m* on mass, *h* on kõrgus ja *v* on kiirus.
-
-$$võimsus = \frac{töö}{ajavahemik}$$
-
-$${elastsusJõuEenergia}_{pot} = \frac{k * (\Delta(s)) ^ 2}{2},$$
-
-kus *k* on jäikus, $\Delta(s)$ on kokkusurumise vahemaa, *pot* on potentsiaalne.
-
-$${tegur}_{kasu} = \frac{töö}{energia}$$
-
-## Jõumoment
-
-$${moment}_{F} = F * raadius * sin({nurk}_{raadius, {mõjuSirge}_{F}}),$$
-
-kus *F* on jõud.
-
-Kangi tasakaal:
-
-$${jõud}_1 * {raadius}_1 === {jõud}_2 * {raadius}_2$$
-
-# Ülesanded
-
-## Autobuss
-
-### Ülesande püstitus
+## Ülesande püstitus
 
 Peatuskohast väljuva autobussi liikumist kirjeldab esimese 10 s jooksul võrrand *s* = 0,38*t^2^*, kus *s* on teepikkus meetrites ja *t* aeg sekundites.
 
@@ -593,7 +23,7 @@ b)  Kui pika tee läbib buss esimese 10 sekundiga?
 
 c)  Kui suure kiiruse saavutab buss selle aja jooksul?
 
-### Lahendus
+## Lahendus
 
 a)  $,76 * \frac{m}{s^2}$.
 
@@ -601,9 +31,9 @@ b)  38 \* m.
 
 c)  $7,6 * \frac{m}{s}$.
 
-## Lennukikandja
+# Lennukikandja
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Lennukikandja püüde- ja pidurdustrossidel kulub 25 tonnise hävitaja peatamiseks 2 sekundit. Pidurdamine algab, kui hävitaja kiirus on 240 km/h[^1]
 
@@ -617,7 +47,7 @@ c)  Kui pikk on hävitaja pidurdusteekond?
 
 d)  Kui suur on pidurdav jõud?
 
-### Lahendus
+## Lahendus
 
 $240 * \frac{km}{h} === \frac{240 * (1000 * m)}{3600 * s} === \frac{200*m}{3*s}$
 
@@ -642,9 +72,9 @@ breakingForce = 25 * 1000 * (-100 / 3)
 
 `r breakingForce` N.
 
-## Autod
+# Autod
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Maanteel sõidab veoauto, mille pikkus on 16 meetrit ja kiirus 72 km/h. Veoauto taha jõuab sõiduauto, mille kiirus on 90 km/h ja pikkus 4 m. Sõiduauto juht soovib sooritada möödasõitu. Nii möödasõidu alustamisel kui ka lõpetamisel peab autode vaheline pikivahe olema 75 m.
 
@@ -654,7 +84,7 @@ b)  Kui pikk on möödasõidumaa?
 
 c)  Kui vastu tuleb auto, mille kiirus on 90 km/h, siis kui kaugel peaks see möödasõidu alguses olema, et mööda sõitev sõiduauto oleks sellega kohakuti parajasti möödasõidu lõppedes?
 
-### Lahendus
+## Lahendus
 
 Jätan arvestamata, et möödasõiduks on vaja ümberreastuda ja lihtsuse mõttes kujutan ette, et lühem auto justkui läbiks pikema auto. Tähistan möödasõidu vahemaa lühema auto jaoks meetrites *x*'ga. Sel juhul on pikema auto jaoks möödasõidu vahemaa *x - 79* m, kui võrdlen autode esiotsi, sest pikivahe peab olema 75 m ja lühema auto pikkus on neli meetrit. Möödasõidu lõppedes on mõlemal kulunud võrdne ajavahemik. Teisendan lühema auto kiiruse rahvusvahelistesse ühikutesse:
 
@@ -723,7 +153,7 @@ distanceOfIncomingVehicle = 2 * distanceOfShorterVehicle
 
 `r distanceOfIncomingVehicle` meetri kaugusel.
 
-### Lahendid
+## Lahendid
 
 a)  `r timeOfLongerVehicle` sekundit
 
@@ -731,13 +161,13 @@ b)  `r distanceOfShorterVehicle` meetrit
 
 c)  `r distanceOfIncomingVehicle` meetrit
 
-## Pall
+# Pall
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Poiss viskas palli vertikaalselt üles ja püüdis selle samas kohas 2s pärast kinni. Kui kõrgele lendas pall?
 
-### Lahendus
+## Lahendus
 
 Palli lennu kestus oli kaks sekundit. Eeldan, et poiss viskas selle palli üles Maal ja seetõttu mõjub pallile gravitatsioonijõud. Palli lähtekoha loen nulliks sõltumata sellest, kui kõrgel asub palli ja käe irdumiskoht. Sellise lennu trajektoori kirjeldab funktsioon, mille graafik on parabool. Kuna parabooli haarad on üksteise suhtes peegelpildis, siis võime järeldada nii palli tõusmine kui laskumine kumbki kestsid eraldi ühe sekundi. Vaja on arvutada selle parabooli haripunkti ordinaadi väärtus. Kiiruse komponendi arvutamiseks tõusva palli jaoks kasutan valemit $-g === \frac{v - v_{0}}{t}$, kus *g* on Maa raskuskiirendust, *v* palli lõppkiirus, $v_{0}$ palli algkiirus ja *t* aeg. Palli lõppkiirus on null. Seega on palli algkiiruse komponent avaldatav valemiga $v_{0} = g * t$. Palli maksimaalne kõrgus on seega arvutatav valemiga:
 
@@ -754,13 +184,13 @@ maxHeightOfBall = g / 2
 maxHeightOfBall
 ```
 
-## Turvavöö
+# Turvavöö
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Turvavööde katsetamisel sõidab auto vastu seina kiirusega 90 km/h ja peatub 0,1 s jooksul. Juhi kohal istub nukk massiga 75 kg. Kui suurele jõule peab turvavöö vastu pidama?
 
-### Lahendus
+## Lahendus
 
 Esmalt on vaja teisendada auto algkiirus 90 km/h rahvusvahelisse mõõtühikute süsteemi:
 
@@ -786,13 +216,13 @@ force = -(acceleration * 75)
 
 Turvavöö peab vastu pidama jõule `r force` N.
 
-## Äkkpidurdus
+# Äkkpidurdus
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Auto sõidab kiirusega 50 km/h. Peale äkkpidurdust rattad blokeeruvad ja auto libiseb 15 m, kuni jääb seisma. Kui kaugele libiseb sama auto blokeerunud ratastega juhul, kui auto kiirus enne pidurdamist on 150 km/h?
 
-### Lahendus
+## Lahendus
 
 Teisendan auto kiiruse 50 km/h rahvusvahelisse mõõtühikute süsteemi:
 
@@ -840,13 +270,13 @@ distance150 = (0 - speed150 ^ 2) / 2 / acceleration150
 
 Auto libiseb blokeerunud ratastega `r distance150` m juhul, kui auto kiirus enne pidurdamist on 150 km/h.
 
-## Koormaga veoauto
+# Koormaga veoauto
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Mööda teed sõidab 2 tonnise koormaga veoauto. Takistust nähes juht pidurdab äkitselt, rattad blokeeruvad ja auto libiseb peatumiseni 42 m. Kui kaugele oleks veoauto libisenud ilma koormata, kui tühja veoauto mass on 5 t? Eeldada, et rehvide ja teepinna vaheline hõõrdejõud jääb samaks.
 
-### Lahendus
+## Lahendus
 
 Meile pole teada algkiirus, kuid võime eeldada, et algkiirus on mõlema massi puhul sama. Kasutan valemit:
 
@@ -866,127 +296,27 @@ $$s_2 = \frac{(42 * m) * 2 * \frac{pidurdusjõud}{7000 * kg}}{2 * \frac{pidurdus
 
 Veoauto oleks libisenud ilma koormata 30 m kaugusele, kui tühja veoauto mass on viis tonni.
 
-## Raskus trossi otsas
+# Orbitaaljaam
 
-### Ülesande püstitus
-
-Raskus massiga 5 kg ripub kahe trossi otsas (vt joonist \@ref(fig:hanging-weight)). Kui suur on kummagi trossi pinge, kui
-
-a)  α = 25°;
-
-b)  α = 50°.
-
-![(\#fig:hanging-weight)Trosside otsas ripub raskus.](mechanics/hanging-weight.svg)
-
-### Lahendus
-
-#### Üldine lahendus
-
-![(\#fig:hanging-weight-complemented)Täiendatud joonis.](mechanics/hanging-weight-complemented.svg)
-
-Kuna algandmeid napib ja ainult ühe nurga suurus on teada, siis eeldan, et trossid on ühepikkused. Kõik kolm jõudu peavad üksteist tasakaalustama. Igal jõul on nii rõhtne kui püstine komponent. Näeme jooniselt \@ref(fig:hanging-weight-complemented), et rõhtne komponent puudub raskusjõul ning ülejäänud rõhtsad komponendid on absoluutväärtuselt ühesugused, mistõttu koostan võrrandi üksnes püstiste komponentidega:
-
-$$(5 * kg) * g === 2 * tross * sin(\alpha)$$
-
-Avaldan sellest võrrandist trossi pikkuse:
-
-$$tross = \frac{5 * kg * g}{2 * sin(\alpha)}$$
-
-```{r}
-calculateForce <- function(alpha) {
-  5 * g / 2 / sin(alpha)
-}
-```
-
-#### a-osa
-
-```{r}
-forceA = calculateForce(25 * pi / 180)
-```
-
-Kummagi trossi pinge on `r forceA` \* N, kui α = 25 °.
-
-#### b-osa
-
-```{r}
-forceB = calculateForce(50 * pi / 180)
-```
-
-Kummagi trossi pinge on `r forceB` \* N, kui α = 50 °.
-
-## Läänemeri
-
-### Ülesande püstitus
-
-Läänemere maht on umbes 20000 km^3^. Kuu mass on 7,3 \* 10^22^ kg ja keskmine kaugus Maast 384000 km. Kui suur gravitatsioonijõud on Kuu ja Läänemere vahel?
-
-### Lahendus
-
-![Maa ja Kuu](mechanics/baltic-sea-moon.svg)
-
-Selles ülesandes on vaja teha palju konverteerimisi. Et arvutada Kuu ja Läänemere vaheline jõud, on vaja lisaks gravitatsioonikonstandile kasutada Läänemere ja Kuu massi ning nendevahelist kaugust.
-
-Läänemere massist pole teavitatud. Siiski on teavitatud Läänemere ruumalast. Selle konverteerin esmalt kuupmeetritesse:
-
-```{r}
-volumeOfSea = 20000 * (1000) ^ 3
-```
-
-Läänemere maht kuupmeetrites on `r volumeOfSea`.
-
-On kindlaks tehtud, et üks kilogramm vett tasakaalustab üht liitrit vett. Kui mitu kilogrammi vett tasakaalustab üht kuupmeetrit vett?
-
-```{r}
-weightToVolume = 1 / (1 * .1 ^ 3)
-```
-
-Üht kuupmeetrit vett tasakaalustab `r weightToVolume` kg vett.
-
-Nüüd on võimalik välja arvutada Läänemere mass:
-
-```{r}
-weightOfSea = volumeOfSea * weightToVolume
-```
-
-Läänemere mass on `r weightOfSea` kg.
-
-Kuu keskmine kaugus maast on
-
-```{r}
-distanceBetweenCelestialbodies = 384000 * 1000
-```
-
-`r distanceBetweenCelestialbodies` m.
-
-Nüüd on kõik vajalikud sisendid sobival kujul ja saan arvutada gravitatsioonijõu Kuu ja Läänemere vahel:
-
-```{r}
-gravitationalForce = gravitationalConstant * weightOfSea * 7.3e22 / distanceBetweenCelestialbodies ^ 2
-```
-
-Kuu ja Läänemere vahel on gravitatsioonijõud suurusega `r gravitationalForce` N.
-
-## Orbitaaljaam
-
-### Ülesande püstitus
+## Ülesande püstitus
 
 Kui suurt raskuskiirendust tunnevad orbitaaljaamas asuvad astronaudid, kui orbitaaljaam on 200 km kõrgusel Maa pinnast? Maa mass on $6 \cdot 10^{24} kg$ ja raadius $6,4 \cdot 10^6 m$.
 
-### Lahendus
+## Lahendus
 
 ```{r}
-gravitationalAccelerationOfAstronauts = gravitationalConstant * 6e24 / (6.4e6 + 200 * 1000) ^ 2
+gravitationalAccelerationOfAstronauts = g * 6e24 / (6.4e6 + 200 * 1000) ^ 2
 ```
 
 Astronaudid tunnevad orbitaaljaamas raskuskiirendust $`r gravitationalAccelerationOfAstronauts` * \frac{m}{s^2}$.
 
-## Veduri lähenemine ülesõidu kohale
+# Veduri lähenemine
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Raudtee ülesõidule läheneb vedur kiirusega 5 km/h. Tehnilise rikke tõttu on ülesõidule jäänud seisma veoauto, mille mass on neli korda väiksem veduri massist. Peale kokkupõrget lükkab vedur autot enda ees. Millise kiirusega vedur koos autoga liigub?
 
-### Lahendus
+## Lahendus
 
 Lähtun mitteelastse põrke valemist:
 
@@ -998,9 +328,9 @@ commonVelocity = 4 / 5 * 5 * 1000 / 3600
 
 Vedur liigub koos autoga kiirusega $`r commonVelocity` * \frac{m}{s}$.
 
-## Röövkala
+# Röövkala
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 5 kilogrammine röövkala ujub vees kiirusega 1 m/s. Röövkala avab suu ja neelab alla talle vastu ujunud väiksema kala, mille mass on 1 kg. Peale allaneelamist jääb röövkala seisma. Kui suure kiirusega ujus kala, mis alla neelati?
 
@@ -1008,9 +338,9 @@ Vedur liigub koos autoga kiirusega $`r commonVelocity` * \frac{m}{s}$.
 
 Kala, kes alla neelati, ujus kiirusega $5 * \frac{m}{s}$.
 
-## Autode kokkupõrge
+# Autode kokkupõrge
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Kaks autot, mõlemad massiga 1000 kg, põrkavad kokku. Mõlema auto kiirus oli 20 m/s. Kui suure kiirusega ja millises suunas liiguvad kokkupõrkunud autod, kui
 
@@ -1018,7 +348,7 @@ a)  üks auto sõitis põhja suunas ja teine lõuna suunas?
 
 b)  üks auto sõitis põhja suunas ja teine ida suunas?
 
-### Lahendus
+## Lahendus
 
 a)  Autod ei liigu peale kokkupõrget.
 
@@ -1038,13 +368,13 @@ commonVelocity = sqrt((weight * velocity) ^ 2 + (weight * velocity) ^ 2) / (weig
 commonVelocity
 ```
 
-## Külmik
+# Külmik
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Külmik, mille mass on 300 kg, tuleb tassida teisele korrusele. Kui palju tööd tuleb seejuures teha, kui teine korrus asub 6 m kõrgusel maapinnast? Mitu minutit saab selle energia arvel põleda elektripirn, mille võimsus on 60 W?
 
-### Lahendus
+## Lahendus
 
 Külmikul on nullist erinev potentsiaalne energia 6 m kõrgusel ja nulliga võrdne potentsiaalne energia 0 m kõrgusel.
 
@@ -1060,13 +390,13 @@ timeOfLighting = work / 60 / 60
 
 `r timeOfLighting` min saab selle energia arvel põleda elektripirn, mille võimsus on 60 W.
 
-## Aeglustusteekond
+# Aeglustusteekond
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Aeglustusteekond on teepikkus, mille auto läbib pidurite töölerakendumisest kuni täieliku peatumiseni. Veoauto massiga 8 t ja sõiduauto massiga 2 t sõidavad mõlemad kiirusega 90 km/h ja pidurdavad. Kui suur on kummagi auto aeglustusteekond? Hõõrdetegur asfaldi ja kummide vahel on 0,6.
 
-### Lahendus
+## Lahendus
 
 ```{r}
 velocityInMPerS = convertFromKmPerHToMPerS(90)
@@ -1077,13 +407,13 @@ distanceOfDecceleration
 
 Kuna aeglustusteekond ei sõltu massist, siis kummagi auto aeglustusteekond on `r distanceOfDecceleration` m.
 
-## Paigalseisust alustamine
+# Paigalseisust alustamine
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Auto mille mass on 1,2 t, alustab paigalseisust liikumist kiirendusega 2 m/s^2^. Kui palju tööd teeb auto veojõud esimese 4 sekundi jooksul? Hõõrdumise võime jätta arvestamata.
 
-### Lahendus
+## Lahendus
 
 ```{r}
 accelerationFrom0 = 2
@@ -1092,13 +422,13 @@ work = 1.2 * 1000 * accelerationFrom0 * ((accelerationFrom0 * 4) ^ 2) / 2 / acce
 
 Auto veojõud teeb esimese 4 sekundi kestel `r work` J tööd.
 
-## Vabalt langev keha
+# Vabalt langev keha
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 2 kilogrammise massiga vabalt langev keha saavutab enne maapinnani jõudmist kiiruse 5 m/s. Kui suur oli raskusjõu töö keha langemisel? Kui kõrgelt langes keha?
 
-### Lahendus
+## Lahendus
 
 Kui kaua kukkus?
 
@@ -1113,13 +443,13 @@ Raskusjõu töö keha langemisel oli `r workOfGravitationalForce` J.
 
 Keha langes `r abs(heightOfFall)` m kõrguselt.
 
-## Avarii
+# Avarii
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Kiirusega 90 km/h sõitev auto sooritab raske avarii, põrkudes vastu puud. Kui kõrgelt kukkudes saaks autos olijad niisama suure vigastuse?
 
-### Lahendus
+## Lahendus
 
 ```{r}
 heightOfFallOfObjectsInCar = convertFromKmPerHToMPerS(90) ^ 2 / 2 / g
@@ -1127,13 +457,13 @@ heightOfFallOfObjectsInCar = convertFromKmPerHToMPerS(90) ^ 2 / 2 / g
 
 Niisama suure vigastuse saaksid autos olijad kukkudes `r heightOfFallOfObjectsInCar` m kõrguselt.
 
-## Kuul
+# Kuul
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 10 grammise massiga kuul, mis liikus kiirusega 900 m/s, läbis 4 cm paksuse laua ja väljus sellest kiirusega 600 m/s. Kui suur takistusjõud mõjus kuulile laua läbimisel?
 
-### Lahendus
+## Lahendus
 
 Kuulile mõjuv takistusjõud mõjub kuuli enda jõule vastupidises suunas:
 
@@ -1143,13 +473,13 @@ forceOfResistancy = -(10 * .001 * (600 ^ 2 - 900 ^ 2) / 2 / (4 * .01))
 
 `r forceOfResistancy` N suurusega takistusjõud mõjus kuulile laua läbimisel.
 
-## Kivi
+# Kivi
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Kivi, mille mass on 0,2 kg, lastakse kukkuda 5 m kõrguselt. Kui suur on kivi kineetiline ja potentsiaalne energia 2 m kõrgusel maapinnast?
 
-### Lahendus
+## Lahendus
 
 ```{r}
 weightOfRock = .2
@@ -1162,139 +492,13 @@ Kivi kineetiline energia 2 m kõrgusel maapinnast on `r kineticEnergy` J.
 
 Kivi potentsiaalne energia 2 m kõrgusel maapinnast on `r potentialEnergy` J.
 
-## Bensiini kulutamine
+# Camps
 
-### Ülesande püstitus
-
-Mitu liitrit bensiini kulutab auto 100 km läbimiseks, kui automootori kasutegur on 25% ja veojõud on 500 N? Bensiini kütteväärtus on 40 MJ/l.
-
-### Lahendus
-
-```{r}
-workOfEngine = 500 * 100 * 1000
-energy = workOfEngine / (25 / 100)
-amountOfFuel = energy / (40 * 1000000)
-```
-
-`r amountOfFuel` liitrit bensiini kulutab auto 100 km läbimiseks, kui automootori kasutegur on 25 % ja veojõud on 500 N.
-
-## Päikesekiirgus
-
-### Ülesande püstitus
-
-Eestis on summaarne päiksekiirgus pindalaühiku kohta keskmiselt 500 W/m^2^. Eramu võimsustarve on ligikaudu 2 kW. Päikesepaneelidega saab muuta päikesekiirgust elektrienergiaks kasuteguriga 20%. Milline peaks olema päikesepaneelide pindala, kui eramu energiakulu katmiseks soovitakse kasutada vaid päikeseenergiat?
-
-### Lahendus
-
-```{r}
-area = 2 * 1000 / 500 / (20 / 100)
-```
-
-`r area` \* m \^ 2 peaks olema päikesepaneelide pindala, kui eramu energiakulu katmiseks soovitakse kasutada vaid päikeseenergiat.
-
-## Jalgratta rataste pöörded
-
-### Ülesande püstitus
-
-Jalgrattal on all rattad läbimõõduga 26 tolli (1 toll =2,54 cm). Millise kiirusega sõidab jalgrattur, kui rattad pöörlevad kiirusega 1 pööre sekundis?
-
-### Lahendus
-
-```{r}
-velocityOfBicycle = pi * 26 * 2.54 * .01
-```
-
-Jalgrattur sõidab kiirusega $`r velocityOfBicycle` * \frac{m}{s}$, kui rattad pöörlevad kiirusega 1 pööre sekundis.
-
-## Jalgratta spidomeeter
-
-### Ülesande püstitus
-
-Jalgratta spidomeetril on esiratta kodara küljes andur, mille abil loendatakse esiratt apöördeid. Jalgratta kiiruse näitamiseks peab spidomeetri seadetes olema valitud õige esiratta läbimõõt. Oletame, et jalgrattur pole spidomeetrit õigesti seadistanud: seadetes on kirjas läbimõõt 26 tolli, kuid tegelikult on all rattad läbimõõduga 28 tolli. Sõidu ajal näitab spidomeeter kiirust 18 km/h. Milline on jalgratta õige kiirus?
-
-### Lahendus
-
-```{r}
-timeOfWheel26 = pi * 26 * 2.54 / convertFromKmPerHToMPerS(18)
-speed28 = pi * 28 * 2.54 / timeOfWheel26
-```
-
-Jalgratta õige kiirus on $`r speed28` * \frac{m}{s}$.
-
-## Kurvi raadius
-
-### Ülesande püstitus
-
-Kurvi raadius on 30 m. Milline on maksimaalne kiirus (km/h), millega auto võib seda kurvi läbida, et hõõrdejõud rehvide ja asfaldi vahel suudaks autot teel hoida? Hõõrdetegur rehvide ja asfaldi vahel on 0,7.
-
-### Lahendus
-
-```{r}
-maxVelocity = sqrt(30 * g * .7) * .001 / (1 / 3600)
-```
-
-$`r maxVelocity` * \frac{km}{h}$ on maksimaalne kiirus, millega auto võib seda kurvi läbida, et hõõrdejõud rehvide ja asfaldi vahel suudaks autot teel hoida.
-
-## Mutri kinnikeeramine
-
-### Ülesande püstitus
-
-Mutri kinnikeeramiseks rakendatakse mutrivõtme otsale jõudu 80 N. Mutrivõtme pikkus on 0,25 m ja jõu suund on mutrivõtmega risti.
-
-a)  Kui suur on jõumoment?
-
-b)  Kui võtta mutrivõtmest kinni mutrile lähemalt, kauguselt 0,1 m, kui suurt jõudu tuleb siis rakendada, et jõumoment oleks sama?
-
-c)  Kui suur on jõumoment siis, kui jõud rakendatakse mutrivõtme otsale, kuid jõud ei ole mutrivõtmega risti, vaid nurk jõu mõjusirge ning mutrivõtme vahel on 70°?
-
-### Lahendus
-
-```{r}
-forceAtEnd = 80
-radius = .25
-```
-
-a)  Arvutuskäik:
-
-```{r}
-momentumPiOver2 = forceAtEnd * radius * 1
-```
-
-Jõumoment on `r momentumPiOver2` \* N \* m.
-
-b)  Arvutuskäik:
-
-```{r}
-forceForTool = momentumPiOver2 / .1
-```
-
-`r forceForTool` \* N jõudu tuleb siis rakendada, kui võtta mutrivõtmest kinni mutrile lähemalt, kauguselt 0.1 \* m, et jõumoment oleks sama.
-
-c)  Arvutuskäik:
-
-```{r}
-momentum70PiOver180 = forceAtEnd * radius * sin(70 * pi / 180)
-```
-
-`r momentum70PiOver180` \* N \* m on jõumoment siis, kui jõud rakendatakse mutrivõtme otsale, kuid jõud ei ole mutrivõtmega risti, vaid nurk jõu mõjusirge ning mutrivõtme vahel on 70°.
-
-## Kiik
-
-### Ülesande püstitus
-
-Kiige ühes otsas, kiige teljest kaugusel 1,5 m istub laps massiga 25 kg. Kui kaugele kiige teljest teisele poole peab istuma täiskasvanu massiga 75 kg, et kiik oleks tasakaalus?
-
-### Lahendus
-
-.5 \* m kaugusele kiige teljest teisele poole peab istuma täiskasvanu massiga 75 kg, et kiik oleks tasakaalus.
-
-## Camps
-
-### Task setup
+## Task setup
 
 A mountain climbing expedition establishes a base camp and two intermediate camps, A and B. Camp A is 11,200 m east of and 3,200 m above base camp. Camp B is 8400 m east of and 1700 m higher than Camp A. Determine the displacement between base camp and Camp B.
 
-### Base data
+## Base data
 
 lateral distance between the base camp and camp *A* *CA~x~* = 11200 \* m
 
@@ -1304,17 +508,17 @@ lateral distance between camp *A* and camp *B* *AB~x~* = 8400 \* m
 
 vertical distance between camp *A* and camp *B* *AB~y~* = 1700 \* m
 
-### What to calculate?
+## What to calculate?
 
 the displacement between base camp and *Camp B* *cb*
 
 the direction of the displacement *tangentAngle*
 
-### Drawing
+## Drawing
 
 ![imagination of the distances of camps](mechanics/expedition.svg)
 
-### The formulas
+## The formulas
 
 For reusing later, the lateral displacement can be calculated by summing up lateral distances:
 
@@ -1332,7 +536,7 @@ The direction can be expressed using the tangent angle from the formula \@ref(eq
 
 $$tangentAngle = atan(\frac{((\overrightarrow{s_y}))}{(\overrightarrow{s_x})})$$
 
-### The calculations
+## The calculations
 
 ```{r}
 lateralDisplacement = 11200 + 8400
@@ -1342,13 +546,13 @@ tangentAngle = atan(verticalDisplacement / lateralDisplacement)
 tangentAngleInDegrees = tangentAngle / pi * 180
 ```
 
-### Solution
+## Solution
 
 Approximately `r signif(cb, digits <- 3)` \* m in the elevation direction `r signif(tangentAngle, digits <- 3)` (`r signif(tangentAngleInDegrees, digits <- 3)`°) is the displacement between base camp and Camp B.
 
-## Round trip
+# Round trip
 
-### Setup
+## Setup
 
 Three of the four busiest airports in the US are Hartsfield-Jackson in Atlanta, Georgia (ATL), O'Hare in Chicago, Illinois (ORD), and Dallas/Fort Worth in Texas (DFW). Complete the following table for roundtrip airplane journey from Atlanta to Chicago to Dallas to Atlanta. Note: Bearing are measured clockwise from due north.
 
@@ -1361,7 +565,7 @@ Three of the four busiest airports in the US are Hartsfield-Jackson in Atlanta, 
 
 : A roundtrip airplane journey
 
-### Initial data
+## Initial data
 
 the distance between ATL and ORD *|AO|* = 975 * km === 975000 * m
 
@@ -1371,7 +575,7 @@ the bearing from ATL to ORD *α* = 342.8°
 
 the bearing from ORD to DFW *β* = 221.6°
 
-### To calculate
+## To calculate
 
 the distance between DFW and ATL *distance_da*
 
@@ -1379,13 +583,13 @@ the bearing from DFW to ATL *bearing_da*
 
 the round trip distance *distance_all*
 
-### Drawing
+## Drawing
 
 I first create a drawing for the task.
 
 ![The given lengths are marked as green and the length to be calculated as red.](mechanics/airports.svg)
 
-### Formulas
+## Formulas
 
 If the length of two sides of triangle and the angle between them are known I can solve the whole triangle. The angle from due north anticlockwise from ATL to ORD is 17.2°. There's a smaller right triangle whoses shorter sides are the segment between ORD and x-axis and the segment between ATL and the intersection point *A* for the former segment with the x-axis. As the line (ORD, ATL) cuts two parallel lines - y-axis and the line (ORD, *A*), the angles (N, ATL, ORD) and (ATL, ORD, *A*) have the same size. The angle (*A*, ORD, DFW~2~) is easy to calculate: I just subtract a straight angle from the bearing of (ORD, DFW). So the angle (*A*, ORD, DFW~2~) is 41.6° which makes the angle (ATL, ORD, DFW~2~) as 58.8° in size. Now, I know the length of two adjacent sides and the angle between them and can use the cosine theorem \@ref(eq:cosine-theorem) to calculate the length of the segment (DFW~2~, ATL). I also need to convert angles sizes from degrees to radians using the formula \@ref(eq:angle-from-degrees-to-radians).
 
@@ -1404,7 +608,7 @@ The round trip distance:
 $$distance_{all} =\\
 |(ORD, ATL)| + |(ORD, DFW_2| + |DFW_2, ATL|$$
 
-### Calculations
+## Calculations
 
 ```{r}
 distance_ao = 975
@@ -1416,7 +620,7 @@ angle_oda
 distance_all <- distance_ao + distance_od + distance_da
 ```
 
-### Solution
+## Solution
 
 | departure | arrival | distance | bearing |
 |-----------|---------|----------|---------|
@@ -1427,9 +631,9 @@ distance_all <- distance_ao + distance_od + distance_da
 
 : A completed roundtrip airplane journey table
 
-## Earth's orbit
+# Earth's orbit
 
-### Setup
+## Setup
 
 Calculate both the distance and the magnitude of the displacement of the Earth after…
 
@@ -1441,15 +645,15 @@ c. one-fourth orbit around the Sun
 
 d. What relationship between distance and displacement does this illustrate?
 
-### Drawing
+## Drawing
 
 ![The Earth's orbit around the Sun](mechanics/earth-s-orbit.svg)
 
-### Formulas
+## Formulas
 
 For solving the task, I make use of two formulas: the length of the circle \@ref(eq:length-of-circle) and \@ref(eq:pythagorean).
 
-### Solving
+## Solving
 
 a. One complete orbit around the Sun means one complete trip around the circle which is $2 \cdot \pi \cdot radius$. The displacement of Earth would be nought as Earth would return to the place of origin.
 
@@ -1461,9 +665,9 @@ $$displacement = \sqrt{radius^2 + radius^2} === \sqrt{2} \cdot radius$$
 
 d. If the distance is less than a full circle the less it is the less is the displacement.
 
-## Walking
+# Walking
 
-### Setup
+## Setup
 
 I went for a walk one day. I walked north 6.0 km at 6.0 km/h and then west 10 km at 5.0 km/hr. Determine the average…
 
@@ -1473,7 +677,7 @@ b. velocity
 
 …for the entire journey.
 
-### Basic data
+## Basic data
 
 displacement north $\Delta(s_N) = 6.0 \cdot km === 6000 \cdot m$
 
@@ -1483,13 +687,13 @@ displacement west $\Delta(s_W) = 10 \cdot km === 10000 \cdot m$
 
 average velocity west $\overrightarrow{v_W} = 5.0 \cdot \frac{km}{h} === \frac{10}{9} \cdot \frac{m}{s}$
 
-### To be calculated
+## To be calculated
 
 average speed *average_speed*
 
 average velocity *average_velocity*
 
-### Formula
+## Formula
 
 For both speed and velocity, I use the formula of the mean velocity \@ref(eq:mean-velocity). So the formula for the average speed is:
 
@@ -1503,7 +707,7 @@ As the velocity has a direction, I also use the formula of the tangent \@ref(eq:
 
 $$tangent\_{angle} = atan(\frac{\Delta(s_W)}{\Delta(s_N)}) + \frac{\pi}{2}$$
 
-### Calculations
+## Calculations
 
 ```{r}
 average_speed <- (6.0 + 10) / (6.0 / 6.0 + 10 / 5.0) * 1000 / 3600
@@ -1515,79 +719,47 @@ average_velocity
 tangent_angle <- atan(10 / 6.0) + pi / 2
 ```
 
-### Results
+## Results
 
 The average speed of the whole journey is $`r signif(average_speed, digits <- 2)` \cdot \frac{m}{s}$. The average velocity of the whole journey is $`r signif(average_velocity, digits <- 2)` \cdot \frac{m}{s}$ at the angle `r signif(tangent_angle, digits <- 2)`.
 
-## Point on equator
+# Light year
 
-### Setup
-
-How fast is a point on the equator moving due to the rotation of the Earth?
-
-### Initial data
-
-the radius of the Earth $r = `r RADIUS_EARTH` \cdot m$
-
-the time Earth makes a rotation around its axis $t = 86400 \cdot s$
-
-### To be calculated
-
-the speed *v*
-
-### Formulas
-
-As the point on the equator rotates, I use the formula for the rotational speed \@ref(eq:line-velocity) which assumes the formula of the length of the circle \@ref(eq:length-of-circle). The complete formula looks like this:
-
-$$v = \frac{2 \cdot \pi \cdot RADIUS_{EARTH}}{\Delta(t)}$$
-
-### Calculation
-
-```{r}
-v <- 2 * pi * RADIUS_EARTH / (24 * 60 * 60)
-```
-
-### Result
-
-$`r signif(v, digits <- 4)` \cdot \frac{m}{s}$ is a point on the equator moving due to the rotation of the Earth.
-
-## Light year
-
-### Setup
+## Setup
 
 A common measure of astronomical distances is the light year. This is the distance a beam of light would travel in a vacuum in one year. Determine the size of a light year in meters.
 
-### Initial data
+## Initial data
 
 the speed of light $v = `r SPEED_LIGHT` \cdot \frac{m}{s}$
 
 seconds in a year knowing that 241 out of thousand years are longer than usual
 
-### The data to be calculated
+## The data to be calculated
 
 the size of a light year in meters *ly*
 
 number of seconds per year *SECONDS_IN_YEAR*
 
-### Rule
+## Rule
 
 I construct a formula for calculating the size of a light year in meters:
 
 $$ly = v \cdot SECONDS\_IN\_YEAR$$
 
-### Calculation
+## Calculation
 
 ```{r}
 ly = SPEED_LIGHT * SECONDS_IN_YEAR
 ```
 
-### Result
+## Result
 
 `r ly` * m is the size of a light year.
 
-## Conversion from miles to meters
+# Conversion from miles to meters
 
-### Setup
+## Setup
 
 A problem for residents of the US only. Convert 60 mph (a common highway speed) to…
 
@@ -1595,34 +767,34 @@ a. km/h
 
 b. m/s
 
-### Initial data
+## Initial data
 
 the speed in $\frac{miles}{h}$ 60
 
 the number of meters in a mile 1609.344
 
-### To be calculated
+## To be calculated
 
 the speed in $\frac{km}{h}$ *v_kmph*
 
 the speed in $\frac{m}{s}$ *v_mps*
 
-### Calculations
+## Calculations
 
 ```{r}
 v_kmph = convertFromMiToM(60) / 1000
 v_mps = convertFromKmPerHToMPerS(v_kmph)
 ```
 
-### Results
+## Results
 
 a. $`r v_kmph` \cdot \frac{km}{h}$
 
 b. $`r signif(v_mps, digits <- 7)` \cdot \frac{m}{s}$
 
-## Accelerating car
+# Accelerating car
 
-### Setup
+## Setup
 
 A problem about a car (US version).
 
@@ -1632,7 +804,7 @@ b. The driver can't release his foot from the gas pedal (a.k.a. the accelerator)
 
 c. A car moving at 80 mph has a speed of 35.8 m/s. What acceleration would it have if it took 5.0 s to come to a complete stop?
 
-### Initial data
+## Initial data
 
 a.  initial speed $v_0 = 0 \cdot \frac{m}{s}$
 
@@ -1652,7 +824,7 @@ c.  initial speed $v_0 = 35.8 \cdot \frac{m}{s}$
 
     change of time $\Delta(t) = 5 \cdot s$
 
-### What to calculate?
+## What to calculate?
 
 a. the acceleration *a_a*
 
@@ -1660,7 +832,7 @@ b. the change of time $change_{time}$
 
 c. the acceleration *a_c*
 
-### Rules
+## Rules
 
 a. Using the formula for the acceleration \@ref(eq:keskmine-kiirendus).
 
@@ -1670,7 +842,7 @@ b.  I use the same formula as for *a* in a modified form:
 
 c. I use the same formula as for *a*.
 
-### Calculations
+## Calculations
 
 I first let to convert the speed $60 \cdot \frac{mi}{h}$ into $\frac{m}{s}$:
 
@@ -1697,7 +869,7 @@ c.
 a_c <- (0 - 35.8) / 5
 ```
 
-### Results
+## Results
 
 a. $`r a_a` \cdot \frac{m}{s^2} forward$ is the acceleration.
 
@@ -1705,13 +877,13 @@ b. `r change_time` additional seconds would it take for the driver to reach 80 m
 
 c. The acceleration of $`r a_c` \cdot \frac{m}{s^2} forward$ would it have if it took 5.0 s to come to a complete stop.
 
-## Baseball
+# Baseball
 
-### Setup
+## Setup
 
 A baseball is pitched at 40 m/s (90 mph) in a Major League game. The batter hits the ball on a line drive straight toward the pitcher at 50 m/s (112 mph). Determine the the acceleration of the ball if it was in contact with the bat for $\frac{1}{30} \cdot s$.
 
-### Initial data
+## Initial data
 
 initial velocity $v_0 = -40 \cdot \frac{m}{s}$
 
@@ -1719,27 +891,27 @@ final velocity $v_1 = 50 \cdot \frac{m}{s}$
 
 change of time $\Delta(t) = \frac{1}{30} \cdot s$
 
-### What to calculate?
+## What to calculate?
 
 the acceleration $a$
 
-### Rule
+## Rule
 
 Using the formula for the acceleration \@ref(eq:keskmine-kiirendus).
 
-### Calculation
+## Calculation
 
 ```{r}
 a = (50 - (-40)) / (1 / 30)
 ```
 
-### Result
+## Result
 
 $`r a` \cdot \frac{m}{s^2}$ towards the pitcher is the acceleration of the ball if it was in contact with the bat for $\frac{1}{30} \cdot s$.
 
-## Exit ramp
+# Exit ramp
 
-### Setup
+## Setup
 
 The speed limit of a particular section of freeway is 25 m/s. The right travel lane is connected to an exit ramp with a short auxiliary lane. Cars would have a comfortable deceleration of $−2.0 m/s^2$ for 3.0 s in the auxiliary lane if they were driving at the speed limit.
 
@@ -1755,7 +927,7 @@ d. Assume a driver was traveling on the freeway at the speed you calculated in p
 
 ![Freeway exit](mechanics/freeway-exit.svg)
 
-### Initial data
+## Initial data
 
 a.  initial speed $v_0 = 25 \cdot \frac{m}{s}$
 
@@ -1779,7 +951,7 @@ d.  acceleration $a = -2.0 \cdot \frac{m}{s^2}$
 
     jerk $j = 0 \cdot \frac{m}{s^3}$
 
-### What to calculate?
+## What to calculate?
 
 a. the final velocity $v$
 
@@ -1789,7 +961,7 @@ c. the initial speed $v_0$
 
 d. the change in distance *distance_comfortable*
 
-### Rules
+## Rules
 
 a. I use the formula for the velocity by integration \@ref(eq:velocity-by-integration).
 
@@ -1801,7 +973,7 @@ $$v_0 = \sqrt{v^2 - 2 \cdot change\_distance \cdot a}$$
 
 d. I use the formula for the distance by speed and acceleration \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu).
 
-### Calculations
+## Calculations
 
 ```{r}
 t = 3.0
@@ -1812,7 +984,7 @@ v_0 <- sqrt(v^2 - 2 * change_distance * 4 * (a))
 distance_comfortable <- (v^2 - v_0^2) / (2 * a)
 ```
 
-### Results
+## Results
 
 a. The speed $`r v` \cdot \frac{m}{s}$ will cars have when they are done decelerating in this way.
 
@@ -1822,9 +994,9 @@ c. At the maximum speed of $`r signif(v_0, digits <- 2)` \cdot \frac{m}{s}$ coul
 
 d. The distance `r distance_comfortable` * m is needed to decelerate this car to the speed limit of the exit ramp at the "comfortable" rate.
 
-## Deceleration
+# Deceleration
 
-### Setup
+## Setup
 
 A car with an initial velocity of 60 mph needs 144 feet to come to a complete stop. Determine the stopping distance of this same car with an initial velocity of…
 
@@ -1836,7 +1008,7 @@ c. 10 mph
 
 Note: The rate of change of velocity is not affected by initial velocity in this problem. Fast cars and slow cars slow down at the same rate.
 
-### Initial data
+## Initial data
 
 initial velocity $v_0 = 60 \cdot \frac{mi}{h}$
     
@@ -1850,17 +1022,17 @@ b. second initial velocity $v_{0_b} = 20 \cdot \frac{mi}{h}$
 
 c. second initial velocity $v_{0_c} = 10 \cdot \frac{mi}{h}$
 
-### What to calculate?
+## What to calculate?
 
 second distance *s*
 
-### Rule
+## Rule
 
 I use the formula for the distance by speed and acceleration \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu). I rearrange the formula to suit all three cases:
 
 $$s = \frac{0^2 - v_0^2}{2 \cdot \frac{0^2 - v_{0_0}^2}{2 \cdot initial\_distance}} === \frac{- v_0^2 \cdot initial\_distance}{- v_{0_0}^2} === \frac{v_0^2 \cdot initial\_distance}{v_{0_0}^2}$$
 
-### Calculations
+## Calculations
 
 ```{r}
 initial_invert_acceleration <- convertFromFtToM(144) / convertFromKmPerHToMPerS(convertFromMiToM(60) / 1000)^2
@@ -1869,7 +1041,7 @@ second_stopping_distance_b <- convertFromKmPerHToMPerS(convertFromMiToM(20) / 10
 second_stopping_distance_c <- convertFromKmPerHToMPerS(convertFromMiToM(10) / 1000) ^ 2 * initial_invert_acceleration
 ```
 
-### Results
+## Results
 
 The stopping distance of this same car with an initial velocity of…
 
@@ -1879,9 +1051,9 @@ b. 20 mph is `r signif(second_stopping_distance_b, digits <- 3)` * m.
 
 c. 10 mph is `r signif(second_stopping_distance_c, digits <- 3)` * m. 
 
-## A plane
+# A plane
 
-### Setup
+## Setup
 
 A typical commercial jet airliner needs to reach a speed of 180 knots before it can take off. (A knot is a nautical mile per hour and is nearly equal to half a meter per second.) If such a plane spends 30 s on the runway estimate…
 
@@ -1889,7 +1061,7 @@ a. its acceleration.
 
 b. the minimum runway length.
 
-### Initial data
+## Initial data
 
 initial speed $v_0 = 0 \cdot \frac{m}{s}$
 
@@ -1899,13 +1071,13 @@ change of time $t = 30 \cdot s$
 
 jerk $j = 0 \cdot \frac{m}{s^3}$
 
-### What to calculate?
+## What to calculate?
 
 a. the acceleration *a*
 
 b. the change of distance *change_distance*
 
-### Rules
+## Rules
 
 a. I use the acceleration equation \@ref(eq:velocity-by-integration) and rearrange it:
 
@@ -1913,7 +1085,7 @@ $$a = \frac{v - v_0}{\Delta(t)}$$
 
 b. I use the distance equation \@ref(eq:second-equation-of-motion-for-constant-jerk).
 
-### Calculations
+## Calculations
 
 ```{r}
 t = 30
@@ -1921,7 +1093,7 @@ a = (180 * .5 - 0) / t
 change_distance <- 0 * t + a * t^2 / 2 + 0 * t^3 / 6
 ```
 
-### Results
+## Results
 
 If such a plane spends 30 s on the runway I estimate…
 
@@ -1929,9 +1101,9 @@ a. the acceleration to be $`r a` \cdot \frac{m}{s^2}$.
 
 b. the minimum runway length to be `r change_distance` * m.
 
-## Subway
+# Subway
 
-### Setup
+## Setup
 
 A 10 car subway train is sitting in a station. It reaches its cruising speed after accelerating at 0.75 m/s^2^ for distance equivalent to the length of the station (184 m). It then travels at a constant speed towards the next station 18 blocks away (1425 m).
 
@@ -1945,7 +1117,7 @@ The driver stops the train in the second station in half the distance it took to
 
 d. What is deceleration of the train in the second station?
 
-### Initial data
+## Initial data
 
 the initial speed $v = 0 \cdot \frac{m}{s}$
 
@@ -1957,7 +1129,7 @@ the distance after accelerating $\Delta(s_v) = 1425 \cdot m$
 
 the distance for stopping $\Delta(s_d) = 92 \cdot m$
 
-### What to calculate?
+## What to calculate?
 
 a. the cruising speed *v*
 
@@ -1967,7 +1139,7 @@ c. the cruising time *t_v*
 
 d. the deceleration *d*
 
-### Rules
+## Rules
 
 a. I use the distance equation \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu) and rearrange it:
 
@@ -1983,7 +1155,7 @@ d. I use the distance equation \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu) an
 
 $$d = -\frac{(v_0^2 - v^2)}{2 \cdot \Delta(s_d)}$$
 
-### Calculations
+## Calculations
 
 ```{r}
 v_0 = 0
@@ -1995,7 +1167,7 @@ t_v = 1425 / v
 d <- -(v_0^2 - v^2) / (2 * s_a / 2)
 ```
 
-### Results
+## Results
 
 a. The train's cruising speed is $`r signif(v, digits <- 4)` \cdot \frac{m}{s}$.
 
@@ -2005,15 +1177,15 @@ c. It takes `r signif(t_v, digits <- 4)` * s the train to travel the 18 blocks t
 
 d. The deceleration of the train in the second station is $`r d` \cdot \frac{m}{s^2}$.
 
-## Laskevõistlus
+# Laskevõistlus
 
-### Ülesande püstitus
+## Ülesande püstitus
 
 Laskevõistlustel laseb laskur temast tabamise hetkel 30 m kaugusel olevat sihtmärki, mille kiirus on
 72 km/h. Sihtmärgi liikumistee on sihtimisjoonega risti. Kui kaugel peab olema sihtmärk tabamiskohast
 laskmise hetkel, kui kuuli kiirus on 375 m/s. Eesmärkon ikkagi, et kuul tabaks sihtmärki.
 
-### Sisendid
+## Sisendid
 
 sihtimisjoon $FB$
 
@@ -2034,11 +1206,11 @@ v_kuul <- 375
 ```
 
 
-### Mida arvutada?
+## Mida arvutada?
 
 sihtmärgi kaugus tabamiskohast laskmise hetkes $|AB| = ?$
 
-### Reeglistik
+## Reeglistik
 
 Vastavalt valemile \@ref(eq:mean-velocity) on vahemaa ja kiirus võrdelised. Tabamiseks peavad nii kuul kui sihtmärk kasutama liikumiseks sama ajavahemiku, mis tähendab, et ajavahemiku suurus on muutumatu. Seetõttu saab arvutada sihtmärgi kauguse tabamiskohast laskmishetkes suhete järgi:
 
@@ -2048,113 +1220,37 @@ millest
 
 $$|AB| = \frac{|FB| \cdot v_{target}}{v_{kuul}}.$$
 
-### Arvutamine
+## Arvutamine
 
 ```{r}
 AB <- FB * v_target / v_kuul
 ```
 
-### Lahend
+## Lahend
 
 `r AB` * m kaugusel peab sihtmärk olema tabamiskohast laskmishetkes, et toimuks selle sihtmärgi tabamine.
 
-## Auto liikumise kiirus ratta raadiuse järgi
+# Plastics in "basin"
 
-### Ülesande püstitus
-
-Auto ratas raadiusega 40 cm pöörleb 10 
-pööret/sekundis. Leida auto liikumise kiirus.
-
-### Sisendid
-
-ratta raadius $r = 40 * cm === 4 * 10^{-1} * m$
-
-pöörlemiskiirus $v_{ratas} = 10 * \frac{pööret}{s}$
-
-pöörlemisaeg $t = 1 \cdot s$
-
-```{r}
-r = 4e-1
-v_ratas <- 10
-t <- 1
-```
-
-### Mida arvutada?
-
-auto liikumise kiirus $\overline{v_{auto}} = ?$
-
-### Reeglistik
-
-Lähtun keskmise kiiruse valemist \@ref(eq:mean-velocity) ja ringjoone pikkuse valemist \@ref(eq:length-of-circle):
-
-$$\overline{v_{auto}} = \frac{v_{ratas} \cdot 2 \cdot \pi \cdot r}{t}$$
-
-### Arvutamine
-
-```{r}
-v_auto <- v_ratas * 2 * pi * r / t
-```
-
-### Lahend
-
-$`r signif(v_auto, digits <- 1)` \cdot \frac{m}{s}$ on auto liikumise kiirus.
-
-## Traadi venitamine
-
-### Ülesande püstitus
-
-Millise jõuga peab venitama ühest otsast kinnitatud traati, etta pikeneks 2mmvõrra? Traadi jäikus on $2 \cdot 10^5 \cdot \frac{N}{m}$.
-
-### Sisendid
-
-traadi pikenemisvahemik $\Delta(x) = 2 \cdot mm === 2 \cdot 10^{-3} \cdot m$
-
-traadi jäikus $2 \cdot 10^5 \cdot \frac{N}{m}$
-
-```{r}
-change_x <- 2e-3
-k <- 2e5
-```
-
-### Mida arvutada?
-
-jõud $F = ?$
-
-### Reeglistik
-
-Lähtun elastsusjõu valemist \@ref(eq:pulling-force).
-
-### Arvutamine
-
-```{r}
-F <- k * change_x
-```
-
-### Lahend
-
-Jõuga `r F` * N peab venitama ühest otsast kinnitatud traati, et see pikeneks 2 * mm võrra.
-
-## How much time would it take to fill this "basin" with plastics?
-
-### Setup
+## Setup
 
 ![The channel that I'm dealing with](mechanics/channel-20220317-181534.jpg)
 
 At the address (https://dripfina.com/plastic-in-the-ocean-statistics/): "Every year, 25 million tons of plastic end up in the ocean." There's a channel here and a part of this channel that's shown on the task's picture is important. This part of the channel is restricted by concrete walls and waterfalls. I imagine that this "basin" is different: having also concrete walls instead of waterfalls with the height of the lowest existing concrete wall aside the "basin" which is shown by the red arrow. I also imagin that any water drains connected to the "basin" are closed so that nothing can flow in or out through them. The imaginable upper edge of the "basin" is shown by the blue line. I don't consider the small niches nor prisms inside the "basin". I only consider that the "basin" is surrounded by four walls and it's empty. Suddenly, out of nowhere, this imaginable "basin" is starting to be filled by plastics having the mentioned speed. My task is to calculate the time frame for this "basin" to be filled by plastics.
 
-### Figures
+## Figures
 
 ![(\#fig:channel-lower-wall)Measurements of the channel's lower wall](mechanics/channel-lower-wall.svg)
 
 ![(\#fig:channel-width)Measuring the width of the channel](mechanics/channel-width.svg)
 
-### Description
+## Description
 
 The "basin" looks like a cuboid. I know how to calculate the volume of the "basin". I just need its measurements which I can take using a measurement stick or band. It's easy to measure the length *AB* of the "basin" (image \@ref(fig:channel-lower-wall)). It's not harder to measure the height of the lower wall *BD*. The height at the level *C* is where the water starts to fall. This is important if I don't want to enter the channel in order to measure its width. As at the time of writing, it's about 273 degrees around in the air, I certainly don't want to enter the water. Instead, I use the rule of similar triangles. For that, I stare at the point *E* (\@ref(fig:channel-width)) where *E* is on the wall at the opposite side of the channel crossing the waterfall line. I walk backwards away from the channel until the point *E* matches the point *D* at the edge of the channel wall at my side. I measure the height of my eyes from the ground *KL*. Then, I measure the distance *DK* which means how far my body from the edge of the channel is. Now, I have two similar triangles: *KLD* and *CDE*. The ratio of the lengths of covers is the same. After I know the width of the channel *CE*, I can calculate the volume of the "basin".
 
 The speed of filling oceans with plastic is given in tons per year. It'd make sense to convert that speed into SI units. I also need the density of plastic in order to convert between its weight and volume. The density of different types of plastic is different: https://plasticranger.com/density-of-plastics/ i just calculate the average of the minimal and maximal value and use it.
 
-### Inputs
+## Inputs
 
 the length of the "basin" $l = .973 \cdot m$
 
@@ -2183,16 +1279,16 @@ the minimal density of the plastics $\rho_{min} = .15 \frac{g}{cm^3} === 150 \cd
 
 the minimal density of the plastics $\rho_{min} = 2.3 \frac{g}{cm^3} === 2300 \cdot \frac{kg}{m^3}$
 
-### What to calculate?
+## What to calculate?
 
 the time the "basin" would be filled by plastic $t = ?$
 
-### Rule
+## Rule
 
 $$t = \frac{l \cdot (h_{lower} + h_{higher}) \cdot \frac{h_{higher} \cdot s}{h_{eyes}} }{\frac{v}{\frac{\rho_{min} + \rho_{max}}{2}}} ===\\
 \frac{l \cdot (h_{lower} + h_{higher}) \cdot h_{higher} \cdot s \cdot (\rho_{min} + \rho_{max})}{h_{eyes} \cdot v \cdot 2}$$
 
-### Calculation
+## Calculation
 
 ```{r}
 t <- l * (h_lower + h_higher) * h_higher * s * (ρ_min + ρ_max) / (h_eyes * v * 2)
@@ -2200,328 +1296,408 @@ t_min <- l * (h_lower + h_higher) * 3.4 * ρ_min / v
 t_max <- l * (h_lower + h_higher) * 5.2 * ρ_max / v
 ```
 
-### Output
+## Output
 
 `r signif(t, digits <- 4)` * s would it take to fill the "basin" with plastic. Acceptable values are between `r signif(t_min, digits <- 4)` * s and `r signif(t_max, digits <- 4)` * s
 
-##
+# Kraana
 
-### Ülesande püstitus
-
-Ratas pöörleb nii, et raadiuse pöördenurga sõltuvus ajast on kirjeldatav  võrrandiga $\phi := 2 + B \times t + C \times t^2 + D \times t^3$, kus $B := 1 \times \frac{rad}{s}$, $C := 1.0 \frac{rad}{s^2}$ ja $D := 1.0 \times \frac{rad}{s^3}$. Leida, ratta raadius r, kui on teada, 
-et teise sekundi lõpuks on ratta serval oleva punkti kesktõmbekiirendus (normaalkiirendus) $a_k := 3.46 \times 10^3 \times \frac{m}{s}$.
-
-### Sisendid
-
-$$\phi := 2 + B \times t + C \times t^2 + D \times t^3$$
-
-$$B := 1 \times \frac{rad}{s}$$
-
-$$C := 1.0 \frac{rad}{s^2}$$
-
-$$D := 1.0 \times \frac{rad}{s^3}$$
-
-$$a_k := 3.46 \times 10^3 \times \frac{m}{s}$$
-
-$$t := 2 \times s$$
-
-### Mida arvutada?
-
-$$r := \ldots$$
-
-### Kuidas arvutada?
-
-Tahvlile lahendatud, praegu ei tee siia.
-
-## Pöörlev ratas
-
-### Ülesande püstitus
-
-Ratas, mille raadius r=10,0cm, pöörleb nii, et raadiuse pöördenurga sõltuvus ajast on kirjeldatav  
-võrrandiga $\phi := A + B \times t + C \times t^3$, kus $B := 2.0 \times \mathrm{\frac{rad}{s}}$ ja $C := 1.0 \times \mathrm{\frac{rad}{s}}$. Leida, ratta serval oleva punkti nurkkiirus 
-ω, nurkkiirendus β, lineaarne kiirus v, tangentsiaalkiirendus (lineaarne) $a_τ$, kesktõmbe kiirendus $a_k$
- ja 
-täiskiirendus a ajahetkel t=2,0s.
-
-### Sisendid
-
-$$r := 10.0 \times \mathrm{cm} = 10^{-1} \times \mathrm{m}$$
-
-```{r rotating-wheel-r}
-r <- 10e-1
-```
-
-$$\phi := A + B \times t + C \times t^3$$
-
-```{r rotating-wheel-phi}
-phi <- expression(A + B * t + C * t^3)
-```
-
-$$B := 2.0 \times \mathrm{\frac{rad}{s}}$$
-
-```{r rotating-wheel-b}
-B <- 2
-```
-
-$$C := 1.0 \times \mathrm{\frac{rad}{s}}$$
-
-```{r rotating-wheel-c}
-C <- 1
-```
-
-
-$$t := 2 \times \mathrm{s}$$
-
-```{r rotating-wheel-t}
-t <- 2
-```
-
-
-### Väljundid
-
-$$\omega := \ldots$$
-
-$$\beta := \ldots$$
-
-$$v := \ldots$$
-
-$$a_\tau := \ldots$$
-
-$$a_k := \ldots$$
-
-$$a := \ldots$$
-
-### Kuidas arvutada?
-
-Nurkkiiruse arvutamiseks kasutan vastavat valemit \@ref(eq:angular-velocity).
-
-Nurkkiirenduse arvutamiseks kasutan vastavat valemit \@ref(eq:angular-acceleration).
-
-Joonkiiruse arvutamiseks kasutan vastavat valemit \@ref(eq:tangential-velocity).
-
-Tangentsiaalkiirenduse arvutamiseks saab kokku panna valemid \@ref(eq:keskmine-kiirendus), \@ref(eq:tangential-velocity):
-
-```{=tex}
-\begin{align}
-a_\tau := \frac{v - B \times r}{t}
-\end{align}
-```
-
-Kesktõmbe kiirenduse jaoks kasutan vastavat valemit \@ref(eq:centripetal-acceleration).
-
-Kogukiirenduse jaoks kasutan Pythagorase teoreemi \@ref(eq:pythagorean):
-
-```{=tex}
-\begin{align}
-a = \sqrt{a_\tau^2 + a_k^2}
-\end{align}
-```
-
-### Lahendamine
-
-```{r rotating-wheel-solving}
-function_for_omega = D(phi, "t")
-omega <- eval(function_for_omega)
-function_for_beta <- D(function_for_omega, "t")
-beta <- eval(function_for_beta)
-v <- omega * r
-a_tau <- (v - B * r) / t
-a_k <- v^2 / r
-a <- sqrt(a_tau^2 + a_k^2)
-```
-
-### Lahend
-
-Ratta serval oleva punkti nurkkiirus on $\omega = `r omega` \times \mathrm{\frac{rad}{s}}$, nurkkiirendus $\beta = `r beta` \times \mathrm{\frac{rad}{s^2}}$, lineaarne kiirus $v = `r v` \times \mathrm{\frac{m}{s}}$, tangentsiaalkiirendus $a_\tau = `r a_tau` \times \mathrm{\frac{m}{s^2}}$, kesktõmbe kiirendus $a_k = `r a_k` \times \mathrm{\frac{m}{s^2}}$ ja täiskiirendus $a = `r signif(a, digits = 4)` \times \mathrm{\frac{m}{s^2}}$ ajahetkel $t = 2.0 \times \mathrm{s}$.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Kraana
-
-### Ülesande püstitus
+## Ülesande püstitus
 
 Kraana tõstab maas lamava rööpa 3s jooksul. Määra kasulik töö, kui rööpa mass on 1t ja rööbas 
 tõuseb kiirusega 30m/min.
 
-#### Sisendid
+## Sisendid
 
-$$t = 3 \cdot s$$
+$$t := 3 \times s$$
+```{r label = "crane-t"}
+t <- 3
+```
 
-$$m = 1 \cdot t = 1 \cdot 10^3 \kg$$
+$$m := 1 \times t = 1 \times 10^3 \times kg$$
+```{r label = "crane-m"}
+m <- 1e3
+```
 
-$$v = 30 \cdot \frac{m}{min} = \frac{1}{2} \cdot \frac{m}{s}$$
+$$v := 30 \times \frac{m}{min} \times \frac{min}{60 \times s} = \frac{1}{2} \times \frac{m}{s}$$
+```{r label = "crane-v"}
+v <- 30 / 60
+```
 
-$$\alpha = 0$$
+$$\alpha := 0$$
+```{r label = "crane-alpha"}
+alpha <- 0
+```
 
-$$g = 9.8 \cdot \frac{m}{s^2}$$
+$$g = `r g` \cdot \frac{m}{s^2}$$
 
-#### Väljund
+## Väljund
 
-$$A = ?$$
+$$W := \ldots$$
 
-#### Reeglistik
+## Reeglistik
 
-$$A = F \cdot s \cdot cos(\alpha) = m \cdot g \cdot v \cdot t \cdot cos(\alpha)$$
+Lähtun töö valemitest \@ref(eq:work), \@ref(eq:smallest-distance) ja \@ref(eq:force):
 
-#### Arvutuskäik
-1.5*10^4
+$$W := \int{\vec{F}} \cdot cos(\alpha) \cdot d(s) = \int{m \cdot \vec{g}} \cdot cos(\alpha) \cdot \vec{v} \cdot d(t) = m \cdot g \cdot cos(\alpha) \cdot (-v) \cdot t$$
 
-###
+## Arvutuskäik
 
-#### Ülesande püstitus
+```{r label = "crane-W"}
+W <- m * g * cos(alpha) * (-v) * t
+```
+
+## Lahend
+
+$`r W` \times J$ on kasulik töö, kui rööpa mass on 1t ja rööbas 
+tõuseb kiirusega 30m/min.
+
+# Koorma tõusmine
+
+## Ülesande püstitus
 
 Tõstes koorma massiga m=2kg kõrgusele h=1m teeb jõud F
 tõste
  tööd A=78,5J. Millise 
 kiirendusega tõuseb koorem
 
-#### Sisendid
+## Sisendid
 
-$$m = 2 \cdot kg$$
+$$m := 2 \cdot \mathrm{kg}$$
+```{r label = "load-m"}
+m <- 2
+```
 
-$$h = 1 \cdot m$$
+$$h := 1 \cdot \mathrm{m}$$
+```{r label = "load-h"}
+h <- 1
+```
 
-$$A = 78.5 \cdot J$$
+$$A := 78.5 \times \mathrm{J}$$
+```{r label = "load-W"}
+A <- 78.5
+```
 
-$$g = 9.8 \cdot \frac{m}{s^2}$$
+$$g = `r g` \cdot \mathrm{\frac{m}{s^2}}$$
 
-$$\alpha = 0 \cdot rad$$
+$$\alpha := 0 \cdot \mathrm{rad}$$
 
-```{r}
-m = 2
-h = 1
-A = 78.5
-g = 9.8
+```{r label = "load-alpha"}
 alpha = 0
 ```
 
 
-#### Väljund
+## Väljund
 
-$$a = ?$$
+$$a := \ldots$$
 
-#### Reeglistik
+## Reeglistik
 
-$$A = F_t \cdot h \cdot cos(\alpha)$$
+Lähtun töö üldvalemist \@ref(eq:work):
 
-$$\overrightarrow{F_t} + \overrightarrow{F_r} = \overrightarrow{F_i}$$
+```{=tex}
+\begin{equation}
+A = F_{lifting} \cdot h \cdot cos(\alpha)
+(\#eq:work-for-lifting)
+\end{equation}
+```
 
-$$F_t - F_r = F_i$$
+Allapoole mõjub raskusjõud, ülespoole tõstejõud. Kui need jõud oleksid tasakaalus, oleks keha paigal. Ometi küsitakse selle kiirendust, mistõttu peab nende kahe jõu summa võrduma jõuga, mille mõjul see kiirendus toimub - inertsiaaljõuga valemist \@ref(eq:inertial-force):
 
-$$F_t = F_i + F_r = m \cdot a + m \cdot g$$
+$$\overrightarrow{F_{lifting}} + \overrightarrow{F_g} = \overrightarrow{F_{inertial}}$$
 
-$$A = (m \cdot g + m \cdot a) \cdot h = m \cdot g \cdot h + m \cdot a \cdot h$$
+Valin raskusjõu suuna negatiivseks:
 
-$$m \cdot a \cdot h = A - m \cdot g \cdot h$$
+```{=tex}
+\begin{equation}
+F_{lifting} - F_g = F_{inertial}
+(\#eq:lifting-force-less-gravitational-force)
+\end{equation}
+```
 
-$$a = \frac{A - m \cdot g \cdot h}{m \cdot h}$$
+Tõstekiirendus on peidus inertsiaaljõus. Kirjutan valemisse \@ref(eq:lifting-force-less-gravitational-force) jõud lahti jõu üldvalemi \@ref(eq:force) alusel:
 
-$$A = F \cdot h \cdot cos(\alpha) = m \cdot (a - g) \cdot h \cdot cos(\alpha)$$
+```{=tex}
+\begin{equation}
+m \cdot a = F_{lifting} - m \cdot g
+(\#eq:force-for-lifting)
+\end{equation}
+```
 
-$$a = $$
+Asendan valemisse \@ref(eq:force-for-lifting) töö valemist \@ref(eq:work-for-lifting) tõstejõu:
 
-#### Arvutuskäik
+```{=tex}
+\begin{align}
+m \cdot a &= \frac{A}{h \cdot cos(\alpha)} - m \cdot g\\
+m \cdot a &= \frac{A - m \cdot g \cdot cos(\alpha) \cdot h}{h \cdot cos(\alpha)}\\
+a &= \frac{A - h \cdot m \cdot g \cdot cos(\alpha)}{cos(\alpha) \cdot m \cdot h}\\
+(\#eq:force-for-lifting-with-work)
+\end{align}
+```
+
+## Arvutuskäik
 
 ```{r}
-a = (A - m * g * h) / (m * h)
+a = (A - m * g * h * cos(alpha)) / (cos(alpha) * h * m)
 a
 ```
 
-###
+Dimensionaalanalüüs:
 
-#### Ülesande püstitus
+$$\frac{\mathrm{J} - \mathrm{kg} \times \mathrm{m} \times {\mathrm{s}^{-2}} \times \mathrm{m}}{\mathrm{m} \times \mathrm{kg}} = \frac{\mathrm{kg} \times \mathrm{m^2} \times \mathrm{s^{-2}} - \mathrm{kg} \times \mathrm{m} \times {\mathrm{s}^{-2}} \times \mathrm{m}}{\mathrm{m} \times \mathrm{kg}} = \frac{\mathrm{M} \times \mathrm{L^2} \times \mathrm{T^{-2}} - \mathrm{M} \times \mathrm{L} \times {\mathrm{T}^{-2}} \times \mathrm{L}}{\mathrm{L} \times \mathrm{M}}\\
+\leadsto \frac{\mathrm{M} \times \mathrm{L^2} \times \mathrm{T^{-2}}}{\mathrm{L} \times \mathrm{M}} = \mathrm{L \times T^{-2}}$$
+
+## Lahend
+
+Kiirendusega $`r a` \times \mathrm{m \times s^{-2}}$ tõuseb koorem.
+
+# Lennuki tõusmine
+
+## Ülesande püstitus
 
 Lennuk tõuseb ja kõrgusel h=5km saavutab kiiruse v=360km/h. Mitu korda on tõusmiseks tehtav töö A1 suurem kiiruse tõstmiseks tehtavast tööst A2?
 
-#### Sisendid
+## Sisendid
 
-$$h = 5 \cdot 10^3 \cdot m$$
+$$h := \mathrm{5 \times km = 5 \cdot 10^3 \cdot m}$$
+```{r plane-rising-h}
+h <- 5e3
+```
 
-$$v = 100 \cdot \frac{m}{s}$$
+$$v := \mathrm{360 \times \frac{km}{h} \times \frac{1 \times 10^3 \times m}{km} \times \frac{h}{3.6 \times 10^3 \times s}= 10^2 \cdot \frac{m}{s}}$$
+```{r label = "plane-rising-v"}
+v <- 360 * 1e3 / 3.6e3
+```
 
-#### Väljund
+$$\alpha_1 := 0$$
 
-$$\frac{A_1}{A_2} = ?$$
+```{r label = "plane-rising-alpha-1"}
+alpha_1 <- 0
+```
 
-9.8
+$$\alpha_2 := 0$$
 
-###
+```{r label = "plane-rising-alpha-2"}
+alpha_2 <- 0
+```
 
-#### Ülesande püstitus
+$$v_0 := 0$$
 
-Millist tööd on vaja sooritada, et keha massiga m=2kg suurendaks kiirust v
-0
-=2m/s kuni v=5m/s
+```{r label = "plane-rising-v-0"}
+v_0 <- 0
+```
 
-#### kodus, 8.5 ka
+## Väljund
 
-###
+$$\frac{A_1}{A_2} = \ldots$$
 
-#### Ülesande püstitus
+## Reeglistik
+
+Asendan otsitavasse suhtesse töö põhivalemist \@ref(eq:work) tööd:
+
+```{=tex}
+\begin{equation}
+\frac{A_1}{A_2} = \frac{m \times g \times h \times \cos(\alpha_1)}{m \times a \times s \times cos(\alpha_2)}
+(\#eq:ratio-of-works)
+\end{equation}
+```
+
+Asendan tööde suhte valemisse \@ref(eq:ratio-of-works) vahemaa nulllähte valemist \@ref(eq:vahemaa-kiiruste-ja-kiirenduse-kaudu):
+
+$$\frac{A_1}{A_2} = \frac{g \times h \times \cos(\alpha_1) \times 2}{(v^2 - v_0^2) \times cos(\alpha_2)}$$
+
+## Arvutamine
+
+```{r label = "plane-rising-ratio-of-A1-to-A2"}
+ratio_of_A1_to_A2 <- (g * h * cos(alpha) * 2) / ((v^2 - v_0^2) * cos(alpha))
+```
+
+Dimensionaalanalüüs:
+
+$$\mathrm{\frac{m \times s^{-2} \times m}{(m^2 \times s^{-2} - m^2 \times s^{-2})} = \frac{L \times T^{-2} \times L}{L^2 \times T^{-2} - L^2 \times T^{-2}} \leadsto \frac{L^2 \times T^{-2}}{L^2 \times T^{-2}} = 1}$$
+
+## Lahend
+
+`r ratio_of_A1_to_A2` korda on tõusmiseks tehtav töö A1 suurem kiiruse tõstmiseks tehtavast tööst A2.
+
+# Inimene jookseb mööda treppi üles.
+
+## Ülesande püstitus
 
  Inimene massiga 70,0 kg jookseb mööda treppi üles 4,0s. Trepi vertikaalne kõrgus on 4,5m. Arvuta inimese keskmine võimsus vattides ja hobujõududes.  
 
-#### Tegu
+## Sisendid
 
-$$1 \cdot hj = 735.5 \cdot W$$
+$$m := \mathrm{70.0 \times kg = 7 \times 10 \times kg}$$
+```{r label = "running-human-m"}
+m <- 70.0
+```
 
-772W
-1.05hj
+$$t := \mathrm{4.0 \times s}$$
+```{r label = "running-human-t"}
+t <- 4.0
+```
 
-### kodus ja järgmine 8.7 ka kodus
+$$h := \mathrm{4.5 \times m}$$
 
-#### Ülesande püstitus
+```{r label = "running-human-h"}
+h <- 4.5
+```
+
+$$\alpha = 0$$
+```{r label = "running-human-alpha"}
+alpha = 0
+```
+
+$$g = `r g` \times \mathrm{m \times s^{-2}}$$
+
+## Väljundid
+
+$$\overline{P} := \mathrm{\ldots \times W = \ldots \times hp}$$
+
+[@haynes_2014_crc, p. 1-44, 2-34]
+
+## Reeglistik
+
+Kasutan töö ja jõu üldvalemeid \@ref(eq:work) ja \@ref(eq:force) ning võimsuse valemit \@ref(eq:power):
+
+$$\overline{P} := \frac{m \times g \times h \times cos(\alpha)}{t}$$
+
+## Arvutamine
+
+```{r label = "running-human-P"}
+P <- m * g * h * cos(alpha) / t
+```
+
+Dimensionaalanalüüs:
+
+$$\mathrm{\frac{kg \times m \times m}{s^{2} \times s} = \frac{M \times L \times L}{T^3} = \frac{M \times L^2}{T^3}}$$
+
+## Lahend
+
+`r P` on inimese keskmine võimsus vattides ja `r signif(convert_W_to_hp(P), digits = 3)` hobujõududes.
+
+# Auto võimsus
+
+## Ülesande püstitus
 
 Arvuta võimsus, mida vajab auto, mille mass on 1,4t, järgmistes olukordades: 
 a)  auto sõidab 10˚ kalde juures mäkke kiirusel 80km/h 
 b)  auto kiirendab 90 kuni 110 km/h 6s jooksul, et teisest autost mööduda. 
-Autole mõjuv hõõrdejõud on 700N. 
+Autole mõjuv hõõrdejõud on 700N.
 
-#### Tegu
+## Sisendid
 
-### 
+$$m := \mathrm{1.4 \times t = 1.4 \times 10^3 \times kg}$$
 
-#### Ülesande püstitus
+```{r label = "power-of-car-m"}
+m <- 1.4e3
+```
 
-Püssist massiga m1=5kg lendab välja kuul massiga m2=5g kiirusega v2=600m/s. Leida püssi 
-tagasilöögi kiirus v1.  
+$$\alpha := 10° = \frac{\pi}{18} \times \mathrm{rad}$$
 
-#### Tegu
+```{r label = "power-of-car-alpha"}
+alpha <- convert_degrees_to_radians(10)
+```
 
-### 
+$$v := \mathrm{80 \times \frac{km}{h} \times \frac{10^3 \times m}{km} \times \frac{h}{3.6 \times 10^3 \times s} = \frac{200}{9} \times \frac{m}{s}}$$
 
-#### Ülesande püstitus
+```{r label = "power-of-car-v"}
+v <- convertFromKmPerHToMPerS(80)
+```
 
- Inimene massiga m1=60kg, kes jookseb kiirusega v1=8m/s, jõuab järele kärule massiga m1=80kg, 
-mis liigub kiirusega v2=2,9km/h ja hüppab sellele.
+$$v_0 := \mathrm{90 \times \frac{km}{h} \times \frac{10^3 \times m}{km} \times \frac{h}{3.6 \times 10^3 \times s} = 25 \times \frac{m}{s}}$$
 
-a) Millise kiirusega hakkab liikuma käru?
+```{r label = "power-of-car_v0"}
+v_0 <- convertFromKmPerHToMPerS(90)
+```
 
-b) Millise kiirusega liigub käru, kui inimene jookseb kärule vastu? 
+$$v_1 := \mathrm{110 \times \frac{km}{h} \times \frac{10^3 \times m}{km} \times \frac{h}{3.6 \times 10^3 \times s} = \frac{275}{9} \times \frac{m}{s}}$$
 
-####
+```{r label = "power-of-car-v1"}
+v_1 <- convertFromKmPerHToMPerS(110)
+```
+
+$$t := \mathrm{6 \times s}$$
+
+```{r label = "power-of-car-t"}
+t <- 6
+```
+
+$$F_\mu := \mathrm{700 \times N}$$
+
+```{r label = "power-of-car-Fmu"}
+F_mu <- 700
+```
+
+$$\beta := 0$$
+
+```{r label = "power-of-car-beta"}
+beta <- 0
+```
+
+$$\overrightarrow{F_{normal}(x)} := 0$$
+
+```{r label = "power-of-car-fnormalx"}
+f_normal_x <- 0
+```
+
+$$g = `r g` \times \mathrm{m \times s^{-2}}$$
+
+$$s_0 := 0$$
+
+```{r label = "power-of-car-s0"}
+s_0 <- 0
+```
+
+$$jerk := 0$$
+
+```{r label = "power-of-car-jerk"}
+jerk <- 0
+```
+
+## Väljundid
+
+$$P_a := \ldots$$
+
+$$P_b := \ldots$$
+
+## Joonis
+
+![Joonisel on $\vec{F_l}$ $\overrightarrow{F_{inertial}}$, $\vec{F_r}$ $\vec{F_g}$ ja $\vec{F_h}$ $\vec{F_\mu}$](mechanics/power-of-car.png)
+
+## Reeglistik
+
+Mäkke ehk ilmselt ülesmäge sõitmise jaoks kasutan töö üldvalemit \@ref(eq:work), võimsuse valemit \@ref(eq:power), hetkkiiruse valemit \@ref(eq:momentvelocity), jõudude summa valemit \@ref(eq:inertial-force):
+
+$$P_a := \frac{W}{t} = \frac{\overrightarrow{F_{inertial}} \cdot s \cdot cos(\beta)}{t} = (\overrightarrow{F_{normal}(x)} + \overrightarrow{F_g(x)} + \vec{F_{\mu}}) \cdot v \cdot cos(\beta)\\
+= (\overrightarrow{F_{normal}(x)} + \overrightarrow{F_g} \cdot sin(\alpha) + \vec{F_{\mu}}) \cdot v \cdot cos(\beta) = (\overrightarrow{F_{normal}(x)} + F_g \cdot sin(\alpha) + F_{\mu}) \cdot v \cdot cos(\beta)\\
+= (\overrightarrow{F_{normal}(x)} + m \cdot g \cdot sin(\alpha) + F_{\mu}) \cdot v \cdot cos(\beta)$$
+
+Eeldatavalt tasapinnal sõitmise jaoks kasutan töö üldvalemit \@ref(eq:work), võimsuse valemit \@ref(eq:power), jõudude summa valemit \@ref(eq:inertial-force), teekonna pikkuse üldvalemit \@ref(eq:second-equation-of-motion-for-constant-jerk) ja keskmise kiirenduse valemit \@ref(eq:keskmine-kiirendus):
+
+$$P_b := \frac{W}{t} = \frac{F_{inertial} \cdot s \cdot cos(\alpha)}{t} = \frac{(F_{normal}(x) + F_g(x) + F_{\mu}) \cdot s \cdot cos(\alpha)}{t}\\
+= \frac{(F_{normal}(x) + F_g \cdot sin(beta) + F_{\mu}) \cdot (s_0 + v_0 \cdot t + \frac{a \cdot t^2}{2}) \cdot cos(\alpha)}{t}\\
+= \frac{(F_{normal}(x) + F_g \cdot sin(beta) + F_{\mu}) \cdot (s_0 + v_0 \cdot t + \frac{\frac{v_1 - v_0}{t} \cdot t^2}{2}) \cdot cos(\alpha)}{t}\\
+= \frac{(F_{normal}(x) + m \cdot g \cdot sin(beta) + F_{\mu}) \cdot (s_0 + v_0 \cdot t + \frac{(v_1 - v_0) \cdot t}{2}) \cdot cos(\alpha)}{t}\\
+= \frac{(F_{normal}(x) + m \cdot g \cdot sin(beta) + F_{\mu}) \cdot (2 \cdot (s_0 + v_0 \cdot t) + \frac{(v_1 - v_0) \cdot t}{2}) \cdot cos(\alpha)}{2 \cdot t}$$
+
+## Arvutamine
+
+```{r power-of-car-Pa}
+P_a <- (f_normal_x + m * g * sin(alpha) + F_mu) * v * cos(beta)
+```
+
+Dimensionaalanalüüs:
+
+$$\mathrm{(M \times L \times T^{-2} + M \times L \times T^{-2} + M \times L \times T^{-2}) \times L \times T^{-1} \leadsto M \times L^2 \times T^{-3}}$$
+
+```{r label = "power-of-car-Pb"}
+P_b <- ((f_normal_x + m * g * sin(beta) + F_mu) * (2 * (s_0 + v_0 * t) + (v_1 - v_0) * t) * cos(alpha)) / (2 * t)
+```
+
+## Lahend
+
+Võimsus, mida vajab auto, mille mass on $1.4 \times \mathrm{t}$, sõitmaks 10° kalde juures mäkke kiirusel $80 \times \mathrm{\frac{km}{h}}$, on $`r signif(P_a, digits = 2)` \times \mathrm{W}$.
+
+Võimsus, mida vajab auto, mille mass on $1.4 \times \mathrm{t}$, kiirendamaks $90 \times \mathrm{\frac{km}{h}}$ kuni $110 \times \mathrm{\frac{km}{h}}$ $6 \times \mathrm{s}$, et teisest autost mööduda, on $`r P_b` \times \mathrm{W}$.

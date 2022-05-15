@@ -262,4 +262,4 @@ wavelengthOnEarth <- SPEED_LIGHT /(SPEED_LIGHT / 486e-9 /(SPEED_LIGHT/ (SPEED_LI
 wavelengthOnEarth
 ```
 
-`r format(wavelengthOnEarth, digits = 0)` * nm on Maal registreeritava vesinikujoone lainepikkus.
+`r signif(wavelengthOnEarth, digits = 3)` * nm on Maal registreeritava vesinikujoone lainepikkus.

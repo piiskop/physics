@@ -196,7 +196,7 @@ differenceFromD = deparse(abs(dInSi - velocity))
 differenceFromD
 minimum = min(c(differenceFromA, differenceFromB, differenceFromC, differenceFromD))
 minimum
-library(switchcase)
+librarian::shelf(switchcase)
 choice <- switchCase(
   minimum,
   alt(

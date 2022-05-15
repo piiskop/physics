@@ -524,6 +524,22 @@ $$p \cdot V^3 - V^2 \cdot (b \cdot p \cdot z + z \cdot R \cdot T) + a \cdot z^2 
 
 Sõltub tihedusest. Nt elavhõbeda tihedus on palju suurem kui klaasi oma, st selle osakesed on üksteisele lähemal kui klaasile. See pole alati nii.
 
+## Soojusmasin
+
+$$A_{1, 2} (\Delta(V) > 0)$$
+
+$$A_{2, 1} (\Delta(V) < 0)$$
+
+$$A = A_{1, 2} + A_{2, 1}$$
+
+$$A = |A_{1, 2}| - |A_{2, 1}| > 0$$
+
+$$\eta_{ideaalne} = \frac{T_1 - T_2}{T_1} = \frac{T_{soe} - T_{külm}}{T_{soe}}$$
+
+$$\eta_{reaalne} := \frac{Q_1 - Q_2}{Q_1} = \frac{Q_{soe} - Q_{külm}}{Q_{soe}}$$
+
+$$\eta_{ideaalne} \ge \eta_{reaalne}$$
+
 # Ülesanded
 
 ## Vesinik ja hapnik kolvides
@@ -2776,4 +2792,122 @@ Seega 4.5 cm puitu on sama mis 29 cm tellisseina.
 
 vill: $0.29 \times 0.037 = 0.01 (m)$
 
-63 ise!
+## Jää
+
+### Ülesande püstitus
+
+Madalal tiigil on moodustunud jää ja saabunud on statsionaarne olukord, kus
+õhutemperatuur jää kohal on -5oC ja veetemperatuur tiigi põhjas on +4oC. Kui tiigi
+sügavus (jää ja vee kogupaksus) on 1,4 m, siis kui paks on jää? Jää
+soojusjuhtivustegur on 2,1 W/(m·K) ning vee soojusjuhtivustegur on 0,592
+W/(m·K).
+
+### Tegu
+
+$$T_1 := -5°C = 268 \times K$$
+
+$$T_2 := 0°C = 273 \times K$$
+
+$$T_3 := 4°C = 277 \times K$$
+
+$$\kappa_1 = 2.1 \times \frac{W}{m \times K}$$
+
+$$\kappa_2 = 5.92 \times 10^{-1} \times \frac{W}{m \times K}$$
+
+$$l := 1.4 \times m$$
+
+$$l_1 := \ldots$$
+
+$$l_2 := l - l_1$$
+
+Soojuslik tasakaal saabub siis, kui läbi veekihi läheb samasugune soojusvoog kui läbi jääkihi. Peab arvestama, et otse jääkihi all on temperatuur 0°C.
+
+$$q = \frac{\Delta(Q)}{\Delta(t)} = \frac{k \times A \times \Delta(t)}{l}$$
+
+$$q_1 := \frac{k_1 \times A \times (T_2 - T_1)}{l_1}$$
+
+$$q_2 := \frac{k_2 \times A \times (T_3 - T_2)}{l_2}$$
+$$q_2 := \frac{k_2 \times A \times (T_3 - T_2)}{l - l_1}$$
+
+$$q_1 = q_2$$
+
+$$\frac{k_1 \times A \times (T_2 - T_1)}{l_1} = \frac{k_2 \times A \times (T_3 - T_2)}{l - l_1}$$
+
+$$k_1 \times (T_2 - T_1) \times (l - l_1) = k_2 \times l_1 \times (T_3 - T_2)$$
+
+$$k_1 \times (T_2 - T_1) \times l - k_1 \times (T_2 - T_1) \times l_1 = k_2 \times l_1 \times (T_3 - T_2)$$
+
+$$k_2 \times l_1 \times (T_3 - T_2) +  k_1 \times (T_2 - T_1) \times l_1 = k_1 \times (T_2 - T_1) \times l$$
+
+$$l_1 \times (k_2 \times (T_3 - T_2) + k_1 \times (T_2 - T_1)) = k_1 \times (T_2 - T_1) \times l$$
+
+$$l_1 := \frac{k_1 \times (T_2 - T_1) \times l}{k_2 \times (T_3 - T_2) + k_1 \times (T_2 - T_1)}$$
+
+```{r}
+l_1 <- (2.1 * (273 - 268) * 1.4) / (5.92e-1 * (277 - 273) + 2.1 * (273 - 268))
+l_1
+```
+
+##
+
+### Ülesande püstitus
+
+Carnot' soojusmasina jahutaja temperatuur on 0oC. Leida soojendaja
+temperatuur, kui masin annab 1/3 soojendajalt saadud soojuselt jahutajale.
+
+### Tegu
+
+$$T_{külm} := 0°C = 273 \times K$$
+
+$$Q_{külm} := \frac{1}{3} \times Q_{soe}$$
+
+$$T_{soe} := \ldots$$
+
+$$\eta_{ideaalne} = \frac{T_{soe} - T_{külm}}{T_{soe}}$$
+
+$$\eta = \frac{Q_{soe} - Q_{külm}}{Q_{soe}} = 1 - \frac{Q_{külm}}{Q_{soe}}$$
+
+$$\eta = \eta_{ideaalne}$$
+
+$$1 - \frac{T_{külm}}{T_{soe}} = 1 - \frac{Q_{külm}}{Q_{soe}}$$
+
+$$T_{soe} := \frac{T_{külm} \times Q_{soe}}{Q_{külm}}$$
+
+$$T_{soe} := 819 \times K$$
+
+##
+
+### Ülesande püstitus
+
+Carnot' ringprotsessil teeb gaas iga soojendajalt saadud 4187J arvel 598J tööd.
+Kui suur on protsessi kasutegur? Mitu korda on soojendaja absoluutne
+tempeteratuur kõrgem jahutaja absoluutsest temperatuurist?
+
+### Tegu
+
+$$Q := 4.187 \times 10^3 \times J$$
+
+$$W := 5.98 \times 10^2 \times J$$
+
+$$\Delta(Q) = \Delta(U) + W$$
+
+$$\eta = \frac{Q_{soe} - Q_{külm}}{Q_{soe}}$$
+
+$$\eta := \frac{W}{Q_{soe}}$$
+
+```{r}
+eta = 598 / 4187
+eta
+```
+
+$$\eta_{ideaalne} := \frac{T_{soe} - T_{külm}}{T_{soe}} = 1 - \frac{T_{külm}}{T_{soe}}$$
+
+$$\eta_{ideaalne} = \eta_{reaalne}$$
+
+
+```{r}
+relation = 1 /(1 - .142823)
+relation
+```
+
+ise 67, 69, 70
