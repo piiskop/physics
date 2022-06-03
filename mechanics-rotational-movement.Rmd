@@ -1,27 +1,22 @@
 ---
-title: "Untitled"
-author: 'peacecop kalmer:'
-date: '2022-05-15'
+#author: 'peacecop kalmer:'
+#date: '2022-05-15'
 output:
     bookdown::html_document2:
       toc: yes
       toc_float: yes
       toc_depth: 5
-bibliography: references.bib
-biblio-style: "newapa"
-link-citations: true
-citation_package: biblatex
 ---
 
-# Mehaanika ülesanded
-
-## Pöördliikumine
+## Pöördliikumise ülesanded
 
 ### Jalgratta rataste pöörded
 
 #### Ülesande püstitus
 
-Jalgrattal on all rattad läbimõõduga 26 tolli (1 toll =2,54 cm). Millise kiirusega sõidab jalgrattur, kui rattad pöörlevad kiirusega 1 pööre sekundis?
+Jalgrattal on all rattad läbimõõduga 26 tolli (1 toll =2,54 cm). Millise
+kiirusega sõidab jalgrattur, kui rattad pöörlevad kiirusega 1 pööre
+sekundis?
 
 #### Lahendus
 
@@ -29,13 +24,20 @@ Jalgrattal on all rattad läbimõõduga 26 tolli (1 toll =2,54 cm). Millise kiir
 velocityOfBicycle = pi * 26 * 2.54 * .01
 ```
 
-Jalgrattur sõidab kiirusega $`r velocityOfBicycle` * \frac{m}{s}$, kui rattad pöörlevad kiirusega 1 pööre sekundis.
+Jalgrattur sõidab kiirusega $`r velocityOfBicycle` * \frac{m}{s}$, kui
+rattad pöörlevad kiirusega 1 pööre sekundis.
 
 ### Jalgratta spidomeeter
 
 #### Ülesande püstitus
 
-Jalgratta spidomeetril on esiratta kodara küljes andur, mille abil loendatakse esiratt apöördeid. Jalgratta kiiruse näitamiseks peab spidomeetri seadetes olema valitud õige esiratta läbimõõt. Oletame, et jalgrattur pole spidomeetrit õigesti seadistanud: seadetes on kirjas läbimõõt 26 tolli, kuid tegelikult on all rattad läbimõõduga 28 tolli. Sõidu ajal näitab spidomeeter kiirust 18 km/h. Milline on jalgratta õige kiirus?
+Jalgratta spidomeetril on esiratta kodara küljes andur, mille abil
+loendatakse esiratt apöördeid. Jalgratta kiiruse näitamiseks peab
+spidomeetri seadetes olema valitud õige esiratta läbimõõt. Oletame, et
+jalgrattur pole spidomeetrit õigesti seadistanud: seadetes on kirjas
+läbimõõt 26 tolli, kuid tegelikult on all rattad läbimõõduga 28 tolli.
+Sõidu ajal näitab spidomeeter kiirust 18 km/h. Milline on jalgratta õige
+kiirus?
 
 #### Lahendus
 
@@ -50,7 +52,9 @@ Jalgratta õige kiirus on $`r speed28` * \frac{m}{s}$.
 
 #### Ülesande püstitus
 
-Kurvi raadius on 30 m. Milline on maksimaalne kiirus (km/h), millega auto võib seda kurvi läbida, et hõõrdejõud rehvide ja asfaldi vahel suudaks autot teel hoida? Hõõrdetegur rehvide ja asfaldi vahel on 0,7.
+Kurvi raadius on 30 m. Milline on maksimaalne kiirus (km/h), millega
+auto võib seda kurvi läbida, et hõõrdejõud rehvide ja asfaldi vahel
+suudaks autot teel hoida? Hõõrdetegur rehvide ja asfaldi vahel on 0,7.
 
 #### Lahendus
 
@@ -58,19 +62,25 @@ Kurvi raadius on 30 m. Milline on maksimaalne kiirus (km/h), millega auto võib 
 maxVelocity = sqrt(30 * g * .7) * .001 / (1 / 3600)
 ```
 
-$`r maxVelocity` * \frac{km}{h}$ on maksimaalne kiirus, millega auto võib seda kurvi läbida, et hõõrdejõud rehvide ja asfaldi vahel suudaks autot teel hoida.
+$`r maxVelocity` * \frac{km}{h}$ on maksimaalne kiirus, millega auto
+võib seda kurvi läbida, et hõõrdejõud rehvide ja asfaldi vahel suudaks
+autot teel hoida.
 
 ### Mutri kinnikeeramine
 
 #### Ülesande püstitus
 
-Mutri kinnikeeramiseks rakendatakse mutrivõtme otsale jõudu 80 N. Mutrivõtme pikkus on 0,25 m ja jõu suund on mutrivõtmega risti.
+Mutri kinnikeeramiseks rakendatakse mutrivõtme otsale jõudu 80 N.
+Mutrivõtme pikkus on 0,25 m ja jõu suund on mutrivõtmega risti.
 
 a)  Kui suur on jõumoment?
 
-b)  Kui võtta mutrivõtmest kinni mutrile lähemalt, kauguselt 0,1 m, kui suurt jõudu tuleb siis rakendada, et jõumoment oleks sama?
+b)  Kui võtta mutrivõtmest kinni mutrile lähemalt, kauguselt 0,1 m, kui
+    suurt jõudu tuleb siis rakendada, et jõumoment oleks sama?
 
-c)  Kui suur on jõumoment siis, kui jõud rakendatakse mutrivõtme otsale, kuid jõud ei ole mutrivõtmega risti, vaid nurk jõu mõjusirge ning mutrivõtme vahel on 70°?
+c)  Kui suur on jõumoment siis, kui jõud rakendatakse mutrivõtme otsale,
+    kuid jõud ei ole mutrivõtmega risti, vaid nurk jõu mõjusirge ning
+    mutrivõtme vahel on 70°?
 
 #### Lahendus
 
@@ -93,7 +103,8 @@ b)  Arvutuskäik:
 forceForTool = momentumPiOver2 / .1
 ```
 
-`r forceForTool` \* N jõudu tuleb siis rakendada, kui võtta mutrivõtmest kinni mutrile lähemalt, kauguselt 0.1 \* m, et jõumoment oleks sama.
+`r forceForTool` \* N jõudu tuleb siis rakendada, kui võtta mutrivõtmest
+kinni mutrile lähemalt, kauguselt 0.1 \* m, et jõumoment oleks sama.
 
 c)  Arvutuskäik:
 
@@ -101,23 +112,29 @@ c)  Arvutuskäik:
 momentum70PiOver180 = forceAtEnd * radius * sin(70 * pi / 180)
 ```
 
-`r momentum70PiOver180` \* N \* m on jõumoment siis, kui jõud rakendatakse mutrivõtme otsale, kuid jõud ei ole mutrivõtmega risti, vaid nurk jõu mõjusirge ning mutrivõtme vahel on 70°.
+`r momentum70PiOver180` \* N \* m on jõumoment siis, kui jõud
+rakendatakse mutrivõtme otsale, kuid jõud ei ole mutrivõtmega risti,
+vaid nurk jõu mõjusirge ning mutrivõtme vahel on 70°.
 
 ### Kiik
 
 #### Ülesande püstitus
 
-Kiige ühes otsas, kiige teljest kaugusel 1,5 m istub laps massiga 25 kg. Kui kaugele kiige teljest teisele poole peab istuma täiskasvanu massiga 75 kg, et kiik oleks tasakaalus?
+Kiige ühes otsas, kiige teljest kaugusel 1,5 m istub laps massiga 25 kg.
+Kui kaugele kiige teljest teisele poole peab istuma täiskasvanu massiga
+75 kg, et kiik oleks tasakaalus?
 
 #### Lahendus
 
-.5 \* m kaugusele kiige teljest teisele poole peab istuma täiskasvanu massiga 75 kg, et kiik oleks tasakaalus.
+.5 \* m kaugusele kiige teljest teisele poole peab istuma täiskasvanu
+massiga 75 kg, et kiik oleks tasakaalus.
 
 ### Point on equator
 
 #### Setup
 
-How fast is a point on the equator moving due to the rotation of the Earth?
+How fast is a point on the equator moving due to the rotation of the
+Earth?
 
 #### Initial data
 
@@ -131,7 +148,10 @@ the speed *v*
 
 #### Formulas
 
-As the point on the equator rotates, I use the formula for the rotational speed \@ref(eq:line-velocity) which assumes the formula of the length of the circle \@ref(eq:length-of-circle). The complete formula looks like this:
+As the point on the equator rotates, I use the formula for the
+rotational speed \@ref(eq:line-velocity) which assumes the formula of
+the length of the circle \@ref(eq:length-of-circle). The complete
+formula looks like this:
 
 $$v = \frac{2 \cdot \pi \cdot RADIUS_{EARTH}}{\Delta(t)}$$
 
@@ -143,14 +163,15 @@ v <- 2 * pi * RADIUS_EARTH / (24 * 60 * 60)
 
 #### Result
 
-$`r signif(v, digits <- 4)` \cdot \frac{m}{s}$ is a point on the equator moving due to the rotation of the Earth.
+$`r signif(v, digits <- 4)` \cdot \frac{m}{s}$ is a point on the equator
+moving due to the rotation of the Earth.
 
 ### Auto liikumise kiirus
 
 #### Ülesande püstitus
 
-Auto ratas raadiusega 40 cm pöörleb 10 
-pööret/sekundis. Leida auto liikumise kiirus.
+Auto ratas raadiusega 40 cm pöörleb 10 pööret/sekundis. Leida auto
+liikumise kiirus.
 
 #### Sisendid
 
@@ -172,7 +193,8 @@ auto liikumise kiirus $\overline{v_{auto}} = ?$
 
 #### Reeglistik
 
-Lähtun keskmise kiiruse valemist \@ref(eq:mean-velocity) ja ringjoone pikkuse valemist \@ref(eq:length-of-circle):
+Lähtun keskmise kiiruse valemist \@ref(eq:mean-velocity) ja ringjoone
+pikkuse valemist \@ref(eq:length-of-circle):
 
 $$\overline{v_{auto}} = \frac{v_{ratas} \cdot 2 \cdot \pi \cdot r}{t}$$
 
@@ -184,15 +206,19 @@ v_auto <- v_ratas * 2 * pi * r / t
 
 #### Lahend
 
-$`r signif(v_auto, digits <- 1)` \cdot \frac{m}{s}$ on auto liikumise kiirus.
+$`r signif(v_auto, digits <- 1)` \cdot \frac{m}{s}$ on auto liikumise
+kiirus.
 
-
-##
+## 
 
 ### Ülesande püstitus
 
-Ratas pöörleb nii, et raadiuse pöördenurga sõltuvus ajast on kirjeldatav  võrrandiga $\phi := 2 + B \times t + C \times t^2 + D \times t^3$, kus $B := 1 \times \frac{rad}{s}$, $C := 1.0 \frac{rad}{s^2}$ ja $D := 1.0 \times \frac{rad}{s^3}$. Leida, ratta raadius r, kui on teada, 
-et teise sekundi lõpuks on ratta serval oleva punkti kesktõmbekiirendus (normaalkiirendus) $a_k := 3.46 \times 10^3 \times \frac{m}{s}$.
+Ratas pöörleb nii, et raadiuse pöördenurga sõltuvus ajast on kirjeldatav
+võrrandiga $\phi := 2 + B \times t + C \times t^2 + D \times t^3$, kus
+$B := 1 \times \frac{rad}{s}$, $C := 1.0 \frac{rad}{s^2}$ ja
+$D := 1.0 \times \frac{rad}{s^3}$. Leida, ratta raadius r, kui on teada,
+et teise sekundi lõpuks on ratta serval oleva punkti kesktõmbekiirendus
+(normaalkiirendus) $a_k := 3.46 \times 10^3 \times \frac{m}{s}$.
 
 ### Sisendid
 
@@ -220,10 +246,13 @@ Tahvlile lahendatud, praegu ei tee siia.
 
 #### Ülesande püstitus
 
-Ratas, mille raadius r=10,0cm, pöörleb nii, et raadiuse pöördenurga sõltuvus ajast on kirjeldatav  
-võrrandiga $\phi := A + B \times t + C \times t^3$, kus $B := 2.0 \times \mathrm{\frac{rad}{s}}$ ja $C := 1.0 \times \mathrm{\frac{rad}{s}}$. Leida, ratta serval oleva punkti nurkkiirus 
-ω, nurkkiirendus β, lineaarne kiirus v, tangentsiaalkiirendus (lineaarne) $a_τ$, kesktõmbe kiirendus $a_k$
- ja 
+Ratas, mille raadius r=10,0cm, pöörleb nii, et raadiuse pöördenurga
+sõltuvus ajast on kirjeldatav\
+võrrandiga $\phi := A + B \times t + C \times t^3$, kus
+$B := 2.0 \times \mathrm{\frac{rad}{s}}$ ja
+$C := 1.0 \times \mathrm{\frac{rad}{s}}$. Leida, ratta serval oleva
+punkti nurkkiirus ω, nurkkiirendus β, lineaarne kiirus v,
+tangentsiaalkiirendus (lineaarne) $a_τ$, kesktõmbe kiirendus $a_k$ ja
 täiskiirendus a ajahetkel t=2,0s.
 
 #### Sisendid
@@ -252,7 +281,6 @@ $$C := 1.0 \times \mathrm{\frac{rad}{s}}$$
 C <- 1
 ```
 
-
 $$t := 2 \times \mathrm{s}$$
 
 ```{r rotating-wheel-t}
@@ -275,21 +303,25 @@ $$a := \ldots$$
 
 #### Kuidas arvutada?
 
-Nurkkiiruse arvutamiseks kasutan vastavat valemit \@ref(eq:angular-velocity).
+Nurkkiiruse arvutamiseks kasutan vastavat valemit
+\@ref(eq:angular-velocity).
 
-Nurkkiirenduse arvutamiseks kasutan vastavat valemit \@ref(eq:angular-acceleration).
+Nurkkiirenduse arvutamiseks kasutan vastavat valemit
+\@ref(eq:angular-acceleration).
 
-Joonkiiruse arvutamiseks kasutan vastavat valemit \@ref(eq:tangential-velocity).
+Joonkiiruse arvutamiseks kasutan vastavat valemit
+\@ref(eq:tangential-velocity).
 
-Tangentsiaalkiirenduse arvutamiseks saab kokku panna valemid \@ref(eq:keskmine-kiirendus), \@ref(eq:tangential-velocity):
+Tangentsiaalkiirenduse arvutamiseks saab kokku panna valemid
+\@ref(eq:keskmine-kiirendus), \@ref(eq:tangential-velocity):
 
 ```{=tex}
 \begin{align}
 a_\tau := \frac{v - B \times r}{t}
 \end{align}
 ```
-
-Kesktõmbe kiirenduse jaoks kasutan vastavat valemit \@ref(eq:centripetal-acceleration).
+Kesktõmbe kiirenduse jaoks kasutan vastavat valemit
+\@ref(eq:centripetal-acceleration).
 
 Kogukiirenduse jaoks kasutan Pythagorase teoreemi \@ref(eq:pythagorean):
 
@@ -298,7 +330,6 @@ Kogukiirenduse jaoks kasutan Pythagorase teoreemi \@ref(eq:pythagorean):
 a = \sqrt{a_\tau^2 + a_k^2}
 \end{align}
 ```
-
 #### Lahendamine
 
 ```{r rotating-wheel-solving}
@@ -317,4 +348,11 @@ a <- sqrt(a_tau^2 + a_k^2)
 
 #### Lahend
 
-Ratta serval oleva punkti nurkkiirus on $\omega = `r omega` \times \mathrm{\frac{rad}{s}}$, nurkkiirendus $\beta = `r beta` \times \mathrm{\frac{rad}{s^2}}$, lineaarne kiirus $v = `r v` \times \mathrm{\frac{m}{s}}$, tangentsiaalkiirendus $a_\tau = `r a_tau` \times \mathrm{\frac{m}{s^2}}$, kesktõmbe kiirendus $a_k = `r a_k` \times \mathrm{\frac{m}{s^2}}$ ja täiskiirendus $a = `r signif(a, digits = 4)` \times \mathrm{\frac{m}{s^2}}$ ajahetkel $t = 2.0 \times \mathrm{s}$.
+Ratta serval oleva punkti nurkkiirus on
+$\omega = `r omega` \times \mathrm{\frac{rad}{s}}$, nurkkiirendus
+$\beta = `r beta` \times \mathrm{\frac{rad}{s^2}}$, lineaarne kiirus
+$v = `r v` \times \mathrm{\frac{m}{s}}$, tangentsiaalkiirendus
+$a_\tau = `r a_tau` \times \mathrm{\frac{m}{s^2}}$, kesktõmbe kiirendus
+$a_k = `r a_k` \times \mathrm{\frac{m}{s^2}}$ ja täiskiirendus
+$a = `r signif(a, digits = 4)` \times \mathrm{\frac{m}{s^2}}$ ajahetkel
+$t = 2.0 \times \mathrm{s}$.

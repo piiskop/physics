@@ -1,17 +1,13 @@
 ---
-title: "Võnkumised ja lained. Heli"
-author: 'peacecop kalmer:'
-date: "12/23/2021"
+#title: "Võnkumised ja lained. Heli"
+#author: 'peacecop kalmer:'
+#date: "12/23/2021"
 output:
   bookdown::html_document2:
     toc: yes
     toc_float: yes
     toc_depth: 5
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # Reeglid
 
@@ -26,23 +22,39 @@ gravitationalAcceleration <- GRAVITATION * (WEIGHT_EARTH) / (RADIUS_EARTH) ^ 2
 
 $$periood = 2 * \pi * \sqrt{\frac{pikkus}{{kiirendus}_{gravitatsioon}}} === 2 * \pi * \sqrt{\frac{mass}{{jäikus}_{vedru}}}$$
 
-![Pillikeel ja lainepikkus](sound/vibstr1.gif)
+```{r label = "instrument-string-wave-length", fig.cap = "Pillikeel ja lainepikkus", echo = FALSE}
+include_svg("sound/vibstr1.gif")
+#if (knitr:::is_latex_output()) {
+ # knitr::asis_output('\\url{sound/vibstr1.gif}')
+#} else {
+ # knitr::include_graphics("sound/vibstr1.gif")
+#}
+```
 
 ```{r}
 VELOCITY_SOUND_AIR = 340
 ```
 
-Doppleri efekt, kui nii jälgija kui heliallikas üksteise suhtes liiguvad:
+Doppleri efekt, kui nii jälgija kui heliallikas üksteise suhtes
+liiguvad:
 
 $${sagedus}_{vastuvõetavHeli} = {sagedus}_{heliallikast} * (\frac{{kiirus}_{heliÕhus} + {kiirus}_{jälgija}}{{kiirus}_{heliÕhus} + {kiirus}_{heliallikas}})$$
 
-Oluline on arvestada kiiruse märki. Kui jälgija ja allikas mõlemad liiguvad üksteise suunas, on jälgija märk pluss ja heliallika märk miinus. Üksteisest eemaldudes on heliallika märk pluss ja jälgija märk miinus.
+Oluline on arvestada kiiruse märki. Kui jälgija ja allikas mõlemad
+liiguvad üksteise suunas, on jälgija märk pluss ja heliallika märk
+miinus. Üksteisest eemaldudes on heliallika märk pluss ja jälgija märk
+miinus.
 
-Kui heliallikas läheneb ja jälgija on paigal, siis jälgija kiirus on null. Heliallika lähenemiskiirus on miinusmärgiga, kaugenemiskiirus plussmärgiga.
+Kui heliallikas läheneb ja jälgija on paigal, siis jälgija kiirus on
+null. Heliallika lähenemiskiirus on miinusmärgiga, kaugenemiskiirus
+plussmärgiga.
 
-Kui heliallikas on paigal ja jälgija läheneb, siis heliallika kiirus on null. Heliallika suunas on jälgija kiirus pluss-, eemaldudes miinusmärgiga.
+Kui heliallikas on paigal ja jälgija läheneb, siis heliallika kiirus on
+null. Heliallika suunas on jälgija kiirus pluss-, eemaldudes
+miinusmärgiga.
 
-Kui heliallikatest lähtuva heli lained on samas faasis, siis need võimendavad üksteist, kui faasinihkega, siis nõrgendavad üksteist.
+Kui heliallikatest lähtuva heli lained on samas faasis, siis need
+võimendavad üksteist, kui faasinihkega, siis nõrgendavad üksteist.
 
 ```{r}
 THRESHOLD_HEARING = 1E-12
@@ -60,54 +72,55 @@ $${valjus} * dB = 10 * \log \frac{intensiivsus * \frac{W}{m^2}}{kuuldelävi * \f
 
 ### Ülesande püstitus
 
-Helilained on
-A.
-ristlained
-B.
-pikilained
+Helilained on A. ristlained B. pikilained
 
 ### Lahendus
 
-B.
+B.  
 
 ## Harmooniline võnkumine
 
 ### Ülesande püstitus
 
-Keha teostab harmoonilist võnkumist, kus hälve sentimeetrites on *x* = 5,2 sin (31,45*t* + 1,2). Leida
+Keha teostab harmoonilist võnkumist, kus hälve sentimeetrites on *x* =
+5,2 sin (31,45*t* + 1,2). Leida
 
-a) võnkeamplituud;
+a)  võnkeamplituud;
 
-b) võnkeperiood;
+b)  võnkeperiood;
 
-c) hälve ajahetkel *t* = 5 s.
+c)  hälve ajahetkel *t* = 5 s.
 
 ### Lahendus
 
-a) 5.2E-2 * m
+a)  5.2E-2 \* m
 
-b) Arvutuskäik:
+b)  Arvutuskäik:
 
 ```{r}
 rangeOfPendulum =  2 * pi / 31.45
 ```
 
-`r format(rangeOfPendulum, digits = 4)` * s on võnkeperiood.
+`r format(rangeOfPendulum, digits = 4)` \* s on võnkeperiood.
 
-c) Arvutuskäik:
+c)  Arvutuskäik:
 
 ```{r}
 distanceFromCenter = 5.2e-2 * sin(31.45e-2 * 5 + 1.2)
 distanceFromCenter
 ```
 
-`r format(distanceFromCenter, digits = 4)` * m on hälve ajahetkel *t* = 5 * s.
+`r format(distanceFromCenter, digits = 4)` \* m on hälve ajahetkel *t* =
+5 \* s.
 
 ## Pendelkell
 
 ### Ülesande püstitus
 
-Soovitakse konstrueerida pendelkella, kus pendliks on peenikese varda otsas rippuv keha. Kella sekundiosuti nihkub edasi siis, kui pendel on ühes oma kahes äärmisest asendist. Milline peaks olema pendli varda pikkus, et kell võimaldaks määrata aega ühe sekundi täpsusega?
+Soovitakse konstrueerida pendelkella, kus pendliks on peenikese varda
+otsas rippuv keha. Kella sekundiosuti nihkub edasi siis, kui pendel on
+ühes oma kahes äärmisest asendist. Milline peaks olema pendli varda
+pikkus, et kell võimaldaks määrata aega ühe sekundi täpsusega?
 
 ### Lahendus
 
@@ -117,13 +130,15 @@ Arvutuskäik:
 lengthOfPendulum = gravitationalAcceleration / pi ^ 2
 ```
 
-`r format(lengthOfPendulum, digits = 1)` * m peaks olema pendli varda pikkus, et kell võimaldaks määrata aega ühe sekundi täpsusega.
+`r format(lengthOfPendulum, digits = 1)` \* m peaks olema pendli varda
+pikkus, et kell võimaldaks määrata aega ühe sekundi täpsusega.
 
 ## Köie otsas
 
 ### Ülesande püstitus
 
-Keha massiga 100 kg ripub köie otsas, mis on 40 m pikkune. Kui keha panna võnkuma, siis mitu täisvõnget see teeb 1 minuti jooksul?
+Keha massiga 100 kg ripub köie otsas, mis on 40 m pikkune. Kui keha
+panna võnkuma, siis mitu täisvõnget see teeb 1 minuti jooksul?
 
 ### Lahendus
 
@@ -135,23 +150,29 @@ frequencyOfPendulum
 flooredFrequencyOfPendulum = floor(frequencyOfPendulum)
 ```
 
-`r flooredFrequencyOfPendulum` täisvõnget teeb keha 1 minuti kestel, kui see panna võnkuma.
+`r flooredFrequencyOfPendulum` täisvõnget teeb keha 1 minuti kestel, kui
+see panna võnkuma.
 
 ## Vedru küljes
 
 ### Ülesande püstitus
 
-Keha massiga *m* ripub vedru küljes ja võngub perioodiga 5 sekundit. Kui suur on võnkeperiood siis, kui sama vedru külge riputada kaks samasugust keha?
+Keha massiga *m* ripub vedru küljes ja võngub perioodiga 5 sekundit. Kui
+suur on võnkeperiood siis, kui sama vedru külge riputada kaks samasugust
+keha?
 
 ### Lahendus
 
-$5 * \sqrt{2} * s$ on võnkeperiood siis, kui sama vedru külge riputada kaks samasugust keha.
+$5 * \sqrt{2} * s$ on võnkeperiood siis, kui sama vedru külge riputada
+kaks samasugust keha.
 
 ## Vedru otsa
 
 ### Ülesande püstitus
 
-Keha riputatakse vedru otsa ning vedru pikeneb 5,0 cm võrra. Nüüd viiakse keha tasakaaluasendist välja ja keha hakkab võnkuma. Kui suur on võnkeperiood?
+Keha riputatakse vedru otsa ning vedru pikeneb 5,0 cm võrra. Nüüd
+viiakse keha tasakaaluasendist välja ja keha hakkab võnkuma. Kui suur on
+võnkeperiood?
 
 ### Lahendus
 
@@ -168,19 +189,27 @@ period
 
 ### Ülesande püstitus
 
-Leia ookeani sügavus, kui ultraheli levimise kiirus soolases vees on 1530 m/s ning heli levib ookeani põhja ja sealt tagasi 6 sekundiga.
+Leia ookeani sügavus, kui ultraheli levimise kiirus soolases vees on
+1530 m/s ning heli levib ookeani põhja ja sealt tagasi 6 sekundiga.
 
 ### Lahendus
 
-Kui kuue sekundiga jõuab heli põhja ja tagasi, siis ainult põhja jõuab kolme sekundiga.
+Kui kuue sekundiga jõuab heli põhja ja tagasi, siis ainult põhja jõuab
+kolme sekundiga.
 
-4590 * m on ookeani sügavus, kui ultraheli levimise kiirus soolases vees on 1530 m/s ning heli levib ookeani põhja ja sealt tagasi 6 sekundiga.
+4590 \* m on ookeani sügavus, kui ultraheli levimise kiirus soolases
+vees on 1530 m/s ning heli levib ookeani põhja ja sealt tagasi 6
+sekundiga.
 
 ## Muinasjutuline tegelane mägedes
 
 ### Ülesande püstitus
 
-Kujuta ette mägedes elavat muinasjutulist tegelast, kes kasutab äratuskella asemel mägedelt peegelduvat heli. Nimelt enne magama minekut hüüab onni ukselt: "ÄRKA ÜLES" ning tema hääl äratab meie tegelase kaheksa tunni pärast. Kui kaugel peaks sellisel juhul mägi asuma? Heli levimiskiirus õhus 20 °C juures on 340 m/s.
+Kujuta ette mägedes elavat muinasjutulist tegelast, kes kasutab
+äratuskella asemel mägedelt peegelduvat heli. Nimelt enne magama minekut
+hüüab onni ukselt: "ÄRKA ÜLES" ning tema hääl äratab meie tegelase
+kaheksa tunni pärast. Kui kaugel peaks sellisel juhul mägi asuma? Heli
+levimiskiirus õhus 20 °C juures on 340 m/s.
 
 ### Lahendus
 
@@ -190,13 +219,14 @@ Arvutuskäik:
 distanceToMountain = 340 * 8 * 3600 / 2
 ```
 
-`r distanceToMountain` * m kaugusel peaks sellisel juhul mägi asuma.
+`r distanceToMountain` \* m kaugusel peaks sellisel juhul mägi asuma.
 
 ## Tšello keel
 
 ### Ülesande püstitus
 
-Tšello keel pikkusega 1,5 m annab poognaga mõjutamisel "la" noodi (352 Hz). Leia laine levimiskiirus mööda keelt.
+Tšello keel pikkusega 1,5 m annab poognaga mõjutamisel "la" noodi (352
+Hz). Leia laine levimiskiirus mööda keelt.
 
 ### Lahendus
 
@@ -212,11 +242,14 @@ $`r velocity` * \frac{m}{s}$ on laine levimiskiirus mööda keelt.
 
 ### Ülesande püstitus
 
-Moskiito lehvitab tiibu sagedusega 600 lööki sekundis, mis tekitavad sumina sagedusega 600 Hz. Kui kaugele liigub heli kahe tiivalöögi vahele jääva aja jooksul? Heli kiirus õhus (20°C) on 340 m/s.
+Moskiito lehvitab tiibu sagedusega 600 lööki sekundis, mis tekitavad
+sumina sagedusega 600 Hz. Kui kaugele liigub heli kahe tiivalöögi vahele
+jääva aja jooksul? Heli kiirus õhus (20°C) on 340 m/s.
 
 ### Lahendus
 
-$\frac{17}{30} * m kaugusele liigub heli kahe tiivalöögi vahele jääva aja kestel.
+$\frac{17}{30} \cdot m$ kaugusele liigub heli kahe tiivalöögi vahele jääva
+aja kestel.
 
 Lasen selle väärtuse ka ebatäpseks arvutada:
 
@@ -229,11 +262,13 @@ distanceOfSound
 
 ### Ülesande püstitus
 
-Noodi C sagedus on 256 Hz. Kui suur on sellise sagedusega heli lainepikkus vees, kui heli kiirus vees on 1500 m/s?
+Noodi C sagedus on 256 Hz. Kui suur on sellise sagedusega heli
+lainepikkus vees, kui heli kiirus vees on 1500 m/s?
 
 ### Lahendus
 
-$\frac{375}{64} * m$ on sellise sagedusega heli lainepikkus vees, kui heli kiirus vees on 1500 m/s.
+$\frac{375}{64} * m$ on sellise sagedusega heli lainepikkus vees, kui
+heli kiirus vees on 1500 m/s.
 
 Lasen selle väärtuse ka ebatäpseks arvutada:
 
@@ -246,17 +281,21 @@ wavelength
 
 ### Ülesande püstitus
 
-Milline on 1000 Hz sagedusega helilaine pikkus õhus, vees, puidus? Heli kiirus õhus (20 °C) on 340 m/s, vees 1500 m/s, puidus 4000 m/s.
+Milline on 1000 Hz sagedusega helilaine pikkus õhus, vees, puidus? Heli
+kiirus õhus (20 °C) on 340 m/s, vees 1500 m/s, puidus 4000 m/s.
 
 ### Lahendus
 
-.34 * m on 1000 * Hz sagedusega helilaine pikkus õhus, 1.5 * m vees ja 4 * m puidus.
+.34 \* m on 1000 \* Hz sagedusega helilaine pikkus õhus, 1.5 \* m vees
+ja 4 \* m puidus.
 
 ## Nahkhiir
 
 ### Ülesande püstitus
 
-Nahkhiir orienteerub koobastes hultraheli abil. Nahkhiire poolt tekitatud ultraheli impulss peegeldub koopaseinalt tagasi ja jõuab nahkhiire kõrva 0,01 sekundi pärast. Kui kaugel on koopa sein?
+Nahkhiir orienteerub koobastes hultraheli abil. Nahkhiire poolt
+tekitatud ultraheli impulss peegeldub koopaseinalt tagasi ja jõuab
+nahkhiire kõrva 0,01 sekundi pärast. Kui kaugel on koopa sein?
 
 ### Lahendus
 
@@ -266,23 +305,28 @@ Arvutuskäik:
 distanceToWall = 340 * (.01 / 2)
 ```
 
-`r distanceToWall` * m kaugusel on koopa sein.
+`r distanceToWall` \* m kaugusel on koopa sein.
 
 ## Maja tellingutel
 
 ### Ülesande püstitus
 
-Kaugel ehitatava maja tellingutel lööb ehitaja naela puusse. Sa näed ja kuuled haamrilööke sünkroonis, sagedusega 1 löök sekundis. Kui ehitaja on löömise peatanud, kuuled sa veel üht lööki. Kui kaugel on ehitatav maja?
+Kaugel ehitatava maja tellingutel lööb ehitaja naela puusse. Sa näed ja
+kuuled haamrilööke sünkroonis, sagedusega 1 löök sekundis. Kui ehitaja
+on löömise peatanud, kuuled sa veel üht lööki. Kui kaugel on ehitatav
+maja?
 
 ### Lahendus
 
-340 * m kaugusel on ehitatav maja.
+340 \* m kaugusel on ehitatav maja.
 
 ## Tõkkepuu
 
 ### Ülesande püstitus
 
-Tõkkepuu taga ootav inimene kuuleb läheneva rongi vilet sagedusega 546 Hz. Kui rong möödub, "kukub" vile sagedus 469 hertsile. Kui kiiresti sõidab rong?
+Tõkkepuu taga ootav inimene kuuleb läheneva rongi vilet sagedusega 546
+Hz. Kui rong möödub, "kukub" vile sagedus 469 hertsile. Kui kiiresti
+sõidab rong?
 
 ### Lahendus
 
@@ -295,7 +339,8 @@ equation
 velocityOfTrain = eval(parse(text = yac_str(y_rmvars(paste("Solve(", equation, ", velocityOfTrain)", sep = "")))))
 ```
 
-Kiirusega $`r format(velocityOfTrain, digits = 3)` * \frac{m}{s}$ sõidab rong.
+Kiirusega $`r format(velocityOfTrain, digits = 3)` * \frac{m}{s}$ sõidab
+rong.
 
 Lasen selle väärtuse arvutada ka kilomeetritesse tunnis:
 
@@ -308,47 +353,54 @@ velocityOfTrainAsKmh
 
 ### Ülesande püstitus
 
-Kontserdiväljakul on kaks kõlarit, mis töötavad sünkroonis. Helilaine pikkus õhus on 6 meetrit. Kas nende poolt kiiratud lained tugevdavad või nõrgendavad üksteist, kui sa asud
+Kontserdiväljakul on kaks kõlarit, mis töötavad sünkroonis. Helilaine
+pikkus õhus on 6 meetrit. Kas nende poolt kiiratud lained tugevdavad või
+nõrgendavad üksteist, kui sa asud
 
-a) 12 m kaugusel mõlemast kõlarist;
+a)  12 m kaugusel mõlemast kõlarist;
 
-b) 9 m kaugusel mõlemast kõlarist;
+b)  9 m kaugusel mõlemast kõlarist;
 
-c) ühest kõlarist 9 m ja teisest 12 m kaugusel.
+c)  ühest kõlarist 9 m ja teisest 12 m kaugusel.
 
 ### Lahendus
 
-a) Tugevdavad.
+a)  Tugevdavad.
 
-b) Tugevdavad.
+b)  Tugevdavad.
 
-c) Nõrgendavad.
+c)  Nõrgendavad.
 
 ## Kuulmislävi
 
 ### Ülesande püstitus
 
-Mitu korda intensiivsem kuulmislävest on heli valjusega 10 dB, 30 dB, 60 dB?
+Mitu korda intensiivsem kuulmislävest on heli valjusega 10 dB, 30 dB, 60
+dB?
 
 ### Lahendus
 
-Üheksa, 999 ja 999999 korda on kuulmislävest intensiivsem heli valjusega 10 * dB, 30 * dB ja 60 * dB.
+Üheksa, 999 ja 999999 korda on kuulmislävest intensiivsem heli valjusega
+10 \* dB, 30 \* dB ja 60 \* dB.
 
 ## Kitarrikeel
 
 ### Ülesande püstitus
 
-Kui kitarrikeele põhisagedus on 220 Hz, kui suure sagedusega on teine ülemtoon? kolmas ülemtoon?
+Kui kitarrikeele põhisagedus on 220 Hz, kui suure sagedusega on teine
+ülemtoon? kolmas ülemtoon?
 
 ### Lahendus
 
-Teine ülemtoon on sagedusega 440 * Hz ja kolmas ülemtoon on sagedusega 660 * Hz.
+Teine ülemtoon on sagedusega 440 \* Hz ja kolmas ülemtoon on sagedusega
+660 \* Hz.
 
 ## Kuulaja laulja suhtes
 
 ### Ülesande püstitus
 
-Kui kiiresti peaks kuulaja laulja suhtes liikuma, et ta kuuleks noodi "do" (264 Hz) asemel nooti "re" (297 Hz)?
+Kui kiiresti peaks kuulaja laulja suhtes liikuma, et ta kuuleks noodi
+"do" (264 Hz) asemel nooti "re" (297 Hz)?
 
 ### Lahendus
 
@@ -361,13 +413,15 @@ equation
 velocityOfListener = eval(parse(text = yac_str(y_rmvars(paste("Solve(", equation, ", velocityOfListener)", sep = "")))))
 ```
 
-$`r velocityOfListener` * \frac{m}{s}$ peaks kuulaja laulja suhtes liikuma, et ta kuuleks noodi *do* asemel nooti *re*.
+$`r velocityOfListener` * \frac{m}{s}$ peaks kuulaja laulja suhtes
+liikuma, et ta kuuleks noodi *do* asemel nooti *re*.
 
 ## Heli puidus
 
 ### Ülesande püstitus
 
-Kui suur on sagedusega 562 Hz heli lainepikkus puidus, kui heli kiirus puidus on 4000 m/s? Vastus esitada kolme tüvenumbriga ja lisada ühik.
+Kui suur on sagedusega 562 Hz heli lainepikkus puidus, kui heli kiirus
+puidus on 4000 m/s? Vastus esitada kolme tüvenumbriga ja lisada ühik.
 
 ### Lahendus
 
@@ -377,4 +431,5 @@ Arvutuskäik:
 wavelengthOfSound <- 4000 / 562
 ```
 
-`r signif(wavelengthOfSound, digits = 3)` * m on heli lainepikkus puidus, kui heli kiirus puidus on $4000 \cdot \frac{m}{s}$.
+`r signif(wavelengthOfSound, digits = 3)` \* m on heli lainepikkus
+puidus, kui heli kiirus puidus on $4000 \cdot \frac{m}{s}$.

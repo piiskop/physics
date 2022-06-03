@@ -1,21 +1,31 @@
 ---
 title: "Füüsika"
-author: 'peacecop kalmer:'
-date: "12/21/2021"
-output:
-    bookdown::html_document2:
-      toc: yes
-      toc_float: yes
-      toc_depth: 5
+author: 'peacecop kalmer: üliõpilaskoodiga *210951MLLB.LT*'
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+format:
+  html:
+    page-layout: article
+#output:
+#    bookdown::html_document2:
+#      toc: yes
+#      toc_float: yes
+#      toc_depth: 5
 bibliography: references.bib
-biblio-style: "newapa"
-link-citations: true
-citation_package: biblatex
+#biblio-style: biblatex
+number-sections: true
+csl: apa.csl
+lang: et
+link-citations: yes
+#citation_package: biblatex
+github-repo: rstudio/bookdown-demo
 ---
 
 ```{r setup, include=FALSE}
 options(width = 60)
 options(bookdown.render.file_scope = FALSE)
+options(tinytex.verbose = TRUE)
 knitr::opts_chunk$set(
   comment = "#>",
   collapse = TRUE,
@@ -26,26 +36,20 @@ knitr::opts_chunk$set(out.height = "\\textheight",  out.width = "\\textwidth",
 knitr::opts_chunk$set(fig.margin = TRUE)
 ```
 
-# Funktsioonid
+# Üldfunktsioonid
 
 ```{r functions}
 include_svg = function(path) {
   if (knitr::is_latex_output()) {
     output = xfun::with_ext(path, 'pdf')
     # you can compare the timestamp of pdf against svg to avoid conversion if necessary
-    system2('rsvg-convert', c('-f', 'pdf', '-a', '-o', shQuote(c(output, path))))
+    #system2('rsvg-convert', c('-f', 'pdf', '-a', '-o', shQuote(c(output, path))))
+    output
+    system(paste('gm convert ', path, ' ', output), intern = FALSE, ignore.stdout = FALSE, ignore.stderr = FALSE, wait = FALSE)
   } else {
     output = path
   }
   knitr::include_graphics(output)
-}
-
-celsius_to_kelvin = function(celsius) {
-  celsius + 2.7315e2
-}
-
-convertFromDegreesFToK <- function(temperatureF) {
-  (temperatureF - 32) / 1.8 + ZERO_DEGREES_C_IN_K
 }
 
 changeSciNot <- function(n) {
@@ -58,6 +62,16 @@ changeSciNot <- function(n) {
 ```
 
 # Temperatuurid
+
+```{r label = "temperature-functions"}
+celsius_to_kelvin = function(celsius) {
+  celsius + 2.7315e2
+}
+
+convertFromDegreesFToK <- function(temperatureF) {
+  (temperatureF - 32) / 1.8 + ZERO_DEGREES_C_IN_K
+}
+```
 
 Standardtemperatuur: [@Calvert, p. 2216]
 
@@ -133,7 +147,25 @@ $$\alpha(\mathrm{steel}) := -19.87 \times10^{-5} = -1.987 \times 10^{-4}$$ [@hay
 COEFFICIENT_LINEAR_EXPANSION_STEEL = -1.9872E-4
 ```
 
-# Muu
+# Töö valemid
+
+```{=tex}
+\begin{equation}
+W = \int{\vec{F}}\cdot cos(\alpha) \cdot d(s) 
+(\#eq:work)
+\end{equation}
+```
+
+[@haynes_2014_crc, p. 2-1 - 2-2]
+
+```{=tex}
+\begin{equation}
+P := \frac{W}{t} 
+(\#eq:power)
+\end{equation}
+```
+
+# Muud üldkonstandid
 
 $$R = 8.314472 \times \frac{\mathrm{Pa} \times \mathrm{m^3}}{\mathrm{K} \times \mathrm{mol}}$$ [@haynes_2014_crc, p. 1-46]
 

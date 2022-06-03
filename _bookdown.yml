@@ -1,0 +1,17 @@
+delete_merged_file: true
+#language:
+#  ui:
+#    chapter_name: "Chapter "
+rmd_files: [
+  "index.Rmd",
+  "mechanics-rules.Rmd",
+  "mechanics.Rmd",
+  "mechanics-rotational-movement.Rmd",
+  "mechanics-pure-force.Rmd",
+  "substance.Rmd",
+  "warmth.Rmd",
+  "sound.Rmd",
+  "electricity.Rmd",
+  "magnetism.Rmd",
+  "electromagnetic-waves-light-colors.Rmd",
+  "optics.Rmd"]

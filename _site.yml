@@ -1,29 +1,29 @@
 name: "füüsika"
 navbar:
   title: "Füüsika"
-  left:
-    - text: "mehaanika reeglid"
-      href: mechanics-rules.html
-    - text: "mehaanika ülesanded: sirgjooneline liikumine"
-      href: mechanics.html
-    - text: "mehaanika ülesanded: pöördliikumine"
-      href: mechanics-rotational-movement.html
-    - text: "mehaanika ülesanded: puhas jõud"
-      href: mechanics-pure-force.html
-    - text: "aine ja selle olekud"
-      href: substance.html
-    - text: "soojus"
-      href: warmth.html
-    - text: "võnkumised, lained, heli"
-      href: sound.html
-    - text: "elekter"
-      href: electricity.html
-    - text: "magnetism, induktsioon"
-      href: magnetism.html
-    - text: "elektromagnetkiirgus, valgus, värvus"
-      href: electromagnetic-waves-light-colors.html
-    - text: "optika"
-      href: optics.html
-    - text: "autor"
-      href: about.html
+#  left:
+#    - text: "mehaanika reeglid"
+#      href: mechanics-rules.html
+#    - text: "mehaanika ülesanded: sirgjooneline liikumine"
+#      href: mechanics.html
+#    - text: "mehaanika ülesanded: pöördliikumine"
+#      href: mechanics-rotational-movement.html
+#    - text: "mehaanika ülesanded: puhas jõud"
+#      href: mechanics-pure-force.html
+#    - text: "aine ja selle olekud"
+#      href: substance.html
+#    - text: "soojus"
+#      href: warmth.html
+#    - text: "võnkumised, lained, heli"
+#      href: sound.html
+#    - text: "elekter"
+#      href: electricity.html
+#    - text: "magnetism, induktsioon"
+#      href: magnetism.html
+#    - text: "elektromagnetkiirgus, valgus, värvus"
+#      href: electromagnetic-waves-light-colors.html
+#    - text: "optika"
+#      href: optics.html
+#    - text: "autor"
+#      href: about.html
 new_session: false

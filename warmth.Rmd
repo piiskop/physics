@@ -1,29 +1,28 @@
 ---
-title: "Soojus"
-author: 'peacecop kalmer:'
-date: "12/21/2021"
+#title: "Soojus"
+#author: 'peacecop kalmer:'
+#date: "12/21/2021"
+format:
+  html:
+    page-layout: article
 output:
     bookdown::html_document2:
       toc: yes
       toc_float: yes
       toc_depth: 5
-bibliography: references.bib
-biblio-style: "newapa"
-link-citations: true
-citation_package: biblatex
+number-sections: true
+lang: et
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+# Soojus
 
-# Reeglid
+## Reeglid
 
-## Temperatuur
+### Temperatuur
 
 $${temperature}_{c} = \frac{{temperature}_{f} - 32}{1.8}$$
 
-## Soojusülekanne
+### Soojusülekanne
 
 $${soojus}_{soojendamiseks} = erisoojus * mass * \Delta(temperatuur)$$
 
@@ -65,14 +64,16 @@ Q := \Delta(U) + W
 \end{align}
 ```
 
-![(\#fig:iso-processes) Isoprocesses](heat/iso-processes.svg)
+```{r label = "iso-processes", fig.cap = "Isoprocesses", echo = FALSE}
+include_svg("heat/iso-processes.svg")
+```
 
 Gaasi molaarruumala:
 
 ```{=tex}
 \begin{align}
 V_m :&= \frac{V}{n} \\
-&= \frac{`r R` \times J \times T}{K \times mol \times 1 \times 10^5 \times Pa} &
+&= \frac{`r R` \times \mathrm{J} \times T}{\mathrm{K} \times \mathrm{mol} \times 1 \times 10^5 \times Pa} &
 (\#eq:molar-volume-of-gas)
 \end{align}
 ```
@@ -82,7 +83,7 @@ Isobaarilise protsessi töö üks valem on jooniselt \@ref(fig:iso-processes):
 
 ```{=tex}
 \begin{equation}
-W = n \times `r R` \times \frac{J}{K \times mol} \times \Delta(T) 
+W = n \times `r R` \times \mathrm{\frac{J}{K \times mol}} \times \Delta(T) 
 (\#eq:isobaric-work-by-amount)
 \end{equation}
 ```
@@ -93,7 +94,7 @@ Asendan molaarruumala valemist \@ref(eq:molar-volume-of-gas) isobaarilise protse
 
 ```{=tex}
 \begin{equation}
-W = \frac{V_0 \times `r R` \times J \times \Delta(T)}{V_m \times K \times mol} 
+W = \frac{V \times `r R` \times \mathrm{J} \times \Delta(T)}{V_m \times \mathrm{K \times mol}} 
 (\#eq:isobaric-work-by-molar-volume)
 \end{equation}
 ```
@@ -111,12 +112,12 @@ Valemiga \@ref(eq:final-temperature) täiendan valemit \@ref(eq:isobaric-work-by
 
 ```{=tex}
 \begin{align}
-W :&= \frac{V_0 \times `r R` \times J \times (\frac{T_0 \times V}{V_0} - T_0)}{V_m \times K \times mol} \\
-&= \frac{V_0 \times `r R` \times J \times T_0 \times (\frac{V}{V_0} - 1)}{V_m \times K \times mol} \\
-&= \frac{V_0 \times `r R` \times J \times T_0 \times (\frac{V - V_0}{V_0})}{V_m \times K \times mol} \\
-&= \frac{`r R` \times J \times T_0 \times (V - V_0)}{V_m \times K \times mol} \\
-&= \frac{`r R` \times J \times T_0 \times (V - V_0)}{\frac{`r R` \times J \times T_0}{K \times mol \times 1 \times 10^5 \times Pa} \times K \times mol} \\
-&= \frac{(V - V_0) \times K \times mol \times 1 \times 10^5 \times Pa}{K \times mol} \\
+W :&= \frac{V_0 \times `r R` \times \mathrm{J} \times (\frac{T_0 \times V}{V_0} - T_0)}{V_m \times \mathrm{K} \times \mathrm{mol}} \\
+&= \frac{V_0 \times `r R` \times \mathrm{J} \times T_0 \times (\frac{V}{V_0} - 1)}{V_m \times \mathrm{K} \times \mathrm{mol}} \\
+&= \frac{V_0 \times `r R` \times \mathrm{J} \times T_0 \times (\frac{V - V_0}{V_0})}{V_m \times \mathrm{K} \times \mathrm{mol}} \\
+&= \frac{`r R` \times \mathrm{J} \times T_0 \times (V - V_0)}{V_m \times \mathrm{K} \times \mathrm{mol}} \\
+&= \frac{`r R` \times \mathrm{J} \times T_0 \times (V - V_0)}{\frac{`r R` \times \mathrm{J} \times T_0}{\mathrm{K} \times \mathrm{mol} \times 1 \times 10^5 \times Pa} \times \mathrm{K} \times \mathrm{mol}} \\
+&= \frac{(V - V_0) \times \mathrm{K} \times \mathrm{mol} \times 1 \times 10^5 \times Pa}{\mathrm{K} \times \mathrm{mol}} \\
 &= (V - V_0) \times 1 \times 10^5 \times Pa \\
 (\#eq:isobaric-work-by-change-of-volume)
 \end{align}
@@ -127,8 +128,8 @@ Adiabaatilise protsessi töö valemi leian samuti jooniselt \@ref(fig:iso-proces
 ```{=tex}
 \begin{align}
 W :&= \frac{V_0 \times C_V \times (T_0 - T)}{V_m} \\
-&= \frac{V_0 \times C_V \times (T_0 - T)}{\frac{`r R` \times J \times T_0}{K \times mol \times p}} \\
-&= \frac{V_0 \times C_V \times (T_0 - T) \times K \times mol \times p}{`r R` \times J \times T_0} \\
+&= \frac{V_0 \times C_V \times (T_0 - T)}{\frac{`r R` \times \mathrm{J} \times T_0}{\mathrm{K} \times \mathrm{mol} \times p}} \\
+&= \frac{V_0 \times C_V \times (T_0 - T) \times \mathrm{K} \times \mathrm{mol} \times p}{`r R` \times \mathrm{J} \times T_0} \\
 (\#eq:adiabatic-work-by-temperature)
 \end{align}
 ```
@@ -137,7 +138,7 @@ Ideaalse gaasi soojusmahtuvus adiabaatilises protsessis:
 
 ```{=tex}
 \begin{align}
-C_V = \frac{3 \times `r R` \times J}{2 \times K \times mol}
+C_V = \frac{3 \times `r R` \times \mathrm{J}}{2 \times \mathrm{K} \times \mathrm{mol}}
 (\#eq:adiabatic-heat-capacity)
 \end{align}
 ```
@@ -146,7 +147,7 @@ Asendan adiabaatilise protsessi soojusmahtuvuse valemist \@ref(eq:adiabatic-heat
 
 ```{=tex}
 \begin{align}
-W :&= \frac{V_0 \times \frac{3 \times `r R` \times J}{2 \times K \times mol} \times (T_0 - T) \times K \times mol \times p}{`r R` \times J \times T_0} \\
+W :&= \frac{V_0 \times \frac{3 \times `r R` \times \mathrm{J}}{2 \times \mathrm{K} \times \mathrm{mol}} \times (T_0 - T) \times \mathrm{K} \times \mathrm{mol} \times p}{`r R` \times J \times T_0} \\
 &= \frac{V_0 \times \frac{3}{2} \times (T_0 - T) \times p}{T_0} \\
 &= \frac{V_0 \times 3 \times (T_0 - T) \times p}{2 \times T_0} \\
 (\#eq:adiabatic-work-of-ideal-gas)
@@ -193,6 +194,24 @@ W := \Delta(V) \times \overrightarrow{p}
 
 Rõhu all mõeldakse siin välisrõhku. Seega, kui gaasi ruumala suureneb, siis see rõhk on negatiivne.
 
+Omavahel on konstantse ruumala ja rõhu molaarsed erisoojused seotud molaarse gaasi konstandi kaudu:
+
+```{=tex}
+\begin{align}
+C_p := C_V + 8.3144621(75) \times \mathrm{\frac{J}{mol \times K}} = \frac{8.3144621(75) \times \mathrm{J} \times (n + 2)}{2 \times \mathrm{mol \times K}}
+(\#eq:molar-heat-capacities-by-constant-pressure)
+\end{align}
+```
+[@haynes_2014_crc, pp. 1-7, A-72]
+
+Edaspidi on võib mõista $\gamma$'t kui erisoojuste suhet, kuid ideaalse gaasi puhul saab arvutada vabadusastmete järgi. Erisoojuste suhte järgi on see:
+
+```{=tex}
+\begin{align}
+\gamma := \frac{C_p}{C_V} = \frac{\frac{8.3144621(75) \times \mathrm{J} \times (n + 2)}{2 \times \mathrm{mol \times K}}}{\frac{8.3144621(75) \times \mathrm{J} \times (n + 2)}{2 \times \mathrm{mol \times K}} - \frac{8.3144621(75) \times \mathrm{J}}{\mathrm{mol \times K}}} = \frac{\frac{8.3144621(75) \times \mathrm{J} \times (n + 2)}{2 \times \mathrm{mol \times K}}}{\frac{8.3144621(75) \times \mathrm{J} \times (n + 2) - 2 \times 8.3144621(75) \times \mathrm{J}}{2 \times \mathrm{mol \times K}}} = \frac{n + 2}{n}(\#eq:ratio-of-molar-heat-capacities)
+\end{align}
+```
+
 Sõltuvalt gaasist astendatakse ruumala koefitsiendiga. Rõhu ja ruumala astme korrutis on mis tahes sisendite väärtuste korral adiabaatilises protsessis jääv suurus:
 
 ```{=tex}
@@ -221,7 +240,7 @@ W :&= \int_{V_0}^{V}{\overrightarrow{p} \times d(V)} \\
 
 [@elucyda]
 
-Milline on lõpptemperatuur adiabaatilises protsessis? Selle arvutamiseks tuleb omavahel kõrvutada töö valemid jooniselt \@ref(fig:iso-processes) ja \@ref(eq:work-by-change-of-volume-and-pressure):
+Milline on lõpptemperatuur adiabaatilises protsessis? Selle arvutamiseks tuleb omavahel kõrvutada töö valemid jooniselt \@ref(fig:iso-processes) ja valemist \@ref(eq:work-by-change-of-volume-and-pressure):
 
 ```{=tex}
 \begin{align}
@@ -235,23 +254,23 @@ Ideaalse gaasi olekuvõrrand:
 
 ```{=tex}
 \begin{align}
-\overrightarrow{p} \times V = \frac{n \times `r R` \times J \times T}{K \times mol} 
+\overrightarrow{p} \times V = \frac{n \times `r R` \times \mathrm{J} \times T}{\mathrm{K \times mol}} 
 (\#eq:ideal-gas)
 \end{align}
 ```
 
-Asendan ideaalse gaasi olekuvõrrandist \@ref(eq:ideal-gas) adiabaatilise töö võrdlusvõrrandisse rõhu:
+Asendan ideaalse gaasi olekuvõrrandist \@ref(eq:ideal-gas) adiabaatilise töö võrdlusvõrrandisse \@ref(comparing-adiabatic-work-equations) rõhu:
 
 ```{=tex}
 \begin{align}
--n \times C_V \times d(T) &=  \frac{n \times `r R` \times J \times T}{K \times mol \times V}\times d(V)\\
--\frac{K \times mol \times n \times C_V \times d(T)}{n \times `r R` \times J \times T} &=  \frac{d(V)}{V}\\
--\frac{K \times mol \times C_V \times d(T)}{`r R` \times J \times T} &=  \frac{d(V)}{V}\\
-\int_{T_0}^T{-\frac{K \times mol \times C_V \times d(T)}{`r R` \times J \times T}} &= \int_{V_0}^V{ \frac{d(V)}{V}}\\
--\frac{K \times mol \times C_V}{`r R` \times J } \times \int_{T_0}^T{\frac{d(T)}{T}} &= \int_{V_0}^V{ \frac{d(V)}{V}}\\
--\frac{K \times mol \times C_V}{`r R` \times J } \times (ln(T) - ln(T_0)) &= ln(V) - ln(V_0)\\
-\frac{K \times mol \times C_V}{`r R` \times J } \times (ln(T_0) - ln(T)) &= ln(V) - ln(V_0)\\
-\frac{K \times mol \times C_V}{`r R` \times J } \times ln(\frac{T_0}{T}) &= ln(\frac{V}{V_0})\\
+-n \times C_V \times d(T) &=  \frac{n \times `r R` \times \mathrm{J} \times T}{\mathrm{K \times mol} \times V}\times d(V)\\
+-\frac{\mathrm{K \times mol} \times n \times C_V \times d(T)}{n \times `r R` \times \mathrm{J} \times T} &=  \frac{d(V)}{V}\\
+-\frac{\mathrm{K \times mol} \times C_V \times d(T)}{`r R` \times \mathrm{J} \times T} &=  \frac{d(V)}{V}\\
+\int_{T_0}^T{-\frac{\mathrm{K \times mol} \times C_V \times d(T)}{`r R` \times \mathrm{J} \times T}} &= \int_{V_0}^V{ \frac{d(V)}{V}}\\
+-\frac{\mathrm{K \times mol} \times C_V}{`r R` \times \mathrm{J} } \times \int_{T_0}^T{\frac{d(T)}{T}} &= \int_{V_0}^V{ \frac{d(V)}{V}}\\
+-\frac{\mathrm{K \times mol} \times C_V}{`r R` \times \mathrm{J} } \times (ln(T) - ln(T_0)) &= ln(V) - ln(V_0)\\
+\frac{\mathrm{K \times mol} \times C_V}{`r R` \times \mathrm{J} } \times (ln(T_0) - ln(T)) &= ln(V) - ln(V_0)\\
+\frac{\mathrm{K \times mol} \times C_V}{`r R` \times \mathrm{J} } \times ln(\frac{T_0}{T}) &= ln(\frac{V}{V_0})\\
 (\#eq:preparing-for-temperature-or-volume)
 \end{align}
 ```
@@ -260,7 +279,7 @@ Võrrandist \@ref(eq:preparing-for-temperature-or-volume) saab avaldada nt ruuma
 
 ```{=tex}
 \begin{align}
-(\frac{T_0}{T})^\frac{K \times mol \times C_V}{`r R` \times J } &= \frac{V}{V_0}\\
+(\frac{T_0}{T})^\frac{\mathrm{K \times mol} \times C_V}{`r R` \times \mathrm{J} } &= \frac{V}{V_0}\\
 (\#eq:volume-from-work-comparison)
 \end{align}
 ```
@@ -269,8 +288,8 @@ Võrrandist \@ref(eq:preparing-for-temperature-or-volume) saab avaldada nt tempe
 
 ```{=tex}
 \begin{align}
-ln(\frac{T_0}{T}) &= \frac{ln(\frac{V}{V_0})}{\frac{K \times mol \times C_V}{`r R` \times J }}\\
-\frac{T_0}{T} &= (\frac{V}{V_0})^\frac{`r R` \times J}{K \times mol \times C_V}
+ln(\frac{T_0}{T}) &= \frac{ln(\frac{V}{V_0})}{\frac{\mathrm{K \times mol} \times C_V}{`r R` \times \mathrm{J} }}\\
+\frac{T_0}{T} &= (\frac{V}{V_0})^\frac{`r R` \times \mathrm{J}}{\mathrm{K \times mol} \times C_V}
 (\#eq:temperature-from-work-comparison)
 \end{align}
 ```
@@ -279,20 +298,20 @@ Adiabaatilise töö valem võib olla ka selline, milles pole lõpptemperatuuri. 
 
 ```{=tex}
 \begin{align}
-W :&= \frac{V_0 \times C_V \times (T_0 - \frac{T_0}{(\frac{V}{V_0})^\frac{`r R` \times J}{K \times mol \times C_V}}) \times K \times mol \times p}{`r R` \times J \times T_0} \\
-&= \frac{V_0 \times C_V \times (1 - \frac{1}{(\frac{V}{V_0})^\frac{`r R` \times J}{K \times mol \times C_V}}) \times K \times mol \times p}{`r R` \times J} \\
-&= \frac{V_0 \times C_V \times (1 - (\frac{V_0}{V})^\frac{`r R` \times J}{K \times mol \times C_V}) \times K \times mol \times p}{`r R` \times J} \\
+W :&= \frac{V_0 \times C_V \times (T_0 - \frac{T_0}{(\frac{V}{V_0})^\frac{`r R` \times \mathrm{J}}{\mathrm{K} \times \mathrm{mol} \times C_V}}) \times \mathrm{K} \times \mathrm{mol} \times p}{`r R` \times \mathrm{J} \times T_0} \\
+&= \frac{V_0 \times C_V \times (1 - \frac{1}{(\frac{V}{V_0})^\frac{`r R` \times \mathrm{J}}{\mathrm{K} \times \mathrm{mol} \times C_V}}) \times \mathrm{K} \times \mathrm{mol} \times p}{`r R` \times \mathrm{J}} \\
+&= \frac{V_0 \times C_V \times (1 - (\frac{V_0}{V})^\frac{`r R` \times \mathrm{J}}{\mathrm{K} \times mol \times C_V}) \times \mathrm{K} \times \mathrm{mol} \times p}{`r R` \times \mathrm{J}} \\
 (\#eq:adiabatic-work-by-volumes-molar-heat-capacity-pressure)
 \end{align}
 ```
 
-## Energia
+### Energia
 
-$${energia}_{kineetiline} = \frac{mass * \vec{kiirus ^ 2}}{2}$$
+$${E}_{k} = \frac{m \cdot \vec{v ^ 2}}{2}$$
 
-$${temperatuur}_{ideaalneGaas} = \frac{2}{3} * \frac{\overline{{kineetilineEnergia}_{molekulid}}}{1.38 * 10^{-23} * \frac{J}{K}}$$
+$${T(\text{ideaalne gaas})} = \frac{2}{3} \cdot \frac{\overline{{E_k(\text{molekulid})}}}{1.38 \cdot 10^{-23} \cdot \mathrm{\frac{J}{K}}}$$
 
-## Soojuspaisumine
+### Soojuspaisumine
 
 \begin{equation}
 tihedus = \frac{mass}{ruumala}
@@ -329,9 +348,9 @@ F = \frac{E \cdot \Delta(l) \cdot A}{l}
 \end{equation}
 ```
 
-## Soojuskiirgus
+### Soojuskiirgus
 
-```{r}
+```{r wien}
 WIEN = 2.9E-3
 
 calculateWavelengthForMaxRadiationEnergy <- function(absoluteTemperatureOfBody) {
@@ -341,7 +360,7 @@ calculateWavelengthForMaxRadiationEnergy <- function(absoluteTemperatureOfBody) 
 
 $${lainepikkus}_{kiirgusenergiaMaksimum} = \frac{WIEN}{{temperatuur}_{absoluutne}}$$
 
-## Adiabaatiline protsess. Polütroopne protsess
+### Adiabaatiline protsess. Polütroopne protsess
 
 Termodünaamika esimene printsiip:
 
@@ -397,7 +416,7 @@ $$\frac{p_1 \cdot V_1}{T_1} === \frac{p_2 \cdot V_2}{T_2}$$
 
 Kui n = 0, siis isobaariline protsess, kui n = 1, siis isotermiline protsess. Kui $n = \frac{i + 2}{2} === \gamma$, siis adiabaatiline protsess. Kui $n = \infty$, siis isohooriline protsess.
 
-## Töö erinevates protsessides
+### Töö erinevates protsessides
 
 $$A = F \cdot s$$
 
@@ -506,7 +525,7 @@ $$p = \int_{0}^{h_1}ρ \cdot g \cdot d(h)$$
 
 $$p = p_0 \cdot e^{-\frac{m_0 \cdot g \cdot h}{k \cdot T}} === p_0 \cdot e^{-\frac{M \cdot g \cdot h}{R \cdot T}}$$
 
-## Van der Waals
+### Van der Waals
 
 $$(p + \frac{z^2 \cdot a}{v^2}) \cdot (V - z \cdot b) = z \cdot\ R \cdot T$$
 
@@ -520,11 +539,25 @@ $$V^3 \cdot p - V^2 \cdot p \cdot z \cdot b + V \cdot z^2 \cdot a - a \cdot b \c
 
 $$p \cdot V^3 - V^2 \cdot (b \cdot p \cdot z + z \cdot R \cdot T) + a \cdot z^2 \cdot V - a \cdot b \cdot z^3 = 0$$
 
-## Märgamine
+### Märgamine
 
 Sõltub tihedusest. Nt elavhõbeda tihedus on palju suurem kui klaasi oma, st selle osakesed on üksteisele lähemal kui klaasile. See pole alati nii.
 
-## Soojusmasin
+### Soojusmasin
+
+```{=tex}
+\begin{align}
+W := Q_h - Q_c
+(\#eq:work-of-heat-engine)
+\end{align}
+```
+
+```{=tex}
+\begin{align}
+\frac{Q_c}{Q_h} = \frac{T_c}{T_h}
+(\#eq:ratio-of-heat)
+\end{align}
+```
 
 $$A_{1, 2} (\Delta(V) > 0)$$
 
@@ -534,17 +567,24 @@ $$A = A_{1, 2} + A_{2, 1}$$
 
 $$A = |A_{1, 2}| - |A_{2, 1}| > 0$$
 
+```{=tex}
+\begin{align}
+\eta := \frac{T_{h} - T_{c}}{T_{h}} = 1 - \frac{T_c}{T_h}
+(\#eq:carnot-efficiency)
+\end{align}
+```
+
 $$\eta_{ideaalne} = \frac{T_1 - T_2}{T_1} = \frac{T_{soe} - T_{külm}}{T_{soe}}$$
 
 $$\eta_{reaalne} := \frac{Q_1 - Q_2}{Q_1} = \frac{Q_{soe} - Q_{külm}}{Q_{soe}}$$
 
 $$\eta_{ideaalne} \ge \eta_{reaalne}$$
 
-# Ülesanded
+## Ülesanded
 
-## Vesinik ja hapnik kolvides
+### Vesinik ja hapnik kolvides
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 ![Kaks kolvi, millest ühes on vesinik, teises hapnik](heat/gases.png)
 
@@ -567,15 +607,17 @@ D.
 otsustamiseks pole piisavalt 
 informatsiooni
 
-### Lahendus
+#### Lahendus
 
 Lähtudes ideaalse gaasi temperatuuri valemist tuleb vesiniku puhul jagada kiiruse arvutamiseks väiksema arvuga kui hapniku puhul, sest vesiniku molaarmass on väiksem kui hapnikul. Seetõttu on vesiniku molekulide keskmine kiirus suurem ja õige lahend on *A*.
 
-## Ämbrid veega
+### Ämbrid veega
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-![Kaks ämbrit pealemärgitud temperatuuriga](buckets.svg)
+```{r label = "buckets", fig.cap = "Kaks ämbrit pealemärgitud temperatuuriga", echo = FALSE}
+include_svg("heat/buckets.svg")
+```
 
 Ühes ämbris on vesi temperatuuril 30
 º
@@ -600,13 +642,13 @@ D.
 otsustamiseks pole piisavalt 
 informatsiooni
 
-### Lahendus
+#### Lahendus
 
 *B*.
 
-## Vardad
+### Vardad
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Olgu meil 2 samast materjalist ja sama läbimõõduga varrast.
 
@@ -625,15 +667,17 @@ Varras A pikeneb rohkem
 3.
 Varras B pikeneb rohkem
 
-### Lahendus
+#### Lahendus
 
 *3*.
 
-## Bimetallide kasutamine
+### Bimetallide kasutamine
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-![Termostaat: 1: regulaator, 3: messing, 4: raud, 2, 5: elektrijuhtmed](thermostate.svg)
+```{r label = "thermostate", fig.cap = "Termostaat: 1: regulaator, 3: messing, 4: raud, 2, 5: elektrijuhtmed", echo = FALSE}
+include_svg("heat/thermostate.svg")
+```
 
 Bimetall on kahest erineva joonpaisumisteguriga metallist 
 koosnev süsteem.
@@ -643,39 +687,39 @@ Kumma joonpaisumistegur
 on suurem, messingil või 
 raual?
 
-### Lahendus
+#### Lahendus
 
 Messingil.
 
-## Vannist väljatulek
+### Vannist väljatulek
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Miks vannist välja tulles hakkab jahe?
 
-### Lahendus
+#### Lahendus
 
 Kui ei olda just auruga täidetud ruumis, on vannist väljatulnuna kehal olevates tilkades rohkem vee osakesi kui ümbritsevas õhus ja toimub aurustumine. Selleks on vaja soojust, mille vedelik saab inimese kehalt. Tulemusena keha jahtub ja tekib jahedusetunne.
 
-## Kuum aur ja vesi
+### Kuum aur ja vesi
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Miks kuum aur (100 °C) kõrvetab rohkem 
 kui kuum vesi (100 °C)?
 
-### Lahendus
+#### Lahendus
 
 Temperatuuril 100 °C on auru siseenergia aurustumissoojuse võrra suurem suurem kui vee siseenergia samal 
 temperatuuril.
 
-## Fahrenheiti-Celsius
+### Fahrenheiti-Celsius
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 1966. aastal valminud film "451° Fahrenheiti" põhineb USA ulmekirjaniku Ray Bradburi samanimelisel romaanil. Romaan peegeldab Ameerika tulevikku, kus ühiskond on hakanud raamatuid põlgama ja põletama. Kui suur on pealkirjas esinev temperatuur Celsiuse skaalas?
 
-### Lahendus
+#### Lahendus
 
 ```{r}
 temperatureC = format((451 - 32) / 1.8, digits = 3)
@@ -683,13 +727,13 @@ temperatureC = format((451 - 32) / 1.8, digits = 3)
 
 `r temperatureC` * ° on pealkirjas esinev temperatuur Celsiuse skaalas.
 
-## Absoluutne null
+### Absoluutne null
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui suur on absoluutne nulltemperatuur Fahrenheiti skaalas?
 
-### Lahendus
+#### Lahendus
 
 ```{r}
 temperatureF = (0 - 273.15) * 1.8 + 32
@@ -697,23 +741,23 @@ temperatureF = (0 - 273.15) * 1.8 + 32
 
 `r temperatureF` * ° on absoluutne nulltemperatuur Fahrenheiti skaalas.
 
-## Lati pikenemine
+### Lati pikenemine
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 1 meetri pikkune latt pikenes soojendamisel 0,5 cm. Kui palju pikeneks samast materjalist 100 meetri pikkune latt, kui selle temperatuuri tõstetakse sama palju?
 
-### Lahendus
+#### Lahendus
 
 Pool meetrit pikeneks samast materjalist 100 meetri pikkune latt, kui selle temperatuuri tõstetakse sama palju.
 
-## Pendelkella pendel
+### Pendelkella pendel
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Pendelkella pendliks on raudvarras pikkusega 10,00 meetrit, mille otsas on raskus. Mitu millimeetrit pikeneb pendel, kui temperatuur tõuseb 20,0 kraadi?
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
@@ -723,13 +767,13 @@ differenceOfLength = 10 * 20 * COEFFICIENT_LINEAR_EXPANSION_FE * 10 ^ 3
 
 `r differenceOfLength` * mm pikeneb pendel, kui temperatuur tõuseb 20,0 kraadi.
 
-## Terasest toru
+### Terasest toru
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kujutle, et 40 000 km pikkune terasest toru paigutati ümber Maa sarnase planeedi ekvaatori tihedalt vastu maad ning seejärel soojendati toru terves ulatuses 1 kraadi võrra, mille tagajärjel toru pikenes. Kas roti suurune elukas pääseks nüüd maapinna ja toru vahelt läbi?
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
@@ -743,13 +787,13 @@ differenceOfRadii = radiusAfter - radiusBefore
 
 `r differenceOfRadii` * m on pärast toru pikendamist vahe maapinna ja toru vahel, millest roti suurune elukas kindlasti pääseks läbi.
 
-## Veesegu
+### Veesegu
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Leia veesegu lõpptemperatuur, kui kokku segati 100 g 25 °C juures olevat vett ja 75 g 40 °C juures olevat vett.
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
@@ -760,13 +804,13 @@ temperatureAfter = format((100 / weightTogether * 25 + 75 / weightTogether * 40)
 
 `r temperatureAfter` * K on veesegu lõpptemperatuur, kui kokku segati 100 * g 25 * °C juures olevat vett ja 75 * g 40 * °C juures olevat vett.
 
-## Süsteemi temperatuur
+### Süsteemi temperatuur
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Milline on süsteemi lõpptemperatuur, kui 100 g toatemperatuuri juures olevasse vette sukeldati 100 g massiga raudnael temperatuuriga 40 °C?
 
-### Lahendus
+#### Lahendus
 
 Vaatasin just järele ja minu toas on õhutemperatuur põrandal 16.9 * °C:
 
@@ -779,9 +823,9 @@ temperatureEnd = yac_str(y_rmvars(paste("Solve(", equation, ", temperatureEnd)",
 
 `r format(eval(parse(text = temperatureEnd)), digits = 3)` * K on süsteemi lõpptemperatuur, kui 100 * g toatemperatuuri juures olevasse vette sukeldati 100 * g massiga raudnael temperatuuriga 40 * °C.
 
-## Jää
+### Jää
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui suurt soojushulka vajatakse
 
@@ -793,7 +837,7 @@ c) 1 kg keeva vee aurustamiseks;
 
 d) temperatuuril 0 °C oleva 1 kg jää muutmiseks 100 °C temperatuuriga veeauruks.
 
-### Lahendus
+#### Lahendus
 
 a) 330000 * J
 
@@ -803,23 +847,23 @@ c) `r HEAT_VAPORIZATION_WATER` * J
 
 d) `r HEAT_OF_FUSION_OF_ICE + 419000 + HEAT_VAPORIZATION_WATER` * J
 
-## Graniit
+### Graniit
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Graniidi ja teise kivimite radioaktiivsel lagunemisel tekkiv soojus on piisav, et hoida Maa tuuma kõrgel temperatuuril. Keskmiselt eraldub radioaktiivsel lagunemisel soojushulk 0,03 J ühe kilogrammi kohta aastas. Kui mitu aastat kulub termiliselt isoleeritud graniidi soojendamiseks 500 °C võrra, kui graniidi erisoojus on $800 J/kg \cdot K$?
 
-### Lahendus
+#### Lahendus
 
 $\frac{40000000}{3} * a$ kulub termiliselt isoleeritud graniidi soojendamiseks 500 * °C võrra, kui graniidi erisoojus on $800 J/kg \cdot K$.
 
-## Terasnael
+### Terasnael
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Lüües terasnaela puusse, muutub nael selle tagajärjel soojemaks. Oletame, et vasar mõjutab naela keskmise jõuga 500 N ning et nael on 12 cm pikk ja mass on 10 g. Leida naela temperatuuri muutus.
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
@@ -829,19 +873,19 @@ differenceOfTemperature = 500 * 12 * .1 ^ 2 / (10 * .1 ^ 3) / SPECIAL_HEAT_STEEL
 
 `r differenceOfTemperature` * K on naela temperatuuri muutus.
 
-## Rauast kuul
+### Rauast kuul
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Rauast kuul massiga 10 kg langeb 100 m kõrguselt maapinnale. Milline on kuuli temperatuuri muutus, kui pool kuuli mehaanilisest energiast muutub kuuli soojendamiseks?
 
-### Lahendus
+#### Lahendus
 
 $\frac{5}{44} * g * K$ on kuuli temperatuuri muutus, kui pool kuuli mehaanilisest energiast muutub kuuli soojendamiseks.
 
-## Lainepikkus
+### Lainepikkus
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Millise lainepikkuse juures on järgmiste kehade soojuskiirguse maksimumid
 
@@ -851,7 +895,7 @@ b) hõõglamp, temperatuur 1500 K;
 
 c) inimkeha.
 
-### Lahendus
+#### Lahendus
 
 a) `r calculateWavelengthForMaxRadiationEnergy(5800)` * m
 
@@ -859,29 +903,29 @@ b) `r format(calculateWavelengthForMaxRadiationEnergy(1500), digits = 2)` * m
 
 c) `r format(calculateWavelengthForMaxRadiationEnergy(convertFromDegreesFToK(96)), digits = 2)` * m, kui inimese keha temperatuur on 96 * °F
 
-## Automootori kasutegur
+### Automootori kasutegur
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui suur on automootori maksimaalne kasutegur, kui kütus põleb temperatuuril 760 °C ja jahutusvedeliku temperatuur on 90 °C?
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
-```{r}
+```{r car-engine-coefficient}
 temperatureOfHeating = 760 + ZERO_DEGREES_C_IN_K
 efficiency = (temperatureOfHeating - (90 + ZERO_DEGREES_C_IN_K)) / (temperatureOfHeating)
 ```
 $`r format(efficiency, digits = 2)`$ on automootori maksimaalne kasutegur, kui kütus põleb temperatuuril 760 * °C ja jahutusvedeliku temperatuur on 90 * °C.
 
-## Elektrijaam
+### Elektrijaam
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Elektrijaam, mille kasutegur on 40% ja elektriline võimsus 10^8^ W, eraldab jahutusvette soojusenergiat $1,5 \cdot 10 ^ 8 W$. Leida, kui palju jahutusvett kasutab elektrijaam igas sekundis, kui vesi soojeneb 3 kraadi võrra.
 
-### Lahendus
+#### Lahendus
 
 Elektrijaama võimsus tähendab seda kogust energiat, mis väljub elektrijaamast tarbijatele. Kasutegur näitab, kui suure osa see moodustab sisendist, mida on vaja selleks, et sellist võimsust väljastada. Sisendvõimsuse arvutan seega jagades väljundvõimsuse kasuteguriga ja saan selleks 2.5 * 10 ^ 8 * W. Võin seda võimsust nimetada ka soojuseks, sest küsitakse ühe sekundi kohta ja võimsus ongi soojushulk sekundi kohta. Nii et sisendvõimsus on kaks ja pool korda suurem kui väljundvõimsus. See sisendsoojus tuleb nt söe põletamisest.
 
@@ -889,15 +933,15 @@ Söe põletamisest eraldunud soojushulka kasutatakse nt turbiini liigutamiseks. 
 
 Küsitakse jahutusvedeliku koguse kohta. Juba ülesande püstituse oli kirjas, kui palju soojust jahutusvette eraldus. See kogus tuleb jagada vee erisoojuse ja temperatuurierinevusega, mille põhjustas sellise soojushulgaga kokkupuutumine, et arvutada välja vajalik veemass:
 
-```{r}
+```{r power-station}
 weightOfWater = 1.5e8 / SPECIFIC_HEAT_CAPACITY_OF_WATER / 3
 ```
 
 `r format(weightOfWater, digits = 2)` * kg jahutusvett kasutab elektrijaam igas sekundis, kui vesi soojeneb 3 kraadi võrra. Kui tahta seda väärtust avaldada kuupmeetrites, tuleb see lihtsalt tuhandega läbi jagada. Nägime, et kasutegurit ja väljundvõimsust polnudki vaja kasutada veekoguse arvutamiseks ja need olid lihtsalt näitlikustavad või siis kontrollandmed.
 
-## Külmik
+### Külmik
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Külmikus on temperatuur 4 °C ja toatemperatuur on 20 °C.
 
@@ -907,11 +951,11 @@ b) Kui suur on maksimaalne soojushulk, mis võetakse ööpäevas jahutatavast ka
 
 c) Külmikusse pannakse toatemperatuuril olev veepudel, milles on 1,5 liitrit vett. Milline on minimaalne elektrienergia hulk, mis kulub selle jahutamiseks temperatuurini 4 °C?
 
-### Lahendus
+#### Lahendus
 
 a) Arvutuskäik:
 
-```{r}
+```{r fridge-temperature}
 temperatureOutside = 20 + ZERO_DEGREES_C_IN_K
 temperatureInside = (4 + ZERO_DEGREES_C_IN_K)
 efficiencyOfFridge = temperatureInside / (temperatureOutside - temperatureInside)
@@ -921,7 +965,7 @@ efficiencyOfFridge = temperatureInside / (temperatureOutside - temperatureInside
 
 b) Arvutuskäik:
 
-```{r}
+```{r fridge-work}
 workOfFridge = 3.6 * 10 ^ 6 * .55
 library(Ryacas)
 equation = paste(efficiencyOfFridge, "== (heatIn) /", workOfFridge, sep = " ")
@@ -933,21 +977,21 @@ heatIn = eval(parse(text = yac_str(y_rmvars(paste("Solve(", equation, ", heatIn)
 
 c) Sedapuhku on vaja arvutada väljas olev soojus, milleks on pudelivee soojus. Arvutuskäik:
 
-```{r}
+```{r fridge-energy-in-j}
 energyInJ = SPECIFIC_HEAT_CAPACITY_OF_WATER * 1.5 * (20 - 4) / efficiencyOfFridge
 ```
 
 `r format(energyInJ, digits = 2)` * J on minimaalne elektrienergia hulk, mis kulub selle veepudeli jahutamiseks temperatuurini 4 °C.
 
-```{r}
+```{r fridge-energy-in-kw-h}
 energyInKwh = energyInJ * .1 ^ 3 / 3600
 ```
 
 `r format(energyInKwh, digits = 2)` * kWh on seesama elektrienergia hulk teistes ühikutes.
 
-## Soojuspump
+### Soojuspump
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Õhk-õhk soojuspump võtab soojust välisõhust ja annab selle edasi toaõhule.
 
@@ -955,11 +999,11 @@ a) Kui suur on soojuspumba maksimaalne võimalik soojendustegur, kui välisõhu 
 
 b) Olgu elektriradiaatori kasutegur 100%, st kogu radiaatori poolt tarbitud elektrienergia muudetakse soojuseks. Mitu korda vähem elektrienergiat kulutab soojuspump sama soojushulga ülekandmiseks?
 
-### Lahendus
+#### Lahendus
 
 a) Arvutuskäik:
 
-```{r}
+```{r heat-pump-temperature}
 temperatureInside = 20 + ZERO_DEGREES_C_IN_K
 cop = temperatureInside / (temperatureInside - (-5 + ZERO_DEGREES_C_IN_K))
 ```
@@ -968,15 +1012,15 @@ cop = temperatureInside / (temperatureInside - (-5 + ZERO_DEGREES_C_IN_K))
 
 b) 100 * % kasuteguriga elektriradikas tarbib iga ühe väljundi kohta ühe sisendi. See on konverteerimine. Soojendustegur on minimaalselt 1. See näitab, mitu ühikut sisendit on vajalik ühe ühiku väljundsoojuse jaoks. Erinevus on märgatav. Kui radika puhul nii palju kui sisse tuleb, läheb välja, siis pumba puhul tuleb palju vähem sisse kui läheb välja. Arvutan, mitu korda vähem tarbib pump elektrit võrreldes radikaga:
 
-```{r}
+```{r heat-pump-difference}
 difference = 1 - (1 / cop)
 ```
 
 `r format(difference, digits = 1)` korda vähem elektrienergiat kulutab soojuspump sama soojushulga ülekandmiseks.
 
-## Heat Pump
+### Heat Pump
 
-### Task
+#### Task
 
 ![Reversible heat pump schemata](heat/Reversible-heat-pump-schematic-min.png)
 
@@ -985,23 +1029,23 @@ A reversible heat pump has a coefficient of performance COP = 3.0 when operated 
 Calculate the amount of heat (Qhot) the heat pump can add to a room?
 If the heat pump were turned to the cooling mode (i.e., to act as an air conditioner in the summer), what would you expect its coefficient of performance to be? Assume all else stays the same and neglect all other losses.
 
-### Solution
+#### Solution
 
 $4500 * \frac{J}{s}$ is the amount of heat the heat pump can add to a room.
 
 If the heat pump were turned to the cooling mode, I would expect its coefficient of performance to be 2.
 
-## Terassild
+### Terassild
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui palju tõmbub terassild kokku või paisub temperatuuride vahemikus -30oCkuni   +40o?   Silla   pikkus   0oC   juures   on  200,0   m,   terase   joonpaisumistegur   onα=11⋅10^-6^1/K.
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
-```{r}
+```{r steel-bridge-calculations}
 length <- 200
 differenceOfLengthIfWarmer <- (1 + 11e-6 * (40 - 0)) * length - length
 differenceOfLengthIfColder <- (1 + 11e-6 * (-30 - 0)) * length - length
@@ -1009,17 +1053,17 @@ differenceOfLengthIfColder <- (1 + 11e-6 * (-30 - 0)) * length - length
 
 Sild pikeneb soojenemisel `r differenceOfLengthIfWarmer` * m ja jahtumisel `r differenceOfLengthIfColder` * m.
 
-## Bensiin
+### Bensiin
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 80   liitriline   terasest   anum   valati   ääreni   täis   bensiini   temperatuuril   5oC.   Kui
 palju   bensiini   voolas   üle   ääre   kui   temperatuur   tõusis   20oC   võrra?   Terase
 joonpaisumistegur on 11⋅10^-6^1/K, bensiini  ruumpaisumistegur on9,5⋅10^-4^1/K.
 
-### Lahendus
+#### Lahendus
 
-#### Algandmed
+##### Algandmed
 
 anuma maht $V_0$: 80 * l ehk $(80E-3) \cdot m^3$
 
@@ -1031,11 +1075,11 @@ terase joonpaisumistegur $\alpha_{teras}$: $(11E-6) \cdot \frac{1}{K}$
 
 bensiini ruumpaisumistegur $3 \cdot \alpha_{bensiin}$: $(9.5E-4) \cdot \frac{1}{K}$
 
-#### Vaja arvutada
+##### Vaja arvutada
 
 ruumalade erinevus pärast paisumist $\Delta(V)$
 
-#### Arvutused
+##### Arvutused
 
 Kasutan ruumala suhtelise suurenemise valemit \@ref(eq:relative-enlargement-of-volume).
 
@@ -1062,23 +1106,23 @@ Täiendan valemit \@ref(eq:change-of-volume-change) kummagi mahumuudu valemiga v
 
 Lasen arvutada terasnõu algruumala:
 
-```{r}
+```{r gasolin-calculation}
  change_volume_change <- 20 * 80e-3 * (9.5e-4 - 3 * 11e-6)
 ```
 
-#### Lahend
+##### Lahend
 
 `r signif(change_volume_change, digits <- 2)` * m^3 bensiini voolas üle ääre.
 
-## Katseanum
+### Katseanum
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Katseanuma täitmisel servani veega temperatuuril 20oC mahtus sinna 65,50 ml vett. Kui anumat javett soojendati temperatuurini 60oC, läks üle serva 0,35g vett. Milline on anuma ruumpaisumistegur?Vee ruumpaisumistegur on 0,21·10^-3^1/K ning tihedus temperatuuril 60oC on 983,24 kg/m^3^.
 
-### Lahendus
+#### Lahendus
 
-#### Algandmed
+##### Algandmed
 
 algtemperatuur *T~0~*: 20°C ehk 293.15 * K
 
@@ -1092,11 +1136,11 @@ vee ruumpaisumistegur *3 \* α~vesi~*: $.21 \cdot 10^{-3} \cdot \frac{1}{K}$
 
 vee tihedus lõpptemperatuuril *ρ*: $983.24 \cdot \frac{kg}{m^3}$
 
-#### Vaja arvutada
+##### Vaja arvutada
 
 anuma ruumpaisumistegur *3 \* α~anum~*
 
-#### Arvutuskäik
+##### Arvutuskäik
 
 Esmalt avaldan mahu, milles vett voolas üle serva, kasutades valemit \@ref(eq:relative-enlargement-of-volume):
 
@@ -1121,21 +1165,21 @@ Asendan valemisse \@ref(eq:factor-of-enlargement-of-beaker) ruumala muudus vee r
 (\#eq:cte-of-beaker-with-density)
 \end{equation}
 
-```{r}
+```{r test-beaker-calculation}
 cte_volume_beaker <- .21e-3 - (.35e-3) / (983.24 * (60 - 20) * 65.5e-6)
 ```
 
-#### Lahend
+##### Lahend
 
 $`r signif(cte_volume_beaker, digits <- 5)` \cdot \frac{1}{K}$ on anuma ruumpaisumistegur.
 
-## Betoonplokkidest tee
+### Betoonplokkidest tee
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Tee on valatud $20 \cdot m$ pikkustest ning $.2 \cdot m^2$ ristlõikepindalaga betoonplokkidest, mille vahele on jäetud $1 \cdot mm$ suurune vahe (temperatuuril $0°C$). Kas betoonplokid paisuvad temperatuuri tõusul $50 \cdot kraadi$ võrra nii palju, et otsad ulatuvad kokku? Kui jah, siis kui suur jõud mõjub plokkide vahel? Betooni soojuspaisumistegur on $\frac{12 \cdot 10^{-6}}{K}$, Youngi moodul on $30 \cdot 10^9 \cdot \frac{N}{m^2}$. (8p).
 
-### Sisendid
+#### Sisendid
 
 $$l = 20 \cdot m = 2 \cdot 10 \cdot m$$
 
@@ -1156,11 +1200,6 @@ $$d = 1 \cdot mm = 1 \cdot 10^{-3} \cdot m$$
 d = 1e-3
 ```
 
-```{r T}
-#T = celsius_to_kelvin(0)
-```
-
-
 $$T = 0°C = `r T` \cdot K$$
 
 $$\Delta(T) = 50°C = 50 \cdot K$$
@@ -1171,23 +1210,23 @@ change_of_temperature <- 50
 
 $$\alpha_l = \frac{12 \cdot 10^{-6}}{K}$$ [@erichardcohen_1987_symbols, p. 31]
 
-```{r}
+```{r road-out-of-concrete-alpha-l}
 alpha_l <- 12e-6
 ```
 
 $$E = 30 \cdot 10^9 \cdot \frac{N}{m^2} = 3 \cdot 10^{10} \cdot \frac{N}{m^2}$$
 
-```{r}
+```{r road-out-of-concrete-e}
 E <- 3e10
 ```
 
-### Mida arvutada?
+#### Mida arvutada?
 
 $$\Delta(l) - d \ge 0 = ?$$
 
 $$\Delta(l) - d \ge 0 = TRUE \rightarrow F = ?$$
 
-### Kuidas arvutada?
+#### Kuidas arvutada?
 
 Et teada saada, kas plokid paisudes üksteist puudutavad, on vaja arvutada, kui palju iga plokk pikeneb. Selleks kasutan valemit \@ref(eq:enlengthening):
 
@@ -1207,11 +1246,11 @@ F = \frac{E \cdot (\Delta(l) - d) \cdot A}{(l + d)}
 \end{equation}
 ```
 
-### Arvutuskäik
+#### Arvutuskäik
 
-```{r}
+```{r road-out-of-concrete-calculations}
 difference_between_enlengthening_and_distance <- l * alpha_l * change_of_temperature - d
-
+difference_between_enlengthening_and_distance
 if(difference_between_enlengthening_and_distance >= 0) {
   F <- E * difference_between_enlengthening_and_distance * A / ((l + d))
   solution <- paste("Betoonplokid paisuvad temperatuuri tõusul 50 kraadi võrra nii palju, et otsad ulatuvad kokku. Nende plokkide vahel mõjub jõud suurusega ", changeSciNot(signif(F, digits = 2)), " $\\times N$.")
@@ -1220,72 +1259,85 @@ if(difference_between_enlengthening_and_distance >= 0) {
 }
 ```
 
-### Lahend
+#### Lahend
 
 `r solution`
 
-## Gaas teeb tööd.
+### Gaas teeb tööd.
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Milline on gaasi poolt tehtud töö, kui 150l süsihapegaasi, mille algtemperatuur on 30°C paisub isobaariliselt 300l-ni? Milline on gaasi töö juhul, kui süsihappegaas paisuks adiabaatiliselt? (8p.)
 
-### Sisendid
+#### Sisendid
 
-$$V_0 := 150 \times l = 1.5 \times 10^{-1} \times m^3$$
+$$V_0 := 150 \times \mathrm{l} = 1.5 \times 10^{-1} \times \mathrm{m^3}$$
 
-```{r}
+```{r co2-expanding-isobaric-adiabatic-work-start}
 V_0 <- 150e-3
 T_0 <- celsius_to_kelvin(30)
 ```
 
 
-$$t := 30°C \leadsto T_0 := `r T_0` \times K$$
+$$t := 30\mathrm{°C} \leadsto T_0 := `r T_0` \times \mathrm{K}$$
 
-$$V := 300 \times l = 3 \times 10^{-1} \times m^3$$
+$$V := 300 \times \mathrm{l} = 3 \times 10^{-1} \times \mathrm{m^3}$$
 
 ```{r co2-expanding-isobaric-adiabatic-work-v}
 V <- 300e-3
 ```
 
-$$C_V := 0.6593 \times \frac{kJ}{kg \times K} = 6.593 \times 10^{2} \times \frac{J}{kg \times K}$$ [@haynes_2014_crc, p. 6-36]
+$$C_V := 0.6593 \times \mathrm{\frac{kJ}{kg \times K}} = 6.593 \times 10^{2} \times \mathrm{\frac{J}{kg \times K}}$$ [@haynes_2014_crc, p. 6-36]
 
 ```{r co2-expanding-isobaric-adiabatic-work-cv}
 C_V <- .6593e3
 ```
 
-### Väljundid
+$$n := 6$$
+```{r co2-expanding-isobaric-adiabatic-work-n}
+n <- 6
+```
+
+#### Väljundid
 
 $$W_p := \ldots$$
 
 $$W_a := \ldots$$
 
-### Kuidas lahendada?
+#### Kuidas lahendada?
 
 Isobaarilise töö arvutamiseks kasutan valemit \@ref(eq:isobaric-work-by-change-of-volume).
 
-Adiabaatilise töö arvutamiseks kasutan valemit \@ref(eq:adiabatic-work-by-volumes-molar-heat-capacity-pressure).
+Adiabaatilise töö arvutamiseks kasutan valemit \@ref(eq:adiabatic-work-by-volumes-molar-heat-capacity-pressure), kui tahan aluseks võtta erisoojuse. Kuna viimast ei ole ülesande püstituses esitatud, siis võib kasutada ka adiabaatilise töö integreerimise valemit \@ref(eq:adiabatic-work). Sellest on puudu sihtrõhk, mille saab arvutada konstantse rõhu ja ruumala korrutise \@ref(eq:constant-partial-work) põhjal:
 
-### Arvutuskäik
-
-```{r co2-expanding-isobaric-adiabatic-work}
-W_p <- (V - V_0) * -p
-W_a <- (V_0 * C_V * (1 - (V_0 / V)^(R / C_V)) * -p) / R
+```{=tex}
+\begin{align}
+W_i :&= \frac{\frac{p_0 \cdot V_0^\gamma \cdot V}{V^\gamma} - p_0 \cdot V_0}{1 - \gamma} = \frac{p_0 \cdot (V_0^\gamma \cdot V - V_0 \cdot V^\gamma)}{V^\gamma \cdot (1 - \gamma)} = \frac{p_0 \cdot (V_0^\frac{n + 2}{n} \cdot V - V_0 \cdot V^\frac{n + 2}{n})}{V^\frac{n + 2}{n} \cdot (1 - \frac{n + 2}{n})}\\
+&= \frac{p_0 \cdot (V_0 \cdot V^\frac{n + 2}{n} - V_0^\frac{n + 2}{n} \cdot V)}{V^\frac{n + 2}{n} \cdot (\frac{2}{n})} = \frac{n \cdot p_0 \cdot (V_0 \cdot V^\frac{n + 2}{n} - V_0^\frac{n + 2}{n} \cdot V)}{V^\frac{n + 2}{n} \cdot 2}
+\end{align}
 ```
 
-### Lahend
+#### Arvutuskäik
 
-$`r W_p` \times J$ on gaasi poolt tehtud töö, kui $`r V_0` \times m^3$ süsihappegaasi, mille algtemperatuur on $`r T_0` \times K$, paisub isobaariliselt $`r V` \times m^3$-ni.
+```{r co2-expanding-isobaric-adiabatic-work}
+W_p <- (V - V_0) * p
+W_a <- (V_0 * C_V * (1 - (V_0 / V)^(R / C_V)) * p) / R
+W_i <- n * p * (V_0 * V^((n + 2) / n) - V_0^((n + 2) / n) * V) / (V^((n + 2) / n) * 2)
+```
 
-$`r signif(W_a, digits = 7)` \times J$ oleks gaasi töö juhul, kui süsihappegaas paisuks adiabaatiliselt.
+#### Lahend
 
-## Alumiiniumist kalorimeeter
+$`r W_p` \times \mathrm{J}$ on gaasi poolt tehtud töö, kui $`r V_0` \times \mathrm{m^3}$ süsihappegaasi, mille algtemperatuur on $`r T_0` \times \mathrm{K}$, paisub isobaariliselt $`r V` \times \mathrm{m^3}$-ni.
 
-### Ülesande püstitus
+$`r signif(W_a, digits = 7)` \times \mathrm{J}$ oleks gaasi töö juhul, kui süsihappegaas paisuks adiabaatiliselt. Kui arvestada süsihappegaasi asemel ideaalset gaasi, siis oleks gaasi adiabaatiline töö $`r signif(W_i, digits = 2)` \times \mathrm{J}$.
+
+### Alumiiniumist kalorimeeter
+
+#### Ülesande püstitus
 
 Alumiiniumist kalorimeetrisse massiga 80 g oli valatud vesi massiga 200 g temperatuuril 15°C. Sellesse kalorimeetrisse lasti sisse vasksilinder massiga 120g ning temperatuuril 80°C. Määrata süsteemi lõpptemperatuur. Vee erisoojus on $4190 \times \frac{J}{kg \cdot K}$, vase erisoojus on $380 \times \frac{J}{kg \times K}$, alumiiniumi erisoojus on $880 \times \frac{J}{kg \times K}$. (6p)
 
-### Sisendid
+#### Sisendid
 
 $$m(\mathrm{Al}) := 80 \times g = 8 \times 10^{-2} \times kg$$
 
@@ -1330,11 +1382,11 @@ $$c_p(\mathrm{H_2O, `r celsius_to_kelvin(20)` \times \mathrm{K}}) := 4.1841 \tim
 cp_H2O_at_293K <- 4.1841e3
 ```
 
-### Väljund
+#### Väljund
 
 $$T := \ldots$$
 
-### Kuidas arvutada?
+#### Kuidas arvutada?
 
 Lähtun soojusliku tasakaalu valemist \@ref(eq:thermal-equilibrium):
 
@@ -1382,16 +1434,95 @@ T := (T(\mathrm{Al, H_2O}) \times (m(\mathrm{Al}) \times c_p(\mathrm{Al}, 300 \t
 \end{align}
 ```
 
-### Arvutuskäik
+#### Arvutuskäik
 
 ```{r putting-cu-into-al-calorimeter-calculation}
 T <- (T_Al_and_H2O * (m_Al * cp_Al + m_H2O * cp_H2O_at_293K) + m_Cu * cp_Cu * T_Cu) / (m_Al * cp_Al + m_H2O * cp_H2O_at_293K + m_Cu * cp_Cu)
 ```
 
-### Lahend
+#### Lahend
 
 $`r signif(T, digits = 5)` \times \mathrm{K}$ on süsteemi lõpptemperatuur.
 
+### Carnot' jõumasin
+
+#### Ülesande püstitus
+
+Carnot’ jõumasina, mille madalama temperatuuriga mahuti temperatuur on 17 oC, kasutegur on 50%. Kui
+palju peab muutma (ja kas langetama või tõstma) madalama temperatuuriga mahuti temperatuuri, et saada
+kasuteguriks 70%? Kui suur on 30s jooksul madalama temperatuuriga mahutile antud soojushulk, kui
+jõumasina võimsus on 1200 W? (5p)
+
+#### Sisendid
+
+$$T_c(\text{initial}) := 17\mathrm{°C} = `r celsius_to_kelvin(17)` \mathrm{K}$$
+```{r carnot-power-machine-t-c}
+T_c_0 <- celsius_to_kelvin(17)
+```
+
+$$\eta_0 := 50\% = 5 \cdot 10^{-1}$$
+```{r label = "carnot-power-machine-eta-0"}
+eta_0 <- 50 / 100
+```
+
+$$\eta := 70\% = 7 \cdot 10^{-1}$$
+```{r label = "carnot-power-machine-eta"}
+eta <- 70 / 100
+```
+
+$$t := 30 \cdot \mathrm{s} = 3 \cdot 10 \cdot \mathrm{s}$$
+
+```{r label = "carnot-power-machine-t"}
+t <- 30
+```
+
+$$P := 1200 \times \mathrm{W} = 1.2 \times 10^3 \times \mathrm{W}$$
+
+```{r label = "carnot-power-machine-p"}
+P <- 1200
+```
+
+#### Väljundid
+
+$$\Delta(T_c) := ...$$
+
+$$Q_c := ...$$
+
+#### Reeglistik
+
+Temperatuuri arvutamiseks saab kasutada ideaalse kasuteguri valemit \@ref(eq:carnot-efficiency):
+
+$$\Delta(T_c) := T_c(\text{final}) - T_c(\text{initial}) = T_h \cdot (1 - \eta) - T_c(\text{initial}) = \frac{T_c(\text{initial}) \cdot (1 - \eta)}{1 - \eta_0} - T_c(\text{initial})$$
+
+Soojushulga arvutamiseks lähtun võimsuse valemist \@ref(eq:power), mille kaudu saan lasta arvutada töö, soojusmasina töö valemist \@ref(eq:work-of-heat-engine) ja soojuste suhte valemist \@ref(eq:ratio-of-heat):
+
+```{=tex}
+\begin{align}
+Q_c :&= Q_h - W = \frac{Q_c \cdot T_h}{T_c(\text{initial})} - P \cdot t = \frac{Q_c \cdot T_c(\text{initial})}{T_c(\text{initial}) \cdot (1 - \eta_0)} - P \cdot t = \frac{Q_c}{(1 - \eta_0)} - P \cdot t\\
+P \cdot t &= \frac{Q_c}{(1 - \eta_0)} - Q_c\\
+P \cdot t &= \frac{Q_c - Q_c + Q_c \cdot \eta_0}{(1 - \eta_0)} - Q_c\\
+P \cdot t &= \frac{Q_c \cdot \eta_0}{(1 - \eta_0)}\\
+Q_c := \frac{P \cdot t \cdot (1 - \eta_0)}{\eta_0}
+\end{align}
+```
+
+#### Arvutamine
+
+```{r label = "carnot-power-machine-calculations"}
+delta_t_c <- (T_c_0 * (1 - eta)) / (1 - eta_0) - T_c_0
+
+if (delta_t_c > 0) {
+  change <- "tõstma"
+} else {
+  change <- "langetama"
+}
+
+q_c <- P * t * (1 - eta_0) / eta_0
+```
+
+#### Lahend
+
+$`r abs(delta_t_c)` \cdot \mathrm{K}$ võrra peab `r change` madalama temperatuuriga mahuti temperatuuri, et saada kasuteguriks 70%. $`r q_c` \cdot \mathrm{J}$ on $30 \cdot \mathrm{s}$ kestel madalama temperatuuriga mahutile antud soojushulk, kui jõumasina võimsus on $1200 \cdot \mathrm{W}$.
 
 
 
@@ -1403,15 +1534,18 @@ $`r signif(T, digits = 5)` \times \mathrm{K}$ on süsteemi lõpptemperatuur.
 
 
 
-## Õhumull
 
-### Ülesande püstitus
+
+
+### Õhumull
+
+#### Ülesande püstitus
 
 Õhumulli ruumala 43,5 m sügavuse järve põhjas on 1,00 cm^3^. Milline on mulli ruumala veepinnale jõudes, kui järve põhjas on temperatuur 5,5oC ning pinnal 20oC?
 
-### Lahendus
+#### Lahendus
 
-#### Algandmed
+##### Algandmed
 
 õhumulli ruumala järve põhjas *V~0~*: 1 * cm^3^ ehk 1e-6 * m^3^
 
@@ -1421,24 +1555,24 @@ temperatuur järve põhjas *T~0~*: 5.5°C === 278.65 * K
 
 temperatuur järve pinnal *T~1~*: 20°C === 293.15 * K
 
-#### Arvutada
+##### Arvutada
 
 õhumulli ruumala järve pinnal *V~1~*
 
-#### Arvutuskäik
+##### Arvutuskäik
 
 
 
-## Alumiiniumtraat
+### Alumiiniumtraat
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 100m pikkune alumiiniumtraat läbimõõduga 3 mm on kinnitatud postide vahelehorisontaalselt ning tõmmatud pingule temperatuuril 0oC. Hinnata, kui palju vajub
 traat   keskkohast   allapoole   kui   temperatuur   tõuseb   40oC-ni.   Alumiiniumi
 soojuspaisumistegur   on  23,2⋅10^-6^1/K.   Kas   traat   hakkab   purunema,   kui
 temperatuur langeb -40oC-ni? Alumiiniumi purunemispinge on 300MPa.
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
@@ -1450,9 +1584,9 @@ pressure
 #difference <- ()
 ```
 
-## Õhurõhu tasakaaldustumine
+### Õhurõhu tasakaaldustumine
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Hinnata,   kui   kaua   võtab   aega,   et   (õhu)rõhk   50   m   pikkusega   ruumis
 tasakaalustuks, kui ruumi ühes otsas on toimunud rõhu hetkeline suurenemine,
@@ -1462,7 +1596,7 @@ a) -50oC ning
 
 b) +50oC.
 
-### Alusandmed
+#### Alusandmed
 
 ruumi pikkus l = 50 * m
 
@@ -1474,11 +1608,11 @@ $$R = 8.314 \cdot \frac{J}{K \cdot mol}$$
 
 $$M = .029 \cdot \frac{kg}{mol}$$
 
-### Arvutada
+#### Arvutada
 
 aeg *t*
 
-### Valemid
+#### Valemid
 
 $$v_h = \sqrt{\frac{P}{ρ}}$$
 $$v_h = \frac{s}{t}$$
@@ -1535,7 +1669,7 @@ Kaheaatomilise gaasi puhul $i = 3 + 2 === 5$.
 
 Kolmeaatomiline gaas: $i = 3 + 3 === 6$.
 
-$$\bar{\epsilon}_{kin} = \fra¢{i}{2} \cdot k \cdot T$$
+$$\bar{\epsilon}_{kin} = \frac{i}{2} \cdot k \cdot T$$
 
 $$\bar{\epsilon}_{kulg} = \frac{3}{2} \cdot k \cdot T$$
 
@@ -1555,9 +1689,9 @@ $$\bar{\epsilon}_{k} = \frac{6}{2} \cdot k \cdot T$$
 
 $$\bar{\epsilon}_{k} = \frac{5}{2} \cdot k \cdot T$$
 
-## Lämmastik
+### Lämmastik
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Lämmastikku temperatuuriga 300K rõhul 100 kPa on lastud sisse väike kogus
 lämmastikku temperatuuriga 500K. Hinnata, kui kaua läheb aega, et temperatuur
@@ -1565,11 +1699,11 @@ gaasis tasakaalustuks arvestades, et lämmastiku molekulide efektiivdiameeter d 
 0,36 nm. Vaba tee pikkus gaasis on leitav valemiga $\lambda = \frac{1}{\sqrt{2} \cdot \pi \cdot d^2 \cdot n}$, kus n on gaasi
 kontsentratsioon.
 
-### Algandmed
+#### Algandmed
 
 alglämmastiku temperatuur $T_0 = 300 \cdot K$
 
-### Valemid
+#### Valemid
 
 $$v = \sqrt{\frac{3 \cdot R \cdot T}{M}}$$
 
@@ -1581,7 +1715,7 @@ $$t = \frac{\lambda}{v}$$
 
 $$t = \frac{\frac{1}{\sqrt{2} \cdot \pi \cdot d^2 \cdot \frac{p}{k \cdot T}}}{\sqrt{\frac{3 \cdot R \cdot T}{M}}} === \frac{\sqrt{M}}{\sqrt{3 \cdot R \cdot T}} \cdot \frac{k \cdot T}{\sqrt{2} \cdot \pi \cdot d^2 \cdot p}$$
 
-### Arvutamine
+#### Arvutamine
 
 ```{r}
 t_1 <- sqrt(.028) / (sqrt(3 * 8.31 * 300)) * (1.38e-23 * 300) / (sqrt(2) * pi * (3.6e-10)^2 * 1e6)
@@ -1590,20 +1724,20 @@ t_2 <- sqrt(.028) / sqrt(3 * 8.31 * 500) * (1.38e-23 * 500) / (sqrt(2) * pi * (3
 t_2
 ```
 
-### Lahend
+#### Lahend
 
 
 
-## Süsinikdioksiidi ja hapniku molekulide ruutkeskmised kiirused
+### Süsinikdioksiidi ja hapniku molekulide ruutkeskmised kiirused
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Mitu   korda   erinevad   süsinikdioksiidi   ja   hapniku   molekulide   ruutkeskmised
 kiirused temperatuuril 0
 o
 C?
 
-### Alusandmed
+#### Alusandmed
 
 T = 0°C === 237.15 * K
 
@@ -1616,7 +1750,7 @@ $$M(CO_2) = .044 \cdot \frac{kg}{mol}$$
 $$i_{O_2} = 5$$
 
 $$i_{CO_2} = 6$$
-### Valemid
+#### Valemid
 
 $$v_{rk} = \sqrt{\frac{i \cdot R \cdot T}{M}}$$
 
@@ -1628,15 +1762,15 @@ $$\frac{v_{rk_{O_2}}}{v_{rk_{CO_2}}} === \sqrt{\frac{i_{O_2} \cdot R \cdot T}{M_
 
 $$\frac{v_{O_2}}{v_{CO_2}} = \sqrt{\frac{5 \cdot .0044}{6 \cdot .032}} === 1.07$$
 
-## Gaasi tihedus
+### Gaasi tihedus
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Gaasi   molekulide   ruutkeskmine   kiirus   on   470   m/s.   Leida   gaasi   tihedus
 normaalrõhul (10^5^Pa). Kui suur on 40 l-sesse ballooni mahtuva gaasi mass antud
 juhul?
 
-### Alusandmed
+#### Alusandmed
 
 $$v_{rk} = 470 \cdot \frac{m}{s}$$
 
@@ -1644,13 +1778,13 @@ $$P = 1 \cdot 10^5 Pa$$
 
 $$V = 40 \cdot l === .04 \cdot m^3$$
 
-### Arvutada
+#### Arvutada
 
 ρ
 
 m
 
-### Valemid
+#### Valemid
 
 $$ρ = \frac{m}{V}$$
 
@@ -1664,15 +1798,15 @@ $$m = ρ \cdot V$$
 
 $$m = 1.358 \cdot .004 === .054 (\cdot kg)$$
 
-## Õhuvahetus
+### Õhuvahetus
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Toas, mille ruumala on 90 m^3^, vahetub õhk täielikult 2 tunni jooksul. Kui palju
 on   vaja   soojust,   et   toas   püsiks   ööpäeva   jooksul   temperatuur   18oC,   kusjuures
 välisõhu temperatuur on -5oC? Eeldame, et õhu tihedus on 1,25 g/l.
 
-### Alusandmed
+#### Alusandmed
 
 $$V_0 = 90 \cdot m^3$$
 
@@ -1688,11 +1822,11 @@ $$t_2 = 24 \cdot h$$
 
 $$M = .029 \cdot \frac{kg}{mol}$$
 
-### Arvutada
+#### Arvutada
 
 Q
 
-### Valemid
+#### Valemid
 
 $$C_{aine} = \frac{i}{2} === R$$
 
@@ -1728,20 +1862,20 @@ kus k on kütteväärtus ja m on puidu mass.
 
 $$k = 10 \cdot \frac{MJ}{kg}$$
 
-### Arvutuskäik
+#### Arvutuskäik
 
 ```{r}
 Q = (24 * 1.25 * 90) / (2 * .029) * (5 + 2) / 2 * 8 * (291 - 268)
 Q
 ```
 
-## Õhu siseenergia
+### Õhu siseenergia
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Milline on 20 mooli õhu siseenergia, kui gaasi ruumala on 100l ja rõhk 3 MPa?
 
-### Alusandmed
+#### Alusandmed
 
 $$p = 3 \cdot MPa === 3 \cdot 10^6 \cdot Pa$$
 
@@ -1751,11 +1885,11 @@ $$z = 20 \cdot mooli$$
 
 $$i = 5$$
 
-### Arvutada
+#### Arvutada
 
 *U*
 
-### Valemid
+#### Valemid
 
 $$\bar{\epsilon_k} = \frac{i}{2} \cdot k \cdot T$$
 
@@ -1777,14 +1911,14 @@ $$h = \frac{E_{pot}}{m \cdot g}$$
 
 $$h = \frac{750000}{100 \cdot 10} \approx 750 \cdot m$$
 
-## Lämmastiku soojendamine
+### Lämmastiku soojendamine
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
  Kui palju soojust kulub 1 kg lämmastiku soojendamiseks jääval rõhul -50oC-lt
 kuni 50oC-ni. Kui suur on gaasi siseenergia juurdekasv? Kui palju teeb gaas tööd?
 
-### Alusandmed
+#### Alusandmed
 
 lämmastiku mass $m = 1 \cdot kg$
 
@@ -1800,7 +1934,7 @@ $$R = 8.314 \cdot \frac{J}{K \cdot mol}$$
 
 $$i = 5$$
 
-### Arvutada
+#### Arvutada
 
 soojushulk *Q*
 
@@ -1808,7 +1942,7 @@ gaasi siseenergia juurdekasv $\Delta(U)$
 
 gaasi tehtav töö *A*
 
-### Valemid
+#### Valemid
 
 $$\Delta(U) = \frac{i}{2} \cdot z \cdot R \cdot \Delta(T)$$
 
@@ -1834,7 +1968,7 @@ $$p \cdot V === z \cdot R \cdot T$$
 
 $$A = z \cdot R \cdot T_2 - z \cdot R \cdot T_1 === z \cdot R \cdot \Delta(T)$$
 
-### Arvutused
+#### Arvutused
 
 ```{r}
 change_u <- 5 / 2 * 1 / .028014 * 8.314 * (323.15 - 223.15)
@@ -1842,13 +1976,13 @@ q <- 1 / .028014 * (5 + 2) / 2 * 8.314 * (323.15 - 223.15)
 a <- q - change_u
 ```
 
-### Lahend
+#### Lahend
 
 `r signif(change_u, digits <- 5)` * J soojust kulub 1 * kg lämmastiku soojendamiseks jääval rõhul -50°C'lt kuni 50°C'ni. `r signif(q, digits <- 5)` * J on gaasi siseenergia juurdekasv. `r signif(a, digits <- 5)` * J teeb gaas tööd.
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Neljataktilises   diiselmootoris   surutakse   sisseimetud   õhk   12-kordselt   kokku.
 Oletades,   et   protsess   on   adiabaatiline,   leida   lõpprõhk,   lõpptemperatuur   ja
@@ -1857,7 +1991,7 @@ o
 C ja
 algruumala 2l.
 
-### Algandmed
+#### Algandmed
 
 $$p_1 = .1 \cdot MPa === 10^5 \cdot Pa$$
 
@@ -1869,7 +2003,7 @@ $$\frac{V_1}{V_2} = 12$$
 
 $$\gamma = 1.39$$
 
-### Arvutada
+#### Arvutada
 
 $$p_2 = ?$$
 
@@ -1877,7 +2011,7 @@ $$T_2 = ?$$
 
 $$A = ?$$
 
-### Valemid
+#### Valemid
 
 $$p_1 \cdot V_1^\gamma === p_2 \cdot V_2^\gamma$$
 
@@ -1891,7 +2025,7 @@ $$T_2 = ...$$
 
 $$A = \frac{p_1 \cdot V_1}{\gamma - 1} \cdot [1 - (\frac{V_1}{V_2})^{\gamma - 1}]$$
 
-### Arvutamine
+#### Arvutamine
 
 ```{r}
 gamma = (5 + 2) / 5
@@ -1900,12 +2034,12 @@ gamma
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Leida gaasisegu erisoojused jääval rõhul ja jääval ruumalal, kui gaas koosneb
 2 g CO2-st ning 3 g N2-st.
 
-### Sisendid
+#### Sisendid
 
 $CO_2$ mass $m\_CO_2 = 2 \cdot g === 2 \cdot 10^{-3} \cdot kg$
 
@@ -1915,13 +2049,13 @@ $CO_2$ vabadusastmete arv $i\_CO_2 = 6$
 
 $N_2$ vabadusastmete arv $i\_N_2 = 5$
 
-### Mida arvutada
+#### Mida arvutada
 
 gaasisegu erisoojus jääval rõhul $c_p$
 
 gaasisegu erisoojus jääval ruumalal $c_V$
 
-### Lahendus
+#### Lahendus
 
 ```{r}
 M_CO2 <- MOLAR_WEIGHT_C + 2 * MOLAR_WEIGHT_O
@@ -1972,9 +2106,9 @@ See oli siis konstantse ruumala jaoks. Nüüd konstantse rõhu jaoks:
 
 $$c_p = \frac{i + 2}{2 \cdot \mu} \cdot R$$
 
-## Vesi
+### Vesi
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 1,00 kg vett on temperatuuril 100oC ning muudetakse veeauruks jääval rõhul
 100 kPa. Vee ruumala kasvab väärtuselt 1,00 l vedelas olekus väärtuseni 1,671 m3
@@ -1982,9 +2116,9 @@ aurufaasis. Kui palju tehakse selle protsessi käigus tööd? Kui palju kantakse
 energiat ning milline on süsteemi siseenergia muutus, kui vee aurustumissoojus
 on 2,256 MJ/kg?
 
-### Lahendus
+#### Lahendus
 
-#### Sisendid
+##### Sisendid
 
 vee mass $m = 1 \cdot kg$
 
@@ -1998,7 +2132,7 @@ vee lõppruumala $V_1 = 1.671 \cdot m^3$
 
 vee aurustumissoojus $\lambda = 2.256 \cdot \frac{MJ}{kg} === 2.256 \cdot 10^6 \cdot \frac{J}{kg}$
 
-#### Mida arvutada?
+##### Mida arvutada?
 
 töö $A = ?$
 
@@ -2006,7 +2140,7 @@ töö $A = ?$
 
 siseenergia muutus $\Delta(U) = ?$
 
-#### Lahendus
+##### Lahendus
 
 $$\Delta(Q) = \Delta(U) + A$$
 
@@ -2051,14 +2185,14 @@ change_u
 
 Aurustumistemperatuuril aur kõrvetab rohkem kui vesi, sest auru siseenergia on suurem.
 
-## Gaasi paisumine graafikute järgi
+### Gaasi paisumine graafikute järgi
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Gaas paisub, minnes olekust A olekusse B nii nagu näidatud joonisel 1. Kui
 suur on gaasi paisumise töö? Kui suur on gaasi paisumise töö joonise 2 järgi?
 
-### Lahendus
+#### Lahendus
 
 $$V_1 = .2 \cdot l = 2 \cdot 10^{-4} \cdot m^3$$
 
@@ -2095,18 +2229,18 @@ a <- a_1 + a_2
 a
 ```
 
-## Kalorimeeter
+### Kalorimeeter
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
  Kalorimeetrisse   soojusmahtuvusega   63   J/K   valati   250   g   õli   temperatuuril
 12oC.   Kui   õlisse   lasti   vasksilinder   massiga   500g   temperatuuril   100oC,   kujunes
 lõpptemperatuuriks 33oC. Kui suur on õli erisoojus antud andmete põhjal?  Vase
 erisoojus on 390 J/(kg·K) ) (V: 2240 J/(kg·K) ).
 
-### Lahendus
+#### Lahendus
 
-#### Sisendid
+##### Sisendid
 
 kalorimeetri soojusmahtuvus $C = 63 \cdot \frac{J}{K}$
 
@@ -2133,11 +2267,11 @@ c_CU <- 390
 ```
 
 
-#### Mida arvutada
+##### Mida arvutada
 
 õli erisoojus $c_{oil} = ?$
 
-#### Reeglid
+##### Reeglid
 
 $$\Delta(Q_1) + \Delta(Q_2) + ... + \Delta(Q_n) === 0$$
 
@@ -2163,28 +2297,28 @@ $$\Delta(Q_3) = m_{CU} \cdot c_{CU} \cdot (T - T_{oil})$$
 
 $$C \cdot (T - T_{oil}) + m_{oil} \cdot c_{oil} \cdot (T - T_{oil}) + m_{CU} \cdot c_{CU} \cdot (T - T_{CU}) === 0$$
 
-$$m_{oil} \cdot c_{oil} \cdot (T - T_{oil}) === -m_{CU} \cdot c_{CU} \¢dot (T - T_{CU}) - C \cdot (T - T_{oil})$$
+$$m_{oil} \cdot c_{oil} \cdot (T - T_{oil}) === -m_{CU} \cdot c_{CU} \cdot (T - T_{CU}) - C \cdot (T - T_{oil})$$
 
 $$c_{oil} = \frac{-m_{CU} \cdot c_{CU} \cdot (T - T_{CU}) - C \cdot (T - T_{oil})}{m_{oil} \cdot (T - T_{oil})}$$
 
-### Lahendus
+#### Lahendus
 
 ```{r}
 c_oil <- (-m_CU * c_CU * (T - T_CU) - C * (T - T_oil)) / (m_oil * (T - T_oil))
 ```
 
-### Lahend
+#### Lahend
 
 $`r c_oil` \cdot \frac{J}{kg \cdot K}$ on õli erisoojus antud andmete põhjal.
 
-## Anumasse juhitav veeaur
+### Anumasse juhitav veeaur
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Anumasse, milles on 1,5 kg vett temperatuuril 15oC, juhitakse 200g veeauru
 temperatuuril 100oC. Kui suur on segu lõpptemperatuur?
 
-### Sisendid
+#### Sisendid
 
 vee mass $m_{vesi} = 1.5 \cdot kg$
 
@@ -2204,11 +2338,11 @@ T_aur <- 373.15
 lambda <- 2.26
 ```
 
-### Arvutada mida?
+#### Arvutada mida?
 
 segu lõpptemperatuur $T = ?$
 
-### Reeglid
+#### Reeglid
 
 $$\Delta(Q_1) + \Delta(Q_2) + \Delta(Q_3) === 0$$
 
@@ -2224,7 +2358,7 @@ $$T \cdot (m_{aur} \cdot c + m_{vesi} \cdot c) === \lambda \cdot m_{aur} + m_{au
 
 $$$$
 
-### Lahendus
+#### Lahendus
 
 1) Veeaur kondenseerub veeks.
 
@@ -2238,20 +2372,20 @@ Eeldan, et on normaalrõhk, muidu on mingi -baariline protsess.
 T <- (lambda * m_aur + m_aur * c * T_aur + m_vesi * c * T_vesi) / (m_aur * c + m_vesi * c)
 ```
 
-### Lahend
+#### Lahend
 
 `r T` * K on segu lõpptemperatuur.88.5C
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Mitu   protsenti   vesiniku   molekulidest   omab   temperatuuril   300K   kiirust
 vahemikus   200-205   m/s?   Mitu   protsenti   hapniku   molekulidest   on   samal
 temperatuuril samas kiirustevahemikus? (V: umbes 0,011% vesiniku ning 0,57%
 hapniku korral). 
 
-### Sisendid
+#### Sisendid
 
 temperatuur $T = 300 \cdot K$
 
@@ -2266,13 +2400,13 @@ v = 205
 ```
 
 
-### Mida arvutada?
+#### Mida arvutada?
 
 vesiniku molekulide osa protsentides $\frac{\Delta(N_v)}{N} = ?$
 
 hapniku molekulide osa protsentides $r_{O_2} = ?$
 
-### Reeglid
+#### Reeglid
 
 $$f(v) = \frac{1}{N} \cdot \rho(v) === \frac{1}{N} \cdot \frac{\Delta(N_v)}{\Delta(v)}$$
 
@@ -2282,7 +2416,7 @@ $$\frac{\Delta(N_v)}{N} === f(v) \cdot \Delta(v)$$
 
 $$v_{probable} = \sqrt{\frac{2 \cdot R \cdot T}{M}}$$
 
-### Lahendus
+#### Lahendus
 
 ```{r}
 ratio_hydrogen <- 4 * pi * sqrt((MOLAR_WEIGHT_H * 2 / (2 * pi * 8.314 * T))^3) * exp(1)^{-MOLAR_WEIGHT_H * 2 * ((v + v_0) / 2) ^2 / (2 * 8.314 * 300)} * ((v + v_0) / 2) ^2
@@ -2292,13 +2426,13 @@ v_probable
 ```
 
 
-### Lahend
+#### Lahend
 
 1.16*10^-4
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Oletame, et maapinnal on õhus 78% lämmastikku N2
  ning umbes 20% hapnikkuO2
@@ -2311,7 +2445,7 @@ b) 20°C?
 
 Kuidas muutub õhu rõhk, kui maapinnal on see 101.3 * kPa?
 
-### Sisend
+#### Sisend
 
 kõrgus $h = 1000 \cdot m$
 
@@ -2325,7 +2459,7 @@ b) temperatuur $T = 20°C === 293.15 \cdot K$
 
 õhu rõhk $p = 101.3 \cdot kPa === 1.013 \cdot 10^5 \cdot Pa$
 
-### Mida arvutada?
+#### Mida arvutada?
 
 lämmastiku sisaldus kõrgemal $\eta_{N_2}^{'}$
 
@@ -2333,7 +2467,7 @@ hapniku sisaldus kõrgemal $\eta_{O_2}^{'}$
 
 õhu rõhk kõrgemal $p^{'}$
 
-### Reeglid
+#### Reeglid
 
 $$p = p_0 \cdot e^{-\frac{M \cdot g \cdot h}{R \cdot T}}$$
 
@@ -2363,7 +2497,7 @@ $$\frac{n_{1_0}}{n_{2_0}} === \frac{7.9}{2}$$
 
 $$\frac{n_{1_1}}{n_{2_1}} === \frac{p_{1_1}}{n_{2_1}} \frac{69}{17}$$
 
-### Lahendus
+#### Lahendus
 
 Eeldame, et õhu protsentuaalne koostis väga ei muutu:
 
@@ -2374,18 +2508,18 @@ p = 101.3 * 10^3 * exp(1)^(-.029 * 9.81 * 1000 / (8.31 * 273))
 ```
 
 
-### Lahend
+#### Lahend
 
 p = 8.9*10^4 Pa
 
-## Puidu põletamine
+### Puidu põletamine
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui palju puid peab põletama ahjus, mille kasutegur on 40%, et saada 200g
 lumest   temperatuuril   -10oC  vesi   temperatuuril   20oC.   Puidu   kütteväärtus   on   10MJ/kg,   jää   erisoojus   on   2100   J/(kg*K),   vee   erisoojus   on   4190   J/(kg*K),   jääsulamissoojus on 330 kJ/kg.
 
-### Sisendid
+#### Sisendid
 
 ahju kasutegur $\eta = 40%$
 
@@ -2405,11 +2539,11 @@ jää sulamissoojus $L = 330 \cdot \frac{kJ}{kg} === 3.3 \cdot 10^5 \cdot \frac{
 
 jää sulamistemperatuur $T_{sulamine} = 273.15 \cdot K$
 
-### Mida arvutada?
+#### Mida arvutada?
 
 puude mass $m_{puit} = ?$
 
-### Reeglid
+#### Reeglid
 
 1) $\Delta(Q_1) = -k \cdot m_2 \cdot \eta$
 
@@ -2423,7 +2557,7 @@ $$\Delta(Q_1) + \Delta(Q_2) + \Delta(Q_3) + \Delta(Q_4) === 0$$
 
 $$m_{puit} = \frac{m_{lumi} \cdot L + m_{lumi} \cdot c_{vesi} \cdot (T_{vesi} -)}{}$$
 
-### Lahendus
+#### Lahendus
 
 1) Puidu põlemine.
 
@@ -2433,19 +2567,19 @@ $$m_{puit} = \frac{m_{lumi} \cdot L + m_{lumi} \cdot c_{vesi} \cdot (T_{vesi} -)
 
 4) Vee soojenemine.
 
-### Lahend
+#### Lahend
 
 
-## Jää sulatamine
+### Jää sulatamine
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui palju 80oC-lise temperatuuriga vett on vaja, et sulatada 0,5 kg jääd, mille
 temperatuur on -10oC kalorimeetris, mille soojusmahtuvus on 90 J/K ning mille
 algtemperatuur on samuti -10oC? Vee erisoojus on 4190 J/(kg*K), jää erisoojus on
 2100 J/(kg*K), jää sulamissoojus on 330 kJ/kg.
 
-### Sisendid
+#### Sisendid
 
 vee temperatuur $T_{vesi} = 80°C === 353.15 \cdot K$
 
@@ -2459,11 +2593,11 @@ jää erisoojus $c_{ice} = 2100 \cdot \frac{J}{kg \cdot K}$
 
 jää sulamissoojus $L = 330 \cdot \frac{kJ}{kg} === 3.3 \cdot 10^5 \frac{J}{kg}$
 
-### Mida arvutada?
+#### Mida arvutada?
 
 vee mass $m_{vesi} = ?$
 
-### Reeglid
+#### Reeglid
 
 1) $\Delta(Q_1) = m_1 \cdot c_1 \cdot (T - T_1)$
 
@@ -2477,7 +2611,7 @@ $$\Delta(Q_1) + \Delta(Q_2) + \Delta(Q_3) + \Delta(Q_4) === 0$$
 
 $$m_1 \cdot c_1 \cdot (T - T_1) === -m_2 \cdot c_2 \cdot (T - T_2) - L \cdot m_2 - C \cdot (T - T_2)$$
 
-### Lahendus
+#### Lahendus
 
 1) Kuum vesi jahtub.
 
@@ -2487,34 +2621,34 @@ $$m_1 \cdot c_1 \cdot (T - T_1) === -m_2 \cdot c_2 \cdot (T - T_2) - L \cdot m_2
 
 4) Kalorimeeter soojeneb.
 
-### Lahend
+#### Lahend
 
 .52
 
-## Märgamine
+### Märgamine
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui   kõrgele   tõuseb   vesi   kahe   vertikaalselt   asetatud   paralleelse   klaasplaadi
 vahel, kui nendevaheline kaugus on 0,5 mm. Eeldada, et märgamine on täielik. Vee
 pindpinevustegur   on   0,072   N/m.   Vee   tihedus   on   1000   kg/m3.   Vaba   langemise
 kiirendus g=9,81 m/s2.
 
-### Sisendid
+#### Sisendid
 
 kaugus $s = .5 \cdot mm === 5 \cdot 10^{-4} \cdot m$
 
 vee pindpinevustegur $.072 \cdot \frac{}{}$
 
-### Lahendus
+#### Lahendus
 
-## Iseseisvaks lahendamiseks
+### Iseseisvaks lahendamiseks
 
 20, 26, 33, 31, 37
 
-## 
+### 
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Missugusel temperatuuril on hapniku rõhk 7 MPa, kui hapniku tihedus on
 $100 \cdot \frac{kg}{m^3}$. Lahendada ülesanne reaalse ja ideaalse gaasi võrrandi abil.
@@ -2522,7 +2656,7 @@ $100 \cdot \frac{kg}{m^3}$. Lahendada ülesanne reaalse ja ideaalse gaasi võrra
 ruumalaks   $1 \cdot m^3$,   seejärel   leida   moolide   arv   ning   siis   arvutada   temperatuur.   Või
 fikseerida moolide arv, siis tiheduse kaudu saab kätte ruumala jne)
 
-### Tegu
+#### Tegu
 
 $$p \cdot V = z \cdot R \cdot T$$
 
@@ -2533,7 +2667,7 @@ Kui $V = 1 \cdot m^3$, siis $m = 100 \cdot kg$.
 ```{r}
 T = 7e6 / (100 / 3.2e-2 * 8.314)
 T
-# See on õige, ülesannete kogus on viga.
+## See on õige, ülesannete kogus on viga.
 T_waals <- (7e6 + (100 / 3.2e-2)^2 * 1.36e-1) * (1 - 100 / 3.2e-2 * 3.16e-5) / (100 / 3.2e-2 * 8.314)
 T_waals
 z = 100 / 3.2e-2
@@ -2544,13 +2678,13 @@ z2_a_over_v = z^2 * 1.36e-1
 z2_a_over_v
 ```
 
-## 
+### 
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Õhk on küllastunud temperatuuril 15oC. Kui suur on õhu suhteline niiskus, kui temperatuur tõuseb 25oC-ni?
 
-### Tegu
+#### Tegu
 
 $$R = \frac{a}{A} \cdot 100\%$$
 
@@ -2562,7 +2696,7 @@ $$R = 53\%$$
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 80m3-lise ruumalaga toas on suhteline õhuniiskus temperatuuril 18oC 75%.
 Toas on avatud veeanum, milles on 3 l vett. Kas vesi sellest anumast saab tuppa
@@ -2571,7 +2705,7 @@ täielikult auruda?
 milline oleks veeauru tihedus, kui kõik auruks, kasutades Mendelejev-Clapeyroni
 võrrandit).
 
-### Tegu
+#### Tegu
 
 Tegelik õhuniiskus on 75% $15.4 \cdot \frac{g}{m^3}$.
 
@@ -2602,14 +2736,14 @@ $$m = \rho \cdot V$$
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui kõrgele tõuseb vesi kahe vertikaalselt asetatud paralleelse klaasplaadi
 vahel, kui nendevaheline kaugus on 0,5 mm. Eeldada, et märgamine on täielik. Vee
 pindpinevustegur on 0,072 N/m. Vee tihedus on 1000 kg/m3. Vaba langemise
 kiirendus g=9,81 m/s2. (V: 29 mm)
 
-### Tegu
+#### Tegu
 
 $$s = 5 * 10^-4 \cdot m$$
 
@@ -2633,15 +2767,15 @@ $$\frac{2 \cdot \sigma}{s \cdot g \cdot \rho}$$
 
 57, 58 kodus
 
-## 
+### 
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Veetorust tilgub külma vett 10 tilka minutis. Mitu korda on suurenenud või
 vähenenud vee pindpinevustegur, kui samast torust tilgub seda 12 tilka minutis?
 (V: Pindpinevustegur on vähenenud 6/5 korda).
 
-### Tegu
+#### Tegu
 
 $$t = 60 \times s$$
 
@@ -2671,7 +2805,7 @@ $$\frac{sigma_1}{sigma_2} = \frac{N_2}{N_1}$$
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
  37   cm   paksuse   telliskiviseina   välispinna   temperatuur   on   -15oC,   sisepinnal
 +20oC.   Leida   ööpäeva   jooksul   läbi   25m2
@@ -2680,7 +2814,7 @@ soojusjuhtivustegur   on   0,7   W/(m*K).   Kui   palju   puid   peaks   ahjus  
 sellist soojusenergiat saada? Puidu kütteväärtus on 19,4 MJ/kg.(V: 7,37 kg)
 
 
-### Tegu
+#### Tegu
 
 $$T_1 = -15°C = 258 K$$
 
@@ -2736,14 +2870,14 @@ m
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Maja   seina   soojuspidavuse   2,5-kordseks   suurendamiseks   temperatuuride
 vahel   20oC   (st,   et   seest   välja   läheks   2,5   korda   vähem   soojust),   otsustati   20cm
 paksusele tellisest seinale lisada klaasvilla ning sellele 2 cm paksune voodrilaud.
 Kui   paks   peab   olema   klaasvilla   kiht?   Klaasvilla   soojusjuhtivustegur   on   0,037 W/(m*K), puidul 0,16 W/(m*K). (V: 1,1 cm.)
 
-### Tegu
+#### Tegu
 
 $$Delta(T) = 20°C$$
 
@@ -2792,9 +2926,9 @@ Seega 4.5 cm puitu on sama mis 29 cm tellisseina.
 
 vill: $0.29 \times 0.037 = 0.01 (m)$
 
-## Jää
+### Jää
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Madalal tiigil on moodustunud jää ja saabunud on statsionaarne olukord, kus
 õhutemperatuur jää kohal on -5oC ja veetemperatuur tiigi põhjas on +4oC. Kui tiigi
@@ -2802,7 +2936,7 @@ sügavus (jää ja vee kogupaksus) on 1,4 m, siis kui paks on jää? Jää
 soojusjuhtivustegur on 2,1 W/(m·K) ning vee soojusjuhtivustegur on 0,592
 W/(m·K).
 
-### Tegu
+#### Tegu
 
 $$T_1 := -5°C = 268 \times K$$
 
@@ -2850,12 +2984,12 @@ l_1
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Carnot' soojusmasina jahutaja temperatuur on 0oC. Leida soojendaja
 temperatuur, kui masin annab 1/3 soojendajalt saadud soojuselt jahutajale.
 
-### Tegu
+#### Tegu
 
 $$T_{külm} := 0°C = 273 \times K$$
 
@@ -2877,13 +3011,13 @@ $$T_{soe} := 819 \times K$$
 
 ##
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Carnot' ringprotsessil teeb gaas iga soojendajalt saadud 4187J arvel 598J tööd.
 Kui suur on protsessi kasutegur? Mitu korda on soojendaja absoluutne
 tempeteratuur kõrgem jahutaja absoluutsest temperatuurist?
 
-### Tegu
+#### Tegu
 
 $$Q := 4.187 \times 10^3 \times J$$
 

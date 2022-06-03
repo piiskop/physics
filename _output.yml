@@ -1,0 +1,39 @@
+bookdown::bs4_book:
+  css: style.css
+  split_by: section
+  split_bib: yes
+  config:
+    toc:
+      collapse: subsection
+      scroll_highlight: yes
+      before: |
+        <li><a href="./">Füüsika</a></li>
+      after: null
+      toolbar:
+      position: fixed
+      edit: https://github.com/piiskop/physics/edit/master/%s
+      download: ["pdf", "epub"]
+      search: yes
+    sharing:
+      facebook: no
+      twitter: no
+      google: no
+      linkedin: no
+      weibo: no
+      instapaper: no
+      vk: no
+      all: false
+      #['facebook', 'google', 'twitter', 'linkedin', 'weibo', 'instapaper']
+#  config:
+#    toc:
+#      before: |
+#        <li><a href="./">A Minimal Book Example</a></li>
+#      after: |
+#        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+#  citation_package: natbib
+  keep_tex: yes
+#bookdown::epub_book: default

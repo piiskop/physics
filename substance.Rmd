@@ -1,7 +1,7 @@
 ---
-title: "Aine ja selle olekud"
-author: 'peacecop kalmer:'
-date: "12/21/2021"
+#title: "Aine ja selle olekud"
+#author: 'peacecop kalmer:'
+#date: "12/21/2021"
 output:
   bookdown::html_document2:
     toc: yes
@@ -9,13 +9,11 @@ output:
     toc_depth: 5
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+# Aine ja selle faasid
 
-# Reeglid
+## Reeglid
 
-## Ühikud
+### Ühikud
 
 ```{r}
 convertFromCmToM <- function(cm) {
@@ -31,23 +29,25 @@ convertFromDegreesCToK <- function(degreesC) {
 }
 ```
 
-## Elementaarlaeng
+### Elementaarlaeng
 
-Elementaarlaeng on ühe prootoni laeng kulonites: 1.6 * 10^-19^ * C.
+Elementaarlaeng on ühe prootoni laeng kulonites: 1.6 \* 10^-19^ \* C.
 
 ```{r}
 ELEMENTARY_CHARGE = 1.6 * 10 ^ -19
 ```
 
-## Mool
+### Mool
 
-Mool on aine hulk, mis vastab 12 * grammile süsinikuaatomitele. Nt 12 * g süsinikus on sama palju osakesi kui 18 * g vees. Ühe mooli osakeste arv on Avogadro arv.
+Mool on aine hulk, mis vastab 12 \* grammile süsinikuaatomitele. Nt 12
+\* g süsinikus on sama palju osakesi kui 18 \* g vees. Ühe mooli
+osakeste arv on Avogadro arv.
 
 ```{r}
 AVOGADRO = 6.02 * 10 ^ 23
 ```
 
-## Molaarmassid
+### Molaarmassid
 
 ```{r}
 WEIGHT_FE = 55.845
@@ -55,15 +55,15 @@ WEIGHT_CU <- 63.546
 WEIGHT_AU = 196.97
 ```
 
-## Jäikus
+### Jäikus
 
 $${jõud}_{elastsus} = -jäikus * \Delta({pikkus}_{venitus}) $$
 
-## Raskusjõust põhjustatud vedelikusamba rõhk
+### Raskusjõust põhjustatud vedelikusamba rõhk
 
 $$rõhk = tihedus * {kiirendus}_{gravitatsioon} * kõrgus$$
 
-## Hüdrostaatiline rõhk
+### Hüdrostaatiline rõhk
 
 $$-{jõud}_{atmosfäär} - {jõud}_{gravitatsioon} + {jõud}_{üleslüke} === 0$$
 
@@ -86,17 +86,17 @@ RADIUS_EARTH = 6.4E6
 GRAVITATIONAL_ACCELERATION = GRAVITATION * WEIGHT_EARTH / RADIUS_EARTH ^ 2
 ```
 
-## Hüdrauliline masin
+### Hüdrauliline masin
 
 $$\frac{jõud_1}{pindala_1} === \frac{jõud_2}{pindala_2}$$
 
 $$jõud_1 = suhe * jõud_2 \land pindala_1 = suhe * pindala_2$$
 
-## Üleslükke jõud
+### Üleslükke jõud
 
 $$jõud = {tihedus}_{vedelik} * {kiirendus}_{gravitatsioon} * {ruumala}_{veeAll}$$
 
-## Gaas
+### Gaas
 
 Ideaalse gaasi olekuvõrrand makroparameetrite kaudu:
 
@@ -107,41 +107,45 @@ BOLTZMANN = 1.38E-23
 UNIVERSAL_GAS = AVOGADRO * BOLTZMANN
 ```
 
-# Ülesanded
+## Ülesanded
 
-## Keemilise elemendi otsustamine
+### Keemilise elemendi otsustamine
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Otsustada, millise keemilise elmeendiga on tegu, kui elemendi
 
-a) tuumalaeng on +13*e* (e tähistab ühiklaengut so elektroni laengut);
+a)  tuumalaeng on +13*e* (e tähistab ühiklaengut so elektroni laengut);
 
-b) elektronide kogulaeng on -16*e*;
+b)  elektronide kogulaeng on -16*e*;
 
-c) tuumalaeng on $+36,8 \cdot 10^{-19} C$.
+c)  tuumalaeng on $+36,8 \cdot 10^{-19} C$.
 
-### Lahendus
+#### Lahendus
 
-a) alumiinium
+a)  alumiinium
 
-b) väävel
+b)  väävel
 
-c) Et teada saada, mitu prootonit selle elemendi aatomis on, jagan selle elemendi aatomi tuuma laengu, mis on sama mis selle elemendi aatomi prootonite kogulaeng, ühe prootoni ehk elementaarlaenguga:
+c)  Et teada saada, mitu prootonit selle elemendi aatomis on, jagan
+    selle elemendi aatomi tuuma laengu, mis on sama mis selle elemendi
+    aatomi prootonite kogulaeng, ühe prootoni ehk elementaarlaenguga:
 
 ```{r}
 numberOfProtons = 36.8 * 10 ^ -19 / ELEMENTARY_CHARGE
 ```
 
-Selle elemendi aatomi tuumas on `r numberOfProtons` prootonit. Järelikult on see element vanaadium.
+Selle elemendi aatomi tuumas on `r numberOfProtons` prootonit.
+Järelikult on see element vanaadium.
 
-## Volfram
+### Volfram
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Leia wolframi massiarv, tuumalaeng, elektronide arv, prootonite arv, neutronite arv, elektronkatte laeng.
+Leia wolframi massiarv, tuumalaeng, elektronide arv, prootonite arv,
+neutronite arv, elektronkatte laeng.
 
-### Lahendus
+#### Lahendus
 
 massiarv: 183.84
 
@@ -155,17 +159,17 @@ neutronite arv: 110
 
 elektronkatte laeng: -74 elementaarlaengut
 
-## Aatomite arv
+### Aatomite arv
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Mitu aatomit on ühes kilogrammis
 
-a) puhtas rauas;
+a)  puhtas rauas;
 
-b) puhtas kullas?
+b)  puhtas kullas?
 
-### Lahendus
+#### Lahendus
 
 ```{r}
 weightOfSubstance = 1 * 1000
@@ -173,19 +177,21 @@ numberOfAtomsInFe = weightOfSubstance / WEIGHT_FE * AVOGADRO
 numberOfAtomsInAu = weightOfSubstance / WEIGHT_AU * AVOGADRO
 ```
 
-a) `r numberOfAtomsInFe`
+a)  `r numberOfAtomsInFe`
 
-b) `r numberOfAtomsInAu`
+b)  `r numberOfAtomsInAu`
 
-## Süsiniku isotoop
+### Süsiniku isotoop
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui suur on süsiniku isotoobi ^14^C mass kilogrammides?
 
-### Lahendus
+#### Lahendus
 
-Süsiniku isotoobi ^14^C molaarmass on 14 * g / mol. Ühes moolis on Avogadro arv osakesi ehk antud juhul neid isotoope. Huvitab ühe isotoobi mass. Arvutuskäik:
+Süsiniku isotoobi ^14^C molaarmass on 14 \* g / mol. Ühes moolis on
+Avogadro arv osakesi ehk antud juhul neid isotoope. Huvitab ühe isotoobi
+mass. Arvutuskäik:
 
 ```{r}
 weightOfC14 = 14 * .001 / AVOGADRO
@@ -193,23 +199,33 @@ weightOfC14 = 14 * .001 / AVOGADRO
 
 Süsiniku isotoobi ^14^C mass kilogrammides on `r weightOfC14`.
 
-## Sõrmkübar
+### Sõrmkübar
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Sõrmkübara täies vees on ca 10^23^ H_2_O molekuli, ookeanis on 10^46^ H_2_O molekuli. Oletame, et Kolumbus valas ookeani sõrmkübara täie vett ja nüüdseks on selles sõrmkübaras olnud veemolekulid ookeanis olnud veemolekulidega ühtlaselt segunenud. Kas on võimalik, et kui praegu võtta ookeanist sõrmkübara täis vett, on seal tõenäoliselt vähemalt üks veemolekul Kolumbuse sõrmkübaras?
+Sõrmkübara täies vees on ca 10^23^ H_2\_O molekuli, ookeanis on 10^46^
+H_2\_O molekuli. Oletame, et Kolumbus valas ookeani sõrmkübara täie vett
+ja nüüdseks on selles sõrmkübaras olnud veemolekulid ookeanis olnud
+veemolekulidega ühtlaselt segunenud. Kas on võimalik, et kui praegu
+võtta ookeanist sõrmkübara täis vett, on seal tõenäoliselt vähemalt üks
+veemolekul Kolumbuse sõrmkübaras?
 
-### Lahendus
+#### Lahendus
 
-Peale Kolumbuse sõrmkübaras olnud molekulide segunemist ookeani veemolekulidega on ookeanis iga 1023 molekuli kohta keskmiselt üks sõrmkübaras olnud molekul. Kui võtame ookeanist sõrmkübara täie vett, milles on 10^23^ molekuli, siis nende seas tõenäoliselt on üks Kolumbuse sõrmkübaras olnud molekul.
+Peale Kolumbuse sõrmkübaras olnud molekulide segunemist ookeani
+veemolekulidega on ookeanis iga 1023 molekuli kohta keskmiselt üks
+sõrmkübaras olnud molekul. Kui võtame ookeanist sõrmkübara täie vett,
+milles on 10^23^ molekuli, siis nende seas tõenäoliselt on üks Kolumbuse
+sõrmkübaras olnud molekul.
 
-## Vedru
+### Vedru
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Vedrule rakendati jõudu 15 N ja vedru pikenes 5,0 cm. Kui suur on vedru jäikus?
+Vedrule rakendati jõudu 15 N ja vedru pikenes 5,0 cm. Kui suur on vedru
+jäikus?
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
@@ -219,41 +235,47 @@ stifness = 15 / -(0 - 5 * 10 ^ -2)
 
 Vedru jäikus on $`r stifness` * \frac{N}{m}$.
 
-## Meri
+### Meri
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
 Kui suur rõhk on meres sügavusel 50,0 m?
 
-### Lahendus
+#### Lahendus
 
 ```{r}
 pressure = format(ATM + WEIGHTPERVOLUME_WATER * GRAVITATIONAL_ACCELERATION * 50, digits = 3)
 ```
 
-`r pressure` * Pa on rõhk meres sügavusel 50,0 m.
+`r pressure` \* Pa on rõhk meres sügavusel 50,0 m.
 
-## Veetorn
+### Veetorn
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Veetorn on ehitis, milles on kõrgel asuv veemahuti ning mille ülesanne on veesurve ja veehulga tagamine veevõrgus. Näiteks 1911. aastal valmis Viljandis veetorn, milles asus veepaak mahuga 100 m^3^. Kui kõrge oli Viljandi veetorn, kui veerõhk selle jalamil oli 294 kPa?
+Veetorn on ehitis, milles on kõrgel asuv veemahuti ning mille ülesanne
+on veesurve ja veehulga tagamine veevõrgus. Näiteks 1911. aastal valmis
+Viljandis veetorn, milles asus veepaak mahuga 100 m^3^. Kui kõrge oli
+Viljandi veetorn, kui veerõhk selle jalamil oli 294 kPa?
 
-### Lahendus
+#### Lahendus
 
 ```{r}
 height = format(294 * 1000 / WEIGHTPERVOLUME_WATER / GRAVITATIONAL_ACCELERATION, digits = 3)
 ```
 
-Veetorn oli `r height` * m kõrge, kui veerõhk selle jalamil oli 294 * kPa.
+Veetorn oli `r height` \* m kõrge, kui veerõhk selle jalamil oli 294 \*
+kPa.
 
-## Hüdrauliline autotõstuk
+### Hüdrauliline autotõstuk
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Hüdraulilise autotõstuki suure silindri diameeter on 25 cm. Teise, väikese silindri diameeter on 1,25 cm. Kui suurt jõudu on vaja rakendada väikesele silindrile, et tõsta üles auto, mille mass on 900 kg?
+Hüdraulilise autotõstuki suure silindri diameeter on 25 cm. Teise,
+väikese silindri diameeter on 1,25 cm. Kui suurt jõudu on vaja rakendada
+väikesele silindrile, et tõsta üles auto, mille mass on 900 kg?
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
@@ -261,37 +283,45 @@ Arvutuskäik:
 force = (convertFromCmToM(1.25) / 2) ^ 2 * 900 / (convertFromCmToM(25) / 2) ^ 2
 ```
 
-2.25 * g * N suurust jõudu on vaja rakendada väikesele silindrile, et tõsta üles auto, mille mass on 900 kg.
+2.25 \* g \* N suurust jõudu on vaja rakendada väikesele silindrile, et
+tõsta üles auto, mille mass on 900 kg.
 
-## Ristküliku kujuline parv
+### Ristküliku kujuline parv
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Ristküliku kujuline parv, pikkusega 5 m ja laiusega 2 m, ujub jões. Leida:
+Ristküliku kujuline parv, pikkusega 5 m ja laiusega 2 m, ujub jões.
+Leida:
 
-a) kui palju sügavamale vajub parv, kui talle laaditakse 0,4 t massiga hobune;
+a)  kui palju sügavamale vajub parv, kui talle laaditakse 0,4 t massiga
+    hobune;
 
-b) mitu hobust saab laadida parvele, kui parv võib koorma laadimise tagajärjel vajuda vaid 15 cm.
+b)  mitu hobust saab laadida parvele, kui parv võib koorma laadimise
+    tagajärjel vajuda vaid 15 cm.
 
-### Lahendus
+#### Lahendus
 
-a) .04 * m sügavamale vajub parv, kui sellele laaditakse .4 * t massiga hobune.
+a)  .04 \* m sügavamale vajub parv, kui sellele laaditakse .4 \* t
+    massiga hobune.
 
-b) Kolm sellise massiga hobust saab laadida parvele, kui parv võib koorma laadimise tagajärjel vajuda vaid 15 * cm.
+b)  Kolm sellise massiga hobust saab laadida parvele, kui parv võib
+    koorma laadimise tagajärjel vajuda vaid 15 \* cm.
 
-## Vedrukaaluga keha massi määramine
+### Vedrukaaluga keha massi määramine
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Keha massi määramiseks kasutati vedrukaalu. Kahes erinevas olukorras saadi järgmised tulemused:
+Keha massi määramiseks kasutati vedrukaalu. Kahes erinevas olukorras
+saadi järgmised tulemused:
 
-a) kui keha kaaluti õhus, siis näitas näidik 2,0 kg;
+a)  kui keha kaaluti õhus, siis näitas näidik 2,0 kg;
 
-b) kui keha sukeldati vette, siis saadi tulemuseks 1,5 kg.
+b)  kui keha sukeldati vette, siis saadi tulemuseks 1,5 kg.
 
-Miks tulemused erinesid ning milline tulemus on õige? Kui suur on selle keha tihedus?
+Miks tulemused erinesid ning milline tulemus on õige? Kui suur on selle
+keha tihedus?
 
-### Lahendus
+#### Lahendus
 
 Tulemused erinesid, kuna vees mõjus kehale üleslükkejõud.
 
@@ -299,17 +329,40 @@ Tulemused erinesid, kuna vees mõjus kehale üleslükkejõud.
 
 Keha tiheduse arvutamiseks teen esmalt graafilise lahenduse:
 
-![Keha tiheduse arvutamine õhus ja vees kaalumise kaudu.](weighing-in-water.svg)
+```{r label = "weighing-in-water", fig.cap = "Keha tiheduse arvutamine õhus ja vees kaalumise
+kaudu.", echo = FALSE}
+include_svg("mechanics/weighing-in-water.svg")
+```
 
-Kui kaalume eset õhus, siis sellele esemele mõjub märkimisväärselt ainult raskusjõud. Selle suurus on 2 * kg * g. Kui sukeldame eseme vette heljuma, rakendub sellele esemele kaks jõudu: lisaks raskusjõule ka üleslükkejõud, mis on omavahel vastassuunalised. Suund pole selles ülesandes oluline. Pigem on oluline, et õhus kaalumise raskusjõud on võrdne üleslükkejõu ja vees kaalumise raskusjõu summaga. Vees kaalumise raskusjõud on ka kirjutatud. See on 1.5 * kg * g. Järelikult, kui lahutan õhus kaalumise raskusjõust vees kaalumise raskusjõu, saan üleslükkejõu väärtuse, milleks on seega .5 * kg * g.
+Kui kaalume eset õhus, siis sellele esemele mõjub märkimisväärselt
+ainult raskusjõud. Selle suurus on 2 \* kg \* g. Kui sukeldame eseme
+vette heljuma, rakendub sellele esemele kaks jõudu: lisaks raskusjõule
+ka üleslükkejõud, mis on omavahel vastassuunalised. Suund pole selles
+ülesandes oluline. Pigem on oluline, et õhus kaalumise raskusjõud on
+võrdne üleslükkejõu ja vees kaalumise raskusjõu summaga. Vees kaalumise
+raskusjõud on ka kirjutatud. See on 1.5 \* kg \* g. Järelikult, kui
+lahutan õhus kaalumise raskusjõust vees kaalumise raskusjõu, saan
+üleslükkejõu väärtuse, milleks on seega .5 \* kg \* g.
 
-Kuna ese on täielikult veega ümbritsetud, tõrjub ese vett välja terve oma ruumala ulatuses. Üleslükkejõd ei ole väga erinev raskusjõust, kuna ka selle valemis on g ja mass, ainult sedapuhku on tegemist mitte kaalutava keha, vaid vedeliku, milles keha kaalutakse, massiga. See mass on järelikult $\frac{1 * kg}{2}$.
+Kuna ese on täielikult veega ümbritsetud, tõrjub ese vett välja terve
+oma ruumala ulatuses. Üleslükkejõd ei ole väga erinev raskusjõust, kuna
+ka selle valemis on g ja mass, ainult sedapuhku on tegemist mitte
+kaalutava keha, vaid vedeliku, milles keha kaalutakse, massiga. See mass
+on järelikult $\frac{1 * kg}{2}$.
 
-Vee tihedusest on informeeritud ja see on konstantse väärtusega. Selle abil arvutan väljatõrjutava vee koguse ruumala, milleks on järelikult $\frac{1}{2000} * m^3$.
+Vee tihedusest on informeeritud ja see on konstantse väärtusega. Selle
+abil arvutan väljatõrjutava vee koguse ruumala, milleks on järelikult
+$\frac{1}{2000} * m^3$.
 
-Kuna ese on täielikult veega ümbritsetud, on selle eseme ruumala võrne selle eseme poolt väljatõrjutava vedeliku, millesse ese on asetatud, ruumalaga. Seetõttu on nüüdseks välja arvutatud ka eseme ruumala. Edasi jääb veel üle õhuskaalumise tulemuse ja keha ruumala alusel arvutada selle keha tihedus, milleks on $4000 * \frac{kg}{m^3}$.
+Kuna ese on täielikult veega ümbritsetud, on selle eseme ruumala võrne
+selle eseme poolt väljatõrjutava vedeliku, millesse ese on asetatud,
+ruumalaga. Seetõttu on nüüdseks välja arvutatud ka eseme ruumala. Edasi
+jääb veel üle õhuskaalumise tulemuse ja keha ruumala alusel arvutada
+selle keha tihedus, milleks on $4000 * \frac{kg}{m^3}$.
 
-Kuna selliselt saab kindlaks määrata suvalise keha tihedust, mille saab vedrukaalu otsa riputada ja mis vette mahub, siis kirjutan välja ka üldvalemi tuletamise:
+Kuna selliselt saab kindlaks määrata suvalise keha tihedust, mille saab
+vedrukaalu otsa riputada ja mis vette mahub, siis kirjutan välja ka
+üldvalemi tuletamise:
 
 $${tihedus}_{keha} = \frac{{kehaMass}_{õhus}}{{ruumala}_{keha}} === \frac{{kehaMass}_{õhus}}{\frac{{mass}_{vedelik}}{{tihedus}_{vedelik}}} === \frac{{kehaMass}_{õhus}}{\frac{\frac{{jõud}_{üleslüke}}{g}}{{tihedus}_{vedelik}}} === \frac{{kehaMass}_{õhus}}{\frac{\frac{{raskusJõud}_{õhus} - {raskusJõud}_{vedelikus}}{g}}{{tihedus}_{vedelik}}}$$
 
@@ -317,33 +370,40 @@ $${tihedus}_{keha} = \frac{{kehaMass}_{õhus}}{\frac{\frac{{kehaMass}_{õhus} * 
 
 $${tihedus}_{keha} = \frac{{kehaMass}_{õhus} * {{tihedus}_{vedelik}}}{{kehaMass}_{õhus} - {kehaMass}_{vedelikus}}$$
 
-## Sukelduja
+### Sukelduja
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Sukelduja massiga 70 kg kannab massiivset sukeldumisvööd massiga 8 kg, et tema keskmine tihedus oleks võrdne vee tihedusega.
+Sukelduja massiga 70 kg kannab massiivset sukeldumisvööd massiga 8 kg,
+et tema keskmine tihedus oleks võrdne vee tihedusega.
 
-a) Kui suur on vööd kandva sukelduja kaal maapinnal?
+a)  Kui suur on vööd kandva sukelduja kaal maapinnal?
 
-b) Milline on sukelduja ruumala?
+b)  Milline on sukelduja ruumala?
 
-c) Millised jõud mõjuvad sukeldujale 2,0 m sügavusel veepinnast ning kui suur on talle mõjuv resultantjõud?
+c)  Millised jõud mõjuvad sukeldujale 2,0 m sügavusel veepinnast ning
+    kui suur on talle mõjuv resultantjõud?
 
-### Lahendus
+#### Lahendus
 
-a) 78 * g * N
+a)  78 \* g \* N
 
-b) Ilmselt võib vöö ruumala arvestamata jätta, mistõttu võib lugeda sukelduja ruumalaks .078 * m^3^.
+b)  Ilmselt võib vöö ruumala arvestamata jätta, mistõttu võib lugeda
+    sukelduja ruumalaks .078 \* m^3^.
 
-c) 2,0 * m sügavusel veepinnast mõjuvad sukeldujale gravitatsioonijõud ja vee üleslükke jõud. Nende jõudude summa on null.
+c)  2,0 \* m sügavusel veepinnast mõjuvad sukeldujale gravitatsioonijõud
+    ja vee üleslükke jõud. Nende jõudude summa on null.
 
-## Õhupall
+### Õhupall
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Kui suur peaks olema heeliumiga täidetud kerakujulise õhupalli raadius, et see suudaks maapinnalt ülest tõsta inimese massiga 80 kg? Normaalrõhul on õhu tihedus 1,29 kg/m^3^ ja heeliumi tihedus 0,179 kg/m^3^. Inimese ruumala võib jätta arvestamata.
+Kui suur peaks olema heeliumiga täidetud kerakujulise õhupalli raadius,
+et see suudaks maapinnalt ülest tõsta inimese massiga 80 kg?
+Normaalrõhul on õhu tihedus 1,29 kg/m^3^ ja heeliumi tihedus 0,179
+kg/m^3^. Inimese ruumala võib jätta arvestamata.
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
@@ -354,15 +414,18 @@ radius = (volume / pi / 4 * 3) ^ (1 / 3)
 radius
 ```
 
-Suurem kui `r radius` * m peaks olema heeliumiga täidetud kerakujulise õhupalli raadius, et see suudaks maapinnalt üles tõsta inimese massiga 80 * kg.
+Suurem kui `r radius` \* m peaks olema heeliumiga täidetud kerakujulise
+õhupalli raadius, et see suudaks maapinnalt üles tõsta inimese massiga
+80 \* kg.
 
-## Gaasi rõhk
+### Gaasi rõhk
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Milline on gaasi rõhk, kui 3 mooli gaasi asub 3 liitrises anumas temperatuuril 50 °C?
+Milline on gaasi rõhk, kui 3 mooli gaasi asub 3 liitrises anumas
+temperatuuril 50 °C?
 
-### Lahendus
+#### Lahendus
 
 Kasutan ideaalse gaasi olekuvõrrandit:
 
@@ -370,15 +433,18 @@ Kasutan ideaalse gaasi olekuvõrrandit:
 pressure = format((3 * UNIVERSAL_GAS * convertFromDegreesCToK(50)) / convertFromLToM3(3), digits = 1)
 ```
 
-`r pressure` * Pa on gaasi rõhk, kui 3 * mooli gaasi asub 3 * liitrises anumas temperatuuril 50 * °C.
+`r pressure` \* Pa on gaasi rõhk, kui 3 \* mooli gaasi asub 3 \*
+liitrises anumas temperatuuril 50 \* °C.
 
-## Gaas balloonis
+### Gaas balloonis
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-10 liitrises balloonis hoitakse gaasi, mille temperatuur on 25 °C ja rõhk 500 kPa. Balloon kannatab rõhku 1000 kPa. Kas balloon peab vastu, kui temperatuur tõuseb 80 kraadini Celsiuse järgi?
+10 liitrises balloonis hoitakse gaasi, mille temperatuur on 25 °C ja
+rõhk 500 kPa. Balloon kannatab rõhku 1000 kPa. Kas balloon peab vastu,
+kui temperatuur tõuseb 80 kraadini Celsiuse järgi?
 
-### Lahendus
+#### Lahendus
 
 Arvutuskäik:
 
@@ -396,15 +462,21 @@ if (pressureAtHigherTemperature > 1000 * 10 ^ 3) {
 }
 ```
 
-## Vase aatom
+### Vase aatom
 
-### Ülesande püstitus
+#### Ülesande püstitus
 
-Hindame vase aatomi mõõtmeid arvestades, et vase tihedus on 8900 kg/m^3^.
+Hindame vase aatomi mõõtmeid arvestades, et vase tihedus on 8900
+kg/m^3^.
 
-### Lahendus
+#### Lahendus
 
-Ühe vaseaatomi molaarmass on väidetud. See on mingi kogus grammides ühe mooli kohta. Samuti on teada, mitu vaseaatomit on ühes moolis. See on mingi arv vaseaatomeid ühe mooli kohta. Kuna mõlemad arvnäitajad on ühe mooli kohta, siis järelikult nimetatud koguses grammides on nimetatud kogus aatomeid. Et arvutada välja ühe aatomi mass, tuleb see kogus grammides jagada aatomite arvuga.
+Ühe vaseaatomi molaarmass on väidetud. See on mingi kogus grammides ühe
+mooli kohta. Samuti on teada, mitu vaseaatomit on ühes moolis. See on
+mingi arv vaseaatomeid ühe mooli kohta. Kuna mõlemad arvnäitajad on ühe
+mooli kohta, siis järelikult nimetatud koguses grammides on nimetatud
+kogus aatomeid. Et arvutada välja ühe aatomi mass, tuleb see kogus
+grammides jagada aatomite arvuga.
 
 Lahenduskäik:
 
@@ -413,4 +485,5 @@ volume <- WEIGHT_CU / AVOGADRO / 8900e3
 radius <- (3 * volume / 4 / pi)^(1 / 3)
 ```
 
-Vase aatomi ruumala on `r signif(volume, digits = 5)` * m^3 ja vase aatomi raadius on `r signif(radius, digits = 5)` * m.
+Vase aatomi ruumala on `r signif(volume, digits = 5)` \* m\^3 ja vase
+aatomi raadius on `r signif(radius, digits = 5)` \* m.

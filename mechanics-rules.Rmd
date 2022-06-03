@@ -1,18 +1,21 @@
 ---
-title: "Untitled"
-author: 'peacecop kalmer:'
-date: '2022-05-14'
+#title: "Mehaanika reeglid"
+#author: 'peacecop kalmer:'
+#date: '2022-05-14'
 output:
   bookdown::html_document2:
     toc: yes
     toc_float: yes
     toc_depth: 5
-bibliography: references.bib
 ---
 
-# Mehaanika reeglid
+# Mehaanika
 
-## Ühikud
+## Reeglid
+
+### Ühikud
+
+\@ref(eq:asf-distance)
 
 +----------+-----------------+--------+------------+--------------------+
 | Eesliide | Kümne astendaja | Lühend | Näide      | Selgitus           |
@@ -75,7 +78,7 @@ SECONDS_IN_YEAR <- (365 * (9 * 76 + 75) + 366 * (9 * 24 + 25)) / 1000 * 24 * 60 
 SECONDS_IN_YEAR
 ```
 
-## Sirgjooneline liikumine
+### Sirgjooneline liikumine
 
 Valguse kiirus vaakumis:
 
@@ -83,7 +86,9 @@ Valguse kiirus vaakumis:
 SPEED_LIGHT <- 299792458
 ```
 
-![(\#fig:integrating-time) Ühesuguste ajavahemike integreerimine](mechanics/integrating-time.svg)
+```{r label = "integrating-time", fig.cap = "Ühesuguste ajavahemike integreerimine", echo = FALSE}
+include_svg("mechanics/integrating-time.svg")
+```
 
 Joonisel \@ref(fig:integrating-time) on kujutatud ajatelge, millele on märgitud võrdsed ajavahemikud. Võime neid ajavahemikke kujutada ka lõputult nullilähedasena. Kui need ajavahemikud kokku liita, saame koguaja:
 
@@ -210,7 +215,9 @@ Kui hetkekiirus on $\color{red}{\textbf{konstantne}}$, siis
 
 kus *s* on vahemaa, *v* on hetkekiirus, *t_0_* on alghetk, *t* on lõpphetk, *s_0_* on lähe.
 
-![(\#fig:aeg-kiirus) Kiiruse muutumine ajas, kui kiirendus on $2 \cdot \frac{m}{s^2}$](mechanics/aeg-kiirus.svg)
+```{r label = "aeg-kiirus", fig.cap = "Kiiruse muutumine ajas, kui kiirendus on $2 \\cdot \\frac{m}{s^2}$", echo = FALSE}
+include_svg("mechanics/aeg-kiirus.svg")
+```
 
 Kui ülilühikese vahemaa ja selle läbimiseks kulunud ülilühikese ajavahemiku suhe on kiirus, mis näitab, kui kiiresti asukoht muutub ajas, siis kiiruse muutumist ajas näitab kiirendus:
 
@@ -363,7 +370,7 @@ Koosinusteoreem:
 \end{equation}
 ```
 
-## Impulss
+### Impulss
 
 $$impulss = mass * kiirus$$
 
@@ -374,13 +381,23 @@ See on alati jääv.
 
 Elastne põrge:
 
-$$m_1 * \vec{v_1} + m_2 * \vec{v_2} === m_1 * \vec{v_1 ^ \prime} + m_2 + \vec{v_2 ^ \prime},$$
+```{=tex}
+\begin{equation}
+m_1 * \vec{v_1} + m_2 * \vec{v_2} === m_1 * \vec{v_1 ^ \prime} + m_2 + \vec{v_2 ^ \prime},
+(\#eq:elastic-collision)
+\end{equation}
+```
 
 kus *m* on mass, *v* on kiirus
 
 Energia jäävuse seadus:
 
-$$\frac{m_1 * \vec{v_1} ^ 2}{2} + \frac{m_2 * \vec{v_2} ^ 2}{2} === \frac{m_1 * (\vec{v_1} ^ \prime) ^ 2}{2} + \frac{m_2 * (\vec{v_2} ^ \prime) ^ 2}{2},$$
+```{=tex}
+\begin{equation}
+\frac{m_1 \cdot \vec{v_1} ^ 2}{2} + \frac{m_2 \cdot \vec{v_2} ^ 2}{2} === \frac{m_1 \cdot (\vec{v_1} ^ \prime) ^ 2}{2} + \frac{m_2 \cdot (\vec{v_2} ^ \prime) ^ 2}{2},
+(\#eq:conservation-of-energy)
+\end{equation}
+```
 
 kus *m* on mass ja *v* on kiirus.
 
@@ -394,7 +411,7 @@ $$jõuImpulss = impulsiMuut$$
 
 $$jõud * ajavahemik === impulsiMuut$$
 
-## Ringliikumine
+### Ringliikumine
 
 Maa keskmine raadius:
 
@@ -471,9 +488,9 @@ $${moment}_{\vec{impulss}} = \vec{{kiirus}_{nurk}} * {moment}_{inerts}$$
 
 Suletud süsteemi koguimpulsimoment on jääv.
 
-## Jõud
+### Jõud
 
-### Ühik
+##### Ühik
 
 ```{=tex}
 \begin{equation}
@@ -484,7 +501,7 @@ Suletud süsteemi koguimpulsimoment on jääv.
 
 [@newell_sp, p. 29]
 
-### Inertsiaaljõud
+##### Inertsiaaljõud
 
 Kõikide jõudude summa on võrdne jõuga, mille mõjul keha liigub ühtlaselt ja sirgjooneliselt:
 
@@ -495,7 +512,7 @@ F_{inertial} = \sum_{i = 1}^{n}{F_i}
 \end{equation}
 ```
 
-### Gravitatsioonijõud
+##### Gravitatsioonijõud
 
 gravitatsioonikonstant:
 
@@ -546,7 +563,9 @@ Vaba langemise ehk gravitatsiooni põhjustatud kiirendus  [@haynes_2014_crc, p. 
 \end{equation}
 ```
 
-![gravitatsiooni standardkiirendus eri piirkondades Maal](mechanics/cities.svg)
+```{r label = "cities", fig.cap = "gravitatsiooni standardkiirendus eri piirkondades Maal", echo = FALSE}
+include_svg("mechanics/cities.svg")
+```
 
 "The value 9.806 m/s2 is midway between these two extremes, so it's sort of true to say that…
 
@@ -556,7 +575,7 @@ This is not the same thing as an average, however. For that, use this value that
 
 g = 9.798 m/s2
 
-Here are my suggestions. Use the value of 9.8 m/s2 with two significant digits for calculations on the surface of the Earth unless a value of gravity is otherwise specified. That seems reasonable. Use the value of 9.80665 m/s2  [@haynes_2014_crc, p. 2-44, 14-11] with six significant digits only when you want to convert m/s2 to g. That is the law." [@gravitation]
+Here are my suggestions. Use the value of 9.8 m/s2 with two significant digits for calculations on the surface of the Earth unless a value of gravity is otherwise specified. That seems reasonable. Use the value of 9.80665 m/s2  [@haynes_2014_crc, p. 2-44, 14-11] with six significant digits only when you want to convert m/s2 to g. That is the law."
 ```{r label = "g"}
 g <- 9.8
 ```
@@ -567,7 +586,7 @@ $$g = G * \frac{m}{(r + h) ^ 2},$$
 
 kus *g* on gravitatsioonikiirendus, *G* on gravitatsioonikonstant, *m* on Maa mass, *r* on Maa raadius, *h* on kõrgus Maa pinnast.
 
-## Elastsusjõud
+### Elastsusjõud
 
 Hooke'i seadus:
 
@@ -589,7 +608,7 @@ F = k∙Δx,
 
 kus $F$ on tõmbejõud, $k$ on elastsustegru ja $\Delta(x)$ on pikenemisvahemik.
 
-## Hõõrdejõud
+### Hõõrdejõud
 
 hõõrdeJõud = hõõrdeTegur \* rõhk
 
@@ -599,20 +618,11 @@ calculateDistanceOfDecceleration <- function(velocity, frictionFactor) {
 }
 ```
 
-## Rõhk
+### Rõhk
 
 rõhk = mass \* *g*
 
-## Töö
-
-```{=tex}
-\begin{equation}
-W = \int{\vec{F}}\cdot cos(\alpha) \cdot d(s) 
-(\#eq:work)
-\end{equation}
-```
-
-[@haynes_2014_crc, p. 2-1 - 2-2]
+### Töö
 
 $$E_{pot} = m * g * h,$$
 
@@ -634,13 +644,6 @@ kus *E* on energia, *m* on mass, *h* on kõrgus ja *v* on kiirus.
 
 ```{=tex}
 \begin{equation}
-P := \frac{W}{t} 
-(\#eq:power)
-\end{equation}
-```
-
-```{=tex}
-\begin{equation}
 P_hp := 746 \times P 
 (\#eq:power-hp)
 \end{equation}
@@ -659,7 +662,7 @@ kus *k* on jäikus, $\Delta(s)$ on kokkusurumise vahemaa, *pot* on potentsiaalne
 
 $${tegur}_{kasu} = \frac{töö}{energia}$$
 
-## Jõumoment
+### Jõumoment
 
 $${moment}_{F} = F * raadius * sin({nurk}_{raadius, {mõjuSirge}_{F}}),$$
 

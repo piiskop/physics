@@ -1,17 +1,13 @@
 ---
-title: "Elektromagnetkiirgus, valgus ja värvus"
-author: 'peacecop kalmer:'
-date: "12/28/2021"
+#title: "Elektromagnetkiirgus, valgus ja värvus"
+#author: 'peacecop kalmer:'
+#date: "12/28/2021"
 output:
   bookdown::html_document2:
     toc: yes
     toc_float: yes
     toc_depth: 5
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # Reeglid
 
@@ -63,16 +59,13 @@ Ei
 
 ### Ülesande püstitus
 
-![Roos valges valguses](electromagnetic-waves-light-colors/rose-without-filter.png)
+![Roos valges
+valguses](electromagnetic-waves-light-colors/rose-without-filter.png)
 
-Valges valguses on punase 
-roosi kroonlehed 
-punased, 
-vars ja lehed 
+Valges valguses on punase roosi kroonlehed punased, vars ja lehed
 rohelised.
 
-Punases 
-valguses
+Punases valguses
 
 Mis värvi on kroonlehed?
 
@@ -80,24 +73,24 @@ Mis värvi on vars ja lehed?
 
 ### Lahendus
 
-![Roos punase filtri läbi](electromagnetic-waves-light-colors/rose-with-filter.png)
+![Roos punase filtri
+läbi](electromagnetic-waves-light-colors/rose-with-filter.png)
 
-Kroonlehed punased, vars 
-ja lehed mustad.
+Kroonlehed punased, vars ja lehed mustad.
 
 ## Värvid mustris
 
 ### Ülesande püstitus
 
-![Muster kaugelt](electromagnetic-waves-light-colors/pattern-from-far.png)
+![Muster
+kaugelt](electromagnetic-waves-light-colors/pattern-from-far.png)
 
-Mitut värvi on kasutatud 
-valgele põhjale mustri 
-tegemiseks?
+Mitut värvi on kasutatud valgele põhjale mustri tegemiseks?
 
 ### Lahendus
 
-![Muster lähedalt](electromagnetic-waves-light-colors/pattern-from-close.png)
+![Muster
+lähedalt](electromagnetic-waves-light-colors/pattern-from-close.png)
 
 Kaht.
 
@@ -105,15 +98,18 @@ Kaht.
 
 ### Ülesande püstitus
 
-Kui suur on raadio Kuku raadiosaatjast kiirguva raadiolaine pikkus, kui raadiojaama sagedus on 100,7 MHz?
+Kui suur on raadio Kuku raadiosaatjast kiirguva raadiolaine pikkus, kui
+raadiojaama sagedus on 100,7 MHz?
 
 ### Lahendus
 
-100.7 * MHz on 1.007e2 * MHz ehk 1.007e8 * Hz. Väljendan lainepikkuse:
+100.7 \* MHz on 1.007e2 \* MHz ehk 1.007e8 \* Hz. Väljendan
+lainepikkuse:
 
 $$\frac{c}{1.007e8} \cdot m === \frac{c}{1007e5} \cdot m$$
 
-$\frac{c}{1007e5} \cdot m$ on raadio *Kuku* raadiosaatjast kiirguva raadionaline pikkus, kui raadiojaama sagedus on 100.7 * MHz.
+$\frac{c}{1007e5} \cdot m$ on raadio *Kuku* raadiosaatjast kiirguva
+raadionaline pikkus, kui raadiojaama sagedus on 100.7 \* MHz.
 
 Lasen selle väärtuse arvutada ka ebatäpseks:
 
@@ -125,7 +121,8 @@ SPEED_LIGHT / 100.7E6
 
 ### Ülesande püstitus
 
-Mikrolaineahi töötab elektromagnetkiirgusega, mille sagedus on 2,5 GHz. Kui suur on vastavate mikrolainete lainepikkus?
+Mikrolaineahi töötab elektromagnetkiirgusega, mille sagedus on 2,5 GHz.
+Kui suur on vastavate mikrolainete lainepikkus?
 
 ### Lahendus
 
@@ -141,11 +138,12 @@ SPEED_LIGHT / 2.5e9
 
 ### Ülesande püstitus
 
-Kui kaua aega kulub valgusel Päikeselt Maale jõudmiseks? Maa keskmine kaugus Päikesest on 150 mln km.
+Kui kaua aega kulub valgusel Päikeselt Maale jõudmiseks? Maa keskmine
+kaugus Päikesest on 150 mln km.
 
 ### Lahendus
 
-Tuleb arvestada, et 150000000 * km on 150000000000 * m.
+Tuleb arvestada, et 150000000 \* km on 150000000000 \* m.
 
 $\frac{15e10}{c} \cdot s$ kulub valgusel Päikeselt Maale jõudmiseks.
 
@@ -164,7 +162,12 @@ timeFromSunToEarthInHours
 
 ### Ülesande püstitus
 
-16. novembril 1974 saadeti Arecibo observatooriumist (Puerto Rico) kosmosesse kodeeritud raadiosõnum, mis sisaldas numbreid ühest kümneni, DNA-s esinevate keemiliste elementide aatomnumbreid, inimese graafilist kujutist ja muud olulist informatsiooni. Sõnum suunati galaktikale M13 ning sõnum peaks sinna jõudma 25 tuh aasta pärast. Kui kaugel asub galaktika M13?
+16. novembril 1974 saadeti Arecibo observatooriumist (Puerto Rico)
+    kosmosesse kodeeritud raadiosõnum, mis sisaldas numbreid ühest
+    kümneni, DNA-s esinevate keemiliste elementide aatomnumbreid,
+    inimese graafilist kujutist ja muud olulist informatsiooni. Sõnum
+    suunati galaktikale M13 ning sõnum peaks sinna jõudma 25 tuh aasta
+    pärast. Kui kaugel asub galaktika M13?
 
 ### Lahendus
 
@@ -174,13 +177,14 @@ Arvutuskäik:
 distance = SPEED_LIGHT * 25e3 * 365.25 * 24 * 60 * 60
 ```
 
-`r distance` * m kaugusel asub galaktika M13.
+`r distance` \* m kaugusel asub galaktika M13.
 
 ## Kollane valgus
 
 ### Ülesande püstitus
 
-Kollase valguse lainepikkus õhus on 589 nm. Milline on selle valguse sagedus?
+Kollase valguse lainepikkus õhus on 589 nm. Milline on selle valguse
+sagedus?
 
 $\frac{c}{589e-9} \cdot Hz$ on selle valguse sagedus.
 
@@ -194,38 +198,53 @@ SPEED_LIGHT / 589e-9
 
 ### Ülesande püstitus
 
-230 voldise pingega hõõglamp tarbib voolu 0,27A. Hõõglambist kiirguva valguse keskmine lainepikkus on 1200 nm. Leida, mitu footonit kiirgab lamp 1 min jooksul, kui kogu tarbitud elektrienergia muundatakse valgusenergiaks.
+230 voldise pingega hõõglamp tarbib voolu 0,27A. Hõõglambist kiirguva
+valguse keskmine lainepikkus on 1200 nm. Leida, mitu footonit kiirgab
+lamp 1 min jooksul, kui kogu tarbitud elektrienergia muundatakse
+valgusenergiaks.
 
-Märkus: 10 astmete eraldajaks kasuta tähte E. Näiteks 7,1·10^5^ kirjutatakse 7,1E+5
+Märkus: 10 astmete eraldajaks kasuta tähte E. Näiteks 7,1·10^5^
+kirjutatakse 7,1E+5
 
 ### Lahendus
 
-Võimsus on 62.1 * W. Lasen arvutada ühe footoni energia:
+Võimsus on 62.1 \* W. Lasen arvutada ühe footoni energia:
 
 ```{r}
 energyOfPhoton <- PLANCK * SPEED_LIGHT / 1200e-9
 ```
 
-`r format(energyOfPhoton, digits = 3)` * J on ühe footoni energia. Sekundis selle pirni poolt kiirgatavate footonite arvu saan, kui lasen pirni võimsuse jagada ühe footoni energiaga, mis on ühtlasi selle pirni footonite kiirgamise sagedus sekundi kohta:
+`r format(energyOfPhoton, digits = 3)` \* J on ühe footoni energia.
+Sekundis selle pirni poolt kiirgatavate footonite arvu saan, kui lasen
+pirni võimsuse jagada ühe footoni energiaga, mis on ühtlasi selle pirni
+footonite kiirgamise sagedus sekundi kohta:
 
 ```{r}
 numberOfPhotonsPerSecond <- 230 * .27 / energyOfPhoton
 ```
 
-`r format(numberOfPhotonsPerSecond, digits <- 3)` on footonite arv, mida see lamp kiirgab sekundis. Vaja veel arvutada, kui palju see hõõglamp neid footoneid minutis pihustab:
+`r format(numberOfPhotonsPerSecond, digits <- 3)` on footonite arv, mida
+see lamp kiirgab sekundis. Vaja veel arvutada, kui palju see hõõglamp
+neid footoneid minutis pihustab:
 
 ```{r}
 numberOfPhotonsPerMinute <- numberOfPhotonsPerSecond * 60
 ```
 
-`r format(numberOfPhotonsPerMinute, digits = 2)` footonit kiirgab lamp 1 * min kestel, kui kogu tarbitud elektrienergia muundatakse valgusenergiaks.
-
+`r format(numberOfPhotonsPerMinute, digits = 2)` footonit kiirgab lamp 1
+\* min kestel, kui kogu tarbitud elektrienergia muundatakse
+valgusenergiaks.
 
 ## Eemalduv galaktika
 
 ### Ülesande püstitus
 
-Galaktikate eemaldumise tõttu esineb nende spektris punanihe, mis on tingitud Doppleri efektist. Kui galaktika eemaldub meist kiirusega 14 tuh km/s, siis millise lainepikkusega registreerib Maal olev vaatleja vesinikujoont, mille lainepikkus paigalseisva kiirgusallika korral on  λ=486 nm? Galaktika liikumiskiirust lugeda mitterelativistlikuks. Vastus anda nanomeetrites 1 nanomeetri täpsusega.
+Galaktikate eemaldumise tõttu esineb nende spektris punanihe, mis on
+tingitud Doppleri efektist. Kui galaktika eemaldub meist kiirusega 14
+tuh km/s, siis millise lainepikkusega registreerib Maal olev vaatleja
+vesinikujoont, mille lainepikkus paigalseisva kiirgusallika korral on
+λ=486 nm? Galaktika liikumiskiirust lugeda mitterelativistlikuks. Vastus
+anda nanomeetrites 1 nanomeetri täpsusega.
 
 ### Lahendus
 
@@ -262,4 +281,5 @@ wavelengthOnEarth <- SPEED_LIGHT /(SPEED_LIGHT / 486e-9 /(SPEED_LIGHT/ (SPEED_LI
 wavelengthOnEarth
 ```
 
-`r signif(wavelengthOnEarth, digits = 3)` * nm on Maal registreeritava vesinikujoone lainepikkus.
+`r signif(wavelengthOnEarth, digits = 3)` \* nm on Maal registreeritava
+vesinikujoone lainepikkus.

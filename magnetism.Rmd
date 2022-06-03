@@ -1,17 +1,13 @@
 ---
-title: "Magnetism ja induktsioon"
-author: 'peacecop kalmer:'
-date: "12/27/2021"
+#title: "Magnetism ja induktsioon"
+#author: 'peacecop kalmer:'
+#date: "12/27/2021"
 output:
   bookdown::html_document2:
     toc: yes
     toc_float: yes
     toc_depth: 5
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # Reeglid
 
@@ -51,16 +47,11 @@ $${ülekanne}_{trafo} = \frac{{pinge}_{primaarmähis}}{{pinge}_{sekundaarmähis}
 
 ![Poolused](magnetism/poles.png)
 
-Kus asub Maa magnetiline 
-põhjapoolus?
+Kus asub Maa magnetiline põhjapoolus?
 
-A.
-geograafilisel 
-põhjapoolusel 
+A.  geograafilisel põhjapoolusel
 
-B.
-geograafilisel 
-lõunapoolusel
+B.  geograafilisel lõunapoolusel
 
 ### Lahendus
 
@@ -74,36 +65,42 @@ lõunapoolusel
 
 Kas trollibussi kontaktliinid
 
-A.
-tõmbuvad?
+A.  tõmbuvad?
 
-B.
-tõukuvad?
+B.  tõukuvad?
 
 ### Lahendus
 
 *B*.
 
-Sest voolud on 
-vastassuunalised.
+Sest voolud on vastassuunalised.
 
 ## Trollide kontaktliin
 
 ### Ülesande püstitus
 
-Trollide kontaktliinis võib alalisvoolu tugevus ulatuda 5000 amprini. Kui suur jõud mõjub sellisel juhul kahe 1 meetri pikkuse juhtmelõigu vahel, kui juhtmete vaheline kaugus on 80 cm?
+Trollide kontaktliinis võib alalisvoolu tugevus ulatuda 5000 amprini.
+Kui suur jõud mõjub sellisel juhul kahe 1 meetri pikkuse juhtmelõigu
+vahel, kui juhtmete vaheline kaugus on 80 cm?
 
 ### Lahendus
 
-Jõu arvutamiseks on vaja kummagi juhtme voolutugevus omavahel esmalt korrutada. Selle tehte tulemus on 25e6 * A^2^. Voolutugevuste korrutis tuleb seejärel korrutada võrdeteguriga ja tulemuseks on 5 * N. Lõpuks tuleb arvutatud jõud jagada juhtmetevahelise kaugusega ja tulemuseks on 6.25 * N.
+Jõu arvutamiseks on vaja kummagi juhtme voolutugevus omavahel esmalt
+korrutada. Selle tehte tulemus on 25e6 \* A^2^. Voolutugevuste korrutis
+tuleb seejärel korrutada võrdeteguriga ja tulemuseks on 5 \* N. Lõpuks
+tuleb arvutatud jõud jagada juhtmetevahelise kaugusega ja tulemuseks on
+6.25 \* N.
 
-6.25 * N suurune jõud mõjub sellisel juhul kahe 1 * m pikkuse juhtmelõigu vahel, kui juhtmete vaheline kaugus on 80 * cm.
+6.25 \* N suurune jõud mõjub sellisel juhul kahe 1 \* m pikkuse
+juhtmelõigu vahel, kui juhtmete vaheline kaugus on 80 \* cm.
 
 ## Sirgjuhe
 
 ### Ülesande püstitus
 
-Sirgjuhe, mille pikkus on 20 cm, moodustab homogeense magnetvälja induktsioonijoontega nurga 60°. Kui juhet läbib 0,15 A tugevune vool, mõjutab magnetväli seda jõuga 15 mN. Leida magnetinduktsiooni väärtus.
+Sirgjuhe, mille pikkus on 20 cm, moodustab homogeense magnetvälja
+induktsioonijoontega nurga 60°. Kui juhet läbib 0,15 A tugevune vool,
+mõjutab magnetväli seda jõuga 15 mN. Leida magnetinduktsiooni väärtus.
 
 ### Lahendus
 
@@ -119,28 +116,40 @@ Lasen välja arvutada ka magnetinduktsiooni ebatäpse väärtuse:
 
 ### Ülesande püstitus
 
-Leida homogeenses magnetväljas risti induktsioonijoontega liikuva prootoni ja elektroni trajektoori raadiused, kui nad liiguvad kiirusega 35 Mm/s ning magnetinduktsioon on 0,5 T.
+Leida homogeenses magnetväljas risti induktsioonijoontega liikuva
+prootoni ja elektroni trajektoori raadiused, kui nad liiguvad kiirusega
+35 Mm/s ning magnetinduktsioon on 0,5 T.
 
 ### Lahendus
 
-Raadiuse saab avaldada mitme valemi kombinatsioonist. Kiirendusjõud on massi ja kiirenduse korrutis. Kesktõmbekiirendus on kiiruse ruudu ja raadiuse suhe. Jõudu osakesele saab arvutada ka laengu, kiiruse, magnetvälja induktsiooni ning osakese liikumissuuna ja magnetvälja induktsiooni vahelise nurga siinuse korrutisena. See kompott kokku raadiuse arvutamiseks on selline:
+Raadiuse saab avaldada mitme valemi kombinatsioonist. Kiirendusjõud on
+massi ja kiirenduse korrutis. Kesktõmbekiirendus on kiiruse ruudu ja
+raadiuse suhe. Jõudu osakesele saab arvutada ka laengu, kiiruse,
+magnetvälja induktsiooni ning osakese liikumissuuna ja magnetvälja
+induktsiooni vahelise nurga siinuse korrutisena. See kompott kokku
+raadiuse arvutamiseks on selline:
 
 ```{r}
 radiusOfProton = MASS_PROTON * 35e6 ^ 2 / (ELEMENTARYCHARGE * 35e6 * .5 * sin(pi / 2))
 radiusOfElectron = MASS_ELECTRON * 35e6 ^ 2 / (ELEMENTARYCHARGE * 35e6 * .5 * sin(pi / 2))
 ```
 
-`r radiusOfProton` * m on homogeenses magnetväljas risti induktsioonijoontega liikuva prootoni raadius, kui see liigub kiirusega $35 * \frac{Mm}{s}$ ning magnetinduktsioon on .5 * T.
+`r radiusOfProton` \* m on homogeenses magnetväljas risti
+induktsioonijoontega liikuva prootoni raadius, kui see liigub kiirusega
+$35 * \frac{Mm}{s}$ ning magnetinduktsioon on .5 \* T.
 
-`r radiusOfElectron` * m on homogeenses magnetväljas risti induktsioonijoontega liikuva elektroni raadius, kui see liigub kiirusega $35 * \frac{Mm}{s}$ ning magnetinduktsioon on .5 * T.
+`r radiusOfElectron` \* m on homogeenses magnetväljas risti
+induktsioonijoontega liikuva elektroni raadius, kui see liigub kiirusega
+$35 * \frac{Mm}{s}$ ning magnetinduktsioon on .5 \* T.
 
 ## Osakeste sattumine magnetvälja
 
 ### Ülesande püstitus
 
-Kaks ühesuguse laenguga, kuid erineva massiga osakest liiguvad samas suunas ühesu-
-guse kineetilise energiaga. Osakesed satuvad magnetvälja, kus nad liiguvad mööda ringjooni.
-Ringjoonte raadiuste suhe on 42,9. Milline on osakeste masside suhe?
+Kaks ühesuguse laenguga, kuid erineva massiga osakest liiguvad samas
+suunas ühesu- guse kineetilise energiaga. Osakesed satuvad magnetvälja,
+kus nad liiguvad mööda ringjooni. Ringjoonte raadiuste suhe on 42,9.
+Milline on osakeste masside suhe?
 
 ### Lahendus
 
@@ -148,15 +157,18 @@ Kineetiline energia on väljendatav valemiga:
 
 $$energia = \frac{mass \cdot kiirus ^ 2}{2}$$
 
-Kirjas on, et osakeste kineetilised energiad on võrdsed. Seega jääb järele masside ja kiiruste ruutude korrutiste võrdsus:
+Kirjas on, et osakeste kineetilised energiad on võrdsed. Seega jääb
+järele masside ja kiiruste ruutude korrutiste võrdsus:
 
 $${mass}_{1} \cdot {kiirus}_{1} ^ 2 === {mass}_{2} \cdot {kiirus}_{2} ^ 2$$
 
 Sellest võrdusest avaldan masside suhte:
 
-$$\begin{equation}
+```{=tex}
+\begin{equation}
 \frac{{mass}_{1}}{{mass}_2} === \frac{{kiirus}_2 ^ 2}{{kiirus}_1 ^ 2}(\#eq:volume)
-\end{equation}$$
+\end{equation}
+```
 
 Kirjutan ka välja raadiuste suhte:
 
@@ -170,7 +182,8 @@ Järgnevalt avaldan suurema raadiusega liikuva osakese kiiruse:
 
 $${kiirus}_1 = \frac{42.9 \cdot {raadius}_2 \cdot {mass}_2 \cdot {kiirus}_2}{{raadius}_2 \cdot {mass}_1} === \frac{42.9 \cdot {mass}_2 \cdot {kiirus}_2}{{mass}_1}$$
 
-Siinkohal asendan viimatiavaldatud suurema raadiusega liikuva osakese kiiruse võrdusesse \@ref(eq:volume):
+Siinkohal asendan viimatiavaldatud suurema raadiusega liikuva osakese
+kiiruse võrdusesse \@ref(eq:volume):
 
 $$\frac{{mass}_{1}}{{mass}_2} === \frac{{kiirus}_2 ^ 2}{(\frac{42.9 \cdot {mass}_2 \cdot {kiirus}_2}{{mass}_1}) ^ 2} === \frac{{kiirus}_2 ^ 2}{\frac{42.9 ^ 2 \cdot {mass}_2 ^ 2 \cdot {kiirus}_2 ^ 2}{{mass}_1 ^ 2}} === \frac{{mass}_1 ^ 2}{42.9 ^ 2 \cdot {mass}_2 ^ 2}$$
 
@@ -184,11 +197,15 @@ $$1848.99 === \frac{{mass}_2 \cdot {mass}_1 ^ 2}{{mass}_1 \cdot {mass}_2 ^ 2} ==
 
 ### Ülesande püstitus
 
-Horisontaalne juhe, mille pikkus on 735 mm ning mass 12 g ja mida läbib 8 A tugevune vool, püsib liikumatuna homogeenses magnetväljas, mille magnetinduktsiooni jooned on risti juhtmega. Leida magnetinduktsiooni arvväärtus.
+Horisontaalne juhe, mille pikkus on 735 mm ning mass 12 g ja mida läbib
+8 A tugevune vool, püsib liikumatuna homogeenses magnetväljas, mille
+magnetinduktsiooni jooned on risti juhtmega. Leida magnetinduktsiooni
+arvväärtus.
 
 ### Lahendus
 
-Ilmselt mõjub juhtmele gravitatsioonijõud. Seetõttu on arvutuskäik selline:
+Ilmselt mõjub juhtmele gravitatsioonijõud. Seetõttu on arvutuskäik
+selline:
 
 ```{r}
 library(Ryacas)
@@ -196,13 +213,14 @@ equality = paste(12e-3 * GRAVITATIONAL_ACCELERATION_EARTH, "== induction *", 8 *
 induction = eval(parse(text = yac_str(y_rmvars(paste("Solve(", equality, ", induction)", sep ="")))))
 ```
 
-`r induction` * T on magnetinduktsiooni arvväärtus.
+`r induction` \* T on magnetinduktsiooni arvväärtus.
 
 ## Prooton
 
 ### Ülesande püstitus
 
-Kui suur jõud mõjub magnetväljas induktsioonijoontega risti liikuvale prootonile, kui magnetinduktsioon on 1,2 T ja prootoni kiirus on 20Mm/s?
+Kui suur jõud mõjub magnetväljas induktsioonijoontega risti liikuvale
+prootonile, kui magnetinduktsioon on 1,2 T ja prootoni kiirus on 20Mm/s?
 
 ### Lahendus
 
@@ -212,13 +230,17 @@ Arvutuskäik:
 forceOnProton = ELEMENTARYCHARGE * 20e6 * 1.2 * sin(pi / 2)
 ```
 
-`r forceOnProton` * N suurune jõud mõjub magnetväljas induktsioonijoontega risti liikuvale prootonile, kui magnetinduktsioon on 1.2 * T ja prootoni kiirus on $20 \cdot \frac{Mm}{s}$.
+`r forceOnProton` \* N suurune jõud mõjub magnetväljas
+induktsioonijoontega risti liikuvale prootonile, kui magnetinduktsioon
+on 1.2 \* T ja prootoni kiirus on $20 \cdot \frac{Mm}{s}$.
 
 ## Elektron
 
 ### Ülesande püstitus
 
-Elektron liigub homogeenses magnetväljas, mille magnetinduktsioon on 40 mT, mööda ringjoont raadiusega 3 mm. Kui suur on elektroni kiirus ja kineetiline energia?
+Elektron liigub homogeenses magnetväljas, mille magnetinduktsioon on 40
+mT, mööda ringjoont raadiusega 3 mm. Kui suur on elektroni kiirus ja
+kineetiline energia?
 
 ### Lahendus
 
@@ -233,49 +255,59 @@ energy = MASS_ELECTRON * velocity ^ 2 / 2
 
 $`r velocity` \cdot \frac{m}{s}$ on elektroni kiirus.
 
-`r energy` * J on elektroni kineetiline energia.
+`r energy` \* J on elektroni kineetiline energia.
 
 ## Generaator
 
 ### Ülesande püstitus
 
-Generaatori mähise ühe keeru pindala on 20 cm^2^ ja mähises on keerdusid 400. Mähis asetseb magnetväljas magnetinduktsiooniga 1,0 mT.
+Generaatori mähise ühe keeru pindala on 20 cm^2^ ja mähises on keerdusid
+400. Mähis asetseb magnetväljas magnetinduktsiooniga 1,0 mT.
 
-a) Kui suur on üht keerdu läbiv magnetvoog, kui magnetväli läbib keerdu risti pinnaga?
+a)  Kui suur on üht keerdu läbiv magnetvoog, kui magnetväli läbib keerdu
+    risti pinnaga?
 
-b) Kui suur on sellisel juhul tervet mähist läbiv magnetvoog?
+b)  Kui suur on sellisel juhul tervet mähist läbiv magnetvoog?
 
-c) Mähis pannakse pöörlema kiirusega 3000 pööret minutis. Pöörlemisel muutub mähist läbiv magnetvoog nullist maksimumini ühe poolpöörde jooksul. Kui suur on mähises tekkiv induktsiooni elektromotoorjõud?
+c)  Mähis pannakse pöörlema kiirusega 3000 pööret minutis. Pöörlemisel
+    muutub mähist läbiv magnetvoog nullist maksimumini ühe poolpöörde
+    jooksul. Kui suur on mähises tekkiv induktsiooni elektromotoorjõud?
 
 ### Lahendus
 
-a) Arvutuskäik:
+a)  Arvutuskäik:
 
 ```{r}
 magnetFlowInOne = 1e-3 * 20e-4 * cos(0)
 ```
 
-`r magnetFlowInOne`* Wb on üht keerdu läbiv magnetvoog, kui magnetväli läbib keerdu risti pinnaga.
+`r magnetFlowInOne`\* Wb on üht keerdu läbiv magnetvoog, kui magnetväli
+läbib keerdu risti pinnaga.
 
-b) 8e-4 * Wb on sellisel juhul tervet mähist läbiv magnetvoog.
+b)  8e-4 \* Wb on sellisel juhul tervet mähist läbiv magnetvoog.
 
-c) -8e-2 * V on mähises tekkiv induktsiooni elektromotoorjõud.
+c)  -8e-2 \* V on mähises tekkiv induktsiooni elektromotoorjõud.
 
 ## Transformaator
 
 ### Ülesande püstitus
 
-Transformaatori primaarmähises on 150 keerdu ja sellele rakendatakse pinge 230 V. Mitu keerdu peab olema sekundaarmähises, et sealt saadav pinge oleks 12 V?
+Transformaatori primaarmähises on 150 keerdu ja sellele rakendatakse
+pinge 230 V. Mitu keerdu peab olema sekundaarmähises, et sealt saadav
+pinge oleks 12 V?
 
 ### Lahendus
 
-$\frac{180}{23} \cdot keerdu$ peab olema sekundaarmähises, et sealt saadav pinge oleks 12 * V.
+$\frac{180}{23} \cdot keerdu$ peab olema sekundaarmähises, et sealt
+saadav pinge oleks 12 \* V.
 
 ## Neoonlambid
 
 ### Ülesande püstitus
 
-Neoonlambid vajavad süttimiseks pinget 12 kV. Et neid saaks kasutada madalpingevõrgus pingega 230 V, tuleb vahele panna trafo. Milline peab olema selle trafo ülekandearv?
+Neoonlambid vajavad süttimiseks pinget 12 kV. Et neid saaks kasutada
+madalpingevõrgus pingega 230 V, tuleb vahele panna trafo. Milline peab
+olema selle trafo ülekandearv?
 
 ### Lahendus
 
@@ -291,7 +323,9 @@ Lasen selle arvu ebatäpsena välja arvutada:
 
 ### Ülesande püstitus
 
-Tramm, mille mass on 7 tonni, sõidab kiirusega 10 km/h. Trammi pidurdamiseks kulub 5 sekundit. Leida, kui suur on pidurdav jõud. Vastus esitada kahe tüvenumbri täpsusega. Lisada ühik!
+Tramm, mille mass on 7 tonni, sõidab kiirusega 10 km/h. Trammi
+pidurdamiseks kulub 5 sekundit. Leida, kui suur on pidurdav jõud. Vastus
+esitada kahe tüvenumbri täpsusega. Lisada ühik!
 
 ### Lahendus
 
@@ -301,4 +335,4 @@ Arvutuskäik:
 forceOfBreaking <- -7e3 * (0 - 10e3 / 3600) / 5
 ```
 
-`r signif(forceOfBreaking, digits = 2)` * N on pidurdav jõud.
+`r signif(forceOfBreaking, digits = 2)` \* N on pidurdav jõud.
