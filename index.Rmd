@@ -45,7 +45,7 @@ include_svg = function(path) {
     # you can compare the timestamp of pdf against svg to avoid conversion if necessary
     #system2('rsvg-convert', c('-f', 'pdf', '-a', '-o', shQuote(c(output, path))))
     output
-    system(paste('gm convert ', path, ' ', output), intern = FALSE, ignore.stdout = FALSE, ignore.stderr = FALSE, wait = FALSE)
+    system(paste('gm convert ', path, ' ', output), intern = FALSE, ignore.stdout = FALSE, ignore.stderr = FALSE, wait = TRUE)
   } else {
     output = path
   }

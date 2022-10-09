@@ -39,7 +39,14 @@ Soojuslik tasakaal:
 
 $${koefitsient}_{tõhusus} = \frac{{kasulikSoojus}_{lisatudVõiEemaldatud}}{töö} === \frac{{võimsus}_{kasulik}}{{võimsus}_{kogu}}$$
 
-$${koefitsient}_{tõhusus} = \frac{{absoluutneTemperatuur}_{kuumutamine} - {absoluutneTemperatuur}_{jahutamine}}{{absoluutneTemperatuur}_{kuumutamine}}$$
+Carnot' soojusmasina kasutegur:
+
+```{=tex}
+\begin{align}
+\frac{Q_h}{W} := \frac{T_h}{T_h - T_c}
+(\#eq:coefficient-of-performance-in-carnot-heat-engine)
+\end{align}
+```
 
 $${koefitsient}_{soojendus} = \frac{|{soojus}_{kuuma}|}{töö} === \frac{|{soojus}_{külmast}| + töö}{töö} === \frac{{soojus}_{kuuma}}{{soojus}_{kuuma} - {soojus}_{külmast}}$$
 
@@ -804,7 +811,7 @@ temperatureAfter = format((100 / weightTogether * 25 + 75 / weightTogether * 40)
 
 `r temperatureAfter` * K on veesegu lõpptemperatuur, kui kokku segati 100 * g 25 * °C juures olevat vett ja 75 * g 40 * °C juures olevat vett.
 
-### Süsteemi temperatuur
+### Raudnael
 
 #### Ülesande püstitus
 
@@ -903,7 +910,7 @@ b) `r format(calculateWavelengthForMaxRadiationEnergy(1500), digits = 2)` * m
 
 c) `r format(calculateWavelengthForMaxRadiationEnergy(convertFromDegreesFToK(96)), digits = 2)` * m, kui inimese keha temperatuur on 96 * °F
 
-### Automootori kasutegur
+### Auto kasutegur
 
 #### Ülesande püstitus
 
@@ -1173,7 +1180,7 @@ cte_volume_beaker <- .21e-3 - (.35e-3) / (983.24 * (60 - 20) * 65.5e-6)
 
 $`r signif(cte_volume_beaker, digits <- 5)` \cdot \frac{1}{K}$ on anuma ruumpaisumistegur.
 
-### Betoonplokkidest tee
+### Betoontee
 
 #### Ülesande püstitus
 
@@ -1331,7 +1338,7 @@ $`r W_p` \times \mathrm{J}$ on gaasi poolt tehtud töö, kui $`r V_0` \times \ma
 
 $`r signif(W_a, digits = 7)` \times \mathrm{J}$ oleks gaasi töö juhul, kui süsihappegaas paisuks adiabaatiliselt. Kui arvestada süsihappegaasi asemel ideaalset gaasi, siis oleks gaasi adiabaatiline töö $`r signif(W_i, digits = 2)` \times \mathrm{J}$.
 
-### Alumiiniumist kalorimeeter
+### Al-kalorimeeter
 
 #### Ülesande püstitus
 
@@ -1523,6 +1530,118 @@ q_c <- P * t * (1 - eta_0) / eta_0
 #### Lahend
 
 $`r abs(delta_t_c)` \cdot \mathrm{K}$ võrra peab `r change` madalama temperatuuriga mahuti temperatuuri, et saada kasuteguriks 70%. $`r q_c` \cdot \mathrm{J}$ on $30 \cdot \mathrm{s}$ kestel madalama temperatuuriga mahutile antud soojushulk, kui jõumasina võimsus on $1200 \cdot \mathrm{W}$.
+
+### Mootori kasutegur
+
+#### Ülesande püstitus
+
+Milline on sõiduauto mootori kasutegur, kui sõiduk kulutab tunnis $5 \cdot \mathrm{l}$ diislikütust ning auto keskmine võimsus sel ajal on $20 \cdot \mathrm{kW}$? Kütuse tihedus on $700 \cdot \mathrm{\frac{kg}{m^3}}$ ning kütteväärtus $42 \cdot \mathrm{\frac{MJ}{kg}}$. Eeldades, et auto jahutusvedeliku temperatuur on $\mathrm{90°C}$ ning mootoris oleva gaasisegu tipptemperatuur on 1500°C, leida antud mootori kasutegur, kui see töötaks Carnot' tsükli alusel! (7p)
+
+#### Sisendid
+
+$$t := 1 \times \mathrm{h \times \frac{3.6 \times 10^3 \times s}{1 \times h}} = \mathrm{3.6 \times 10^3 \times s}$$
+```{r label = "efficiency-factor-of-engine-of-car-t"}
+convert_from_min_to_s <- function(min) {
+  return(min * 60)
+}
+
+convert_from_h_to_s <- function(h) {
+  return(convert_from_min_to_s(h * 60))
+}
+
+t <- convert_from_h_to_s(1)
+```
+
+$$V := \mathrm{5 \cdot l \cdot \frac{1 \cdot m^3}{10^3 \cdot l} = 5 \cdot 10^{-3} \cdot m^3}$$
+```{r label = "efficiency-factor-of-engine-of-car-v"}
+V <- 5e-3
+```
+
+$$\overline{P} := \mathrm{20 \cdot kW = 2 \cdot 10^4 \cdot W}$$
+```{r label = "efficiency-factor-of-engine-of-car-p"}
+P <- 20e3
+```
+
+$$\rho := \mathrm{700 \cdot \frac{kg}{m^3} = 7 \cdot 10^2 \cdot \frac{kg}{m^3}}$$
+```{r label = "efficiency-factor-of-engine-of-car-rho"}
+rho <- 700
+```
+
+$$\frac{Q}{m} := \mathrm{42 \times \frac{MJ}{kg} \times \frac{10^6 \times J}{1 \times MJ} = 4.2 \times 10^7 \times \frac{J}{kg}}$$
+
+```{r label = "efficiency-factor-of-engine-of-car-q-per-m"}
+Q_per_m <- 42e6
+```
+
+$$T_c := \mathrm{90°C = `r celsius_to_kelvin(90)` \times K}$$
+
+```{r label = "efficiency-factor-of-engine-of-car-tc"}
+T_c <- celsius_to_kelvin(90)
+```
+
+$$T_h := \mathrm{1500°C = `celsius_to_kelvin(1500)` \times K}$$
+```{r label = "efficiency-factor-of-engine-of-car-th"}
+T_h <- celsius_to_kelvin(1500)
+```
+
+#### Väljundid
+
+$$\frac{W}{Q_h}(\mathrm{real}) := \ldots$$
+$$\frac{W}{Q_h}(\mathrm{Carnot}) := \ldots$$
+
+#### Reeglistik
+
+Töö saan lasta arvutada võimsuse valemi \@ref(eq:work) järgi.
+
+Sisendsoojushulga saan lasta arvutada kütteväärtuse ja massi järgi, kusjuures massi saan lasta arvutada tiheduse valemi \@ref(eq:density) abil.
+
+Koondvalem tegeliku olukorra jaoks:
+
+$$\frac{Q_h}{W}(\mathrm{real}) := \frac{\frac{Q}{m} \cdot \rho \cdot V}{P \cdot t}$$
+
+Carnot' tsükli jaoks kasutan valemit \@ref(eq:coefficient-of-performance-in-carnot-heat-engine).
+
+#### Arvutamine
+```{r label = "efficiency-factor-of-engine-of-car-calculation"}
+Q_h_per_W_real <- (Q_per_m * rho * V) / (P * t)
+Q_h_per_W_carnot <- T_h / (T_h -  T_c)
+```
+
+#### Lahend
+
+`r signif(Q_h_per_W_real, digits = 2)` on sõiduauto mootori kasutegur, kui sõiduk kulutab tunnis $5 \cdot \mathrm{l}$ diislikütust ning auto keskmine võimsus sel ajal on $20 \cdot \mathrm{kW}$.
+
+`r signif(Q_h_per_W_carnot, digits = 2)` on antud mootori kasutegur, kui see töötaks Carnot' tsükli alusel eeldades, et auto jahutusvedeliku temperatuur on 90°C ning mootoris oleva gaasisegu tipptemperatuur 1500°C.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

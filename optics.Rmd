@@ -125,7 +125,6 @@ angleFalling
 ```
 
 ```{r label = "light-through-glass", fig.cap = "Skeem nurga arvutamiseks", echo = FALSE, out.width = "100%"}
-#system('gm convert')
 include_svg("light-through-glass.svg")
 ```
 

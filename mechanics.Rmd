@@ -697,8 +697,7 @@ the round trip distance *distance_all*
 
 I first create a drawing for the task.
 
-```{r label = "airports", fig.cap = "The given lengths are marked as green and the length to be calculated
-as red.", echo = FALSE}
+```{r label = "airports", fig.cap = "The given lengths are marked as green and the length to be calculated as red.", echo = FALSE}
 include_svg("mechanics/airports.svg")
 ```
 
@@ -1479,13 +1478,11 @@ this "basin" to be filled by plastics.
 
 #### Figures
 
-```{r label = "channel-lower-wall", fig.cap = "Measurements of the channel's lower
-wall", echo = FALSE}
+```{r label = "channel-lower-wall", fig.cap = "Measurements of the channel's lower wall", echo = FALSE}
 include_svg("mechanics/channel-lower-wall.svg")
 ```
 
-```{r label = "channel-width", fig.cap = "Measuring the width of the
-channel", echo = FALSE}
+```{r label = "channel-width", fig.cap = "Measuring the width of the channel", echo = FALSE}
 include_svg("mechanics/channel-width.svg")
 ```
 

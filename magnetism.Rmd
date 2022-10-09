@@ -169,7 +169,6 @@ Sellest võrdusest avaldan masside suhte:
 \frac{{mass}_{1}}{{mass}_2} === \frac{{kiirus}_2 ^ 2}{{kiirus}_1 ^ 2}(\#eq:volume)
 \end{equation}
 ```
-
 Kirjutan ka välja raadiuste suhte:
 
 $$\frac{{raadius}_1}{{raadius}_2} === \frac{\frac{{mass}_1 \cdot {kiirus}_1 ^ 2}{laeng \cdot {kiirus}_1 \cdot {induktsioon}_{magnetväli} \cdot \sin({nurk}_{liikumissuund, \vec{{induktsioon}_{magnetväli}}})}}{\frac{{mass}_2 \cdot {kiirus}_2 ^ 2}{laeng \cdot {kiirus}_2 \cdot {induktsioon}_{magnetväli} \cdot \sin({nurk}_{liikumissuund, \vec{{induktsioon}_{magnetväli}}})}} === \frac{{mass}_1 \cdot {kiirus}_1}{{mass}_2 \cdot {kiirus}_2}$$
